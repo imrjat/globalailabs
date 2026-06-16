@@ -384,3 +384,114 @@ html.lenis, html.lenis body {
   transform: translateY(-4px);
 }
 
+/* 3-Row Logo Carousel */
+.logo-carousel-section {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.logo-row {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  user-select: none;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  will-change: transform;
+}
+
+.logo-track.scroll-left {
+  animation: logo-scroll-left 40s linear infinite;
+}
+
+.logo-track.scroll-right {
+  animation: logo-scroll-right 40s linear infinite;
+}
+
+.logo-row:hover .logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes logo-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.client-logo-img {
+  height: 1.75rem;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  filter: grayscale(100%) contrast(1.1) brightness(0.7);
+}
+
+.client-logo-img:hover {
+  opacity: 1;
+  filter: grayscale(0%) contrast(1) brightness(1);
+}
+
+
+@media (min-width: 768px) {
+  .client-logo-img {
+    height: 2.5rem;
+  }
+  .logo-track {
+    gap: 4rem;
+  }
+  .logo-carousel-section {
+    gap: 2rem;
+  }
+}
+
+/* When menu overlay is open, force fixed header logo and buttons to be visible on dark background */
+body.menu-open #site-header .header-logo {
+  filter: invert(1) !important;
+  mix-blend-mode: normal !important;
+}
+
+body.menu-open #site-header .header-btn {
+  border-color: var(--color-ice) !important;
+  color: var(--color-ice) !important;
+}
+
+body.menu-open #site-header .header-btn:hover {
+  background-color: var(--color-ice) !important;
+  color: var(--color-ink) !important;
+}
+
+body.menu-open #site-header .header-menu-btn {
+  background-color: var(--color-ice) !important;
+  color: var(--color-ink) !important;
+}
+
+body.menu-open #site-header .header-menu-btn:hover {
+  background-color: var(--color-signal) !important;
+  color: var(--color-ink) !important;
+}
+
+
+

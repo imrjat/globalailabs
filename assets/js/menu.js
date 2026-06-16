@@ -28,6 +28,7 @@ export function initMenu() {
       window.lenisInstance.stop();
     }
     document.body.classList.add('lenis-stopped');
+    document.body.classList.add('menu-open');
     menuOverlay.style.pointerEvents = 'auto';
 
     // GSAP clip-path reveal from top
@@ -74,6 +75,7 @@ export function initMenu() {
       window.lenisInstance.start();
     }
     document.body.classList.remove('lenis-stopped');
+    document.body.classList.remove('menu-open');
     menuOverlay.style.pointerEvents = 'none';
 
     // GSAP clip-path sweep up/out
