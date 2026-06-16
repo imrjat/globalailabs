@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global AI Labs — Autonomous AI Agent & Brand Intelligence Platform</title>
+  <meta name="description" content="Deploy specialized AI agents that analyze trends, generate high-fidelity creative, and publish across your entire digital footprint from a single autonomous platform.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Global AI Labs — Autonomous AI Agent & Brand Intelligence Platform">
+  <meta property="og:description" content="Deploy specialized AI agents that analyze trends, generate high-fidelity creative, and publish across your entire digital footprint from a single autonomous platform.">
+
+  <!-- Tailwind & Custom Styles -->
+  <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-ice text-ink antialiased selection:bg-signal selection:text-ink">
+
+  <!-- Noise Background -->
+  <div class="noise-overlay"></div>
+
+  <!-- Grid Overlay lines (Desktop only) -->
+  <div class="grid-overlay hidden md:grid">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <!-- First-Visit Loader Overlay -->
+  <div id="loader-overlay" class="loader-overlay" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+    <div class="flex justify-between items-start w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">loading signal</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">global ai labs</div>
+    </div>
+    <div class="w-full text-center">
+      <h1 class="loader-title text-ice font-black text-6xl md:text-8xl tracking-[-0.05em] uppercase select-none">
+        global ai labs
+      </h1>
+    </div>
+    <div class="flex justify-between items-end w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">system ready</div>
+      <div class="loader-progress text-signal font-black text-8xl md:text-[12rem] leading-none tracking-[-0.05em]">
+        00
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Transition Screen Sweep Overlay -->
+  <div class="transition-overlay">
+    <div class="transition-text">GLOBAL</div>
+  </div>
+
+  <!-- Fixed Navigation Header -->
+  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center">
+    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 flex items-center">
+      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="mix-blend-mode: multiply; filter: none;">
+    </a>
+    <div class="flex items-center gap-4">
+      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-ink text-ink text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ink hover:text-ice transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-btn">
+        start free trial
+      </a>
+      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-ink text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-signal hover:text-ink transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-menu-btn">
+        <span class="menu-text">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen Dark Navigation Overlay -->
+  <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-ink text-ice z-[998] flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);">
+    <div class="flex justify-between items-start w-full mt-12 md:mt-6">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">navigation</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">global ai labs</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <a href="./index.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          home
+        </a>
+        <a href="./work.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          work
+        </a>
+        <a href="./team.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          team
+        </a>
+        <a href="./careers.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          careers
+        </a>
+        <a href="./connect.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          connect
+        </a>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3">capabilities</div>
+          <ul class="flex flex-col gap-2">
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">STRATEGY</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">PRODUCTION</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CONTENT</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CREATORS</li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2">say hello</div>
+          <a href="mailto:hello@globalailabs.in" class="menu-secondary-item text-md md:text-lg hover:underline text-signal">hello@globalailabs.in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-end w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">© 2026</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">mumbai, india</div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Fullscreen Hero Section -->
+    <!-- Fullscreen Hero Section -->
+    <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-32 pb-16 md:px-8 lg:px-12 bg-ice overflow-hidden z-0">
+      
+      <!-- Placeholder grid lines for mobile -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none md:hidden flex justify-between px-5 opacity-40">
+        <div class="h-full w-[1px] bg-line-light"></div>
+        <div class="h-full w-[1px] bg-line-light"></div>
+      </div>
+
+      <!-- Floating Canvas Signal Device in Background -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none opacity-45">
+        <canvas id="hero-canvas" class="w-full h-full"></canvas>
+      </div>
+
+      <!-- Centered Hero Copy -->
+      <div class="max-w-6xl mx-auto w-full flex-grow flex flex-col items-center justify-center text-center relative z-10 gap-8 mt-12">
+        <div class="hero-tagline text-[11px] font-black tracking-[0.15em] uppercase text-muted">
+          [ THE AUTONOMOUS CAMPAIGN OPERATING SYSTEM ]
+        </div>
+        
+        <h1 class="hero-wordmark text-[8vw] md:text-[5vw] font-black uppercase tracking-[-0.06em] leading-[0.88] select-none text-ink max-w-4xl">
+          Orchestrate your brand.<br><span class="text-muted">Automate your growth.</span>
+        </h1>
+        
+        <p class="hero-intro text-lg md:text-xl lg:text-2xl text-ink font-light leading-relaxed max-w-2xl">
+          Deploy specialized AI agents that analyze trends, generate high-fidelity creative, and publish across your entire digital footprint—from a single autonomous console.
+        </p>
+        
+        <div class="flex flex-row flex-wrap justify-center gap-4 hero-ctas">
+          <a href="./connect.html" class="magnetic px-8 py-4 bg-ink text-ice hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal">
+            Deploy Agents Free
+          </a>
+          <a href="./connect.html" class="magnetic px-8 py-4 border border-ink text-ink hover:bg-ink hover:text-ice text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ink">
+            Book Enterprise Demo
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50 select-none">
+        <span class="text-[9px] tracking-[0.15em] uppercase font-bold text-ink">scroll</span>
+        <div class="w-[1px] h-6 bg-ink animate-bounce"></div>
+      </div>
+    </section>
+
+    <!-- Platform Console Mockup Section -->
+    <section class="w-full bg-ice py-12 px-5 md:px-8 lg:px-12 relative z-10 border-b border-line-light">
+      <div class="max-w-7xl mx-auto">
+        <!-- Console Window -->
+        <div class="console-window w-full bg-ink rounded-[24px] border border-line-dark overflow-hidden flex flex-col relative aspect-[16/10] md:aspect-[16/9.5]">
+          <!-- Console Header -->
+          <div class="flex items-center justify-between px-6 py-4 border-b border-line-dark bg-[#11161d]">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+              <span class="text-[11px] font-mono text-muted uppercase tracking-[0.08em] ml-4">console.globalailabs.in / workspace</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[10px] bg-[rgba(184,255,218,0.1)] text-signal border border-[rgba(184,255,218,0.2)] rounded-full px-3 py-1 font-mono uppercase">System Active</span>
+            </div>
+          </div>
+          <!-- Console Grid Layout -->
+          <div class="flex-grow grid grid-cols-1 md:grid-cols-12 text-ice">
+            <!-- Side panel (col-span-3) -->
+            <div class="md:col-span-3 border-r border-line-dark p-6 flex flex-col justify-between hidden md:flex bg-[#0c1016]">
+              <div class="flex flex-col gap-6">
+                <div class="text-[9px] font-black tracking-[0.08em] uppercase text-muted">Core Modules</div>
+                <ul class="flex flex-col gap-3 font-mono text-[11px]">
+                  <li class="flex items-center gap-2 text-signal cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-signal"></span> STIR_STRATEGY
+                  </li>
+                  <li class="flex items-center gap-2 text-muted hover:text-ice cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-transparent"></span> CARBON_GENERATOR
+                  </li>
+                  <li class="flex items-center gap-2 text-muted hover:text-ice cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-transparent"></span> H2O_PUBLISHER
+                  </li>
+                  <li class="flex items-center gap-2 text-muted hover:text-ice cursor-pointer">
+                    <span class="w-1.5 h-1.5 rounded-full bg-transparent"></span> DRIP_CREATORS
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="flex flex-col gap-4">
+                <div class="border-t border-line-dark pt-4">
+                  <div class="text-[9px] font-black tracking-[0.08em] uppercase text-muted mb-2">Connected Channels</div>
+                  <div class="flex gap-2 opacity-60">
+                    <span class="text-[10px] font-mono bg-line-dark px-2 py-0.5 rounded">YT</span>
+                    <span class="text-[10px] font-mono bg-line-dark px-2 py-0.5 rounded">IG</span>
+                    <span class="text-[10px] font-mono bg-line-dark px-2 py-0.5 rounded">LI</span>
+                    <span class="text-[10px] font-mono bg-line-dark px-2 py-0.5 rounded">X</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Workspace panel (col-span-9) -->
+            <div class="col-span-12 md:col-span-9 p-6 flex flex-col justify-between bg-[#0e131b]">
+              <!-- Top active status / bar -->
+              <div class="flex justify-between items-center border-b border-line-dark pb-4">
+                <div>
+                  <h4 class="text-md font-bold uppercase tracking-[-0.02em]">Campaign Builder (Stir Mode)</h4>
+                  <p class="text-[11px] text-muted font-mono mt-0.5">Agent run ID: gl_agent_984f_active</p>
+                </div>
+                <div class="flex gap-3">
+                  <span class="text-[10px] font-mono border border-line-dark px-3 py-1 rounded">Model: Global-3.5-Turbo</span>
+                </div>
+              </div>
+              
+              <!-- Interactive visual graph or details (Middle) -->
+              <div class="my-6 flex-grow flex flex-col lg:flex-row gap-6 items-stretch min-h-[180px] lg:min-h-0">
+                <!-- Node Graph Panel -->
+                <div class="flex-grow bg-[#0c1016] border border-line-dark rounded-[16px] p-4 flex flex-col justify-between relative overflow-hidden">
+                  <div class="glow-ambient w-32 h-32 bg-cyan top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                  <span class="text-[8px] font-mono text-muted uppercase">Agent Node Orchestrator</span>
+                  <div class="flex-grow flex items-center justify-center relative py-6">
+                    <!-- Node 1: Input -->
+                    <div class="flex items-center gap-8 md:gap-12 relative z-10">
+                      <div class="w-10 h-10 rounded-full border border-line-light bg-ink flex items-center justify-center text-[10px] font-mono text-muted font-bold">IN</div>
+                      
+                      <!-- Connecting Animated Line -->
+                      <div class="w-12 h-[1px] bg-line-light relative">
+                        <div class="absolute inset-0 bg-signal animate-ping opacity-30"></div>
+                      </div>
+                      
+                      <!-- Node 2: Agent (Pulse) -->
+                      <div class="w-14 h-14 rounded-full border border-signal bg-ink flex items-center justify-center text-[10px] font-mono text-signal font-bold node-pulse">AGENT</div>
+                      
+                      <!-- Connecting Line -->
+                      <div class="w-12 h-[1px] bg-line-light"></div>
+                      
+                      <!-- Node 3: Output -->
+                      <div class="w-10 h-10 rounded-full border border-line-light bg-ink flex items-center justify-center text-[10px] font-mono text-muted font-bold">OUT</div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center text-[9px] font-mono text-muted">
+                    <span>Inputs: 14 channels</span>
+                    <span>Throughput: 12.4 ops/s</span>
+                  </div>
+                </div>
+                <!-- Performance chart panel -->
+                <div class="w-full lg:w-[240px] bg-[#0c1016] border border-line-dark rounded-[16px] p-4 flex flex-col justify-between">
+                  <span class="text-[8px] font-mono text-muted uppercase">Conversions & ROI</span>
+                  <div class="h-24 flex items-end justify-between relative py-2">
+                    <!-- Animated Chart Line SVG -->
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 80" preserveAspectRatio="none">
+                      <path class="line-draw" d="M 0 70 Q 30 65 60 40 T 120 45 T 180 15 T 200 10" fill="none" stroke="#b8ffda" stroke-width="2.5" />
+                    </svg>
+                    <div class="w-[1px] h-full bg-[rgba(240,246,248,0.05)]"></div>
+                    <div class="w-[1px] h-full bg-[rgba(240,246,248,0.05)]"></div>
+                    <div class="w-[1px] h-full bg-[rgba(240,246,248,0.05)]"></div>
+                    <div class="w-[1px] h-full bg-[rgba(240,246,248,0.05)]"></div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div>
+                      <span class="text-[8px] text-muted uppercase block font-mono">Conversion Rate</span>
+                      <span class="text-xl font-bold tracking-tight text-signal font-mono">+41.2%</span>
+                    </div>
+                    <div>
+                      <span class="text-[8px] text-muted uppercase block font-mono">Cost Per Lead</span>
+                      <span class="text-xl font-bold tracking-tight text-cyan font-mono">-24.8%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Bottom status message -->
+              <div class="flex justify-between items-center border-t border-line-dark pt-4 text-[10px] font-mono text-muted">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-signal animate-pulse"></span>
+                  <span>Agent [creative_carbon] executing multi-format video generation...</span>
+                </div>
+                <span class="hidden md:inline">Execution complete: 0.82s</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trusted-by Section -->
+    <section class="w-full bg-ice py-12 border-b border-line-light relative z-10 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex flex-col gap-8">
+        <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted text-center">TRUSTED BY LEADING HIGH-GROWTH TEAMS AT</span>
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <div class="flex items-center gap-16 md:gap-24">
+              <!-- Stripe Logo -->
+              <svg class="h-5 w-auto text-ink opacity-30 hover:opacity-85 transition-opacity" viewBox="0 0 80 34" fill="currentColor">
+                <path d="M41.4 13.5c0-3.3-2.1-5.1-5.6-5.1-4.1 0-6.9 2.5-6.9 6.8 0 5.4 3.7 6.4 7.6 7.4 3.5.9 4.3 1.7 4.3 3.1 0 1.4-1.2 2.2-3.1 2.2-2.7 0-4.8-1.2-5-3.3l-5.3.7c.6 4.3 4.2 6.1 9.8 6.1 4.5 0 8.9-1.9 8.9-6.4 0-5.8-3.9-6.8-7.9-7.8-3.3-.8-4-1.4-4-2.6 0-1.2.9-1.8 2.6-1.8 2.3 0 4 .9 4.2 2.6l4.4-.7zm14.3-5.3c-2.3 0-3.7 1.1-4.4 2.2V8.6H46v24h5.6v-8.2c.8.9 2.1 1.7 4.1 1.7 3.9 0 6.6-3.1 6.6-8.9 0-5.9-2.7-9-6.6-9zm-1 14.1c-2 0-3.1-1.3-3.1-3.6V17c0-2.3 1.1-3.6 3.1-3.6 2 0 3.1 1.3 3.1 3.6v1.8c0 2.3-1.1 3.6-3.1 3.6zM22.5 13.3c0-3.2-2.1-4.9-5.4-4.9-3.8 0-6.4 2.4-6.4 6.5v18.7h5.6V17.2c0-2.2 1.1-3.3 2.9-3.3 1.6 0 2.4.9 2.4 2.5v17.2H27.2V15.9c0-5-2-7.3-4.7-7.3zm47.2 4.9V8.6h-5.6v24.7H69.7v-2.3c.7.9 2.1 2.5 4.3 2.5 3.7 0 6-3 6-8.9.1-5.9-2.3-9-6.3-9zm-1 8.5c-2 0-3.1-1.3-3.1-3.6V17c0-2.3 1.1-3.6 3.1-3.6 2 0 3.1 1.3 3.1 3.6v1.8c0 2.3-1.1 3.6-3.1 3.6zM8.3 8.6H2.7V25h5.6V8.6zm-.2-5.4H2.5v4.2h5.6V3.2z"></path>
+              </svg>
+              <!-- Vercel Logo -->
+              <svg class="h-4 w-auto text-ink opacity-30 hover:opacity-85 transition-opacity" viewBox="0 0 116 26" fill="currentColor">
+                <path d="M13.7 0L27.4 23.8H0L13.7 0ZM43.4 4.5v15.2h6.5v4.1H36.9v-4.1h6.5V4.5H36.9v-4.1h13V4.5h-6.5zm19.8 19.3h10v4.1H56.2v-23h16.2v4.1h-9.7v5.4h8.3v4.1h-8.3v5.4zm23.2-19.3v3.7c-.8-1.2-2.3-2.1-4.5-2.1-4.2 0-7.3 3.2-7.3 7.8 0 4.6 3.1 7.8 7.3 7.8 2.2 0 3.7-.9 4.5-2.1v1.6c0 3-1.6 4.7-4.4 4.7-2.3 0-3.8-1-4.3-2.5h-4.3c.6 3.8 3.9 6.5 8.6 6.5 5.3 0 8.7-3.1 8.7-8.8V4.5h-4.3zm-4.3 11c-2.3 0-4-1.7-4-3.9 0-2.2 1.7-3.9 4-3.9s4 1.7 4 3.9c0 2.2-1.7 3.9-4 3.9zm30.3-11c-2.2 0-3.7.9-4.5 2.1v-1.6h-4.3v15.2h4.3v-9.3c0-2.5 1.5-4.1 3.9-4.1.4 0 .7.1 1 .2l1.1-4c-.7-.3-1.1-.5-1.5-.5z"></path>
+              </svg>
+              <!-- Figma Logo -->
+              <svg class="h-5 w-auto text-ink opacity-30 hover:opacity-85 transition-opacity" viewBox="0 0 72 108" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M18 108C27.9411 108 36 99.9411 36 90V72H18C8.05888 72 0 80.0589 0 90C0 99.9411 8.05888 108 18 108ZM36 54V72H18C8.05888 72 0 63.9411 0 54C0 44.0589 8.05888 36 18 36H36V54ZM36 54V36H54C63.9411 36 72 44.0589 72 54C72 63.9411 63.9411 72 54 72H36V54ZM36 18V36H54C63.9411 36 72 27.9411 72 18C72 8.05888 63.9411 0 54 0H36V18ZM18 36C27.9411 36 36 27.9411 36 18V36H18Z"></path>
+              </svg>
+              <!-- Supabase Logo -->
+              <svg class="h-4 w-auto text-ink opacity-30 hover:opacity-85 transition-opacity" viewBox="0 0 160 30" fill="currentColor">
+                <path d="M14.6 0l13 15.6H17.8L30 30 15.4 14.4h9.8L14.6 0zM48 22.2c0 1.9 1.4 2.8 3.5 2.8s3.5-.9 3.5-2.8c0-3.3-6.9-2.5-6.9-7.3 0-2.8 2.2-4.9 5.8-4.9s5.8 2.1 5.8 4.9h-3.3c0-1.6-1.1-2.2-2.5-2.2s-2.5.6-2.5 2.2c0 3.1 6.9 2.5 6.9 7.3 0 2.9-2.2 4.9-5.9 4.9-3.7 0-6.1-2-6.1-5h3.3zm20.8 4.8v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5V10h3.3v17h-3.3zm-4.3-3c2 0 3.1-1.3 3.1-3.6v-1.8c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm23.9-14H91.7v17h-3.3v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5v-2h3.3zm-4.3 11c2 0 3.1-1.3 3.1-3.6V17c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm22-11c4.2 0 7 2.8 7 7.7V27h-3.3v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5v-2h3.3zm-4.3 11c2 0 3.1-1.3 3.1-3.6V17c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm21.4-11c3.5 0 5.8 2.1 5.8 5s-2.3 5-5.8 5h-4.3v7h-3.3v-17h7.6zm-1.8 7.3c1.9 0 3.1-1 3.1-2.5s-1.2-2.5-3.1-2.5h-4.3v5h4.3zm21.8 9.7v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5V10h3.3v17h-3.3zm-4.3-3c2 0 3.1-1.3 3.1-3.6v-1.8c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm19.9-14c3.4 0 5.4 1.7 5.4 4.5 0 2.1-1.2 3.5-3.2 4.1 2.3.5 3.6 2 3.6 4.4 0 3.1-2.2 5-6 5h-7.8V10h8zm-2.4 6.8c1.9 0 2.9-.8 2.9-2.1 0-1.2-1-2-2.9-2h-3.1v4.1h3.1zm.6 7.6c1.9 0 3.1-.9 3.1-2.3s-1.2-2.3-3.1-2.3h-3.7v4.6H152z"></path>
+              </svg>
+              <!-- Linear Logo -->
+              <svg class="h-4.5 w-auto text-ink opacity-30 hover:opacity-85 transition-opacity" viewBox="0 0 110 24" fill="currentColor">
+                <path d="M12.5 12c0 2.5-2 4.5-4.5 4.5S3.5 14.5 3.5 12 5.5 7.5 8 7.5s4.5 2 4.5 4.5zm8-12C9.2 0 0 9.2 0 20.5S9.2 41 20.5 41s20.5-9.2 20.5-20.5S31.8 0 20.5 0zm0 37.5C11.1 37.5 3.5 29.9 3.5 20.5S11.1 3.5 20.5 3.5 37.5 11.1 37.5 20.5 29.9 37.5 20.5 37.5zM48 5h3.5v17H48V5zm12 5.5c0-2.2 1.5-3.5 3.5-3.5s3.5 1.3 3.5 3.5V22H60V10.5zm16-5.5h3.5v17H76V5zm12 12c0 3.3-2.2 5.5-5.5 5.5S77 20.3 77 17s2.2-5.5 5.5-5.5 5.5 2.2 5.5 5.5zm-3.5 0c0-1.8-1-3-2.5-3s-2.5 1.2-2.5 3 1 3 2.5 3 2.5-1.2 2.5-3zM98 10.5c0-2.2 1.5-3.5 3.5-3.5s3.5 1.3 3.5 3.5V22H98V10.5z"></path>
+              </svg>
+            </div>
+          </div>
+          <!-- Duplicate content for marquee loop -->
+          <div class="marquee-content" aria-hidden="true">
+            <div class="flex items-center gap-16 md:gap-24">
+              <!-- Stripe Logo -->
+              <svg class="h-5 w-auto text-ink opacity-30" viewBox="0 0 80 34" fill="currentColor">
+                <path d="M41.4 13.5c0-3.3-2.1-5.1-5.6-5.1-4.1 0-6.9 2.5-6.9 6.8 0 5.4 3.7 6.4 7.6 7.4 3.5.9 4.3 1.7 4.3 3.1 0 1.4-1.2 2.2-3.1 2.2-2.7 0-4.8-1.2-5-3.3l-5.3.7c.6 4.3 4.2 6.1 9.8 6.1 4.5 0 8.9-1.9 8.9-6.4 0-5.8-3.9-6.8-7.9-7.8-3.3-.8-4-1.4-4-2.6 0-1.2.9-1.8 2.6-1.8 2.3 0 4 .9 4.2 2.6l4.4-.7zm14.3-5.3c-2.3 0-3.7 1.1-4.4 2.2V8.6H46v24h5.6v-8.2c.8.9 2.1 1.7 4.1 1.7 3.9 0 6.6-3.1 6.6-8.9 0-5.9-2.7-9-6.6-9zm-1 14.1c-2 0-3.1-1.3-3.1-3.6V17c0-2.3 1.1-3.6 3.1-3.6 2 0 3.1 1.3 3.1 3.6v1.8c0 2.3-1.1 3.6-3.1 3.6zM22.5 13.3c0-3.2-2.1-4.9-5.4-4.9-3.8 0-6.4 2.4-6.4 6.5v18.7h5.6V17.2c0-2.2 1.1-3.3 2.9-3.3 1.6 0 2.4.9 2.4 2.5v17.2H27.2V15.9c0-5-2-7.3-4.7-7.3zm47.2 4.9V8.6h-5.6v24.7H69.7v-2.3c.7.9 2.1 2.5 4.3 2.5 3.7 0 6-3 6-8.9.1-5.9-2.3-9-6.3-9zm-1 8.5c-2 0-3.1-1.3-3.1-3.6V17c0-2.3 1.1-3.6 3.1-3.6 2 0 3.1 1.3 3.1 3.6v1.8c0 2.3-1.1 3.6-3.1 3.6zM8.3 8.6H2.7V25h5.6V8.6zm-.2-5.4H2.5v4.2h5.6V3.2z"></path>
+              </svg>
+              <!-- Vercel Logo -->
+              <svg class="h-4 w-auto text-ink opacity-30" viewBox="0 0 116 26" fill="currentColor">
+                <path d="M13.7 0L27.4 23.8H0L13.7 0ZM43.4 4.5v15.2h6.5v4.1H36.9v-4.1h6.5V4.5H36.9v-4.1h13V4.5h-6.5zm19.8 19.3h10v4.1H56.2v-23h16.2v4.1h-9.7v5.4h8.3v4.1h-8.3v5.4zm23.2-19.3v3.7c-.8-1.2-2.3-2.1-4.5-2.1-4.2 0-7.3 3.2-7.3 7.8 0 4.6 3.1 7.8 7.3 7.8 2.2 0 3.7-.9 4.5-2.1v1.6c0 3-1.6 4.7-4.4 4.7-2.3 0-3.8-1-4.3-2.5h-4.3c.6 3.8 3.9 6.5 8.6 6.5 5.3 0 8.7-3.1 8.7-8.8V4.5h-4.3zm-4.3 11c-2.3 0-4-1.7-4-3.9 0-2.2 1.7-3.9 4-3.9s4 1.7 4 3.9c0 2.2-1.7 3.9-4 3.9zm30.3-11c-2.2 0-3.7.9-4.5 2.1v-1.6h-4.3v15.2h4.3v-9.3c0-2.5 1.5-4.1 3.9-4.1.4 0 .7.1 1 .2l1.1-4c-.7-.3-1.1-.5-1.5-.5z"></path>
+              </svg>
+              <!-- Figma Logo -->
+              <svg class="h-5 w-auto text-ink opacity-30" viewBox="0 0 72 108" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M18 108C27.9411 108 36 99.9411 36 90V72H18C8.05888 72 0 80.0589 0 90C0 99.9411 8.05888 108 18 108ZM36 54V72H18C8.05888 72 0 63.9411 0 54C0 44.0589 8.05888 36 18 36H36V54ZM36 54V36H54C63.9411 36 72 44.0589 72 54C72 63.9411 63.9411 72 54 72H36V54ZM36 18V36H54C63.9411 36 72 27.9411 72 18C72 8.05888 63.9411 0 54 0H36V18ZM18 36C27.9411 36 36 27.9411 36 18V36H18Z"></path>
+              </svg>
+              <!-- Supabase Logo -->
+              <svg class="h-4 w-auto text-ink opacity-30" viewBox="0 0 160 30" fill="currentColor">
+                <path d="M14.6 0l13 15.6H17.8L30 30 15.4 14.4h9.8L14.6 0zM48 22.2c0 1.9 1.4 2.8 3.5 2.8s3.5-.9 3.5-2.8c0-3.3-6.9-2.5-6.9-7.3 0-2.8 2.2-4.9 5.8-4.9s5.8 2.1 5.8 4.9h-3.3c0-1.6-1.1-2.2-2.5-2.2s-2.5.6-2.5 2.2c0 3.1 6.9 2.5 6.9 7.3 0 2.9-2.2 4.9-5.9 4.9-3.7 0-6.1-2-6.1-5h3.3zm20.8 4.8v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5V10h3.3v17h-3.3zm-4.3-3c2 0 3.1-1.3 3.1-3.6v-1.8c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm23.9-14H91.7v17h-3.3v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5v-2h3.3zm-4.3 11c2 0 3.1-1.3 3.1-3.6V17c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm22-11c4.2 0 7 2.8 7 7.7V27h-3.3v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5v-2h3.3zm-4.3 11c2 0 3.1-1.3 3.1-3.6V17c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm21.4-11c3.5 0 5.8 2.1 5.8 5s-2.3 5-5.8 5h-4.3v7h-3.3v-17h7.6zm-1.8 7.3c1.9 0 3.1-1 3.1-2.5s-1.2-2.5-3.1-2.5h-4.3v5h4.3zm21.8 9.7v-2.2c-.8.9-2.2 2.5-4.4 2.5-3.6 0-5.8-3-5.8-8.9 0-5.9 2.2-8.9 5.8-8.9 2.2 0 3.6 1.6 4.4 2.5V10h3.3v17h-3.3zm-4.3-3c2 0 3.1-1.3 3.1-3.6v-1.8c0-2.3-1.1-3.6-3.1-3.6-2 0-3.1 1.3-3.1 3.6v1.8c0 2.3 1.1 3.6 3.1 3.6zm19.9-14c3.4 0 5.4 1.7 5.4 4.5 0 2.1-1.2 3.5-3.2 4.1 2.3.5 3.6 2 3.6 4.4 0 3.1-2.2 5-6 5h-7.8V10h8zm-2.4 6.8c1.9 0 2.9-.8 2.9-2.1 0-1.2-1-2-2.9-2h-3.1v4.1h3.1zm.6 7.6c1.9 0 3.1-.9 3.1-2.3s-1.2-2.3-3.1-2.3h-3.7v4.6H152z"></path>
+              </svg>
+              <!-- Linear Logo -->
+              <svg class="h-4.5 w-auto text-ink opacity-30" viewBox="0 0 110 24" fill="currentColor">
+                <path d="M12.5 12c0 2.5-2 4.5-4.5 4.5S3.5 14.5 3.5 12 5.5 7.5 8 7.5s4.5 2 4.5 4.5zm8-12C9.2 0 0 9.2 0 20.5S9.2 41 20.5 41s20.5-9.2 20.5-20.5S31.8 0 20.5 0zm0 37.5C11.1 37.5 3.5 29.9 3.5 20.5S11.1 3.5 20.5 3.5 37.5 11.1 37.5 20.5 29.9 37.5 20.5 37.5zM48 5h3.5v17H48V5zm12 5.5c0-2.2 1.5-3.5 3.5-3.5s3.5 1.3 3.5 3.5V22H60V10.5zm16-5.5h3.5v17H76V5zm12 12c0 3.3-2.2 5.5-5.5 5.5S77 20.3 77 17s2.2-5.5 5.5-5.5 5.5 2.2 5.5 5.5zm-3.5 0c0-1.8-1-3-2.5-3s-2.5 1.2-2.5 3 1 3 2.5 3 2.5-1.2 2.5-3zM98 10.5c0-2.2 1.5-3.5 3.5-3.5s3.5 1.3 3.5 3.5V22H98V10.5z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="w-full bg-ice py-16 border-b border-line-light relative z-10">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+          <div class="flex flex-col gap-2">
+            <span class="text-xs uppercase font-mono tracking-wider text-muted">Scale Automated</span>
+            <span class="text-4xl md:text-5xl font-black tracking-tight uppercase text-ink">140M+</span>
+            <p class="text-sm font-light text-muted">Weekly campaign impressions generated and optimized across global nodes.</p>
+          </div>
+          <div class="flex flex-col gap-2 md:border-l md:border-line-light md:pl-12">
+            <span class="text-xs uppercase font-mono tracking-wider text-muted">Efficiency Gained</span>
+            <span class="text-4xl md:text-5xl font-black tracking-tight uppercase text-ink">4.2X</span>
+            <p class="text-sm font-light text-muted">Increase in average content output volume and brand assets generated per team.</p>
+          </div>
+          <div class="flex flex-col gap-2 md:border-l md:border-line-light md:pl-12">
+            <span class="text-xs uppercase font-mono tracking-wider text-muted">Customer Acquisition Cost</span>
+            <span class="text-4xl md:text-5xl font-black tracking-tight uppercase text-ink">-32%</span>
+            <p class="text-sm font-light text-muted">Average reduction in campaign CAC driven by dynamic trend-based keyword optimization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid Product Features Section -->
+    <section class="w-full bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-line-light">
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        <!-- Header -->
+        <div class="max-w-3xl flex flex-col gap-4">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted">[ PLATFORM PILLARS ]</span>
+          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-[-0.05em] leading-[0.9] text-ink">
+            Built to automate enterprise creative operations.
+          </h2>
+          <p class="text-lg text-muted font-light leading-relaxed max-w-2xl mt-2">
+            Global AI Labs replaces fragmented agencies, manual creator scouting, and ad-hoc content schedules with an integrated, secure brand operating system.
+          </p>
+        </div>
+        
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Bento Card 1: Stir (col-span-2 on large screen) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">01 / AUTONOMOUS STRATEGY</span>
+              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">Predictive Trend Detection</h3>
+              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
+                Our STIR engine continuously ingests real-time cultural signals, competitor tactics, and search volumes to generate optimized brand hooks and campaign briefs automatically.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Trend Scraper</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Brief Generator</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Competitive Analysis</span>
+            </div>
+          </div>
+          
+          <!-- Bento Card 2: Carbon (col-span-1) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">02 / MEDIA ENGINE</span>
+              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">High-Fidelity Assets</h3>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                Deploy our CARBON generative models to output brand-compliant media, high-res graphics, and optimized scripts instantly.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Asset Render</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Brand Guardrails</span>
+            </div>
+          </div>
+          
+          <!-- Bento Card 3: H2O (col-span-1) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">03 / DISTRIBUTION</span>
+              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">Auto-Scheduler</h3>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                Automate publication schedules across all channels. Our H2O scheduler tests post timings and formats in real-time.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Channel Sync</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Smart Timing</span>
+            </div>
+          </div>
+          
+          <!-- Bento Card 4: Drip (col-span-2) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">04 / CREATOR WORKSPACE</span>
+              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">Creator Network Sync</h3>
+              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
+                Manage, brief, and credit thousands of creators simultaneously. The DRIP module monitors content status, automates legal templates, and tracks creator performance metrics.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Automated Scouting</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Smart Briefing</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">ROI Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Preview list (Dark Section) -->
+    <section class="dark-section bg-ink text-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
+      <!-- Grid Overlay lines (For dark section contrast) -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none hidden md:grid grid-cols-12 px-12 gap-6">
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 border-b border-line-dark pb-8">
+          <div>
+            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ SELECTED CASE STUDIES ]</h2>
+            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
+              Work that moves fast<br>and lands deep.
+            </h3>
+          </div>
+          <a href="./work.html" class="magnetic px-8 py-4 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none w-fit">
+            view all work
+          </a>
+        </div>
+
+        <!-- Project Rows List (8 Items) -->
+        <div class="flex flex-col">
+          <!-- Row 1 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0C1016 0%, #1e293b 100%)" data-accent="#b8ffda">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">01</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Airborne Social Lift</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Social Media Strategy</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Travel inspiration content systems.</div>
+            </div>
+          </a>
+
+          <!-- Row 2 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #3b0764 100%)" data-accent="#9ff7ff">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">02</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Singles Launch System</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Music Campaign</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Fan-led interactive content drops.</div>
+            </div>
+          </a>
+
+          <!-- Row 3 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #064e3b 0%, #0c1016 100%)" data-accent="#e5ffb8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">03</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Grocery IP Channel</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">YouTube IP / Content</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Quick-commerce recipe storytelling.</div>
+            </div>
+          </a>
+
+          <!-- Row 4 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #7c2d12 0%, #0c1016 100%)" data-accent="#ffd9f4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">04</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Wild Harvest Identity</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Branding & Packaging</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Clutter-breaking D2C snack identity.</div>
+            </div>
+          </a>
+
+          <!-- Row 5 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1e1b4b 0%, #0c1016 100%)" data-accent="#b8ffda">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">05</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Glowline</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Brand Identity</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Refined launch language for jewellery.</div>
+            </div>
+          </a>
+
+          <!-- Row 6 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #0284c7 100%)" data-accent="#9ff7ff">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">06</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">FrameQuest</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Digital Platform</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Creative visual contest hub.</div>
+            </div>
+          </a>
+
+          <!-- Row 7 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1c1917 0%, #78350f 100%)" data-accent="#e5ffb8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">07</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Aqo Studio</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">D2C Website</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Ingredient-led wellness experience.</div>
+            </div>
+          </a>
+
+          <!-- Row 8 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #065f46 0%, #0c1016 100%)" data-accent="#ffd9f4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">08</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">People & Planet</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">ESG / HR Comms</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Sustainability and employer brand narratives.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project Hover Preview container -->
+      <div class="work-preview-hover-container"></div>
+    </section>
+
+    <!-- Services / Verticals Section -->
+    <section class="bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+
+        <!-- Left accordion panels -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          <div class="mb-12">
+            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ PLATFORM MODULES ]</h2>
+            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
+              Modular platform<br>capabilities.
+            </h3>
+          </div>
+
+          <!-- Vertical Panels Container -->
+          <div class="flex flex-col gap-4">
+            <!-- Stir Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">01 / STIR</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Autonomous Strategy & Briefing</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Unify search volumes, competitor actions, and audience signals to construct high-conversion brand strategies and briefs automatically.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Trend Scraping</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brief Generation</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Audience Scoring</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Growth Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carbon Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">02 / CARBON</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Generative Media Engine</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Instantly compile script concepts, dynamic ad layouts, and high-fidelity social reels using fine-tuned brand guardrails.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Asset Rendering</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brand Guardrails</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Video Automation</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Creative AI</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- H2O Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">03 / H2O</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Auto-Scheduler & Publisher</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Sync publication schedules, optimize post copy variants, and execute automated distribution workflows.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Smart Timing</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">A/B Testing Copy</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Channel Auto-Sync</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Engagement Loops</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drip Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">04 / DRIP</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Creator Network Integration</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Brief, deploy, and attribute campaigns across hundreds of creators. Manage payouts and licensing automatically.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Creator Mapping</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Outreach Flows</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Legal Smart Templates</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">ROI Attribution</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right playground canvas column -->
+        <div class="lg:col-span-5 h-[400px] lg:h-auto border border-line-light rounded-[24px] relative bg-ice overflow-hidden group">
+          <div class="absolute top-6 left-6 z-10 flex flex-col gap-1 select-none pointer-events-none">
+            <span class="text-[9px] font-black tracking-[0.08em] uppercase text-muted">interactive play</span>
+            <h5 class="text-md font-bold uppercase text-ink">signal playground</h5>
+          </div>
+          <canvas id="services-canvas" class="w-full h-full cursor-crosshair"></canvas>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Custom CSS-first accordion script for backup if JS fails -->
+    <style>
+      .service-card.active {
+        background-color: var(--color-ink);
+        color: var(--color-ice);
+      }
+      .service-card.active .service-details {
+        display: flex;
+      }
+      .service-card.active .w-8 {
+        transform: rotate(45deg);
+        background-color: var(--color-signal);
+        color: var(--color-ink);
+        border-color: var(--color-signal);
+      }
+    </style>
+
+    <!-- Pricing Section -->
+    <section class="bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-light">
+      <div class="max-w-7xl mx-auto flex flex-col items-center gap-16">
+        <!-- Header -->
+        <div class="text-center max-w-2xl flex flex-col items-center gap-4">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted">[ PRICING PLANS ]</span>
+          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-[-0.05em] leading-none text-ink">
+            Transparent pricing for any scale.
+          </h2>
+          <p class="text-md text-muted font-light leading-relaxed max-w-lg">
+            Start free, deploy specialized agents, and scale campaign throughput as your brand footprint grows.
+          </p>
+          
+          <!-- Billing Switch Toggle -->
+          <div class="pricing-toggle-container mt-4" id="billing-toggle-container">
+            <div class="pricing-toggle-bg"></div>
+            <button class="pricing-toggle-btn active" data-billing="monthly">Monthly</button>
+            <button class="pricing-toggle-btn" data-billing="yearly">Annually <span class="text-signal text-[9px] lowercase font-bold ml-1">(-20%)</span></button>
+          </div>
+        </div>
+        
+        <!-- Plans Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-stretch stagger-container">
+          <!-- Plan 1: Developer -->
+          <div class="plan-card glass-panel rounded-[24px] p-8 flex flex-col justify-between stagger-card border border-line-light">
+            <div class="flex flex-col gap-6">
+              <div>
+                <span class="text-[9px] font-mono font-bold tracking-[0.08em] text-muted uppercase">Developer</span>
+                <h3 class="text-2xl font-black uppercase tracking-tight text-ink mt-2">Free Starter</h3>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-5xl font-black tracking-tight text-ink font-mono">$0</span>
+                <span class="text-xs text-muted font-mono uppercase tracking-wider">/ forever</span>
+              </div>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                Perfect for individuals and teams looking to deploy their first autonomous agent and scrape basic trend briefs.
+              </p>
+              <ul class="flex flex-col gap-3 border-t border-line-light pt-6 text-xs text-ink font-mono">
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> 1 Active Agent Node
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> STIR trend analysis (basic)
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> 50 asset generation credits/mo
+                </li>
+                <li class="flex items-center gap-2 text-muted">
+                  <span class="text-muted">✗</span> Multi-channel auto-scheduling
+                </li>
+              </ul>
+            </div>
+            <a href="./connect.html" class="magnetic w-full py-4 border border-ink text-center text-ink hover:bg-ink hover:text-ice text-[10px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none mt-8">
+              Deploy Free Agent
+            </a>
+          </div>
+          
+          <!-- Plan 2: Growth (Highlighted/Premium) -->
+          <div class="plan-card bg-ink text-ice rounded-[24px] p-8 flex flex-col justify-between stagger-card border border-[#243242] relative overflow-hidden">
+            <!-- Best value badge -->
+            <span class="absolute top-4 right-4 bg-signal text-ink text-[9px] font-black uppercase tracking-[0.08em] px-3 py-1 rounded-full">RECOMMENDED</span>
+            <div class="flex flex-col gap-6">
+              <div>
+                <span class="text-[9px] font-mono font-bold tracking-[0.08em] text-muted uppercase">Growth</span>
+                <h3 class="text-2xl font-black uppercase tracking-tight text-ice mt-2">Pro Platform</h3>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-5xl font-black tracking-tight text-ice font-mono" id="price-growth">$120</span>
+                <span class="text-xs text-muted font-mono uppercase tracking-wider">/ month</span>
+              </div>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                For growing brands and scaling startups that need always-on content automation and full campaign reporting.
+              </p>
+              <ul class="flex flex-col gap-3 border-t border-[#243242] pt-6 text-xs text-ice font-mono">
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> 5 Active Agent Nodes
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Full STIR + CARBON capabilities
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> 2,000 asset credits/mo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> H2O multi-channel scheduling
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Creator metrics tracking
+                </li>
+              </ul>
+            </div>
+            <a href="./connect.html" class="magnetic w-full py-4 bg-ice text-center text-ink hover:bg-signal hover:text-ink text-[10px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none mt-8">
+              Start 14-Day Free Trial
+            </a>
+          </div>
+          
+          <!-- Plan 3: Enterprise -->
+          <div class="plan-card glass-panel rounded-[24px] p-8 flex flex-col justify-between stagger-card border border-line-light">
+            <div class="flex flex-col gap-6">
+              <div>
+                <span class="text-[9px] font-mono font-bold tracking-[0.08em] text-muted uppercase">Enterprise</span>
+                <h3 class="text-2xl font-black uppercase tracking-tight text-ink mt-2">Custom Scale</h3>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-5xl font-black tracking-tight text-ink font-mono">Custom</span>
+                <span class="text-xs text-muted font-mono uppercase tracking-wider">/ volumes</span>
+              </div>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                For enterprise marketing teams requiring custom AI model training, dedicated SLA support, and infinite API volumes.
+              </p>
+              <ul class="flex flex-col gap-3 border-t border-line-light pt-6 text-xs text-ink font-mono">
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Unlimited Agent Nodes
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Custom LLM fine-tuning on brand guidelines
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Dedicated account strategist
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> 99.9% campaign automation SLA
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-signal font-bold">✓</span> Custom contract and SSO
+                </li>
+              </ul>
+            </div>
+            <a href="./connect.html" class="magnetic w-full py-4 border border-ink text-center text-ink hover:bg-ink hover:text-ice text-[10px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none mt-8">
+              Contact Sales
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Large CTA Section (Dark background) -->
+    <section class="bg-ink text-ice py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden text-center">
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-8">
+        <div class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ GET STARTED ]</div>
+        <h2 class="text-reveal-scroll text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase leading-[0.85]">
+          Deploy your first agent today.
+        </h2>
+        <p class="text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
+          Join high-growth teams and automate content generation, trend analysis, and influencer briefing. Start your 14-day free trial now.
+        </p>
+        <a href="./connect.html" class="magnetic px-12 py-5 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal mt-6">
+          start free trial
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-ink text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-dark">
+    <div class="max-w-7xl mx-auto flex flex-col gap-16">
+
+      <!-- Top row -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-5 flex flex-col gap-4">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted">platform</div>
+          <p class="text-md text-muted max-w-xs leading-relaxed">
+            Autonomous AI Agent & Brand Intelligence Platform.
+          </p>
+        </div>
+        <div class="md:col-span-3">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">pages</div>
+          <ul class="flex flex-col gap-2 text-sm font-bold">
+            <li><a href="./index.html" class="hover:text-signal transition-colors uppercase">Home</a></li>
+            <li><a href="./work.html" class="hover:text-signal transition-colors uppercase">Work</a></li>
+            <li><a href="./team.html" class="hover:text-signal transition-colors uppercase">Team</a></li>
+            <li><a href="./careers.html" class="hover:text-signal transition-colors uppercase">Careers</a></li>
+            <li><a href="./connect.html" class="hover:text-signal transition-colors uppercase">Connect</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 flex flex-col gap-6">
+          <div>
+            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">business inquiries</div>
+            <a href="mailto:hello@globalailabs.in" class="text-lg font-bold text-signal hover:underline">hello@globalailabs.in</a>
+          </div>
+          <div>
+            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-line-dark text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ice hover:text-ink hover:border-ice transition-all duration-300">
+              go up ↑
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Giant Wordmark Logo -->
+      <div class="w-full border-t border-line-dark pt-12 overflow-hidden">
+        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-10" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
+      </div>
+
+      <!-- Bottom row -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-line-dark pt-8">
+        <div>© 2026 Global AI Labs — Autonomous AI Agent & Brand Intelligence Platform</div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-ice transition-colors">Privacy Policy</a>
+          <span>/</span>
+          <a href="#" class="hover:text-ice transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Header dark/light detection — invert logo on dark sections
+    (function() {
+      const header = document.getElementById('site-header');
+      const logo = header && header.querySelector('.header-logo');
+      const startBtn = header && header.querySelector('.header-btn');
+      const menuBtn = header && header.querySelector('.header-menu-btn');
+      const darkSections = document.querySelectorAll('.dark-section, footer');
+
+      function setHeaderDark(isDark) {
+        if (!header) return;
+        if (isDark) {
+          if (logo) {
+            logo.style.filter = 'invert(1)';
+            logo.style.mixBlendMode = 'normal';
+          }
+          if (startBtn) {
+            startBtn.classList.remove('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
+            startBtn.classList.add('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
+          }
+          if (menuBtn) {
+            menuBtn.classList.remove('bg-ink', 'text-ice');
+            menuBtn.classList.add('bg-ice', 'text-ink');
+          }
+        } else {
+          if (logo) {
+            logo.style.filter = 'none';
+            logo.style.mixBlendMode = 'multiply';
+          }
+          if (startBtn) {
+            startBtn.classList.remove('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
+            startBtn.classList.add('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
+          }
+          if (menuBtn) {
+            menuBtn.classList.remove('bg-ice', 'text-ink');
+            menuBtn.classList.add('bg-ink', 'text-ice');
+          }
+        }
+      }
+
+      if (darkSections.length && window.ScrollTrigger) {
+        darkSections.forEach(section => {
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top 60px',
+            end: 'bottom 60px',
+            onEnter: () => setHeaderDark(true),
+            onLeave: () => setHeaderDark(false),
+            onEnterBack: () => setHeaderDark(true),
+            onLeaveBack: () => setHeaderDark(false),
+          });
+        });
+      }
+
+      // Service cards accordion toggle
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const isActive = card.classList.contains('active');
+          serviceCards.forEach(c => c.classList.remove('active'));
+          if (!isActive) card.classList.add('active');
+        });
+      });
+
+      // Pricing Toggle Logic
+      const billingContainer = document.getElementById('billing-toggle-container');
+      const growthPriceText = document.getElementById('price-growth');
+      if (billingContainer && growthPriceText) {
+        const buttons = billingContainer.querySelectorAll('.pricing-toggle-btn');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const billing = btn.getAttribute('data-billing');
+            if (billing === 'yearly') {
+              billingContainer.classList.add('yearly');
+              growthPriceText.textContent = '$96';
+            } else {
+              billingContainer.classList.remove('yearly');
+              growthPriceText.textContent = '$120';
+            }
+          });
+        });
+      }
+    })();
+  </script>
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect — Global AI Labs</title>
+  <meta name="description" content="Get in touch with Global AI Labs. Start a creative project, campaign, digital workflow optimization, or submit a creator brief.">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Connect — Global AI Labs">
+  <meta property="og:description" content="Get in touch with Global AI Labs. Start a creative project, campaign, digital workflow optimization, or submit a creator brief.">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-ice text-ink antialiased selection:bg-signal selection:text-ink">
+
+  <!-- Noise Background -->
+  <div class="noise-overlay"></div>
+
+  <!-- Grid Overlay lines (Desktop only) -->
+  <div class="grid-overlay hidden md:grid">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <!-- Page Transition Screen Sweep Overlay -->
+  <div class="transition-overlay">
+    <div class="transition-text">CONNECT</div>
+  </div>
+
+  <!-- Fixed Navigation Header -->
+  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center">
+    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 flex items-center">
+      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="mix-blend-mode: multiply; filter: none;">
+    </a>
+    <div class="flex items-center gap-4">
+      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-ink text-ink text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ink hover:text-ice transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-btn">
+        start free trial
+      </a>
+      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-ink text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-signal hover:text-ink transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-menu-btn">
+        <span class="menu-text">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen Navigation Menu -->
+  <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-ink text-ice z-[998] flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);">
+    <div class="flex justify-between items-start w-full mt-12 md:mt-6">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">navigation</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">global ai labs</div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <a href="./index.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          home
+        </a>
+        <a href="./work.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          work
+        </a>
+        <a href="./team.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          team
+        </a>
+        <a href="./careers.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          careers
+        </a>
+        <a href="./connect.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          connect
+        </a>
+      </div>
+      
+      <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3">capabilities</div>
+          <ul class="flex flex-col gap-2">
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">STRATEGY</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">PRODUCTION</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CONTENT</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CREATORS</li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2">say hello</div>
+          <a href="mailto:hello@globalailabs.in" class="menu-secondary-item text-md md:text-lg hover:underline text-signal">hello@globalailabs.in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-end w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">© 2026</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">mumbai, india</div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-24 px-5 md:px-8 lg:px-12">
+    <!-- Connect Hero -->
+    <section class="max-w-7xl mx-auto flex flex-col gap-8 border-b border-line-light pb-12 mb-16">
+      <span class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ TRANSMIT SIGNAL ]</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8">
+          <h1 class="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-[-0.05em] uppercase leading-[0.85] text-ink">
+            Deploy your first<br>agent node.
+          </h1>
+        </div>
+        <div class="lg:col-span-4">
+          <p class="text-lg md:text-xl text-muted font-light leading-relaxed">
+            Ready to scale your content automation? Get in touch to setup your Pro Platform trial or discuss enterprise-level agent customization.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Form and details -->
+    <section class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-28">
+      
+      <!-- Contact Blocks (Left Column) -->
+      <div class="lg:col-span-4 flex flex-col gap-10">
+        <div>
+          <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-2">Business Enquiries</h2>
+          <a href="mailto:hello@globalailabs.in" class="text-xl font-black uppercase tracking-[-0.02em] hover:text-signal transition-colors block">
+            hello@globalailabs.in
+          </a>
+        </div>
+
+        <div>
+          <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-2">Career Enquiries</h2>
+          <a href="mailto:careers@globalailabs.in" class="text-xl font-black uppercase tracking-[-0.02em] hover:text-signal transition-colors block">
+            careers@globalailabs.in
+          </a>
+        </div>
+
+        <div>
+          <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-2">Location</h2>
+          <p class="text-md font-bold uppercase text-ink">
+            Mumbai, India
+          </p>
+          <p class="text-sm text-muted mt-1 leading-relaxed max-w-xs">
+            Global AI Labs Headquarters,<br>
+            Bandra Kurla Complex,<br>
+            Mumbai, MH 400051
+          </p>
+        </div>
+
+        <!-- Abstract location map (CSS/SVG Vector) -->
+        <div class="border border-line-light rounded-[24px] p-6 h-[240px] relative bg-ice overflow-hidden group select-none pointer-events-none">
+          <div class="absolute inset-0 grid grid-cols-6 grid-rows-4 gap-2 opacity-15">
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-r border-ink"></div>
+            <div class="border-b border-ink"></div>
+          </div>
+          <!-- Signal Center Glowing Node -->
+          <div class="absolute left-[60%] top-[45%] flex items-center justify-center">
+            <div class="absolute w-12 h-12 rounded-full bg-signal opacity-35 animate-ping"></div>
+            <div class="absolute w-6 h-6 rounded-full bg-signal opacity-60"></div>
+            <div class="w-3.5 h-3.5 rounded-full bg-ink"></div>
+          </div>
+          <!-- Grid Coordinates -->
+          <span class="absolute bottom-4 left-6 text-[8px] font-black tracking-[0.08em] text-muted">MUMBAI HQ / 19.0760° N, 72.8777° E</span>
+        </div>
+      </div>
+
+      <!-- Contact Form (Right Column) -->
+      <form class="lg:col-span-8 flex flex-col gap-8 border border-line-light rounded-[24px] p-8 md:p-10 bg-ice relative" action="#" method="POST" onsubmit="event.preventDefault(); alert('Signal Transmitted successfully.');">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <label for="form-name" class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Name *</label>
+            <input type="text" id="form-name" required class="bg-transparent border-b border-line-light py-2 text-ink text-md focus:outline-none focus:border-ink transition-colors" placeholder="your name">
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="form-email" class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Email Address *</label>
+            <input type="email" id="form-email" required class="bg-transparent border-b border-line-light py-2 text-ink text-md focus:outline-none focus:border-ink transition-colors" placeholder="name@company.com">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <label for="form-company" class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Company / Brand</label>
+            <input type="text" id="form-company" class="bg-transparent border-b border-line-light py-2 text-ink text-md focus:outline-none focus:border-ink transition-colors" placeholder="company name">
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="form-build" class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Target Platform Module</label>
+            <select id="form-build" class="bg-transparent border-b border-line-light py-2 text-ink text-md focus:outline-none focus:border-ink transition-colors uppercase font-bold text-xs">
+              <option value="stir">Autonomous Strategy (STIR)</option>
+              <option value="carbon">Generative Media Engine (CARBON)</option>
+              <option value="h2o">Auto-Scheduling & Publishing (H2O)</option>
+              <option value="drip">Creator Network Sync (DRIP)</option>
+              <option value="enterprise">Custom Enterprise Suite</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Budget Range *</span>
+          <div class="flex flex-wrap gap-3">
+            <label class="cursor-pointer">
+              <input type="radio" name="budget" required class="sr-only peer" value="small">
+              <span class="px-5 py-2 text-[10px] font-bold uppercase tracking-[0.08em] border border-line-light rounded-full block peer-checked:bg-ink peer-checked:text-ice peer-checked:border-ink hover:border-ink transition-all">
+                Under $10k
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="budget" class="sr-only peer" value="medium">
+              <span class="px-5 py-2 text-[10px] font-bold uppercase tracking-[0.08em] border border-line-light rounded-full block peer-checked:bg-ink peer-checked:text-ice peer-checked:border-ink hover:border-ink transition-all">
+                $10k – $50k
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="budget" class="sr-only peer" value="large">
+              <span class="px-5 py-2 text-[10px] font-bold uppercase tracking-[0.08em] border border-line-light rounded-full block peer-checked:bg-ink peer-checked:text-ice peer-checked:border-ink hover:border-ink transition-all">
+                $50k – $150k
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="budget" class="sr-only peer" value="premium">
+              <span class="px-5 py-2 text-[10px] font-bold uppercase tracking-[0.08em] border border-line-light rounded-full block peer-checked:bg-ink peer-checked:text-ice peer-checked:border-ink hover:border-ink transition-all">
+                $150k+
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="form-message" class="text-[10px] font-bold tracking-[0.08em] uppercase text-muted">Message / Brief *</label>
+          <textarea id="form-message" required rows="4" class="bg-transparent border border-line-light rounded-[12px] p-4 text-ink text-md focus:outline-none focus:border-ink transition-colors resize-none" placeholder="tell us about your timeline, ideas, and goals"></textarea>
+        </div>
+
+        <button type="submit" class="magnetic w-full py-5 bg-ink text-ice hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal mt-4">
+          send the signal
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-ink text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-dark">
+    <div class="max-w-7xl mx-auto flex flex-col gap-16">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-5 flex flex-col gap-4">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted">platform</div>
+          <p class="text-md text-muted max-w-xs leading-relaxed">
+            Autonomous AI Agent & Brand Intelligence Platform.
+          </p>
+        </div>
+        <div class="md:col-span-3">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">pages</div>
+          <ul class="flex flex-col gap-2 text-sm font-bold">
+            <li><a href="./index.html" class="hover:text-signal transition-colors uppercase">Home</a></li>
+            <li><a href="./work.html" class="hover:text-signal transition-colors uppercase">Work</a></li>
+            <li><a href="./team.html" class="hover:text-signal transition-colors uppercase">Team</a></li>
+            <li><a href="./careers.html" class="hover:text-signal transition-colors uppercase">Careers</a></li>
+            <li><a href="./connect.html" class="hover:text-signal transition-colors uppercase">Connect</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 flex flex-col gap-6">
+          <div>
+            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">business inquiries</div>
+            <a href="mailto:hello@globalailabs.in" class="text-lg font-bold text-signal hover:underline">hello@globalailabs.in</a>
+          </div>
+          <div>
+            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-line-dark text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ice hover:text-ink hover:border-ice transition-all duration-300">
+              go up ↑
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full border-t border-line-dark pt-12 overflow-hidden">
+        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-10" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-line-dark pt-8">
+        <div>© 2026 Global AI Labs — Autonomous AI Agent & Brand Intelligence Platform</div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-ice transition-colors">Privacy Policy</a>
+          <span>/</span>
+          <a href="#" class="hover:text-ice transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>

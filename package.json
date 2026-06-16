@@ -1,0 +1,17 @@
+{
+  "name": "global-ai-labs",
+  "version": "1.0.0",
+  "description": "Premium creative AI lab website",
+  "main": "index.html",
+  "scripts": {
+    "dev:css": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/styles.css --watch",
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/css/styles.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0-alpha.30",
+    "tailwindcss": "^4.0.0-alpha.30"
+  }
+}

@@ -1,0 +1,386 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0C1016;
+  --color-ice: #f0f6f8;
+  --color-muted: #8c969d;
+  --color-smoke: #d7e0e4;
+  --color-line-dark: rgba(240, 246, 248, 0.14);
+  --color-line-light: rgba(12, 16, 22, 0.14);
+  --color-signal: #b8ffda;
+  --color-cyan: #9ff7ff;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-ice);
+    color: var(--color-ink);
+    scroll-behavior: auto;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ice);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-muted);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink);
+  }
+}
+
+/* Lenis Integration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Grid & Noise Overlays */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 0 48px;
+  gap: 24px;
+}
+
+.grid-line {
+  height: 100%;
+  border-left: 1px solid var(--color-line-light);
+}
+
+.grid-line:last-child {
+  border-right: 1px solid var(--color-line-light);
+}
+
+.dark-section .grid-line {
+  border-color: var(--color-line-dark);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-ink);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  display: none;
+}
+
+.custom-cursor-follower {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-ice);
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.custom-cursor-follower span {
+  display: none;
+}
+
+/* Magnetic Items */
+.magnetic {
+  display: inline-block;
+}
+
+/* Text Reveal Animation */
+.word-wrap {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.word-reveal {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+/* Page Transition Overlay */
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-ink);
+  z-index: 99999;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transition-text {
+  color: var(--color-ice);
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+/* Loader Screen */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-ink);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+}
+
+/* Work list hover preview container */
+.work-preview-hover-container {
+  position: fixed;
+  width: 380px;
+  height: 240px;
+  pointer-events: none;
+  z-index: 9997;
+  overflow: hidden;
+  border-radius: 12px;
+  opacity: 0;
+  transform: scale(0.8) translate(-50%, -50%);
+  display: none;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.work-preview-hover-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Grid overlay responsiveness */
+@media (max-width: 1024px) {
+  .grid-overlay {
+    grid-template-columns: repeat(6, 1fr);
+    padding: 0 32px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-overlay {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 20px;
+    gap: 12px;
+  }
+}
+
+/* --- SAAS REDESIGN UTILITIES --- */
+
+/* Marquee Logo Banner */
+.marquee-container {
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 48px;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: scroll-marquee 30s linear infinite;
+}
+
+@keyframes scroll-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Glassmorphism styling */
+.glass-panel {
+  background: rgba(240, 246, 248, 0.5);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(12, 16, 22, 0.08);
+}
+
+.dark-section .glass-panel {
+  background: rgba(12, 16, 22, 0.6);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(240, 246, 248, 0.08);
+}
+
+/* Dashboard Mockup Widgets */
+.console-window {
+  box-shadow: 0 30px 60px -15px rgba(12, 16, 22, 0.15), 0 0 0 1px rgba(12, 16, 22, 0.05);
+}
+
+.glow-ambient {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.15;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.line-draw {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-line 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite;
+}
+
+@keyframes draw-line {
+  0% { stroke-dashoffset: 600; }
+  35% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.node-pulse {
+  position: relative;
+}
+.node-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 2px solid var(--color-signal);
+  opacity: 0;
+  animation: pulse-ring 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* Pricing Toggle Pill */
+.pricing-toggle-container {
+  display: flex;
+  background-color: var(--color-smoke);
+  border-radius: 99px;
+  padding: 4px;
+  position: relative;
+  width: fit-content;
+}
+
+.pricing-toggle-btn {
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 10;
+}
+
+.pricing-toggle-btn.active {
+  color: var(--color-ink);
+}
+
+.pricing-toggle-bg {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background-color: var(--color-ice);
+  border-radius: 99px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  z-index: 1;
+}
+
+.pricing-toggle-container.yearly .pricing-toggle-bg {
+  transform: translateX(100%);
+}
+
+/* Plan Card Hover Highlight */
+.plan-card {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.plan-card:hover {
+  transform: translateY(-4px);
+}
+
