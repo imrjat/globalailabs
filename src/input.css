@@ -452,9 +452,16 @@ html.lenis, html.lenis body {
   }
 }
 
+/* Default logo style: invert white text to black, keep pink 'ai' brand color pink using invert + hue-rotate */
+.header-logo {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: normal;
+  transition: filter 0.3s ease;
+}
+
 /* When menu overlay is open, force fixed header logo and buttons to be visible on dark background */
 body.menu-open #site-header .header-logo {
-  filter: invert(1) !important;
+  filter: none !important;
   mix-blend-mode: normal !important;
 }
 
@@ -658,7 +665,7 @@ body.menu-open #site-header .header-menu-btn:hover {
 
 /* CSS variables override for header elements in dark landing page */
 .dark-mode-override #site-header .header-logo {
-  filter: invert(1) !important;
+  filter: none !important;
   mix-blend-mode: normal !important;
 }
 

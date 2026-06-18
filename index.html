@@ -49,7 +49,7 @@
   <!-- Fixed Navigation Header -->
   <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center transition-all duration-300">
     <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-[#ff2e93] focus:ring-offset-2 flex items-center">
-      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="filter: invert(1); mix-blend-mode: normal;">
+      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-8 md:h-10 w-auto header-logo">
     </a>
     <div class="flex items-center gap-4">
       <a href="#pricing" class="magnetic hidden md:inline-flex px-6 py-2 border border-white/20 text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-white hover:text-[#0c1016] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-btn">
@@ -120,7 +120,7 @@
   </nav>
 
   <main class="relative overflow-hidden">
-    
+
     <!-- Glow Decorative Background Blobs -->
     <div class="glow-blob glow-pink w-[600px] h-[600px] -top-[10%] -left-[10%] opacity-10"></div>
     <div class="glow-blob glow-cyan w-[700px] h-[700px] top-[20%] -right-[20%] opacity-10"></div>
@@ -129,7 +129,7 @@
     <!-- 1. Hero Section -->
     <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-32 pb-12 md:px-8 lg:px-12 bg-[#06080c] overflow-hidden z-0 border-b border-white/5">
       <div class="max-w-7xl mx-auto w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 my-8">
-        
+
         <!-- Left Side Dot Indicator (Desktop) -->
         <div class="hidden lg:flex flex-col gap-3 absolute left-0 top-1/2 -translate-y-1/2 z-20">
           <a href="#hero" class="w-2.5 h-2.5 rounded-full border border-white/40 bg-[#ff2e93] transition-all" aria-label="Hero Section"></a>
@@ -191,7 +191,7 @@
 
         <!-- Right Column: Central Element & Widgets -->
         <div class="lg:col-span-7 flex justify-center items-center relative h-[550px] md:h-[650px] w-full parallax-wrap">
-          
+
           <!-- SVG Connections Overlay (Drawn dynamically or styled via classes) -->
           <svg class="absolute inset-0 w-full h-full pointer-events-none z-10 hidden md:block" id="hero-svg-connections">
             <!-- Dynamic lines will be rendered here by JS targeting the centers of widgets -->
@@ -238,7 +238,7 @@
 
       <!-- Hero Bottom Bar -->
       <div class="max-w-7xl mx-auto w-full border-t border-white/10 pt-6 mt-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-        
+
         <!-- Left: Audio Sync controller -->
         <div class="flex items-center gap-3">
           <button id="hero-audio-sync" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#ff2e93] hover:text-white transition-all text-white focus:outline-none" aria-label="Toggle Audio Beat Sync demo">
@@ -279,7 +279,7 @@
       <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[#ff2e93]/5 blur-[80px] pointer-events-none"></div>
 
       <div class="max-w-7xl mx-auto flex flex-col items-center text-center gap-16 relative">
-        
+
         <!-- Section Header -->
         <div class="max-w-3xl flex flex-col items-center gap-4 text-center">
           <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ AI STUDIO INTERACTIVE ]</span>
@@ -295,7 +295,7 @@
         <div id="studio-dashboard" class="relative w-full max-w-5xl rounded-2xl border border-white/10 bg-[#0c1016]/40 backdrop-blur-xl p-3 md:p-5 shadow-[0_0_80px_rgba(112,0,255,0.12)] overflow-hidden transform-gpu">
           <!-- Ambient internal glows -->
           <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#9ff7ff]/5 blur-3xl pointer-events-none"></div>
-          
+
           <!-- Mockup Window Header -->
           <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 text-[10px] tracking-[0.06em] text-muted font-mono">
             <div class="flex items-center gap-1.5">
@@ -315,14 +315,14 @@
 
           <!-- Mockup Workspace Content Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 text-left">
-            
+
             <!-- Left Side: Prompt Editor (4 cols) -->
             <div id="studio-panel-left" class="lg:col-span-4 flex flex-col gap-4 border border-white/5 rounded-xl bg-white/[0.02] p-4 transform-gpu">
               <div class="text-[10px] font-bold uppercase tracking-wider text-[#ff2e93] font-mono flex items-center justify-between">
                 <span>01 // Input Reference</span>
                 <span class="px-2 py-0.5 rounded bg-[#ff2e93]/10 text-[#ff2e93]">ACTIVE</span>
               </div>
-              
+
               <!-- Textarea Prompt -->
               <div class="flex flex-col gap-1.5">
                 <label class="text-[9px] uppercase tracking-wider text-muted font-mono">Text Prompt</label>
@@ -366,7 +366,7 @@
 
             <!-- Center: Video Viewport Showcase (5 cols) -->
             <div id="studio-panel-center" class="lg:col-span-5 flex flex-col justify-between border border-white/5 rounded-xl bg-black/30 p-2.5 relative overflow-hidden group transform-gpu">
-              
+
               <!-- Video Wrapper with Glow -->
               <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-black shadow-[0_0_30px_rgba(112,0,255,0.2)]">
                 <video id="studio-video" class="w-full h-full object-cover rounded-lg transform transition-transform duration-700 group-hover:scale-102" autoplay loop muted playsinline>
@@ -518,7 +518,7 @@
     <!-- 3. Features / Benefits Section (Bento Grid) -->
     <section id="features" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
       <div class="max-w-7xl mx-auto flex flex-col gap-16">
-        
+
         <!-- Section Header -->
         <div class="max-w-3xl flex flex-col gap-4 text-left">
           <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ PLATFORM ADVANTAGES ]</span>
@@ -532,7 +532,7 @@
 
         <!-- Bento Grid: 6 Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-container">
-          
+
           <!-- Card 1: Multi-Modal (col-span-2) -->
           <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#ff2e93]/30 stagger-card md:col-span-2 relative overflow-hidden group">
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-[#ff2e93]/5 rounded-full filter blur-xl group-hover:bg-[#ff2e93]/10 transition-all"></div>
@@ -639,7 +639,7 @@
     <!-- 3. How It Works Section -->
     <section class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
       <div class="max-w-7xl mx-auto flex flex-col gap-16">
-        
+
         <!-- Section Header -->
         <div class="max-w-3xl flex flex-col gap-4 text-left">
           <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ WORKFLOW ]</span>
@@ -653,7 +653,7 @@
 
         <!-- Steps Layout -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
+
           <!-- Step 1 -->
           <div class="premium-glass rounded-2xl p-6 flex flex-col gap-6 text-left hover:border-white/20">
             <div class="w-12 h-12 rounded-full bg-[#ff2e93]/15 border border-[#ff2e93]/30 flex items-center justify-center text-[#ff2e93] font-black font-mono text-lg">
@@ -700,7 +700,7 @@
     <!-- 4. AI Capabilities Showcase -->
     <section id="capabilities" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
       <div class="max-w-7xl mx-auto flex flex-col gap-12">
-        
+
         <!-- Section Header -->
         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6">
           <div class="max-w-xl flex flex-col gap-4 text-left">
@@ -732,7 +732,7 @@
 
         <!-- Tab Contents Wrapper -->
         <div id="showcase-view-container" class="premium-glass rounded-3xl p-6 md:p-10 min-h-[400px] flex flex-col justify-center items-center relative overflow-hidden">
-          
+
           <!-- Product Ads Showcase Content (Active by default) -->
           <div id="showcase-ads" class="showcase-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
             <div class="lg:col-span-5 flex flex-col gap-4 text-left">
@@ -747,7 +747,7 @@
                 <span class="text-xs font-mono text-[#ff2e93]">✓ 100% Brand logo lock</span>
               </div>
             </div>
-            
+
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Reference Panel -->
               <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
@@ -794,7 +794,7 @@
                 <span class="text-xs font-mono text-[#ff2e93]">✓ Style persistence</span>
               </div>
             </div>
-            
+
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Reference Panel -->
               <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
@@ -838,7 +838,7 @@
                 <span class="text-xs font-mono text-[#ff2e93]">✓ 1:1 Pacing track</span>
               </div>
             </div>
-            
+
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Reference Panel -->
               <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
@@ -882,7 +882,7 @@
                 <span class="text-xs font-mono text-[#ff2e93]">✓ Fluid pulse transitions</span>
               </div>
             </div>
-            
+
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Reference Panel -->
               <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
@@ -923,7 +923,7 @@
     <!-- 5. Pricing Section -->
     <section id="pricing" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
       <div class="max-w-7xl mx-auto flex flex-col gap-12">
-        
+
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
           <div class="max-w-2xl flex flex-col gap-4 text-left">
@@ -963,7 +963,7 @@
 
         <!-- 4 Subscription Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          
+
           <!-- Basic Plan -->
           <div class="premium-glass rounded-3xl p-6 flex flex-col justify-between min-h-[420px] text-left relative overflow-hidden plan-card hover:border-white/20">
             <div class="flex flex-col gap-4">
@@ -975,14 +975,14 @@
                 <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($178.80/yr)">Billed monthly</span>
               </div>
               <p class="text-xs text-muted leading-relaxed">Perfect for creators experimenting with cinematic multi-modal AI generation.</p>
-              
+
               <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   <strong class="credits-count" data-monthly="1,200" data-yearly="14,400">1,200</strong> credits/mo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   Up to <span class="vids-count" data-monthly="60" data-yearly="720">60</span> videos
                 </li>
                 <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Nano Banana Pro Access</li>
@@ -1006,14 +1006,14 @@
                 <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($298.80/yr)">Billed monthly</span>
               </div>
               <p class="text-xs text-muted leading-relaxed">For content creators and social publishers needing faster rendering.</p>
-              
+
               <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   <strong class="credits-count" data-monthly="2,500" data-yearly="30,000">2,500</strong> credits/mo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   Up to <span class="vids-count" data-monthly="125" data-yearly="1,500">125</span> videos
                 </li>
                 <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Priority Queue Rendering</li>
@@ -1040,14 +1040,14 @@
                 <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($598.80/yr)">Billed monthly</span>
               </div>
               <p class="text-xs text-muted leading-relaxed">Designed for professional filmmaking studios and commercial agencies.</p>
-              
+
               <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   <strong class="credits-count" data-monthly="6,000" data-yearly="72,000">6,000</strong> credits/mo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   Up to <span class="vids-count" data-monthly="300" data-yearly="3,600">300</span> videos
                 </li>
                 <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Commercial License Included</li>
@@ -1071,14 +1071,14 @@
                 <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($1198.80/yr)">Billed monthly</span>
               </div>
               <p class="text-xs text-muted leading-relaxed">High-volume production rendering, API integrations, and bulk video exports.</p>
-              
+
               <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   <strong class="credits-count" data-monthly="13,000" data-yearly="156,000">13,000</strong> credits/mo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <span class="text-[#ff2e93] font-bold">✓</span>
                   Up to <span class="vids-count" data-monthly="650" data-yearly="7,800">650</span> videos
                 </li>
                 <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> API Direct Integration Access</li>
@@ -1099,9 +1099,9 @@
             <h3 class="text-xl font-black uppercase text-white font-outfit">Single Purchase Credit Packs</h3>
             <p class="text-xs text-[#8c969d] mt-1">Need a one-time boost? Buy extra credits. No subscription required. Credits expire in 1 year.</p>
           </div>
-          
+
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            
+
             <!-- Starter Pack -->
             <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
               <div>
@@ -1189,7 +1189,7 @@
     <!-- 6. Testimonials Section -->
     <section class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
       <div class="max-w-7xl mx-auto flex flex-col gap-16">
-        
+
         <!-- Section Header -->
         <div class="max-w-3xl flex flex-col gap-4 text-left">
           <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ CREATOR REVIEWS ]</span>
@@ -1203,7 +1203,7 @@
 
         <!-- Grid of Testimonials (3 Columns) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
+
           <!-- Testimonial 1 -->
           <div class="premium-glass rounded-2xl p-6 flex flex-col justify-between gap-6 text-left hover:border-white/20">
             <p class="text-xs text-ice leading-relaxed">
@@ -1253,7 +1253,7 @@
     <!-- 7. FAQ Section -->
     <section id="faq" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
       <div class="max-w-4xl mx-auto flex flex-col gap-12 text-left">
-        
+
         <!-- Section Header -->
         <div class="text-center md:text-left">
           <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ FREQUENT QUESTIONS ]</span>
@@ -1267,15 +1267,15 @@
 
         <!-- FAQ Categories -->
         <div class="flex flex-col gap-8 mt-4">
-          
+
           <!-- Category 1: Engine Capabilities -->
           <div>
             <h3 class="text-xs font-bold tracking-widest text-[#ff2e93] uppercase font-mono border-b border-white/10 pb-2 mb-4">
               01 / Engine Capabilities
             </h3>
-            
+
             <div class="flex flex-col divide-y divide-white/5">
-              
+
               <!-- FAQ Item 1 -->
               <div class="faq-item py-1">
                 <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
@@ -1317,9 +1317,9 @@
             <h3 class="text-xs font-bold tracking-widest text-[#9ff7ff] uppercase font-mono border-b border-white/10 pb-2 mb-4">
               02 / Credits & Billing
             </h3>
-            
+
             <div class="flex flex-col divide-y divide-white/5">
-              
+
               <!-- FAQ Item 4 -->
               <div class="faq-item py-1">
                 <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
@@ -1350,9 +1350,9 @@
             <h3 class="text-xs font-bold tracking-widest text-[#b8ffda] uppercase font-mono border-b border-white/10 pb-2 mb-4">
               03 / Security & Rights
             </h3>
-            
+
             <div class="flex flex-col divide-y divide-white/5">
-              
+
               <!-- FAQ Item 6 -->
               <div class="faq-item py-1">
                 <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
@@ -1385,7 +1385,7 @@
     <!-- 8. Call-to-Action (CTA) Section -->
     <section class="bg-[#06080c] py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden text-center border-t border-white/5">
       <div class="glow-blob glow-pink w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 filter blur-3xl"></div>
-      
+
       <div class="max-w-4xl mx-auto flex flex-col items-center gap-8 relative z-10">
         <div class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ ELEVATE PRODUCTION ]</div>
         <h2 class="text-reveal-scroll text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.04em] uppercase leading-[0.9] text-white font-outfit">
@@ -1394,7 +1394,7 @@
         <p class="text-sm text-muted max-w-xl leading-relaxed">
           Create a free account to test our multi-modal control engine. Join creators using Global AI Labs to render high-fidelity, watermark-free videos.
         </p>
-        
+
         <div class="flex flex-row flex-wrap justify-center gap-4 mt-4">
           <a href="#pricing" class="magnetic px-10 py-4 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93]">
             Start Creating Free
@@ -1440,7 +1440,7 @@
             🛡️ CCPA/GDPR Compliant · Stripe Secure Payments
           </div>
         </div>
-        
+
         <div class="md:col-span-3 text-left">
           <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4 font-mono">features</div>
           <ul class="flex flex-col gap-2 text-xs font-bold uppercase tracking-wider">
@@ -1450,7 +1450,7 @@
             <li><a href="./connect.html" class="hover:text-[#ff2e93] transition-colors">Connect Workspace</a></li>
           </ul>
         </div>
-        
+
         <div class="md:col-span-4 flex flex-col gap-6 text-left">
           <div>
             <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4 font-mono">support inquiries</div>
@@ -1467,7 +1467,7 @@
 
       <!-- Giant Wordmark Logo -->
       <div class="w-full border-t border-white/5 pt-12 overflow-hidden">
-        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-[0.03] select-none pointer-events-none" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
+        <img src="./assets/img/globalailabs_footer.png" alt="Global AI Labs" class="w-full opacity-100 select-none pointer-events-none" style="max-height: 18vw; object-fit: contain; object-position: left;">
       </div>
 
       <!-- Bottom row -->
@@ -1486,12 +1486,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  
+
   <script>
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
   </script>
-  
+
   <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>
