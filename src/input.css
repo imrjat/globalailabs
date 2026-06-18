@@ -196,21 +196,6 @@ html.lenis, html.lenis body {
   opacity: 0;
 }
 
-/* Loader Screen */
-.loader-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-ink);
-  z-index: 999999;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 48px;
-}
-
 /* Work list hover preview container */
 .work-preview-hover-container {
   position: fixed;

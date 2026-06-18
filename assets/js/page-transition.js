@@ -3,9 +3,19 @@ export function initPageTransitions() {
   const transitionText = document.querySelector('.transition-text');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const path = window.location.pathname;
+  const isHome = path === '/' || path.includes('index.html') || path.endsWith('global/') || path.includes('globalailabs') || !!document.getElementById('studio');
+
   // 1. Page Entrance Animation on Load
   if (transitionOverlay) {
-    if (prefersReducedMotion) {
+    if (isHome) {
+      // For index page, ensure overlay is hidden instantly with no animation
+      transitionOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
+      transitionOverlay.style.pointerEvents = 'none';
+      if (transitionText) {
+        transitionText.style.opacity = '0';
+      }
+    } else if (prefersReducedMotion) {
       if (window.gsap) {
         window.gsap.fromTo(transitionOverlay, 
           { opacity: 1, clipPath: 'none' }, 
@@ -19,25 +29,36 @@ export function initPageTransitions() {
       }
     } else {
       if (window.gsap) {
-        // Set state to cover, then sweep away upward
-        window.gsap.set(transitionOverlay, {
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-        });
-        
-        window.gsap.to(transitionOverlay, {
-          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-          duration: 0.85,
-          ease: 'power4.inOut',
+        // Explicitly set text to visible at start of entrance animation
+        if (transitionText) {
+          window.gsap.set(transitionText, { opacity: 1, y: 0 });
+        }
+
+        const tl = window.gsap.timeline({
           onComplete: () => {
             transitionOverlay.style.pointerEvents = 'none';
-            // Hide the text
-            if (transitionText) {
-              window.gsap.set(transitionText, { opacity: 0 });
-            }
           }
         });
+
+        tl.to(transitionOverlay, {
+          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+          duration: 0.85,
+          ease: 'power4.inOut'
+        });
+
+        if (transitionText) {
+          tl.to(transitionText, {
+            opacity: 0,
+            y: -40,
+            duration: 0.45,
+            ease: 'power3.in'
+          }, 0);
+        }
       } else {
         transitionOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
+        if (transitionText) {
+          transitionText.style.opacity = '0';
+        }
       }
     }
   }
