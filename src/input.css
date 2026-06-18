@@ -493,5 +493,244 @@ body.menu-open #site-header .header-menu-btn:hover {
   color: var(--color-ink) !important;
 }
 
+/* --- PREMIUM AI SAAS STYLE EXTENSIONS --- */
 
+:root {
+  --color-pink-neon: #ff2e93;
+  --color-cyan-neon: #9ff7ff;
+  --color-mint-neon: #b8ffda;
+  --color-bg-dark: #06080c;
+  --color-surface-dark: #0b0e14;
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+}
 
+/* Base Dark styles for the landing page body/main content */
+.bg-dark-premium {
+  background-color: var(--color-bg-dark);
+  color: #f0f6f8;
+}
+
+/* Custom premium glow blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+
+.glow-pink {
+  background: radial-gradient(circle, var(--color-pink-neon) 0%, transparent 70%);
+}
+
+.glow-cyan {
+  background: radial-gradient(circle, var(--color-cyan-neon) 0%, transparent 70%);
+}
+
+.glow-mint {
+  background: radial-gradient(circle, var(--color-mint-neon) 0%, transparent 70%);
+}
+
+/* Premium Dark Glassmorphism */
+.premium-glass {
+  background: rgba(11, 14, 20, 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.premium-glass:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 15px 50px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* Neon Glow borders and outlines */
+.border-glow-pink {
+  border-color: var(--color-pink-neon);
+  box-shadow: 0 0 15px rgba(255, 46, 147, 0.15);
+}
+
+.border-glow-cyan {
+  border-color: var(--color-cyan-neon);
+  box-shadow: 0 0 15px rgba(159, 247, 255, 0.15);
+}
+
+.border-glow-mint {
+  border-color: var(--color-mint-neon);
+  box-shadow: 0 0 15px rgba(184, 255, 218, 0.15);
+}
+
+/* Floating Animation */
+@keyframes premiumFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.floating-element {
+  animation: premiumFloat 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Parallax element smoothing */
+.parallax-wrap {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Custom interactive capabilities showcase slider/tabs */
+.showcase-tab-btn {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.showcase-tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-pink-neon);
+  transition: width 0.3s ease;
+}
+
+.showcase-tab-btn.active {
+  color: #fff;
+}
+
+.showcase-tab-btn.active::after {
+  width: 100%;
+}
+
+/* Custom line drawing class */
+.svg-connection-line {
+  stroke-dasharray: 8;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Custom Accordion FAQ styles */
+.faq-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.faq-header:hover {
+  color: var(--color-cyan-neon);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease;
+  padding-bottom: 0;
+}
+
+.faq-item.active .faq-content {
+  max-height: 350px;
+  padding-bottom: 1.5rem;
+}
+
+.faq-item.active .faq-header {
+  color: var(--color-pink-neon);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+  background-color: var(--color-pink-neon);
+  color: #fff;
+  border-color: var(--color-pink-neon);
+}
+
+/* Mini thumbnail image in Hero Bottom */
+.hero-mini-thumb {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-mini-thumb:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* CSS variables override for header elements in dark landing page */
+.dark-mode-override #site-header .header-logo {
+  filter: invert(1) !important;
+  mix-blend-mode: normal !important;
+}
+
+.dark-mode-override #site-header .header-btn {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #f0f6f8 !important;
+}
+
+.dark-mode-override #site-header .header-btn:hover {
+  background-color: #f0f6f8 !important;
+  color: var(--color-ink) !important;
+  border-color: #f0f6f8 !important;
+}
+
+.dark-mode-override #site-header .header-menu-btn {
+  background-color: #f0f6f8 !important;
+  color: var(--color-ink) !important;
+}
+.dark-mode-override #site-header .header-menu-btn:hover {
+  background-color: var(--color-pink-neon) !important;
+  color: #fff !important;
+}
+
+/* --- INTERACTIVE STUDIO WAVES & ANIMATIONS --- */
+
+@keyframes waveSlow {
+  0%, 100% { height: 25%; }
+  50% { height: 75%; }
+}
+
+@keyframes waveMid {
+  0%, 100% { height: 40%; }
+  50% { height: 95%; }
+}
+
+@keyframes waveFast {
+  0%, 100% { height: 50%; }
+  50% { height: 100%; }
+}
+
+.animate-wave-slow {
+  animation: waveSlow 1.5s ease-in-out infinite;
+}
+
+.animate-wave-mid {
+  animation: waveMid 1.1s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: waveFast 0.8s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}

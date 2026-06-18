@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global AI Labs — Creative | Production | Content | Digital</title>
-  <meta name="description" content="An integrated agency with a digital-first approach across creative strategy, campaigns, production, content, influencer marketing, digital and social media.">
+  <title>Global AI Labs — Next-Gen Multi-Modal Cinematic AI Video Generator</title>
+  <meta name="description" content="Create high-fidelity, cinematic AI videos with multi-modal control. Combine text, image, video, and audio reference tracks with total consistency.">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Global AI Labs — Creative | Production | Content | Digital">
-  <meta property="og:description" content="An integrated agency with a digital-first approach across creative strategy, campaigns, production, content, influencer marketing, digital and social media.">
+  <meta property="og:title" content="Global AI Labs — Cinematic AI Video Generator">
+  <meta property="og:description" content="Create cinematic AI videos with precise multi-modal control. Keep character and scene consistency across shots.">
 
   <!-- Tailwind & Custom Styles -->
   <link rel="stylesheet" href="./assets/css/styles.css">
@@ -17,43 +17,43 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-ice text-ink antialiased selection:bg-signal selection:text-ink">
+<body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
 
   <!-- Noise Background -->
-  <div class="noise-overlay"></div>
+  <div class="noise-overlay" style="opacity: 0.04;"></div>
 
-  <!-- Grid Overlay lines (Desktop only) -->
+  <!-- Grid Overlay lines (Desktop only, styled for dark theme) -->
   <div class="grid-overlay hidden md:grid">
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
   </div>
 
   <!-- First-Visit Loader Overlay -->
   <div id="loader-overlay" class="loader-overlay" role="progressbar" aria-valuemin="0" aria-valuemax="100">
     <div class="flex justify-between items-start w-full">
-      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">loading</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">initializing engine</div>
       <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">global ai labs</div>
     </div>
     <div class="w-full text-center">
-      <h1 class="loader-title text-ice font-black text-6xl md:text-8xl tracking-[-0.05em] uppercase select-none">
+      <h1 class="loader-title text-ice font-black text-6xl md:text-8xl tracking-[-0.05em] uppercase select-none font-outfit">
         global ai labs
       </h1>
     </div>
     <div class="flex justify-between items-end w-full">
-      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">system ready</div>
-      <div class="loader-progress text-signal font-black text-8xl md:text-[12rem] leading-none tracking-[-0.05em]">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">rendering core</div>
+      <div class="loader-progress text-[#ff2e93] font-black text-8xl md:text-[12rem] leading-none tracking-[-0.05em] font-outfit">
         00
       </div>
     </div>
@@ -61,19 +61,22 @@
 
   <!-- Page Transition Screen Sweep Overlay -->
   <div class="transition-overlay">
-    <div class="transition-text">GLOBAL</div>
+    <div class="transition-text font-outfit">GLOBAL AI</div>
   </div>
 
   <!-- Fixed Navigation Header -->
-  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center">
-    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 flex items-center">
-      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="mix-blend-mode: multiply; filter: none;">
+  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center transition-all duration-300">
+    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-[#ff2e93] focus:ring-offset-2 flex items-center">
+      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="filter: invert(1); mix-blend-mode: normal;">
     </a>
     <div class="flex items-center gap-4">
-      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-ink text-ink text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ink hover:text-ice transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-btn">
-        connect
+      <a href="#pricing" class="magnetic hidden md:inline-flex px-6 py-2 border border-white/20 text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-white hover:text-[#0c1016] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-btn">
+        Pricing
       </a>
-      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-ink text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-signal hover:text-ink transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-menu-btn">
+      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-[#ff2e93] bg-[#ff2e93]/10 text-white text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-[#ff2e93] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-btn">
+        Connect
+      </a>
+      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-[#f0f6f8] text-[#0c1016] text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-[#ff2e93] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-menu-btn">
         <span class="menu-text">menu</span>
       </button>
     </div>
@@ -88,42 +91,42 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
       <div class="lg:col-span-8 flex flex-col gap-4">
-        <a href="./index.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./index.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           home
         </a>
-        <a href="./stir.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./stir.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           stir
         </a>
-        <a href="./carbon.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./carbon.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           carbon
         </a>
-        <a href="./h2o.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./h2o.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           h2o
         </a>
-        <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           team
         </a>
-        <a href="./careers.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./careers.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           careers
         </a>
-        <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+        <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-[#ff2e93] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit">
           connect
         </a>
       </div>
 
       <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
         <div>
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3">capabilities</div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3 font-mono">capabilities</div>
           <ul class="flex flex-col gap-2">
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">STRATEGY</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">PRODUCTION</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CONTENT</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CREATORS</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">CINEMATIC AI VIDEO</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">MULTI-MODAL CONTROL</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">STYLE CONSISTENCY</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">BEAT SYNC AUDIO</li>
           </ul>
         </div>
         <div>
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2">say hello</div>
-          <a href="mailto:connect@globalailabs.in" class="menu-secondary-item text-md md:text-lg hover:underline text-signal">connect@globalailabs.in</a>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2 font-mono">say hello</div>
+          <a href="mailto:connect@globalailabs.in" class="menu-secondary-item text-md md:text-lg hover:underline text-[#ff2e93]">connect@globalailabs.in</a>
         </div>
       </div>
     </div>
@@ -134,554 +137,1346 @@
     </div>
   </nav>
 
-  <main>
-    <!-- Fullscreen Hero Section -->
-    <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-32 pb-16 md:px-8 lg:px-12 bg-ice overflow-hidden z-0">
-      
-      <!-- Placeholder grid lines for mobile -->
-      <div class="absolute inset-0 z-[-1] pointer-events-none md:hidden flex justify-between px-5 opacity-40">
-        <div class="h-full w-[1px] bg-line-light"></div>
-        <div class="h-full w-[1px] bg-line-light"></div>
-      </div>
+  <main class="relative overflow-hidden">
+    
+    <!-- Glow Decorative Background Blobs -->
+    <div class="glow-blob glow-pink w-[600px] h-[600px] -top-[10%] -left-[10%] opacity-10"></div>
+    <div class="glow-blob glow-cyan w-[700px] h-[700px] top-[20%] -right-[20%] opacity-10"></div>
+    <div class="glow-blob glow-mint w-[600px] h-[600px] bottom-[10%] left-[20%] opacity-5"></div>
 
-      <!-- Floating Canvas Signal Device in Background -->
-      <div class="absolute inset-0 z-[-1] pointer-events-none opacity-45">
-        <canvas id="hero-canvas" class="w-full h-full"></canvas>
-      </div>
-
-      <!-- Centered Hero Copy -->
-      <div class="max-w-6xl mx-auto w-full flex-grow flex flex-col items-center justify-center text-center relative z-10 gap-8 mt-12">
-        <div class="hero-tagline text-[11px] font-black tracking-[0.15em] uppercase text-muted">
-          [ AN INTEGRATED CREATIVE AGENCY ]
+    <!-- 1. Hero Section -->
+    <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-32 pb-12 md:px-8 lg:px-12 bg-[#06080c] overflow-hidden z-0 border-b border-white/5">
+      <div class="max-w-7xl mx-auto w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 my-8">
+        
+        <!-- Left Side Dot Indicator (Desktop) -->
+        <div class="hidden lg:flex flex-col gap-3 absolute left-0 top-1/2 -translate-y-1/2 z-20">
+          <a href="#hero" class="w-2.5 h-2.5 rounded-full border border-white/40 bg-[#ff2e93] transition-all" aria-label="Hero Section"></a>
+          <a href="#features" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Features"></a>
+          <a href="#capabilities" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Showcase"></a>
+          <a href="#pricing" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Pricing"></a>
         </div>
-        
-        <h1 class="hero-wordmark text-[8vw] md:text-[6vw] font-black uppercase tracking-[-0.06em] leading-[0.88] select-none text-ink max-w-4xl">
-          Global AI Labs
-        </h1>
-        
-        <p class="hero-intro text-lg md:text-xl lg:text-2xl text-ink font-light leading-relaxed max-w-2xl">
-          An integrated agency with a digital-first approach. Think creative strategy, campaigns, activations, influencer marketing, production, content, paid and organic search, and everything else a brand needs to navigate digital and social media.
-        </p>
-        
-        <div class="flex flex-row flex-wrap justify-center gap-4 hero-ctas">
-          <a href="./stir.html" class="magnetic px-8 py-4 bg-ink text-ice hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal">
-            View Work
-          </a>
-          <a href="./connect.html" class="magnetic px-8 py-4 border border-ink text-ink hover:bg-ink hover:text-ice text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ink">
-            Connect With Us
-          </a>
+
+        <!-- Left Column: Copy & Details -->
+        <div class="lg:col-span-5 flex flex-col gap-6 lg:pl-10 text-left">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93] bg-[#ff2e93]/10 rounded-full">
+              Cinematic AI Engine v2.0
+            </span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+            Empowering Creators<br>With Multi-Modal AI
+          </h1>
+
+          <!-- Capabilities Highlights -->
+          <ul class="flex flex-col gap-4 my-2">
+            <li class="flex items-start gap-3 group">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#ff2e93]/10 border border-[#ff2e93]/30 flex items-center justify-center text-[10px] text-[#ff2e93] font-bold font-mono">▲</span>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white">Multi-Modal Control</h3>
+                <p class="text-xs text-muted leading-relaxed mt-0.5">Combine up to 9 images, audio loops, and video guides into one scene generation.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 group">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#9ff7ff]/10 border border-[#9ff7ff]/30 flex items-center justify-center text-[10px] text-[#9ff7ff] font-bold font-mono">▲</span>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white">Scene & Character Consistency</h3>
+                <p class="text-xs text-muted leading-relaxed mt-0.5">Retain faces, wardrobe details, and environment styling perfectly across cuts.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 group">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#b8ffda]/10 border border-[#b8ffda]/30 flex items-center justify-center text-[10px] text-[#b8ffda] font-bold font-mono">▲</span>
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white">Motion & Camera Replication</h3>
+                <p class="text-xs text-muted leading-relaxed mt-0.5">Upload guide videos to replicate complex choreography and precise camera panning.</p>
+              </div>
+            </li>
+          </ul>
+
+          <p class="text-sm text-[#8c969d] font-light leading-relaxed max-w-lg">
+            At Global AI Labs, we believe cinematic AI video generation should be intuitive and watermark-free. Craft 4-15 second clips with direct control over camera vectors, character physics, and beat-sync audio.
+          </p>
+
+          <div class="flex flex-row flex-wrap gap-4 mt-2">
+            <a href="#pricing" class="magnetic px-7 py-3 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93]">
+              Generate Free Video
+            </a>
+            <a href="#capabilities" class="magnetic px-7 py-3 border border-white/20 text-white hover:bg-white/10 text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white">
+              Watch Showcase
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Central Element & Widgets -->
+        <div class="lg:col-span-7 flex justify-center items-center relative h-[550px] md:h-[650px] w-full parallax-wrap">
+          
+          <!-- SVG Connections Overlay (Drawn dynamically or styled via classes) -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none z-10 hidden md:block" id="hero-svg-connections">
+            <!-- Dynamic lines will be rendered here by JS targeting the centers of widgets -->
+            <line id="line-widget-1" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255, 46, 147, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
+            <line id="line-widget-2" x1="0" y1="0" x2="0" y2="0" stroke="rgba(159, 247, 255, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
+            <line id="line-widget-3" x1="0" y1="0" x2="0" y2="0" stroke="rgba(184, 255, 218, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
+          </svg>
+
+          <!-- Core Floating Organism Image -->
+          <div id="hero-main-visual" class="relative z-0 w-[280px] h-[280px] md:w-[460px] md:h-[460px] flex items-center justify-center floating-element">
+            <img src="assets/img/home-section-element.png" alt="AI Core Element" class="w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(255,46,147,0.15)]">
+            <!-- Tiny pulsing light at center -->
+            <div class="absolute w-6 h-6 rounded-full bg-[#ff2e93]/50 blur-md animate-pulse"></div>
+          </div>
+
+          <!-- Glassmorphic Widget 1: Direct Reference (Top Right) -->
+          <div id="hero-widget-1" class="absolute top-[8%] right-[2%] md:right-[8%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-pink">
+            <div class="flex items-center gap-2 text-[#ff2e93] font-bold text-[10px] tracking-widest uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#ff2e93]"></span>
+              Direct Reference
+            </div>
+            <p class="text-[10px] text-muted leading-snug">Guide scene composition using up to 9 input image references.</p>
+          </div>
+
+          <!-- Glassmorphic Widget 2: Camera Tracking (Bottom Left) -->
+          <div id="hero-widget-2" class="absolute bottom-[15%] left-[2%] md:left-[8%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-cyan">
+            <div class="flex items-center gap-2 text-[#9ff7ff] font-bold text-[10px] tracking-widest uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#9ff7ff]"></span>
+              Camera Tracking
+            </div>
+            <p class="text-[10px] text-muted leading-snug">Replicate specific camera pans, rotations, and scene choreography.</p>
+          </div>
+
+          <!-- Glassmorphic Widget 3: Style Coherence (Bottom Right) -->
+          <div id="hero-widget-3" class="absolute bottom-[8%] right-[2%] md:right-[12%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-mint">
+            <div class="flex items-center gap-2 text-[#b8ffda] font-bold text-[10px] tracking-widest uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda]"></span>
+              Style Coherence
+            </div>
+            <p class="text-[10px] text-muted leading-snug">Keep outfits, lighting palettes, and style traits persistent across shots.</p>
+          </div>
         </div>
       </div>
 
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50 select-none">
-        <span class="text-[9px] tracking-[0.15em] uppercase font-bold text-ink">scroll</span>
-        <div class="w-[1px] h-6 bg-ink animate-bounce"></div>
+      <!-- Hero Bottom Bar -->
+      <div class="max-w-7xl mx-auto w-full border-t border-white/10 pt-6 mt-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+        
+        <!-- Left: Audio Sync controller -->
+        <div class="flex items-center gap-3">
+          <button id="hero-audio-sync" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#ff2e93] hover:text-white transition-all text-white focus:outline-none" aria-label="Toggle Audio Beat Sync demo">
+            <span class="audio-icon text-xs">🔊</span>
+          </button>
+          <div class="text-left">
+            <span class="block text-[10px] font-bold uppercase tracking-wider text-white">Beat Sync Audio Enabled</span>
+            <span class="block text-[9px] text-[#8c969d]">Click to preview model rhythm alignment</span>
+          </div>
+        </div>
+
+        <!-- Center: Mini thumbnail & Engine status -->
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-8 rounded overflow-hidden bg-white/10 border border-white/20 hero-mini-thumb relative cursor-pointer">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#ff2e93]/40 to-transparent"></div>
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('assets/img/home-section-element.png'); transform: scale(1.5);"></div>
+          </div>
+          <div class="text-left">
+            <span class="px-2 py-0.5 text-[8px] font-bold uppercase bg-[#b8ffda] text-[#0c1016] rounded-full">Active</span>
+            <h4 class="text-[10px] font-bold uppercase tracking-wider text-white mt-1">Render Pipeline v2.05</h4>
+          </div>
+        </div>
+
+        <!-- Right: Brief specs -->
+        <div class="text-center md:text-right max-w-xs">
+          <p class="text-[10px] text-muted leading-relaxed">
+            Multi-modal control translates music tracks, layout guidelines, and text prompts into 4K MP4 outputs without watermark delays.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Trusted-by Section -->
-    <section class="w-full bg-ice py-16 border-b border-line-light relative z-10 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex flex-col gap-12">
-        <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted text-center">TRUSTED BY LEADING BRANDS</span>
-        <div class="logo-carousel-section">
-          
-          <!-- Row 1: Left scrolling -->
-          <div class="logo-row">
-            <div class="logo-track scroll-left">
-              <!-- Set 1 -->
-              <img src="assets/img/clients/Acko.png" alt="Acko" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Akasa-1.png" alt="Akasa Air" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Alpanlibe-1.png" alt="Alpenliebe" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/google-1.png" alt="Google" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Gradient-Map-1-copy.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/IDFC-Bank.png" alt="IDFC First Bank" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-1.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-3.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Mahindra.png" alt="Mahindra Rise" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Netflix.png" alt="Netflix" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Only-Natural-Diamonds.png" alt="Only Natural Diamonds" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Swiggy-IM.png" alt="Swiggy Instamart" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Titan.png" alt="Titan" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/VIP.png" alt="VIP" class="client-logo-img" loading="lazy">
-              
-              <!-- Set 2 (Duplicated) -->
-              <img src="assets/img/clients/Acko.png" alt="Acko" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Akasa-1.png" alt="Akasa Air" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Alpanlibe-1.png" alt="Alpenliebe" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/google-1.png" alt="Google" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Gradient-Map-1-copy.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/IDFC-Bank.png" alt="IDFC First Bank" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-1.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-3.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Mahindra.png" alt="Mahindra Rise" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Netflix.png" alt="Netflix" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Only-Natural-Diamonds.png" alt="Only Natural Diamonds" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Swiggy-IM.png" alt="Swiggy Instamart" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Titan.png" alt="Titan" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/VIP.png" alt="VIP" class="client-logo-img" loading="lazy">
-            </div>
-          </div>
+    <!-- 2. Interactive AI Studio Experience -->
+    <section id="studio" class="w-full py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden border-b border-white/5 bg-[#06080c] opacity-0 scale-95 translate-y-12">
+      <!-- Background Ambient Glow & Grid -->
+      <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#7000ff]/15 blur-[120px] pointer-events-none studio-glow transition-all duration-700"></div>
+      <div class="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[#ff2e93]/5 blur-[80px] pointer-events-none"></div>
 
-          <!-- Row 2: Right scrolling -->
-          <div class="logo-row">
-            <div class="logo-track scroll-right">
-              <!-- Set 1 -->
-              <img src="assets/img/clients/Amazon_logo.svg.png" alt="Amazon" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Brigade_GROUP-logo-BB840DD4AF-seeklogo.com_.png" alt="Brigade Group" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/disney-logogrey.png" alt="Disney" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/DLF.png" alt="DLF" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/hilton.png" alt="Hilton" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Huggies.png" alt="Huggies" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/ITC.png" alt="ITC" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Max-Kleen.png" alt="Max Kleen" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/RedBull.png" alt="Red Bull" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Spotify.png" alt="Spotify" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Swiggy.png" alt="Swiggy" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Upgrad-copy.png" alt="UpGrad" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Wiki.png" alt="Wiki" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/wild-date-111-11-11.png" alt="Wild Date" class="client-logo-img" loading="lazy">
-              
-              <!-- Set 2 (Duplicated) -->
-              <img src="assets/img/clients/Amazon_logo.svg.png" alt="Amazon" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Brigade_GROUP-logo-BB840DD4AF-seeklogo.com_.png" alt="Brigade Group" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/disney-logogrey.png" alt="Disney" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/DLF.png" alt="DLF" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/hilton.png" alt="Hilton" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Huggies.png" alt="Huggies" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/ITC.png" alt="ITC" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Max-Kleen.png" alt="Max Kleen" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/RedBull.png" alt="Red Bull" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Spotify.png" alt="Spotify" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Swiggy.png" alt="Swiggy" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Upgrad-copy.png" alt="UpGrad" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Wiki.png" alt="Wiki" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/wild-date-111-11-11.png" alt="Wild Date" class="client-logo-img" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Row 3: Left scrolling -->
-          <div class="logo-row">
-            <div class="logo-track scroll-left">
-              <!-- Set 1 -->
-              <img src="assets/img/clients/Adani.png" alt="Adani" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/arvind-limited-logo.png" alt="Arvind Limited" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/ColumbiaAsia.png" alt="Columbia Asia" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/GoKwik.png" alt="GoKwik" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Gujarat.png" alt="Gujarat Tourism" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Kirtilals.png" alt="Kirtilals" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-4.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Lead-1.png" alt="Lead School" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Lonely-Planet.png" alt="Lonely Planet" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Maruti-Suzuki-Logo.png" alt="Maruti Suzuki" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Nat-Geo.png" alt="National Geographic" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Only-Earth.png" alt="Only Earth" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Reise.png" alt="Reise Moto" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Upgrad.png" alt="UpGrad" class="client-logo-img" loading="lazy">
-              
-              <!-- Set 2 (Duplicated) -->
-              <img src="assets/img/clients/Adani.png" alt="Adani" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/arvind-limited-logo.png" alt="Arvind Limited" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/ColumbiaAsia.png" alt="Columbia Asia" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/GoKwik.png" alt="GoKwik" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Gujarat.png" alt="Gujarat Tourism" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Kirtilals.png" alt="Kirtilals" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Layer-4.png" alt="Client Partner" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Lead-1.png" alt="Lead School" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Lonely-Planet.png" alt="Lonely Planet" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Maruti-Suzuki-Logo.png" alt="Maruti Suzuki" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Nat-Geo.png" alt="National Geographic" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Only-Earth.png" alt="Only Earth" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Reise.png" alt="Reise Moto" class="client-logo-img" loading="lazy">
-              <img src="assets/img/clients/Upgrad.png" alt="UpGrad" class="client-logo-img" loading="lazy">
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-    <!-- Bento Grid Product Features Section -->
-    <section class="w-full bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-line-light">
-      <div class="max-w-7xl mx-auto flex flex-col gap-16">
-        <!-- Header -->
-        <div class="max-w-3xl flex flex-col gap-4">
-          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted">[ AGENCY PILLARS ]</span>
-          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-[-0.05em] leading-[0.9] text-ink">
-            Makers of the secret sauce
+      <div class="max-w-7xl mx-auto flex flex-col items-center text-center gap-16 relative">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl flex flex-col items-center gap-4 text-center">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ AI STUDIO INTERACTIVE ]</span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+            A Live Look Into the Future of Creation
           </h2>
-          <p class="text-lg text-muted font-light leading-relaxed max-w-2xl mt-2">
-            We help brands navigate the world of digital and social media – armed with brand and creative strategy. Be it campaigns, websites, branding, activations, influencer marketing, paid and organic search and anything else your brand needs.
+          <p class="text-xs text-muted max-w-xl">
+            Control motion, timing, styles, and character parameters through a responsive glass workstation. Scroll to see the engine render live references.
           </p>
         </div>
 
-        <!-- Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Bento Card 1: Stir (col-span-2 on large screen) -->
-          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
-            <div class="flex flex-col gap-4">
-              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">01 / CREATIVE AGENCY & CAMPAIGNS</span>
-              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">STIR</h3>
-              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
-                Our creative powerhouse. From campaign concepts and visual design to copy strategy and full-funnel digital activations, we stir emotions and create brand resonance.
-              </p>
+        <!-- Dashboard Workspace Container -->
+        <div id="studio-dashboard" class="relative w-full max-w-5xl rounded-2xl border border-white/10 bg-[#0c1016]/40 backdrop-blur-xl p-3 md:p-5 shadow-[0_0_80px_rgba(112,0,255,0.12)] overflow-hidden transform-gpu">
+          <!-- Ambient internal glows -->
+          <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#9ff7ff]/5 blur-3xl pointer-events-none"></div>
+          
+          <!-- Mockup Window Header -->
+          <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 text-[10px] tracking-[0.06em] text-muted font-mono">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+              <span class="ml-3 text-white/40">studio_session_active.mov</span>
             </div>
-            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Campaign Briefs</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Creative Strategy</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Art Direction</span>
-            </div>
-          </div>
-
-          <!-- Bento Card 2: Carbon (col-span-1) -->
-          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
-            <div class="flex flex-col gap-4">
-              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">02 / PRODUCTION BACKBONE</span>
-              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">CARBON</h3>
-              <p class="text-sm text-muted font-light leading-relaxed">
-                The production engine. We produce high-fidelity ad films, social reels, corporate films, and print-ready digital assets that capture attention instantly.
-              </p>
-            </div>
-            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Video Production</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Post Production</span>
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1 text-[#b8ffda]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda] animate-ping"></span>
+                LIVE ENGINE
+              </span>
+              <span class="opacity-40">FPS: 60.0</span>
             </div>
           </div>
 
-          <!-- Bento Card 3: H2O (col-span-1) -->
-          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
-            <div class="flex flex-col gap-4">
-              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">03 / CONTENT STUDIO</span>
-              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">H2O</h3>
-              <p class="text-sm text-muted font-light leading-relaxed">
-                A fluid content stream. We craft daily social formats, interactive stories, and digital content series designed to keep your audience engaged 24/7.
-              </p>
-            </div>
-            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Social Formats</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Daily Content</span>
-            </div>
-          </div>
+          <!-- Mockup Workspace Content Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 text-left">
+            
+            <!-- Left Side: Prompt Editor (4 cols) -->
+            <div id="studio-panel-left" class="lg:col-span-4 flex flex-col gap-4 border border-white/5 rounded-xl bg-white/[0.02] p-4 transform-gpu">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#ff2e93] font-mono flex items-center justify-between">
+                <span>01 // Input Reference</span>
+                <span class="px-2 py-0.5 rounded bg-[#ff2e93]/10 text-[#ff2e93]">ACTIVE</span>
+              </div>
+              
+              <!-- Textarea Prompt -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[9px] uppercase tracking-wider text-muted font-mono">Text Prompt</label>
+                <div class="relative">
+                  <textarea readonly class="w-full h-24 bg-black/40 border border-white/10 rounded-lg p-2.5 text-[11px] text-white resize-none font-mono focus:outline-none focus:border-[#ff2e93]/40">A female dancer performing high-energy cyber-hiphop in a neon Tokyo alleyway, cinematic lighting, 8k resolution, photorealistic.</textarea>
+                  <span class="absolute bottom-2 right-2 text-[8px] text-muted font-mono">134 ch</span>
+                </div>
+              </div>
 
-          <!-- Bento Card 4: Drip (col-span-2) -->
-          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
-            <div class="flex flex-col gap-4">
-              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">04 / INFLUENCER WORKSPACE</span>
-              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">DRIP</h3>
-              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
-                Influencer marketing at scale. We sync with a vetted creator network, managing legal briefs, status tracking, and performance metrics to amplify brand outreach.
-              </p>
+              <!-- Audio Sync Indicator -->
+              <div class="flex flex-col gap-1.5">
+                <div class="flex justify-between items-center text-[9px] uppercase tracking-wider text-muted font-mono">
+                  <span>Audio Rhythm Sync</span>
+                  <span class="text-[#9ff7ff]">124 BPM</span>
+                </div>
+                <div class="flex items-end gap-1 h-8 bg-black/30 border border-white/5 rounded-lg px-2.5 py-1">
+                  <!-- Animated Waveform Bars -->
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-3 animate-wave-slow"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-6 animate-wave-fast"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-4 animate-wave-mid"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-2 animate-wave-slow"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-5 animate-wave-mid"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-7 animate-wave-fast"></span>
+                  <span class="flex-1 bg-[#9ff7ff] rounded-t-sm h-3 animate-wave-slow"></span>
+                </div>
+              </div>
+
+              <!-- Style Selection Mockup -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[9px] uppercase tracking-wider text-muted font-mono">Visual Style Preset</label>
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                  <div class="border border-[#ff2e93]/30 bg-[#ff2e93]/5 rounded-lg px-2 py-1.5 text-center text-white font-bold cursor-pointer">
+                    ✨ Cinematic Cyber
+                  </div>
+                  <div class="border border-white/10 bg-white/[0.01] rounded-lg px-2 py-1.5 text-center text-muted hover:border-white/20 cursor-pointer">
+                    Anime Redline
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Scouting</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Creator Network</span>
-              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Campaign Tracking</span>
+
+            <!-- Center: Video Viewport Showcase (5 cols) -->
+            <div id="studio-panel-center" class="lg:col-span-5 flex flex-col justify-between border border-white/5 rounded-xl bg-black/30 p-2.5 relative overflow-hidden group transform-gpu">
+              
+              <!-- Video Wrapper with Glow -->
+              <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-black shadow-[0_0_30px_rgba(112,0,255,0.2)]">
+                <video id="studio-video" class="w-full h-full object-cover rounded-lg transform transition-transform duration-700 group-hover:scale-102" autoplay loop muted playsinline>
+                  <source src="assets/video/video.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+
+                <!-- Processing Overlay Badge -->
+                <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded border border-white/10 flex items-center gap-1.5 text-[9px] font-mono text-white">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#ff2e93] animate-pulse"></span>
+                  RENDERING: SAMPLE_942
+                </div>
+              </div>
+
+              <!-- Video Control Bar Mockup -->
+              <div class="flex items-center justify-between mt-3 text-[10px] font-mono text-muted px-1">
+                <div class="flex items-center gap-3">
+                  <button class="text-white hover:text-[#ff2e93]">⏸</button>
+                  <span>0:00 / 0:12</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#b8ffda]"></span>
+                  <span class="text-[#b8ffda]">100% COMPLETE</span>
+                </div>
+              </div>
             </div>
+
+            <!-- Right Side: Parameters / Settings (3 cols) -->
+            <div id="studio-panel-right" class="lg:col-span-3 flex flex-col gap-4 border border-white/5 rounded-xl bg-white/[0.02] p-4 transform-gpu">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#9ff7ff] font-mono">
+                02 // Pipeline Controls
+              </div>
+
+              <!-- Parameter 1: Motion Strength Slider -->
+              <div class="flex flex-col gap-1.5">
+                <div class="flex justify-between items-center text-[9px] uppercase tracking-wider text-muted font-mono">
+                  <span>Motion Strength</span>
+                  <span class="text-white">85%</span>
+                </div>
+                <div class="h-1 w-full bg-white/10 rounded-full relative">
+                  <div class="absolute left-0 top-0 bottom-0 w-[85%] bg-[#9ff7ff] rounded-full"></div>
+                  <span class="absolute left-[85%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-white border border-[#9ff7ff] shadow-md shadow-cyan-500/20 cursor-pointer"></span>
+                </div>
+              </div>
+
+              <!-- Parameter 2: Camera Speed -->
+              <div class="flex flex-col gap-1.5">
+                <div class="flex justify-between items-center text-[9px] uppercase tracking-wider text-muted font-mono">
+                  <span>Pan / Zoom Bias</span>
+                  <span class="text-white">1.2x</span>
+                </div>
+                <div class="h-1 w-full bg-white/10 rounded-full relative">
+                  <div class="absolute left-0 top-0 bottom-0 w-[60%] bg-[#b8ffda] rounded-full"></div>
+                  <span class="absolute left-[60%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-white border border-[#b8ffda] shadow-md cursor-pointer"></span>
+                </div>
+              </div>
+
+              <!-- Toggle options -->
+              <div class="flex flex-col gap-3 pt-2 text-[10px] font-mono text-muted">
+                <div class="flex items-center justify-between">
+                  <span>Aspect Ratio</span>
+                  <span class="text-white font-bold">16:9 Wide</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Temporal Coherence</span>
+                  <span class="text-[#b8ffda]">HIGH</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Seed Number</span>
+                  <span class="text-white">3982409214</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+
+        <!-- Absolute Floating cards around Dashboard Mockup -->
+        <!-- Top Left: Generating Video -->
+        <div id="float-card-1" class="absolute -top-6 -left-12 md:top-20 md:-left-20 border border-white/10 bg-[#0c1016]/80 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-44 md:w-52 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-[#7000ff]/10 flex items-center justify-center border border-[#7000ff]/20">
+            <span class="w-4 h-4 rounded-full border-2 border-t-transparent border-[#ff2e93] animate-spin"></span>
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Status</div>
+            <div class="text-[11px] font-bold text-white">Generating Video...</div>
+          </div>
+        </div>
+
+        <!-- Middle Left: Style Applied -->
+        <div id="float-card-2" class="absolute top-[28%] -left-16 md:top-[42%] md:-left-28 border border-[#ff2e93]/20 bg-[#0c1016]/85 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-40 md:w-48 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-[#ff2e93]/10 flex items-center justify-center border border-[#ff2e93]/20 text-md">
+            🪄
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Visual FX</div>
+            <div class="text-[11px] font-bold text-white">Style Applied</div>
+          </div>
+        </div>
+
+        <!-- Bottom Left: 4K Output Ready -->
+        <div id="float-card-3" class="absolute -bottom-8 -left-8 md:bottom-[15%] md:-left-24 border border-[#b8ffda]/20 bg-[#0c1016]/80 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-44 md:w-52 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-[#b8ffda]/10 flex items-center justify-center border border-[#b8ffda]/20 text-emerald-400 text-md">
+            ✓
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Compiler</div>
+            <div class="text-[11px] font-bold text-[#b8ffda]">4K Output Ready</div>
+          </div>
+        </div>
+
+        <!-- Top Right: Reference Image Added -->
+        <div id="float-card-4" class="absolute -top-8 -right-8 md:top-24 md:-right-24 border border-[#9ff7ff]/20 bg-[#0c1016]/80 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-44 md:w-52 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-[#9ff7ff]/10 flex items-center justify-center border border-[#9ff7ff]/20 text-cyan-400 text-md">
+            🖼️
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Source</div>
+            <div class="text-[11px] font-bold text-white">Reference Image</div>
+          </div>
+        </div>
+
+        <!-- Middle Right: Motion Control Enabled -->
+        <div id="float-card-5" class="absolute top-[35%] -right-16 md:top-[50%] md:-right-28 border border-white/10 bg-[#0c1016]/85 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-44 md:w-52 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-md relative">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+            <span class="absolute inset-0 rounded-full border border-cyan-400/50 animate-ping"></span>
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Sensors</div>
+            <div class="text-[11px] font-bold text-white">Motion Enabled</div>
+          </div>
+        </div>
+
+        <!-- Bottom Right: AI Processing -->
+        <div id="float-card-6" class="absolute -bottom-10 -right-4 md:bottom-[20%] md:-right-20 border border-[#ffbd2e]/20 bg-[#0c1016]/80 backdrop-blur-md rounded-xl p-3 flex items-center gap-3 shadow-lg pointer-events-none z-20 w-40 md:w-48 opacity-0">
+          <div class="w-8 h-8 rounded-lg bg-[#ffbd2e]/10 flex items-center justify-center border border-[#ffbd2e]/20">
+            <span class="w-2 h-2 rounded-full bg-[#ffbd2e] animate-ping"></span>
+          </div>
+          <div class="text-left font-mono">
+            <div class="text-[9px] text-muted uppercase tracking-wider">Engine</div>
+            <div class="text-[11px] font-bold text-white">AI Processing</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- Work Preview list (Dark Section) -->
-    <section class="dark-section bg-ink text-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
-      <!-- Grid Overlay lines (For dark section contrast) -->
-      <div class="absolute inset-0 z-[-1] pointer-events-none hidden md:grid grid-cols-12 px-12 gap-6">
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-        <div class="border-l border-line-dark"></div>
-      </div>
-
+    <!-- 3. Features / Benefits Section (Bento Grid) -->
+    <section id="features" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
       <div class="max-w-7xl mx-auto flex flex-col gap-16">
-        <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 border-b border-line-dark pb-8">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl flex flex-col gap-4 text-left">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ PLATFORM ADVANTAGES ]</span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+            Engineered For Absolute Creative Control
+          </h2>
+          <p class="text-sm text-[#8c969d] font-light leading-relaxed max-w-xl">
+            Generic AI generators drift and lose coherence. Global AI Labs provides granular control parameters, enabling you to align generated outcomes with strict creative briefs.
+          </p>
+        </div>
+
+        <!-- Bento Grid: 6 Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-container">
+          
+          <!-- Card 1: Multi-Modal (col-span-2) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#ff2e93]/30 stagger-card md:col-span-2 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-[#ff2e93]/5 rounded-full filter blur-xl group-hover:bg-[#ff2e93]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#ff2e93] font-mono uppercase">01 / CAPABILITIES</span>
+              <h3 class="text-xl md:text-2xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Multi-Modal Inputs</h3>
+              <p class="text-xs text-muted leading-relaxed max-w-md">
+                Combine text prompts with up to 9 layout images, 3 reference videos, and 3 music audio files simultaneously. Our model resolves dependencies in a single step.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Image References</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Video Prompts</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Audio Overlays</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Superior Consistency (col-span-1) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#9ff7ff]/30 stagger-card col-span-1 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#9ff7ff]/5 rounded-full filter blur-lg group-hover:bg-[#9ff7ff]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#9ff7ff] font-mono uppercase">02 / CONTINUITY</span>
+              <h3 class="text-xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Coherent Characters</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Maintain strict character consistency. Faces, garments, logos, and environment settings remain structurally aligned without frame-to-frame distortion.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Face Lock</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Style Persistence</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Camera Replication (col-span-1) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#b8ffda]/30 stagger-card col-span-1 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#b8ffda]/5 rounded-full filter blur-lg group-hover:bg-[#b8ffda]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#b8ffda] font-mono uppercase">03 / MOTION</span>
+              <h3 class="text-xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Camera Replication</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Translate camera vectors and choreography from layout clips. Upload any reference shot to copy its exact speed, panning trajectory, and zoom parameters.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Vector Copy</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Choreography Track</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Video Editing & Extension (col-span-2) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#ff2e93]/30 stagger-card md:col-span-2 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-[#ff2e93]/5 rounded-full filter blur-xl group-hover:bg-[#ff2e93]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#ff2e93] font-mono uppercase">04 / TIMELINE</span>
+              <h3 class="text-xl md:text-2xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Smart Clip Extension</h3>
+              <p class="text-xs text-muted leading-relaxed max-w-md">
+                Extend clips, connect adjacent scenes, or isolate specific visual segments for target in-painting without re-rendering the surrounding timeline elements.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Extend Timeline</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Segment Redraw</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Continuity Lock</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Audio Generation (col-span-1) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#9ff7ff]/30 stagger-card col-span-1 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#9ff7ff]/5 rounded-full filter blur-lg group-hover:bg-[#9ff7ff]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#9ff7ff] font-mono uppercase">05 / AUDIO</span>
+              <h3 class="text-xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Beat-Sync Audio</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Generate matching sound effects and environmental audio cues aligned to on-screen movements, or map visual elements to the rhythm of uploaded audio.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Audio Sync</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Sound FX</span>
+            </div>
+          </div>
+
+          <!-- Card 6: HD Commercial Ready (col-span-2) -->
+          <div class="premium-glass rounded-3xl p-8 flex flex-col justify-between min-h-[300px] hover:border-[#b8ffda]/30 stagger-card md:col-span-2 relative overflow-hidden group">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-[#b8ffda]/5 rounded-full filter blur-xl group-hover:bg-[#b8ffda]/10 transition-all"></div>
+            <div class="flex flex-col gap-4 text-left">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-[#b8ffda] font-mono uppercase">06 / DEPLOYMENT</span>
+              <h3 class="text-xl md:text-2xl font-black tracking-[-0.03em] uppercase text-white font-outfit">Commercial-Ready Pipeline</h3>
+              <p class="text-xs text-muted leading-relaxed max-w-md">
+                Skip formatting bottlenecks. Render high-resolution, watermark-free videos formatted for YouTube, TikTok, or widescreen cinematic displays with full IP ownership.
+              </p>
+            </div>
+            <div class="border-t border-white/10 pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Watermark-Free</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">1080p Resolution</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full text-[9px] uppercase font-bold text-muted font-mono">Commercial Use IP</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. How It Works Section -->
+    <section class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl flex flex-col gap-4 text-left">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ WORKFLOW ]</span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+            From Inspiration To Final Cut In 3 Steps
+          </h2>
+          <p class="text-sm text-[#8c969d] font-light leading-relaxed max-w-xl">
+            Global AI Labs streamlines production. Bring ideas to life quickly using a single integrated workspace without external stitchers.
+          </p>
+        </div>
+
+        <!-- Steps Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Step 1 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col gap-6 text-left hover:border-white/20">
+            <div class="w-12 h-12 rounded-full bg-[#ff2e93]/15 border border-[#ff2e93]/30 flex items-center justify-center text-[#ff2e93] font-black font-mono text-lg">
+              01
+            </div>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold text-white uppercase tracking-wide">Upload Reference Assets</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Provide visual materials to guide the generation. Select character photos, camera motion templates, and background tracks, up to 12 files in total.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col gap-6 text-left hover:border-white/20">
+            <div class="w-12 h-12 rounded-full bg-[#9ff7ff]/15 border border-[#9ff7ff]/30 flex items-center justify-center text-[#9ff7ff] font-black font-mono text-lg">
+              02
+            </div>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold text-white uppercase tracking-wide">Describe Your Vision</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Compose natural language prompts to specify camera behaviors, pacing, and details, indicating exactly what to pull from each reference asset.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col gap-6 text-left hover:border-white/20">
+            <div class="w-12 h-12 rounded-full bg-[#b8ffda]/15 border border-[#b8ffda]/30 flex items-center justify-center text-[#b8ffda] font-black font-mono text-lg">
+              03
+            </div>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold text-white uppercase tracking-wide">Generate & Refine</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                Generate 4-15 second clips, review the layout, and use segment-level timelines to expand clips or refine movements until client-ready.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. AI Capabilities Showcase -->
+    <section id="capabilities" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
+      <div class="max-w-7xl mx-auto flex flex-col gap-12">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6">
+          <div class="max-w-xl flex flex-col gap-4 text-left">
+            <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ LIVE DEMONSTRATION ]</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+              Reference Control Showcase
+            </h2>
+            <p class="text-sm text-[#8c969d] font-light leading-relaxed">
+              Explore how reference inputs determine structure, movement vectors, and style. Select tabs below to review reference-to-output capabilities.
+            </p>
+          </div>
+
+          <!-- Tabs Switcher -->
+          <div class="flex flex-wrap gap-2 lg:bg-white/5 p-1 rounded-full border border-white/5 w-fit">
+            <button class="showcase-tab-btn active px-4 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white bg-transparent" data-showcase="ads">
+              Product Ads
+            </button>
+            <button class="showcase-tab-btn px-4 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white bg-transparent" data-showcase="characters">
+              Character Sync
+            </button>
+            <button class="showcase-tab-btn px-4 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white bg-transparent" data-showcase="dance">
+              Dance Cover
+            </button>
+            <button class="showcase-tab-btn px-4 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white bg-transparent" data-showcase="music">
+              Audio Beat Sync
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Contents Wrapper -->
+        <div id="showcase-view-container" class="premium-glass rounded-3xl p-6 md:p-10 min-h-[400px] flex flex-col justify-center items-center relative overflow-hidden">
+          
+          <!-- Product Ads Showcase Content (Active by default) -->
+          <div id="showcase-ads" class="showcase-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+            <div class="lg:col-span-5 flex flex-col gap-4 text-left">
+              <span class="px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider bg-[#ff2e93]/20 text-[#ff2e93] rounded w-fit">Prompt & Ref</span>
+              <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight text-white font-outfit">Commercial Product Ads</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                <strong>Input Reference:</strong> A single blueprint still of a brand thermos flask on a gray backdrop.<br>
+                <strong>Text Prompt:</strong> "Hand lifting the thermos flask in a warm-toned cozy home interior kitchen scene, smooth camera slide forward, soft cinematic sunset lighting."
+              </p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Perfect shape replication</span>
+                <span class="text-xs font-mono text-[#ff2e93]">✓ 100% Brand logo lock</span>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Reference Panel -->
+              <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-muted font-mono">Reference Image</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center relative border border-white/10 mt-4">
+                  <!-- Vector Flask Graphic -->
+                  <div class="w-12 h-32 bg-zinc-400 rounded-lg relative flex flex-col items-center justify-between py-4 border border-zinc-200">
+                    <div class="w-14 h-4 bg-zinc-500 rounded"></div>
+                    <div class="w-8 h-8 rounded-full border-2 border-dashed border-zinc-600 flex items-center justify-center font-bold text-xs text-zinc-800">LOGO</div>
+                    <div class="w-10 h-2 bg-zinc-500 rounded-full"></div>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Blueprint Flask (Layout Reference)</p>
+              </div>
+
+              <!-- Output Panel -->
+              <div class="bg-black/40 border border-[#ff2e93]/30 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-[#ff2e93] font-mono">Generated AI Video</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-[#ff2e93]/5 to-[#ff2e93]/15 flex items-center justify-center relative border border-[#ff2e93]/20 mt-4 overflow-hidden">
+                  <!-- Simulated video frames -->
+                  <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url('assets/img/home-section-element.png'); filter: hue-rotate(180deg) blur(20px);"></div>
+                  <div class="relative z-10 flex flex-col items-center gap-2">
+                    <!-- Hands lifting flask -->
+                    <div class="w-10 h-10 rounded-full bg-[#ff2e93]/10 border border-[#ff2e93]/30 flex items-center justify-center text-xl">✨</div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 px-3 py-1 rounded-full">Interactive Preview</span>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Warm kitchen scene, photorealistic</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Character Sync Showcase Content -->
+          <div id="showcase-characters" class="showcase-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full hidden">
+            <div class="lg:col-span-5 flex flex-col gap-4 text-left">
+              <span class="px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider bg-[#ff2e93]/20 text-[#ff2e93] rounded w-fit">Prompt & Ref</span>
+              <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight text-white font-outfit">Character Consistency</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                <strong>Input Reference:</strong> Front portrait photograph of a character wearing a bright yellow winter hoodie.<br>
+                <strong>Text Prompt:</strong> "Same character running through a crowded, neon-lit cyberpunk alleyway in the rain, wide shot, cinematic tracking camera."
+              </p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Wardrobe features lock</span>
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Style persistence</span>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Reference Panel -->
+              <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-muted font-mono">Reference Character</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center relative border border-white/10 mt-4">
+                  <!-- Abstract Character Representation -->
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="w-16 h-16 rounded-full bg-zinc-700 border border-zinc-500 flex items-center justify-center text-2xl">👤</div>
+                    <div class="px-3 py-1 bg-yellow-500 text-black text-[9px] font-bold rounded uppercase font-mono">Yellow Hoodie</div>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Front Portrait (Style Reference)</p>
+              </div>
+
+              <!-- Output Panel -->
+              <div class="bg-black/40 border border-[#ff2e93]/30 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-[#ff2e93] font-mono">Generated AI Video</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-[#ff2e93]/5 to-[#ff2e93]/15 flex items-center justify-center relative border border-[#ff2e93]/20 mt-4 overflow-hidden">
+                  <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url('assets/img/home-section-element.png'); filter: hue-rotate(90deg) blur(20px);"></div>
+                  <div class="relative z-10 flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-[#ff2e93]/10 border border-[#ff2e93]/30 flex items-center justify-center text-xl">🏃‍♂️</div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 px-3 py-1 rounded-full">Cyberpunk Alley, Rain</span>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Yellow hoodie features retained</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dance Cover Showcase Content -->
+          <div id="showcase-dance" class="showcase-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full hidden">
+            <div class="lg:col-span-5 flex flex-col gap-4 text-left">
+              <span class="px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider bg-[#ff2e93]/20 text-[#ff2e93] rounded w-fit">Prompt & Ref</span>
+              <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight text-white font-outfit">Motion Transfer / Dance Covers</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                <strong>Input Reference:</strong> A reference video of a dancer performing contemporary choreography.<br>
+                <strong>Text Prompt:</strong> "A chrome robot performing the dance movements on a clean white gallery stage, soft shadows, high detail."
+              </p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Motion vector match</span>
+                <span class="text-xs font-mono text-[#ff2e93]">✓ 1:1 Pacing track</span>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Reference Panel -->
+              <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-muted font-mono">Reference Choreography</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center relative border border-white/10 mt-4">
+                  <!-- Dancer icon and path -->
+                  <div class="flex flex-col items-center gap-2">
+                    <span class="text-3xl">💃</span>
+                    <span class="px-2 py-0.5 bg-white/10 rounded text-[9px] font-mono text-muted">Dance video input</span>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Guide motion track</p>
+              </div>
+
+              <!-- Output Panel -->
+              <div class="bg-black/40 border border-[#ff2e93]/30 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-[#ff2e93] font-mono">Generated AI Video</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-[#ff2e93]/5 to-[#ff2e93]/15 flex items-center justify-center relative border border-[#ff2e93]/20 mt-4 overflow-hidden">
+                  <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url('assets/img/home-section-element.png'); filter: hue-rotate(270deg) blur(20px);"></div>
+                  <div class="relative z-10 flex flex-col items-center gap-2">
+                    <span class="text-3xl animate-bounce">🤖</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 px-3 py-1 rounded-full">Robot dancing 1:1</span>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Chrome texture, identical moves</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Music Beat Sync Showcase Content -->
+          <div id="showcase-music" class="showcase-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full hidden">
+            <div class="lg:col-span-5 flex flex-col gap-4 text-left">
+              <span class="px-2.5 py-0.5 text-[8px] font-bold uppercase tracking-wider bg-[#ff2e93]/20 text-[#ff2e93] rounded w-fit">Prompt & Ref</span>
+              <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight text-white font-outfit">Audio beat-sync visuals</h3>
+              <p class="text-xs text-muted leading-relaxed">
+                <strong>Input Reference:</strong> An electronic music audio track with a heavy drum-beat drops.<br>
+                <strong>Text Prompt:</strong> "Abstract neon rings pulsing and expanding outwards in space, synced exactly to the music beats and frequency peaks."
+              </p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Amplitude analysis</span>
+                <span class="text-xs font-mono text-[#ff2e93]">✓ Fluid pulse transitions</span>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Reference Panel -->
+              <div class="bg-black/40 border border-white/5 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-muted font-mono">Reference Audio (MP3)</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-white/5 to-white/10 flex items-center justify-center relative border border-white/10 mt-4">
+                  <!-- Waveform mockup -->
+                  <div class="flex items-end gap-1.5 h-16 w-32">
+                    <div class="w-2.5 h-6 bg-white/30 rounded-t"></div>
+                    <div class="w-2.5 h-12 bg-white/40 rounded-t"></div>
+                    <div class="w-2.5 h-16 bg-white/60 rounded-t"></div>
+                    <div class="w-2.5 h-8 bg-white/40 rounded-t"></div>
+                    <div class="w-2.5 h-14 bg-white/50 rounded-t"></div>
+                    <div class="w-2.5 h-4 bg-white/30 rounded-t"></div>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Drum and Bass track, 128 BPM</p>
+              </div>
+
+              <!-- Output Panel -->
+              <div class="bg-black/40 border border-[#ff2e93]/30 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden">
+                <span class="absolute top-2 left-2 text-[8px] uppercase font-bold tracking-wider text-[#ff2e93] font-mono">Generated AI Video</span>
+                <div class="w-full h-48 rounded bg-gradient-to-tr from-[#ff2e93]/5 to-[#ff2e93]/15 flex items-center justify-center relative border border-[#ff2e93]/20 mt-4 overflow-hidden">
+                  <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url('assets/img/home-section-element.png'); filter: hue-rotate(0deg) blur(20px);"></div>
+                  <div class="relative z-10 flex flex-col items-center gap-2">
+                    <span class="text-4xl animate-ping text-[#ff2e93]">◎</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 px-3 py-1 rounded-full">Neon Rings pulsing</span>
+                  </div>
+                </div>
+                <p class="text-[10px] text-muted text-center italic">Pulse matches 128 BPM drops</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Pricing Section -->
+    <section id="pricing" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
+      <div class="max-w-7xl mx-auto flex flex-col gap-12">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
+          <div class="max-w-2xl flex flex-col gap-4 text-left">
+            <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ SUBSCRIPTION PLANS ]</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+              Simple Credit Pricing
+            </h2>
+            <p class="text-sm text-[#8c969d] font-light leading-relaxed">
+              Unlock the rendering power of Global AI Labs. Save 50% on annual plans. Credit balances roll over monthly.
+            </p>
+          </div>
+
+          <!-- Billing Toggle Pill -->
+          <div class="pricing-toggle-container flex items-center bg-white/5 border border-white/10 p-1 rounded-full w-fit cursor-pointer relative select-none">
+            <button id="toggle-monthly" class="pricing-toggle-btn active px-6 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white transition-colors relative z-10">
+              Monthly
+            </button>
+            <button id="toggle-yearly" class="pricing-toggle-btn px-6 py-2 text-[10px] uppercase font-bold tracking-wider rounded-full hover:text-white transition-colors relative z-10">
+              Yearly (Save 50%)
+            </button>
+            <div class="pricing-toggle-bg absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-[#ff2e93] rounded-full transition-transform duration-300 z-0"></div>
+          </div>
+        </div>
+
+        <!-- Conversion rate announcement banner -->
+        <div class="premium-glass rounded-2xl p-4 flex flex-col md:flex-row justify-between items-center gap-4 text-left border-glow-pink border/20">
+          <div class="flex items-center gap-3">
+            <span class="w-2 h-2 rounded-full bg-[#ff2e93] animate-ping"></span>
+            <p class="text-xs text-ice">
+              <strong>Annual Multiplier Advantage:</strong> Annual subscribers enjoy half-price plans + <strong>1.0x credit usage rate</strong>. Monthly or single pack plans use a <strong>1.5x credit rate</strong>.
+            </p>
+          </div>
+          <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[9px] uppercase font-bold text-muted font-mono whitespace-nowrap">
+            Recommended: Annual
+          </span>
+        </div>
+
+        <!-- 4 Subscription Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Basic Plan -->
+          <div class="premium-glass rounded-3xl p-6 flex flex-col justify-between min-h-[420px] text-left relative overflow-hidden plan-card hover:border-white/20">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold text-muted uppercase tracking-widest font-mono">01 / Basic</span>
+              <h3 class="text-xl font-bold text-white uppercase font-outfit">Basic</h3>
+              <div class="my-2">
+                <span class="price-val text-4xl font-extrabold text-white font-outfit" data-monthly="$29.90" data-yearly="$14.90">$29.90</span>
+                <span class="text-xs text-muted">/month</span>
+                <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($178.80/yr)">Billed monthly</span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">Perfect for creators experimenting with cinematic multi-modal AI generation.</p>
+              
+              <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <strong class="credits-count" data-monthly="1,200" data-yearly="14,400">1,200</strong> credits/mo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  Up to <span class="vids-count" data-monthly="60" data-yearly="720">60</span> videos
+                </li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Nano Banana Pro Access</li>
+                <li class="flex items-center gap-2 text-muted/60"><span>✗</span> Priority Queue</li>
+                <li class="flex items-center gap-2 text-muted/60"><span>✗</span> Commercial License</li>
+              </ul>
+            </div>
+            <a href="#connect" class="magnetic w-full py-3 bg-white/5 border border-white/10 hover:bg-[#ff2e93] hover:border-[#ff2e93] text-white hover:text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-center mt-6">
+              Get Started
+            </a>
+          </div>
+
+          <!-- Standard Plan -->
+          <div class="premium-glass rounded-3xl p-6 flex flex-col justify-between min-h-[420px] text-left relative overflow-hidden plan-card hover:border-white/20">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold text-muted uppercase tracking-widest font-mono">02 / Standard</span>
+              <h3 class="text-xl font-bold text-white uppercase font-outfit">Standard</h3>
+              <div class="my-2">
+                <span class="price-val text-4xl font-extrabold text-white font-outfit" data-monthly="$49.90" data-yearly="$24.90">$49.90</span>
+                <span class="text-xs text-muted">/month</span>
+                <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($298.80/yr)">Billed monthly</span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">For content creators and social publishers needing faster rendering.</p>
+              
+              <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <strong class="credits-count" data-monthly="2,500" data-yearly="30,000">2,500</strong> credits/mo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  Up to <span class="vids-count" data-monthly="125" data-yearly="1,500">125</span> videos
+                </li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Priority Queue Rendering</li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Unlimited Cloud Storage</li>
+                <li class="flex items-center gap-2 text-muted/60"><span>✗</span> Commercial License</li>
+              </ul>
+            </div>
+            <a href="#connect" class="magnetic w-full py-3 bg-white/5 border border-white/10 hover:bg-[#ff2e93] hover:border-[#ff2e93] text-white hover:text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-center mt-6">
+              Get Started
+            </a>
+          </div>
+
+          <!-- Pro Plan (Best Value) -->
+          <div class="premium-glass rounded-3xl p-6 flex flex-col justify-between min-h-[420px] text-left relative overflow-hidden plan-card border-glow-pink">
+            <div class="absolute top-0 right-0 bg-[#ff2e93] text-white text-[8px] font-black uppercase tracking-wider px-3 py-1 rounded-bl">
+              Best Value
+            </div>
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold text-[#ff2e93] uppercase tracking-widest font-mono">03 / Pro</span>
+              <h3 class="text-xl font-bold text-white uppercase font-outfit">Pro</h3>
+              <div class="my-2">
+                <span class="price-val text-4xl font-extrabold text-white font-outfit" data-monthly="$99.90" data-yearly="$49.90">$99.90</span>
+                <span class="text-xs text-muted">/month</span>
+                <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($598.80/yr)">Billed monthly</span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">Designed for professional filmmaking studios and commercial agencies.</p>
+              
+              <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <strong class="credits-count" data-monthly="6,000" data-yearly="72,000">6,000</strong> credits/mo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  Up to <span class="vids-count" data-monthly="300" data-yearly="3,600">300</span> videos
+                </li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Commercial License Included</li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Priority Queue Rendering</li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Dedicated Account Manager</li>
+              </ul>
+            </div>
+            <a href="#connect" class="magnetic w-full py-3 bg-[#ff2e93] border border-[#ff2e93] hover:bg-white hover:text-[#0c1016] text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-center mt-6">
+              Choose Pro
+            </a>
+          </div>
+
+          <!-- Max Plan -->
+          <div class="premium-glass rounded-3xl p-6 flex flex-col justify-between min-h-[420px] text-left relative overflow-hidden plan-card hover:border-white/20">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold text-muted uppercase tracking-widest font-mono">04 / Max</span>
+              <h3 class="text-xl font-bold text-white uppercase font-outfit">Max</h3>
+              <div class="my-2">
+                <span class="price-val text-4xl font-extrabold text-white font-outfit" data-monthly="$199.90" data-yearly="$99.90">$199.90</span>
+                <span class="text-xs text-muted">/month</span>
+                <span class="price-note block text-[9px] text-[#ff2e93] mt-1 font-mono" data-monthly="Billed monthly" data-yearly="Billed annually ($1198.80/yr)">Billed monthly</span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">High-volume production rendering, API integrations, and bulk video exports.</p>
+              
+              <ul class="border-t border-white/10 pt-4 flex flex-col gap-2 text-[11px] text-ice">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  <strong class="credits-count" data-monthly="13,000" data-yearly="156,000">13,000</strong> credits/mo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#ff2e93] font-bold">✓</span> 
+                  Up to <span class="vids-count" data-monthly="650" data-yearly="7,800">650</span> videos
+                </li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> API Direct Integration Access</li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Commercial License Included</li>
+                <li class="flex items-center gap-2"><span class="text-[#ff2e93] font-bold">✓</span> Priority Support 24/7</li>
+              </ul>
+            </div>
+            <a href="#connect" class="magnetic w-full py-3 bg-white/5 border border-white/10 hover:bg-[#ff2e93] hover:border-[#ff2e93] text-white hover:text-white text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-center mt-6">
+              Get Started
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Single Purchase Credit Packs Section -->
+        <div class="mt-16 flex flex-col gap-8 text-left">
           <div>
-            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ SELECTED CASE STUDIES ]</h2>
-            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
-              Work that moves fast<br>and lands deep.
-            </h3>
+            <h3 class="text-xl font-black uppercase text-white font-outfit">Single Purchase Credit Packs</h3>
+            <p class="text-xs text-[#8c969d] mt-1">Need a one-time boost? Buy extra credits. No subscription required. Credits expire in 1 year.</p>
           </div>
-          <a href="./work.html" class="magnetic px-8 py-4 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none w-fit">
-            view all work
-          </a>
-        </div>
-
-        <!-- Project Rows List (8 Items) -->
-        <div class="flex flex-col">
-          <!-- Row 1 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0C1016 0%, #1e293b 100%)" data-accent="#b8ffda">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">01</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Airborne Social Lift</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Social Media Strategy</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Travel inspiration content systems.</div>
+          
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            
+            <!-- Starter Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
+              <div>
+                <span class="text-[8px] font-mono text-muted uppercase">Starter</span>
+                <h4 class="text-sm font-bold text-white mt-1">1,400 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 70 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$39.90</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 2 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #3b0764 100%)" data-accent="#9ff7ff">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">02</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Singles Launch System</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Music Campaign</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Fan-led interactive content drops.</div>
+            <!-- Creator Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left border-glow-pink">
+              <div>
+                <span class="text-[8px] font-mono text-[#ff2e93] uppercase">Popular</span>
+                <h4 class="text-sm font-bold text-white mt-1">3,200 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 160 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$79.90</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 3 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #064e3b 0%, #0c1016 100%)" data-accent="#e5ffb8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">03</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Grocery IP Channel</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">YouTube IP / Content</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Quick-commerce recipe storytelling.</div>
+            <!-- Professional Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
+              <div>
+                <span class="text-[8px] font-mono text-muted uppercase">Professional</span>
+                <h4 class="text-sm font-bold text-white mt-1">10,000 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 500 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$199.90</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 4 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #7c2d12 0%, #0c1016 100%)" data-accent="#ffd9f4">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">04</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Wild Harvest Identity</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Branding & Packaging</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Clutter-breaking D2C snack identity.</div>
+            <!-- Advanced Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
+              <div>
+                <span class="text-[8px] font-mono text-muted uppercase">Advanced</span>
+                <h4 class="text-sm font-bold text-white mt-1">33,000 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 1,650 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$599.00</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 5 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1e1b4b 0%, #0c1016 100%)" data-accent="#b8ffda">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">05</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Glowline</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Brand Identity</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Refined launch language for jewellery.</div>
+            <!-- Power Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
+              <div>
+                <span class="text-[8px] font-mono text-muted uppercase">Power</span>
+                <h4 class="text-sm font-bold text-white mt-1">70,000 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 3,500 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$999.00</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 6 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #0284c7 100%)" data-accent="#9ff7ff">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">06</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">FrameQuest</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Digital Platform</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Creative visual contest hub.</div>
+            <!-- Max Pack -->
+            <div class="premium-glass rounded-2xl p-4 flex flex-col justify-between text-left hover:border-white/20">
+              <div>
+                <span class="text-[8px] font-mono text-muted uppercase">Max</span>
+                <h4 class="text-sm font-bold text-white mt-1">180,000 Credits</h4>
+                <p class="text-[10px] text-muted mt-0.5">Up to 9,000 videos</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span class="text-sm font-bold text-white">$2,499.00</span>
+                <span class="text-[8px] text-[#ff2e93] font-mono">Buy →</span>
+              </div>
             </div>
-          </a>
 
-          <!-- Row 7 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1c1917 0%, #78350f 100%)" data-accent="#e5ffb8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">07</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Aqo Studio</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">D2C Website</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Ingredient-led wellness experience.</div>
-            </div>
-          </a>
-
-          <!-- Row 8 -->
-          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #065f46 0%, #0c1016 100%)" data-accent="#ffd9f4">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
-              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">08</div>
-              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">People & Planet</div>
-              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">ESG / HR Comms</div>
-              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Sustainability and employer brand narratives.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Project Hover Preview container -->
-      <div class="work-preview-hover-container"></div>
-    </section>
-
-    <!-- Services / Verticals Section -->
-    <section class="bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-
-        <!-- Left accordion panels -->
-        <div class="lg:col-span-7 flex flex-col justify-between">
-          <div class="mb-12">
-            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ PLATFORM MODULES ]</h2>
-            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
-              Modular platform<br>capabilities.
-            </h3>
           </div>
-
-          <!-- Vertical Panels Container -->
-          <div class="flex flex-col gap-4">
-            <!-- Stir Panel -->
-            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
-              <div class="flex justify-between items-start">
-                <div>
-                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">01 / STIR</span>
-                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Creative & Campaign Strategy</h4>
-                </div>
-                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
-              </div>
-              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
-                <p class="text-md leading-relaxed text-muted max-w-xl">
-                  We conceptualize and execute integrated campaigns, design stellar visual systems, craft copy, and orchestrate full-funnel digital launches that get people talking.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Campaign Concept</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brand Identity</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Copy Strategy</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Art Direction</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Carbon Panel -->
-            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
-              <div class="flex justify-between items-start">
-                <div>
-                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">02 / CARBON</span>
-                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Production & Post</h4>
-                </div>
-                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
-              </div>
-              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
-                <p class="text-md leading-relaxed text-muted max-w-xl">
-                  Our in-house production arm. We produce stunning ad films, daily social video content, reels, corporate narratives, and high-fidelity print assets.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Film Production</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Reels & Shorts</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Post Production</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Color Grading</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- H2O Panel -->
-            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
-              <div class="flex justify-between items-start">
-                <div>
-                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">03 / H2O</span>
-                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Digital Content Studio</h4>
-                </div>
-                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
-              </div>
-              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
-                <p class="text-md leading-relaxed text-muted max-w-xl">
-                  Continuous, fluid digital storytelling. We design daily social templates, write engaging copy, build interactive formats, and keep your feed fresh and alive 24/7.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Daily Social</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Storytelling</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Interactive Formats</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Feed Management</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Drip Panel -->
-            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
-              <div class="flex justify-between items-start">
-                <div>
-                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">04 / DRIP</span>
-                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Creator & Influencer Hub</h4>
-                </div>
-                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
-              </div>
-              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
-                <p class="text-md leading-relaxed text-muted max-w-xl">
-                  Influencer campaigns executed at scale. We manage outreach, structure creator briefs, negotiate licensing contracts, and deliver clear performance attribution.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Influencer Scouting</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brief Management</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Creator Sync</span>
-                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Campaign ROI</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right playground canvas column -->
-        <div class="lg:col-span-5 h-[400px] lg:h-auto border border-line-light rounded-[24px] relative bg-ice overflow-hidden group">
-          <div class="absolute top-6 left-6 z-10 flex flex-col gap-1 select-none pointer-events-none">
-            <span class="text-[9px] font-black tracking-[0.08em] uppercase text-muted">interactive play</span>
-            <h5 class="text-md font-bold uppercase text-ink">signal playground</h5>
-          </div>
-          <canvas id="services-canvas" class="w-full h-full cursor-crosshair"></canvas>
         </div>
 
       </div>
     </section>
 
-    <!-- Custom CSS-first accordion script for backup if JS fails -->
-    <style>
-      .service-card.active {
-        background-color: var(--color-ink);
-        color: var(--color-ice);
-      }
-      .service-card.active .service-details {
-        display: flex;
-      }
-      .service-card.active .w-8 {
-        transform: rotate(45deg);
-        background-color: var(--color-signal);
-        color: var(--color-ink);
-        border-color: var(--color-signal);
-      }
-    </style>
+    <!-- 6. Testimonials Section -->
+    <section class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5 bg-[#06080c]/50">
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl flex flex-col gap-4 text-left">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ CREATOR REVIEWS ]</span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
+            Vetted By Studios Worldwide
+          </h2>
+          <p class="text-sm text-[#8c969d] font-light leading-relaxed max-w-xl">
+            Read stories from filmmakers, branding agencies, and social editors about how our consistent character mapping and precise layout tools improve their pipelines.
+          </p>
+        </div>
 
-    <!-- Large CTA Section (Dark background) -->
-    <section class="bg-ink text-ice py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden text-center">
-      <div class="max-w-4xl mx-auto flex flex-col items-center gap-8">
-        <div class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ WORK WITH US ]</div>
-        <h2 class="text-reveal-scroll text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase leading-[0.85]">
-          Let's make something explosive.
+        <!-- Grid of Testimonials (3 Columns) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Testimonial 1 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col justify-between gap-6 text-left hover:border-white/20">
+            <p class="text-xs text-ice leading-relaxed">
+              "The reference capabilities in Global AI Labs are outstanding. We uploaded layout boards from a camera tracker, and the cinematic engine replicated panning directions and lens focus without any layout shifts."
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-8 h-8 rounded-full bg-[#ff2e93]/20 flex items-center justify-center text-[10px] font-bold text-[#ff2e93]">MR</div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">Marcus Rodriguez</h4>
+                <span class="text-[9px] text-muted">Filmmaker & Director</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col justify-between gap-6 text-left hover:border-white/20">
+            <p class="text-xs text-ice leading-relaxed">
+              "Working with character continuity models used to take days of target painting. Now, we just feed a single portrait photo and run multi-scene sequences with consistent attire and face properties."
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-8 h-8 rounded-full bg-[#9ff7ff]/20 flex items-center justify-center text-[10px] font-bold text-[#9ff7ff]">JL</div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">Jessica Liu</h4>
+                <span class="text-[9px] text-muted">Animation Lead, PixelCraft</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="premium-glass rounded-2xl p-6 flex flex-col justify-between gap-6 text-left hover:border-white/20">
+            <p class="text-xs text-ice leading-relaxed">
+              "The audio synchronization feature saves us massive time in editing. We upload audio beats, and the visual changes pulse exactly with the BPM peaks. It's incredibly straightforward."
+            </p>
+            <div class="flex items-center gap-3 border-t border-white/5 pt-4">
+              <div class="w-8 h-8 rounded-full bg-[#b8ffda]/20 flex items-center justify-center text-[10px] font-bold text-[#b8ffda]">EW</div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">Emily Watson</h4>
+                <span class="text-[9px] text-muted">Creative Director, Apex</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAQ Section -->
+    <section id="faq" class="w-full py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-white/5">
+      <div class="max-w-4xl mx-auto flex flex-col gap-12 text-left">
+        
+        <!-- Section Header -->
+        <div class="text-center md:text-left">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ FREQUENT QUESTIONS ]</span>
+          <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit mt-2">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-sm text-[#8c969d] font-light leading-relaxed mt-2">
+            Find details about credit conversions, reference controls, security measures, and rendering capabilities.
+          </p>
+        </div>
+
+        <!-- FAQ Categories -->
+        <div class="flex flex-col gap-8 mt-4">
+          
+          <!-- Category 1: Engine Capabilities -->
+          <div>
+            <h3 class="text-xs font-bold tracking-widest text-[#ff2e93] uppercase font-mono border-b border-white/10 pb-2 mb-4">
+              01 / Engine Capabilities
+            </h3>
+            
+            <div class="flex flex-col divide-y divide-white/5">
+              
+              <!-- FAQ Item 1 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  What is the Global AI Cinematic Engine?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  The Global AI Cinematic Engine is a next-generation video generation model that supports up to 9 images, 3 reference videos, and 3 audio files. This enables creators to guide visual output using natural language and direct reference guidelines.
+                </div>
+              </div>
+
+              <!-- FAQ Item 2 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  How is character consistency maintained across cuts?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  Our model locks face metrics, wardrobe patterns, and environmental styling directly. This maintains style coherence across cuts and scenes, preventing character drift.
+                </div>
+              </div>
+
+              <!-- FAQ Item 3 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  Can I edit details in an existing video?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  Yes. You can isolate segments in the rendering timeline and apply target prompts to change specific details (e.g. swap backgrounds or adjust attire) without re-rendering the rest of the clip.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Category 2: Credits & Subscriptions -->
+          <div>
+            <h3 class="text-xs font-bold tracking-widest text-[#9ff7ff] uppercase font-mono border-b border-white/10 pb-2 mb-4">
+              02 / Credits & Billing
+            </h3>
+            
+            <div class="flex flex-col divide-y divide-white/5">
+              
+              <!-- FAQ Item 4 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  How do credits work?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  Each rendering action uses credits based on length, resolution, and features. Annual subscribers benefit from a 1.0x credit rate. Monthly subscriptions and one-time credit packs use credits at a 1.5x usage rate.
+                </div>
+              </div>
+
+              <!-- FAQ Item 5 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  Do unused credits roll over to the next month?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  Yes, subscription credits roll over each month. Purchase credit packs remain valid for 1 year from the date of buy.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Category 3: Security & Rights -->
+          <div>
+            <h3 class="text-xs font-bold tracking-widest text-[#b8ffda] uppercase font-mono border-b border-white/10 pb-2 mb-4">
+              03 / Security & Rights
+            </h3>
+            
+            <div class="flex flex-col divide-y divide-white/5">
+              
+              <!-- FAQ Item 6 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  Who owns the IP rights of generated videos?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  You retain complete intellectual property and commercial ownership rights for all generated videos on Pro and Max plans.
+                </div>
+              </div>
+
+              <!-- FAQ Item 7 -->
+              <div class="faq-item py-1">
+                <button class="faq-header w-full text-sm font-bold text-white uppercase font-outfit flex justify-between items-center text-left py-4 focus:outline-none" aria-expanded="false">
+                  Are uploaded references secure?
+                  <span class="faq-icon w-5 h-5 rounded-full border border-white/20 flex items-center justify-center text-[10px] transition-transform duration-300 font-bold font-mono">+</span>
+                </button>
+                <div class="faq-content text-xs text-muted leading-relaxed">
+                  Yes. All files are encrypted in transit and at rest. They are processed privately and never used to train public base models.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Call-to-Action (CTA) Section -->
+    <section class="bg-[#06080c] py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden text-center border-t border-white/5">
+      <div class="glow-blob glow-pink w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 filter blur-3xl"></div>
+      
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-8 relative z-10">
+        <div class="text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93]">[ ELEVATE PRODUCTION ]</div>
+        <h2 class="text-reveal-scroll text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.04em] uppercase leading-[0.9] text-white font-outfit">
+          Build Cinematic AI Videos With Precision
         </h2>
-        <p class="text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
-          We would love to know more about your brand and discuss how we can help you scale your digital presence.
+        <p class="text-sm text-muted max-w-xl leading-relaxed">
+          Create a free account to test our multi-modal control engine. Join creators using Global AI Labs to render high-fidelity, watermark-free videos.
         </p>
-        <a href="./connect.html" class="magnetic px-12 py-5 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal mt-6">
-          get in touch
-        </a>
+        
+        <div class="flex flex-row flex-wrap justify-center gap-4 mt-4">
+          <a href="#pricing" class="magnetic px-10 py-4 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93]">
+            Start Creating Free
+          </a>
+          <a href="./connect.html" class="magnetic px-10 py-4 border border-white/20 text-white hover:bg-white/10 text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white">
+            Developer API
+          </a>
+        </div>
+
+        <!-- Trust Stats Counter -->
+        <div class="flex flex-wrap justify-center gap-8 mt-12 pt-8 border-t border-white/10 w-full max-w-2xl">
+          <div class="text-center">
+            <span class="block text-2xl font-black text-white font-outfit">50,000+</span>
+            <span class="block text-[9px] text-muted uppercase tracking-widest font-mono mt-1">Creators & Studios</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-2xl font-black text-[#ff2e93] font-outfit">1,000,000+</span>
+            <span class="block text-[9px] text-muted uppercase tracking-widest font-mono mt-1">AI Videos Generated</span>
+          </div>
+          <div class="text-center">
+            <span class="block text-2xl font-black text-[#9ff7ff] font-outfit">4K UHD</span>
+            <span class="block text-[9px] text-muted uppercase tracking-widest font-mono mt-1">Render Capabilities</span>
+          </div>
+        </div>
+
       </div>
     </section>
+
   </main>
 
   <!-- Footer -->
-  <footer class="bg-ink text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-dark">
+  <footer class="bg-[#06080c] text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-white/5">
     <div class="max-w-7xl mx-auto flex flex-col gap-16">
 
       <!-- Top row -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-        <div class="md:col-span-5 flex flex-col gap-4">
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted">agency</div>
-          <p class="text-md text-muted max-w-xs leading-relaxed">
-            An integrated creative agency with a digital-first approach.
+        <div class="md:col-span-5 flex flex-col gap-4 text-left">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted font-mono">agency</div>
+          <p class="text-sm text-muted max-w-sm leading-relaxed">
+            Global AI Labs is a cinematic generation platform providing precise character, camera, and style reference controls.
           </p>
+          <div class="text-[10px] text-muted mt-2">
+            🛡️ CCPA/GDPR Compliant · Stripe Secure Payments
+          </div>
         </div>
-        <div class="md:col-span-3">
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">pages</div>
-          <ul class="flex flex-col gap-2 text-sm font-bold">
-            <li><a href="./index.html" class="hover:text-signal transition-colors uppercase">Home</a></li>
-            <li><a href="./stir.html" class="hover:text-signal transition-colors uppercase">Stir</a></li>
-            <li><a href="./carbon.html" class="hover:text-signal transition-colors uppercase">Carbon</a></li>
-            <li><a href="./h2o.html" class="hover:text-signal transition-colors uppercase">H2O</a></li>
-            <li><a href="./team.html" class="hover:text-signal transition-colors uppercase">Team</a></li>
-            <li><a href="./careers.html" class="hover:text-signal transition-colors uppercase">Careers</a></li>
-            <li><a href="./connect.html" class="hover:text-signal transition-colors uppercase">Connect</a></li>
+        
+        <div class="md:col-span-3 text-left">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4 font-mono">features</div>
+          <ul class="flex flex-col gap-2 text-xs font-bold uppercase tracking-wider">
+            <li><a href="#features" class="hover:text-[#ff2e93] transition-colors">Bento Features</a></li>
+            <li><a href="#capabilities" class="hover:text-[#ff2e93] transition-colors">Showcase Library</a></li>
+            <li><a href="#pricing" class="hover:text-[#ff2e93] transition-colors">Pricing Plans</a></li>
+            <li><a href="./connect.html" class="hover:text-[#ff2e93] transition-colors">Connect Workspace</a></li>
           </ul>
         </div>
-        <div class="md:col-span-4 flex flex-col gap-6">
+        
+        <div class="md:col-span-4 flex flex-col gap-6 text-left">
           <div>
-            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">business inquiries</div>
-            <a href="mailto:connect@globalailabs.in" class="text-lg font-bold text-signal hover:underline">connect@globalailabs.in</a>
+            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4 font-mono">support inquiries</div>
+            <a href="mailto:support@globalailabs.in" class="text-md font-bold text-[#ff2e93] hover:underline block">support@globalailabs.in</a>
+            <a href="mailto:connect@globalailabs.in" class="text-xs text-muted hover:underline block mt-1">connect@globalailabs.in</a>
           </div>
           <div>
-            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-line-dark text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ice hover:text-ink hover:border-ice transition-all duration-300">
+            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-white/10 text-white text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-white hover:text-[#0c1016] transition-all duration-300">
               go up ↑
             </button>
           </div>
@@ -689,17 +1484,17 @@
       </div>
 
       <!-- Giant Wordmark Logo -->
-      <div class="w-full border-t border-line-dark pt-12 overflow-hidden">
-        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-10" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
+      <div class="w-full border-t border-white/5 pt-12 overflow-hidden">
+        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-[0.03] select-none pointer-events-none" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
       </div>
 
       <!-- Bottom row -->
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-line-dark pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-white/5 pt-8">
         <div>© 2026 Global AI Labs. All rights reserved.</div>
         <div class="flex gap-4">
-          <a href="#" class="hover:text-ice transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
           <span>/</span>
-          <a href="#" class="hover:text-ice transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
         </div>
       </div>
     </div>
@@ -709,74 +1504,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  
   <script>
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
-
-    // Header dark/light detection — invert logo on dark sections
-    (function() {
-      const header = document.getElementById('site-header');
-      const logo = header && header.querySelector('.header-logo');
-      const startBtn = header && header.querySelector('.header-btn');
-      const menuBtn = header && header.querySelector('.header-menu-btn');
-      const darkSections = document.querySelectorAll('.dark-section, footer');
-
-      function setHeaderDark(isDark) {
-        if (!header) return;
-        if (isDark) {
-          if (logo) {
-            logo.style.filter = 'invert(1)';
-            logo.style.mixBlendMode = 'normal';
-          }
-          if (startBtn) {
-            startBtn.classList.remove('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
-            startBtn.classList.add('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
-          }
-          if (menuBtn) {
-            menuBtn.classList.remove('bg-ink', 'text-ice');
-            menuBtn.classList.add('bg-ice', 'text-ink');
-          }
-        } else {
-          if (logo) {
-            logo.style.filter = 'none';
-            logo.style.mixBlendMode = 'multiply';
-          }
-          if (startBtn) {
-            startBtn.classList.remove('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
-            startBtn.classList.add('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
-          }
-          if (menuBtn) {
-            menuBtn.classList.remove('bg-ice', 'text-ink');
-            menuBtn.classList.add('bg-ink', 'text-ice');
-          }
-        }
-      }
-
-      if (darkSections.length && window.ScrollTrigger) {
-        darkSections.forEach(section => {
-          ScrollTrigger.create({
-            trigger: section,
-            start: 'top 60px',
-            end: 'bottom 60px',
-            onEnter: () => setHeaderDark(true),
-            onLeave: () => setHeaderDark(false),
-            onEnterBack: () => setHeaderDark(true),
-            onLeaveBack: () => setHeaderDark(false),
-          });
-        });
-      }
-
-      // Service cards accordion toggle
-      const serviceCards = document.querySelectorAll('.service-card');
-      serviceCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const isActive = card.classList.contains('active');
-          serviceCards.forEach(c => c.classList.remove('active'));
-          if (!isActive) card.classList.add('active');
-        });
-      });
-    })();
   </script>
+  
   <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>

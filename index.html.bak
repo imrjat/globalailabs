@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global AI Labs — Creative | Production | Content | Digital</title>
+  <meta name="description" content="An integrated agency with a digital-first approach across creative strategy, campaigns, production, content, influencer marketing, digital and social media.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Global AI Labs — Creative | Production | Content | Digital">
+  <meta property="og:description" content="An integrated agency with a digital-first approach across creative strategy, campaigns, production, content, influencer marketing, digital and social media.">
+
+  <!-- Tailwind & Custom Styles -->
+  <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-ice text-ink antialiased selection:bg-signal selection:text-ink">
+
+  <!-- Noise Background -->
+  <div class="noise-overlay"></div>
+
+  <!-- Grid Overlay lines (Desktop only) -->
+  <div class="grid-overlay hidden md:grid">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <!-- First-Visit Loader Overlay -->
+  <div id="loader-overlay" class="loader-overlay" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+    <div class="flex justify-between items-start w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">loading</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">global ai labs</div>
+    </div>
+    <div class="w-full text-center">
+      <h1 class="loader-title text-ice font-black text-6xl md:text-8xl tracking-[-0.05em] uppercase select-none">
+        global ai labs
+      </h1>
+    </div>
+    <div class="flex justify-between items-end w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-smoke">system ready</div>
+      <div class="loader-progress text-signal font-black text-8xl md:text-[12rem] leading-none tracking-[-0.05em]">
+        00
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Transition Screen Sweep Overlay -->
+  <div class="transition-overlay">
+    <div class="transition-text">GLOBAL</div>
+  </div>
+
+  <!-- Fixed Navigation Header -->
+  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center">
+    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 flex items-center">
+      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo" style="mix-blend-mode: multiply; filter: none;">
+    </a>
+    <div class="flex items-center gap-4">
+      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-ink text-ink text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ink hover:text-ice transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-btn">
+        connect
+      </a>
+      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-ink text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-signal hover:text-ink transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-menu-btn">
+        <span class="menu-text">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen Dark Navigation Overlay -->
+  <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-ink text-ice z-[998] flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);">
+    <div class="flex justify-between items-start w-full mt-12 md:mt-6">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">navigation</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">global ai labs</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <a href="./index.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          home
+        </a>
+        <a href="./stir.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          stir
+        </a>
+        <a href="./carbon.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          carbon
+        </a>
+        <a href="./h2o.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          h2o
+        </a>
+        <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          team
+        </a>
+        <a href="./careers.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          careers
+        </a>
+        <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
+          connect
+        </a>
+      </div>
+
+      <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3">capabilities</div>
+          <ul class="flex flex-col gap-2">
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">STRATEGY</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">PRODUCTION</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CONTENT</li>
+            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CREATORS</li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2">say hello</div>
+          <a href="mailto:connect@globalailabs.in" class="menu-secondary-item text-md md:text-lg hover:underline text-signal">connect@globalailabs.in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-end w-full">
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">© 2026</div>
+      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">mumbai, india</div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Fullscreen Hero Section -->
+    <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-32 pb-16 md:px-8 lg:px-12 bg-ice overflow-hidden z-0">
+      
+      <!-- Placeholder grid lines for mobile -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none md:hidden flex justify-between px-5 opacity-40">
+        <div class="h-full w-[1px] bg-line-light"></div>
+        <div class="h-full w-[1px] bg-line-light"></div>
+      </div>
+
+      <!-- Floating Canvas Signal Device in Background -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none opacity-45">
+        <canvas id="hero-canvas" class="w-full h-full"></canvas>
+      </div>
+
+      <!-- Centered Hero Copy -->
+      <div class="max-w-6xl mx-auto w-full flex-grow flex flex-col items-center justify-center text-center relative z-10 gap-8 mt-12">
+        <div class="hero-tagline text-[11px] font-black tracking-[0.15em] uppercase text-muted">
+          [ AN INTEGRATED CREATIVE AGENCY ]
+        </div>
+        
+        <h1 class="hero-wordmark text-[8vw] md:text-[6vw] font-black uppercase tracking-[-0.06em] leading-[0.88] select-none text-ink max-w-4xl">
+          Global AI Labs
+        </h1>
+        
+        <p class="hero-intro text-lg md:text-xl lg:text-2xl text-ink font-light leading-relaxed max-w-2xl">
+          An integrated agency with a digital-first approach. Think creative strategy, campaigns, activations, influencer marketing, production, content, paid and organic search, and everything else a brand needs to navigate digital and social media.
+        </p>
+        
+        <div class="flex flex-row flex-wrap justify-center gap-4 hero-ctas">
+          <a href="./stir.html" class="magnetic px-8 py-4 bg-ink text-ice hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal">
+            View Work
+          </a>
+          <a href="./connect.html" class="magnetic px-8 py-4 border border-ink text-ink hover:bg-ink hover:text-ice text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ink">
+            Connect With Us
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50 select-none">
+        <span class="text-[9px] tracking-[0.15em] uppercase font-bold text-ink">scroll</span>
+        <div class="w-[1px] h-6 bg-ink animate-bounce"></div>
+      </div>
+    </section>
+
+    <!-- Trusted-by Section -->
+    <section class="w-full bg-ice py-16 border-b border-line-light relative z-10 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex flex-col gap-12">
+        <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted text-center">TRUSTED BY LEADING BRANDS</span>
+        <div class="logo-carousel-section">
+          
+          <!-- Row 1: Left scrolling -->
+          <div class="logo-row">
+            <div class="logo-track scroll-left">
+              <!-- Set 1 -->
+              <img src="assets/img/clients/Acko.png" alt="Acko" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Akasa-1.png" alt="Akasa Air" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Alpanlibe-1.png" alt="Alpenliebe" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/google-1.png" alt="Google" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Gradient-Map-1-copy.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/IDFC-Bank.png" alt="IDFC First Bank" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-1.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-3.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Mahindra.png" alt="Mahindra Rise" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Netflix.png" alt="Netflix" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Only-Natural-Diamonds.png" alt="Only Natural Diamonds" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Swiggy-IM.png" alt="Swiggy Instamart" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Titan.png" alt="Titan" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/VIP.png" alt="VIP" class="client-logo-img" loading="lazy">
+              
+              <!-- Set 2 (Duplicated) -->
+              <img src="assets/img/clients/Acko.png" alt="Acko" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Akasa-1.png" alt="Akasa Air" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Alpanlibe-1.png" alt="Alpenliebe" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/google-1.png" alt="Google" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Gradient-Map-1-copy.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/IDFC-Bank.png" alt="IDFC First Bank" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-1.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-3.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Mahindra.png" alt="Mahindra Rise" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Netflix.png" alt="Netflix" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Only-Natural-Diamonds.png" alt="Only Natural Diamonds" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Swiggy-IM.png" alt="Swiggy Instamart" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Titan.png" alt="Titan" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/VIP.png" alt="VIP" class="client-logo-img" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Row 2: Right scrolling -->
+          <div class="logo-row">
+            <div class="logo-track scroll-right">
+              <!-- Set 1 -->
+              <img src="assets/img/clients/Amazon_logo.svg.png" alt="Amazon" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Brigade_GROUP-logo-BB840DD4AF-seeklogo.com_.png" alt="Brigade Group" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/disney-logogrey.png" alt="Disney" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/DLF.png" alt="DLF" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/hilton.png" alt="Hilton" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Huggies.png" alt="Huggies" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/ITC.png" alt="ITC" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Max-Kleen.png" alt="Max Kleen" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/RedBull.png" alt="Red Bull" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Spotify.png" alt="Spotify" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Swiggy.png" alt="Swiggy" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Upgrad-copy.png" alt="UpGrad" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Wiki.png" alt="Wiki" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/wild-date-111-11-11.png" alt="Wild Date" class="client-logo-img" loading="lazy">
+              
+              <!-- Set 2 (Duplicated) -->
+              <img src="assets/img/clients/Amazon_logo.svg.png" alt="Amazon" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Brigade_GROUP-logo-BB840DD4AF-seeklogo.com_.png" alt="Brigade Group" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/disney-logogrey.png" alt="Disney" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/DLF.png" alt="DLF" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/hilton.png" alt="Hilton" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Huggies.png" alt="Huggies" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/ITC.png" alt="ITC" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Max-Kleen.png" alt="Max Kleen" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/RedBull.png" alt="Red Bull" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Spotify.png" alt="Spotify" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Swiggy.png" alt="Swiggy" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Upgrad-copy.png" alt="UpGrad" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Wiki.png" alt="Wiki" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/wild-date-111-11-11.png" alt="Wild Date" class="client-logo-img" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Row 3: Left scrolling -->
+          <div class="logo-row">
+            <div class="logo-track scroll-left">
+              <!-- Set 1 -->
+              <img src="assets/img/clients/Adani.png" alt="Adani" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/arvind-limited-logo.png" alt="Arvind Limited" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/ColumbiaAsia.png" alt="Columbia Asia" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/GoKwik.png" alt="GoKwik" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Gujarat.png" alt="Gujarat Tourism" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Kirtilals.png" alt="Kirtilals" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-4.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Lead-1.png" alt="Lead School" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Lonely-Planet.png" alt="Lonely Planet" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Maruti-Suzuki-Logo.png" alt="Maruti Suzuki" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Nat-Geo.png" alt="National Geographic" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Only-Earth.png" alt="Only Earth" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Reise.png" alt="Reise Moto" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Upgrad.png" alt="UpGrad" class="client-logo-img" loading="lazy">
+              
+              <!-- Set 2 (Duplicated) -->
+              <img src="assets/img/clients/Adani.png" alt="Adani" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/arvind-limited-logo.png" alt="Arvind Limited" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/ColumbiaAsia.png" alt="Columbia Asia" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/GoKwik.png" alt="GoKwik" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Gujarat.png" alt="Gujarat Tourism" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Kirtilals.png" alt="Kirtilals" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Layer-4.png" alt="Client Partner" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Lead-1.png" alt="Lead School" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Lonely-Planet.png" alt="Lonely Planet" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Maruti-Suzuki-Logo.png" alt="Maruti Suzuki" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Nat-Geo.png" alt="National Geographic" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Only-Earth.png" alt="Only Earth" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Reise.png" alt="Reise Moto" class="client-logo-img" loading="lazy">
+              <img src="assets/img/clients/Upgrad.png" alt="UpGrad" class="client-logo-img" loading="lazy">
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    <!-- Bento Grid Product Features Section -->
+    <section class="w-full bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 border-b border-line-light">
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        <!-- Header -->
+        <div class="max-w-3xl flex flex-col gap-4">
+          <span class="text-[9px] font-black tracking-[0.15em] uppercase text-muted">[ AGENCY PILLARS ]</span>
+          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-[-0.05em] leading-[0.9] text-ink">
+            Makers of the secret sauce
+          </h2>
+          <p class="text-lg text-muted font-light leading-relaxed max-w-2xl mt-2">
+            We help brands navigate the world of digital and social media – armed with brand and creative strategy. Be it campaigns, websites, branding, activations, influencer marketing, paid and organic search and anything else your brand needs.
+          </p>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Bento Card 1: Stir (col-span-2 on large screen) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">01 / CREATIVE AGENCY & CAMPAIGNS</span>
+              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">STIR</h3>
+              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
+                Our creative powerhouse. From campaign concepts and visual design to copy strategy and full-funnel digital activations, we stir emotions and create brand resonance.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Campaign Briefs</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Creative Strategy</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Art Direction</span>
+            </div>
+          </div>
+
+          <!-- Bento Card 2: Carbon (col-span-1) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">02 / PRODUCTION BACKBONE</span>
+              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">CARBON</h3>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                The production engine. We produce high-fidelity ad films, social reels, corporate films, and print-ready digital assets that capture attention instantly.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Video Production</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Post Production</span>
+            </div>
+          </div>
+
+          <!-- Bento Card 3: H2O (col-span-1) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg col-span-1">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">03 / CONTENT STUDIO</span>
+              <h3 class="text-2xl font-black tracking-[-0.03em] uppercase text-ink">H2O</h3>
+              <p class="text-sm text-muted font-light leading-relaxed">
+                A fluid content stream. We craft daily social formats, interactive stories, and digital content series designed to keep your audience engaged 24/7.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Social Formats</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Daily Content</span>
+            </div>
+          </div>
+
+          <!-- Bento Card 4: Drip (col-span-2) -->
+          <div class="glass-panel rounded-[24px] p-8 flex flex-col justify-between min-h-[300px] transition-all duration-300 hover:shadow-lg md:col-span-2">
+            <div class="flex flex-col gap-4">
+              <span class="text-[9px] font-bold tracking-[0.08em] text-muted font-mono uppercase">04 / INFLUENCER WORKSPACE</span>
+              <h3 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase text-ink">DRIP</h3>
+              <p class="text-sm text-muted font-light leading-relaxed max-w-xl">
+                Influencer marketing at scale. We sync with a vetted creator network, managing legal briefs, status tracking, and performance metrics to amplify brand outreach.
+              </p>
+            </div>
+            <div class="border-t border-line-light pt-6 mt-8 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Scouting</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Creator Network</span>
+              <span class="px-3 py-1 bg-line-light rounded-full text-[10px] uppercase font-bold text-muted font-mono">Campaign Tracking</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Preview list (Dark Section) -->
+    <section class="dark-section bg-ink text-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
+      <!-- Grid Overlay lines (For dark section contrast) -->
+      <div class="absolute inset-0 z-[-1] pointer-events-none hidden md:grid grid-cols-12 px-12 gap-6">
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+        <div class="border-l border-line-dark"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto flex flex-col gap-16">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 border-b border-line-dark pb-8">
+          <div>
+            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ SELECTED CASE STUDIES ]</h2>
+            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
+              Work that moves fast<br>and lands deep.
+            </h3>
+          </div>
+          <a href="./work.html" class="magnetic px-8 py-4 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none w-fit">
+            view all work
+          </a>
+        </div>
+
+        <!-- Project Rows List (8 Items) -->
+        <div class="flex flex-col">
+          <!-- Row 1 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0C1016 0%, #1e293b 100%)" data-accent="#b8ffda">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">01</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Airborne Social Lift</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Social Media Strategy</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Travel inspiration content systems.</div>
+            </div>
+          </a>
+
+          <!-- Row 2 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #3b0764 100%)" data-accent="#9ff7ff">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">02</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Singles Launch System</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Music Campaign</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Fan-led interactive content drops.</div>
+            </div>
+          </a>
+
+          <!-- Row 3 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #064e3b 0%, #0c1016 100%)" data-accent="#e5ffb8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">03</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Grocery IP Channel</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">YouTube IP / Content</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Quick-commerce recipe storytelling.</div>
+            </div>
+          </a>
+
+          <!-- Row 4 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #7c2d12 0%, #0c1016 100%)" data-accent="#ffd9f4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">04</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Wild Harvest Identity</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Branding & Packaging</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Clutter-breaking D2C snack identity.</div>
+            </div>
+          </a>
+
+          <!-- Row 5 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1e1b4b 0%, #0c1016 100%)" data-accent="#b8ffda">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">05</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Glowline</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Brand Identity</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Refined launch language for jewellery.</div>
+            </div>
+          </a>
+
+          <!-- Row 6 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #0f172a 0%, #0284c7 100%)" data-accent="#9ff7ff">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">06</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">FrameQuest</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">Digital Platform</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Creative visual contest hub.</div>
+            </div>
+          </a>
+
+          <!-- Row 7 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #1c1917 0%, #78350f 100%)" data-accent="#e5ffb8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">07</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">Aqo Studio</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">D2C Website</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Ingredient-led wellness experience.</div>
+            </div>
+          </a>
+
+          <!-- Row 8 -->
+          <a href="./work.html" class="project-row block py-8 md:py-12 border-b border-line-dark hover:bg-[rgba(240,246,248,0.03)] transition-all duration-300 relative group" data-gradient="linear-gradient(135deg, #065f46 0%, #0c1016 100%)" data-accent="#ffd9f4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-4">
+              <div class="md:col-span-1 text-[11px] font-bold tracking-[0.08em] text-muted group-hover:text-signal transition-colors">08</div>
+              <div class="md:col-span-5 text-2xl md:text-4xl font-black tracking-[-0.03em] uppercase group-hover:translate-x-4 transition-transform duration-300">People & Planet</div>
+              <div class="md:col-span-3 text-[11px] font-bold tracking-[0.08em] uppercase text-muted group-hover:text-ice transition-colors">ESG / HR Comms</div>
+              <div class="md:col-span-3 text-sm font-light text-muted group-hover:text-ice transition-colors">Sustainability and employer brand narratives.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Project Hover Preview container -->
+      <div class="work-preview-hover-container"></div>
+    </section>
+
+    <!-- Services / Verticals Section -->
+    <section class="bg-ice py-28 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+
+        <!-- Left accordion panels -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          <div class="mb-12">
+            <h2 class="text-[11px] font-black tracking-[0.08em] uppercase text-muted mb-4">[ PLATFORM MODULES ]</h2>
+            <h3 class="text-5xl md:text-7xl font-black tracking-[-0.05em] uppercase leading-none">
+              Modular platform<br>capabilities.
+            </h3>
+          </div>
+
+          <!-- Vertical Panels Container -->
+          <div class="flex flex-col gap-4">
+            <!-- Stir Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">01 / STIR</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Creative & Campaign Strategy</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  We conceptualize and execute integrated campaigns, design stellar visual systems, craft copy, and orchestrate full-funnel digital launches that get people talking.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Campaign Concept</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brand Identity</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Copy Strategy</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Art Direction</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carbon Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">02 / CARBON</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Production & Post</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Our in-house production arm. We produce stunning ad films, daily social video content, reels, corporate narratives, and high-fidelity print assets.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Film Production</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Reels & Shorts</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Post Production</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Color Grading</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- H2O Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">03 / H2O</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-signal transition-colors">Digital Content Studio</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Continuous, fluid digital storytelling. We design daily social templates, write engaging copy, build interactive formats, and keep your feed fresh and alive 24/7.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Daily Social</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Storytelling</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Interactive Formats</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Feed Management</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drip Panel -->
+            <div class="service-card border border-line-light rounded-[24px] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden min-h-[160px] bg-ice cursor-pointer group" style="transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="text-[11px] font-bold tracking-[0.08em] text-muted uppercase">04 / DRIP</span>
+                  <h4 class="text-2xl md:text-3xl font-black tracking-[-0.03em] uppercase mt-2 group-hover:text-cyan transition-colors">Creator & Influencer Hub</h4>
+                </div>
+                <div class="w-8 h-8 rounded-full border border-ink flex items-center justify-center text-lg font-bold group-hover:bg-ink group-hover:text-ice transition-all">+</div>
+              </div>
+              <div class="service-details hidden mt-6 pt-6 border-t border-line-light flex-col gap-4">
+                <p class="text-md leading-relaxed text-muted max-w-xl">
+                  Influencer campaigns executed at scale. We manage outreach, structure creator briefs, negotiate licensing contracts, and deliver clear performance attribution.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Influencer Scouting</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Brief Management</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Creator Sync</span>
+                  <span class="px-3 py-1 border border-line-light rounded-full text-[10px] uppercase font-bold text-muted">Campaign ROI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right playground canvas column -->
+        <div class="lg:col-span-5 h-[400px] lg:h-auto border border-line-light rounded-[24px] relative bg-ice overflow-hidden group">
+          <div class="absolute top-6 left-6 z-10 flex flex-col gap-1 select-none pointer-events-none">
+            <span class="text-[9px] font-black tracking-[0.08em] uppercase text-muted">interactive play</span>
+            <h5 class="text-md font-bold uppercase text-ink">signal playground</h5>
+          </div>
+          <canvas id="services-canvas" class="w-full h-full cursor-crosshair"></canvas>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Custom CSS-first accordion script for backup if JS fails -->
+    <style>
+      .service-card.active {
+        background-color: var(--color-ink);
+        color: var(--color-ice);
+      }
+      .service-card.active .service-details {
+        display: flex;
+      }
+      .service-card.active .w-8 {
+        transform: rotate(45deg);
+        background-color: var(--color-signal);
+        color: var(--color-ink);
+        border-color: var(--color-signal);
+      }
+    </style>
+
+    <!-- Large CTA Section (Dark background) -->
+    <section class="bg-ink text-ice py-32 px-5 md:px-8 lg:px-12 relative z-10 overflow-hidden text-center">
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-8">
+        <div class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ WORK WITH US ]</div>
+        <h2 class="text-reveal-scroll text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase leading-[0.85]">
+          Let's make something explosive.
+        </h2>
+        <p class="text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
+          We would love to know more about your brand and discuss how we can help you scale your digital presence.
+        </p>
+        <a href="./connect.html" class="magnetic px-12 py-5 bg-ice text-ink hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal mt-6">
+          get in touch
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-ink text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-dark">
+    <div class="max-w-7xl mx-auto flex flex-col gap-16">
+
+      <!-- Top row -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-5 flex flex-col gap-4">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted">agency</div>
+          <p class="text-md text-muted max-w-xs leading-relaxed">
+            An integrated creative agency with a digital-first approach.
+          </p>
+        </div>
+        <div class="md:col-span-3">
+          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">pages</div>
+          <ul class="flex flex-col gap-2 text-sm font-bold">
+            <li><a href="./index.html" class="hover:text-signal transition-colors uppercase">Home</a></li>
+            <li><a href="./stir.html" class="hover:text-signal transition-colors uppercase">Stir</a></li>
+            <li><a href="./carbon.html" class="hover:text-signal transition-colors uppercase">Carbon</a></li>
+            <li><a href="./h2o.html" class="hover:text-signal transition-colors uppercase">H2O</a></li>
+            <li><a href="./team.html" class="hover:text-signal transition-colors uppercase">Team</a></li>
+            <li><a href="./careers.html" class="hover:text-signal transition-colors uppercase">Careers</a></li>
+            <li><a href="./connect.html" class="hover:text-signal transition-colors uppercase">Connect</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 flex flex-col gap-6">
+          <div>
+            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">business inquiries</div>
+            <a href="mailto:connect@globalailabs.in" class="text-lg font-bold text-signal hover:underline">connect@globalailabs.in</a>
+          </div>
+          <div>
+            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-line-dark text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ice hover:text-ink hover:border-ice transition-all duration-300">
+              go up ↑
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Giant Wordmark Logo -->
+      <div class="w-full border-t border-line-dark pt-12 overflow-hidden">
+        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-10" style="filter: invert(1); max-height: 18vw; object-fit: contain; object-position: left;">
+      </div>
+
+      <!-- Bottom row -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-line-dark pt-8">
+        <div>© 2026 Global AI Labs. All rights reserved.</div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-ice transition-colors">Privacy Policy</a>
+          <span>/</span>
+          <a href="#" class="hover:text-ice transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Header dark/light detection — invert logo on dark sections
+    (function() {
+      const header = document.getElementById('site-header');
+      const logo = header && header.querySelector('.header-logo');
+      const startBtn = header && header.querySelector('.header-btn');
+      const menuBtn = header && header.querySelector('.header-menu-btn');
+      const darkSections = document.querySelectorAll('.dark-section, footer');
+
+      function setHeaderDark(isDark) {
+        if (!header) return;
+        if (isDark) {
+          if (logo) {
+            logo.style.filter = 'invert(1)';
+            logo.style.mixBlendMode = 'normal';
+          }
+          if (startBtn) {
+            startBtn.classList.remove('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
+            startBtn.classList.add('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
+          }
+          if (menuBtn) {
+            menuBtn.classList.remove('bg-ink', 'text-ice');
+            menuBtn.classList.add('bg-ice', 'text-ink');
+          }
+        } else {
+          if (logo) {
+            logo.style.filter = 'none';
+            logo.style.mixBlendMode = 'multiply';
+          }
+          if (startBtn) {
+            startBtn.classList.remove('border-ice', 'text-ice', 'hover:bg-ice', 'hover:text-ink');
+            startBtn.classList.add('border-ink', 'text-ink', 'hover:bg-ink', 'hover:text-ice');
+          }
+          if (menuBtn) {
+            menuBtn.classList.remove('bg-ice', 'text-ink');
+            menuBtn.classList.add('bg-ink', 'text-ice');
+          }
+        }
+      }
+
+      if (darkSections.length && window.ScrollTrigger) {
+        darkSections.forEach(section => {
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top 60px',
+            end: 'bottom 60px',
+            onEnter: () => setHeaderDark(true),
+            onLeave: () => setHeaderDark(false),
+            onEnterBack: () => setHeaderDark(true),
+            onLeaveBack: () => setHeaderDark(false),
+          });
+        });
+      }
+
+      // Service cards accordion toggle
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const isActive = card.classList.contains('active');
+          serviceCards.forEach(c => c.classList.remove('active'));
+          if (!isActive) card.classList.add('active');
+        });
+      });
+    })();
+  </script>
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>

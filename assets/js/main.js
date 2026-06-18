@@ -6,8 +6,9 @@ import {
   initLoader, 
   initScrollReveals, 
   initMagneticButtons, 
-  initHeroCanvas, 
-  initServicesCanvas 
+  initHeroParallax, 
+  initServicesCanvas,
+  initStudioAnimations
 } from './animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,42 +54,140 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- HOME PAGE LOGIC ---
 function initHomePage() {
-  // Canvases
-  const cleanHeroCanvas = initHeroCanvas();
+  // Parallax Hero and lines connection
+  const cleanHeroParallax = initHeroParallax();
   const cleanServicesCanvas = initServicesCanvas();
+  
+  // Initialize Studio Scroll Animations
+  initStudioAnimations();
 
-  // Clean up canvas loops when leaving page
+  // Clean up loops when leaving page
   window.addEventListener('beforeunload', () => {
-    if (cleanHeroCanvas) cleanHeroCanvas();
+    if (cleanHeroParallax) cleanHeroParallax();
     if (cleanServicesCanvas) cleanServicesCanvas();
   });
 
-  // Services Accordion/Panels
-  const serviceCards = document.querySelectorAll('.service-card');
-  serviceCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      // Deactivate others
-      serviceCards.forEach(c => {
-        if (c !== card) {
-          c.classList.remove('active', 'flex-grow');
-          c.classList.add('opacity-40');
+  // 1. Capabilities Showcase Tab Selector
+  const tabs = document.querySelectorAll('.showcase-tab-btn');
+  const contents = document.querySelectorAll('.showcase-tab-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-showcase');
+      
+      // Update active tab button style
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Toggle visibility of panels
+      contents.forEach(content => {
+        if (content.id === `showcase-${targetId}`) {
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
         }
-      });
-      // Activate hovered
-      card.classList.add('active', 'flex-grow');
-      card.classList.remove('opacity-40');
-    });
-
-    card.addEventListener('mouseleave', () => {
-      // Reset all back to original equal sizes
-      serviceCards.forEach(c => {
-        c.classList.remove('active', 'flex-grow', 'opacity-40');
       });
     });
   });
 
-  // Work Hover Previews
-  setupWorkHoverPreviews();
+  // 2. Pricing Subscription toggle (Monthly vs Yearly)
+  const monthlyBtn = document.getElementById('toggle-monthly');
+  const yearlyBtn = document.getElementById('toggle-yearly');
+  const toggleBg = document.querySelector('.pricing-toggle-bg');
+  const priceVals = document.querySelectorAll('.price-val');
+  const priceNotes = document.querySelectorAll('.price-note');
+  const creditsCounts = document.querySelectorAll('.credits-count');
+  const vidsCounts = document.querySelectorAll('.vids-count');
+
+  if (monthlyBtn && yearlyBtn && toggleBg) {
+    const setBillingCycle = (cycle) => {
+      if (cycle === 'yearly') {
+        monthlyBtn.classList.remove('active');
+        yearlyBtn.classList.add('active');
+        toggleBg.style.transform = 'translateX(100%)';
+        
+        priceVals.forEach(val => {
+          val.textContent = val.getAttribute('data-yearly');
+        });
+        priceNotes.forEach(note => {
+          note.textContent = note.getAttribute('data-yearly');
+        });
+        creditsCounts.forEach(count => {
+          count.textContent = count.getAttribute('data-yearly');
+        });
+        vidsCounts.forEach(count => {
+          count.textContent = count.getAttribute('data-yearly');
+        });
+      } else {
+        yearlyBtn.classList.remove('active');
+        monthlyBtn.classList.add('active');
+        toggleBg.style.transform = 'translateX(0)';
+        
+        priceVals.forEach(val => {
+          val.textContent = val.getAttribute('data-monthly');
+        });
+        priceNotes.forEach(note => {
+          note.textContent = note.getAttribute('data-monthly');
+        });
+        creditsCounts.forEach(count => {
+          count.textContent = count.getAttribute('data-monthly');
+        });
+        vidsCounts.forEach(count => {
+          count.textContent = count.getAttribute('data-monthly');
+        });
+      }
+    };
+
+    monthlyBtn.addEventListener('click', () => setBillingCycle('monthly'));
+    yearlyBtn.addEventListener('click', () => setBillingCycle('yearly'));
+  }
+
+  // 3. FAQ Accordion Item expands/collapses
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const header = item.querySelector('.faq-header');
+    if (header) {
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        
+        // Collapse all items
+        faqItems.forEach(i => {
+          i.classList.remove('active');
+          const h = i.querySelector('.faq-header');
+          if (h) h.setAttribute('aria-expanded', 'false');
+        });
+
+        // Expand clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+  });
+
+  // 4. Audio preview play indicator toggle
+  const audioSyncBtn = document.getElementById('hero-audio-sync');
+  if (audioSyncBtn) {
+    let audioState = false;
+    audioSyncBtn.addEventListener('click', () => {
+      audioState = !audioState;
+      const icon = audioSyncBtn.querySelector('.audio-icon');
+      const text = audioSyncBtn.nextElementSibling?.querySelector('span:first-child');
+      
+      if (audioState) {
+        icon.textContent = '🔊';
+        icon.classList.add('animate-bounce');
+        if (text) text.textContent = 'Beat Sync Preview Playing';
+        audioSyncBtn.style.backgroundColor = 'var(--color-pink-neon)';
+      } else {
+        icon.textContent = '🔇';
+        icon.classList.remove('animate-bounce');
+        if (text) text.textContent = 'Beat Sync Preview Muted';
+        audioSyncBtn.style.backgroundColor = 'rgba(255,255,255,0.05)';
+      }
+    });
+  }
 }
 
 // --- WORK PAGE LOGIC ---

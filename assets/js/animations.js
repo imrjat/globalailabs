@@ -81,27 +81,48 @@ export function initLoader() {
 
 // 2. Hero entrance animations
 export function animateHeroEntrance() {
-  const heroWordmark = document.querySelector('.hero-wordmark');
-  const heroTagline = document.querySelector('.hero-tagline');
-  const heroIntro = document.querySelector('.hero-intro');
-  const heroCTAs = document.querySelector('.hero-ctas');
-
   if (!window.gsap) return;
 
   const tl = window.gsap.timeline();
 
-  if (heroWordmark) {
-    tl.fromTo(heroWordmark, 
-      { y: 150, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.4, ease: 'expo.out' }
+  // 1. Fade/Slide in the left side copy elements
+  const versionTag = document.querySelector('section span.px-3');
+  const h1 = document.querySelector('section h1');
+  const listItems = document.querySelectorAll('section ul li');
+  const descParagraph = document.querySelector('section p');
+  const ctas = document.querySelector('section .flex-row');
+  const bottomBar = document.querySelector('section .border-t');
+
+  const targets = [];
+  if (versionTag) targets.push(versionTag);
+  if (h1) targets.push(h1);
+  if (listItems.length > 0) listItems.forEach(item => targets.push(item));
+  if (descParagraph) targets.push(descParagraph);
+  if (ctas) targets.push(ctas);
+
+  if (targets.length > 0) {
+    tl.fromTo(targets,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out' }
     );
   }
 
-  if (heroTagline || heroIntro || heroCTAs) {
-    tl.fromTo([heroTagline, heroIntro, heroCTAs], 
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.0, stagger: 0.15, ease: 'power3.out' },
-      '-=0.8'
+  // 2. Scale up/fade in the right side parallax wrapper
+  const parallaxWrap = document.querySelector('.parallax-wrap');
+  if (parallaxWrap) {
+    tl.fromTo(parallaxWrap,
+      { scale: 0.96, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.2, ease: 'power4.out' },
+      '-=0.6'
+    );
+  }
+
+  // 3. Fade in bottom bar
+  if (bottomBar) {
+    tl.fromTo(bottomBar,
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+      '-=0.4'
     );
   }
 }
@@ -187,147 +208,128 @@ export function initMagneticButtons() {
   });
 }
 
-// 5. Canvas: Floating AI / Content Signal Device (Hero Section)
-export function initHeroCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
+// 5. Hero Parallax and Connection Lines
+export function initHeroParallax() {
+  const wrap = document.querySelector('.parallax-wrap');
+  const mainVisual = document.getElementById('hero-main-visual');
+  const w1 = document.getElementById('hero-widget-1');
+  const w2 = document.getElementById('hero-widget-2');
+  const w3 = document.getElementById('hero-widget-3');
+  const svg = document.getElementById('hero-svg-connections');
 
-  const ctx = canvas.getContext('2d');
-  let animationId;
+  if (!wrap) return;
 
-  // Set canvas size
-  const resizeCanvas = () => {
-    const container = canvas.parentElement;
-    canvas.width = container.clientWidth;
-    canvas.height = container.clientHeight;
-  };
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
 
-  const device = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    baseY: canvas.height / 2,
-    targetX: canvas.width / 2,
-    targetY: canvas.height / 2,
-    rotation1: 0,
-    rotation2: 0,
-    radius: Math.min(canvas.width, canvas.height) * 0.14,
-    pulse: 0,
-    mouseParallaxX: 0,
-    mouseParallaxY: 0
+  const onMouseMove = (e) => {
+    const rect = wrap.getBoundingClientRect();
+    // Normalize coordinates relative to wrap center (-1 to 1)
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX = (e.clientX - centerX) / (rect.width / 2);
+    mouseY = (e.clientY - centerY) / (rect.height / 2);
   };
 
-  // Tracking mouse for parallax
-  window.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX - canvas.getBoundingClientRect().left;
-    const mouseY = e.clientY - canvas.getBoundingClientRect().top;
-    
-    device.mouseParallaxX = (mouseX - canvas.width / 2) * 0.08;
-    device.mouseParallaxY = (mouseY - canvas.height / 2) * 0.08;
-  });
+  window.addEventListener('mousemove', onMouseMove);
 
-  const drawDevice = (time) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Connection Lines Update Loop
+  const updateLines = () => {
+    if (!wrap || !svg || !mainVisual || !w1 || !w2 || !w3) return;
 
-    // Apply slow bobbing/floating motion
-    const bob = Math.sin(time * 0.002) * 15;
-    device.x += (canvas.width / 2 + device.mouseParallaxX - device.x) * 0.1;
-    device.y += (device.baseY + bob + device.mouseParallaxY - device.y) * 0.1;
+    const wrapRect = wrap.getBoundingClientRect();
+    const coreRect = mainVisual.getBoundingClientRect();
 
-    device.pulse = Math.sin(time * 0.005) * 3 + 6;
-    
-    // Draw outer glow
-    const glowGradient = ctx.createRadialGradient(
-      device.x, device.y, device.radius * 0.1, 
-      device.x, device.y, device.radius * 1.3
-    );
-    glowGradient.addColorStop(0, 'rgba(159, 247, 255, 0.07)');
-    glowGradient.addColorStop(0.5, 'rgba(184, 255, 218, 0.02)');
-    glowGradient.addColorStop(1, 'rgba(12, 16, 22, 0)');
-    ctx.fillStyle = glowGradient;
-    ctx.beginPath();
-    ctx.arc(device.x, device.y, device.radius * 1.3, 0, Math.PI * 2);
-    ctx.fill();
+    const coreX = (coreRect.left + coreRect.width / 2) - wrapRect.left;
+    const coreY = (coreRect.top + coreRect.height / 2) - wrapRect.top;
 
-    // Draw grid rings (outer rotating circle)
-    device.rotation1 += 0.0025;
-    ctx.strokeStyle = 'rgba(12, 16, 22, 0.12)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.arc(device.x, device.y, device.radius, 0, Math.PI * 2);
-    ctx.stroke();
+    const getRelativeCenter = (el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        x: (r.left + r.width / 2) - wrapRect.left,
+        y: (r.top + r.height / 2) - wrapRect.top
+      };
+    };
 
-    // Dot dashes ring
-    ctx.save();
-    ctx.translate(device.x, device.y);
-    ctx.rotate(device.rotation1);
-    ctx.strokeStyle = 'rgba(12, 16, 22, 0.25)';
-    ctx.setLineDash([4, 12]);
-    ctx.beginPath();
-    ctx.arc(0, 0, device.radius * 0.85, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    const c1 = getRelativeCenter(w1);
+    const c2 = getRelativeCenter(w2);
+    const c3 = getRelativeCenter(w3);
 
-    // Inner reverse rotating ring
-    device.rotation2 -= 0.004;
-    ctx.save();
-    ctx.translate(device.x, device.y);
-    ctx.rotate(device.rotation2);
-    ctx.strokeStyle = 'rgba(12, 16, 22, 0.35)';
-    ctx.setLineDash([20, 30]);
-    ctx.lineWidth = 2.0;
-    ctx.beginPath();
-    ctx.arc(0, 0, device.radius * 0.65, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    const line1 = document.getElementById('line-widget-1');
+    const line2 = document.getElementById('line-widget-2');
+    const line3 = document.getElementById('line-widget-3');
 
-    // Center Core Lens
-    const coreGrad = ctx.createRadialGradient(
-      device.x, device.y - 3, 1, 
-      device.x, device.y, device.radius * 0.25
-    );
-    coreGrad.addColorStop(0, '#ffffff');
-    coreGrad.addColorStop(0.3, 'rgba(159, 247, 255, 0.7)');
-    coreGrad.addColorStop(0.8, 'rgba(184, 255, 218, 0.4)');
-    coreGrad.addColorStop(1, 'rgba(12, 16, 22, 0)');
-
-    ctx.fillStyle = coreGrad;
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = '#9ff7ff';
-    ctx.beginPath();
-    ctx.arc(device.x, device.y, device.radius * 0.25 + (device.pulse * 0.1), 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0; // reset shadow
-
-    // Digital circular waveform
-    ctx.strokeStyle = 'rgba(12, 16, 22, 0.65)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    const points = 45;
-    for (let i = 0; i <= points; i++) {
-      const angle = (i / points) * Math.PI * 2;
-      const waveVal = Math.sin(angle * 12 + time * 0.008) * (2 + device.pulse * 0.3);
-      const r = device.radius * 0.48 + waveVal;
-      const px = device.x + Math.cos(angle) * r;
-      const py = device.y + Math.sin(angle) * r;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
+    if (line1) {
+      line1.setAttribute('x1', c1.x);
+      line1.setAttribute('y1', c1.y);
+      line1.setAttribute('x2', coreX);
+      line1.setAttribute('y2', coreY);
     }
-    ctx.closePath();
-    ctx.stroke();
+    if (line2) {
+      line2.setAttribute('x1', c2.x);
+      line2.setAttribute('y1', c2.y);
+      line2.setAttribute('x2', coreX);
+      line2.setAttribute('y2', coreY);
+    }
+    if (line3) {
+      line3.setAttribute('x1', c3.x);
+      line3.setAttribute('y1', c3.y);
+      line3.setAttribute('x2', coreX);
+      line3.setAttribute('y2', coreY);
+    }
   };
 
-  const loop = (time) => {
-    drawDevice(time);
-    animationId = requestAnimationFrame(loop);
-  };
-  animationId = requestAnimationFrame(loop);
+  let animationId;
+  const tick = () => {
+    // Smooth interpolation (lag/damping)
+    currentX += (mouseX - currentX) * 0.08;
+    currentY += (mouseY - currentY) * 0.08;
 
-  // Expose clean-up handler
+    // Apply parallax offset translations to different layers
+    if (window.gsap) {
+      window.gsap.set(mainVisual, {
+        x: currentX * 25,
+        y: currentY * 25,
+        overwrite: 'auto'
+      });
+      window.gsap.set(w1, {
+        x: currentX * 45,
+        y: currentY * 45,
+        overwrite: 'auto'
+      });
+      window.gsap.set(w2, {
+        x: currentX * -35,
+        y: currentY * -35,
+        overwrite: 'auto'
+      });
+      window.gsap.set(w3, {
+        x: currentX * 55,
+        y: currentY * 55,
+        overwrite: 'auto'
+      });
+    } else {
+      mainVisual.style.transform = `translate(${currentX * 25}px, ${currentY * 25}px)`;
+      w1.style.transform = `translate(${currentX * 45}px, ${currentY * 45}px)`;
+      w2.style.transform = `translate(${currentX * -35}px, ${currentY * -35}px)`;
+      w3.style.transform = `translate(${currentX * 55}px, ${currentY * 55}px)`;
+    }
+
+    updateLines();
+    animationId = requestAnimationFrame(tick);
+  };
+
+  animationId = requestAnimationFrame(tick);
+  window.addEventListener('resize', updateLines);
+
+  // Initial call
+  setTimeout(updateLines, 150);
+
   return () => {
     cancelAnimationFrame(animationId);
-    window.removeEventListener('resize', resizeCanvas);
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('resize', updateLines);
   };
 }
 
@@ -446,3 +448,105 @@ export function initServicesCanvas() {
     window.removeEventListener('resize', resize);
   };
 }
+
+// 7. Interactive Studio Scroll Animations (Stage 1, 2, and 3)
+export function initStudioAnimations() {
+  const section = document.getElementById('studio');
+  const dashboard = document.getElementById('studio-dashboard');
+  const leftPanel = document.getElementById('studio-panel-left');
+  const centerPanel = document.getElementById('studio-panel-center');
+  const rightPanel = document.getElementById('studio-panel-right');
+  const floatCards = [
+    document.getElementById('float-card-1'),
+    document.getElementById('float-card-2'),
+    document.getElementById('float-card-3'),
+    document.getElementById('float-card-4'),
+    document.getElementById('float-card-5'),
+    document.getElementById('float-card-6')
+  ];
+
+  if (!section || !dashboard || !window.gsap || !window.ScrollTrigger) return;
+
+  // Timeline 1: Entrance reveal of the whole section and panels
+  const entranceTimeline = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 85%',
+      toggleActions: 'play none none none',
+    }
+  });
+
+  // Stage 1: Fade and scale section up, dashboard rises
+  entranceTimeline.to(section, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.9,
+    ease: 'power3.out'
+  });
+
+  // Stage 2: Dashboard panels reveal
+  if (leftPanel && rightPanel && centerPanel) {
+    entranceTimeline.fromTo(leftPanel, 
+      { x: -50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
+      '-=0.4'
+    );
+    entranceTimeline.fromTo(rightPanel, 
+      { x: 50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
+      '-=0.7'
+    );
+    entranceTimeline.fromTo(centerPanel, 
+      { scale: 0.96, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.2)' },
+      '-=0.5'
+    );
+  }
+
+  // Stagger floating cards entrance
+  const validCards = floatCards.filter(c => c !== null);
+  if (validCards.length > 0) {
+    entranceTimeline.fromTo(validCards, 
+      { scale: 0.7, opacity: 0, y: 30 },
+      { scale: 1, opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'back.out(1.5)' },
+      '-=0.4'
+    );
+  }
+
+  // Timeline 2: Scroll scrubbing/parallax
+  const scrubTimeline = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 80%',
+      end: 'bottom 20%',
+      scrub: 1
+    }
+  });
+
+  // Dashboard scale and ambient glow increase
+  scrubTimeline.to(dashboard, {
+    scale: 1.04,
+    ease: 'none'
+  }, 0);
+
+  const glow = section.querySelector('.studio-glow');
+  if (glow) {
+    scrubTimeline.to(glow, {
+      scale: 1.25,
+      opacity: 0.7,
+      ease: 'none'
+    }, 0);
+  }
+
+  // Parallax offsets for floating cards
+  const parallaxOffsets = [ -70, -35, 45, -45, 75, 50 ];
+  validCards.forEach((card, index) => {
+    const offset = parallaxOffsets[index] || 40;
+    scrubTimeline.to(card, {
+      y: offset,
+      ease: 'none'
+    }, 0);
+  });
+}
+
