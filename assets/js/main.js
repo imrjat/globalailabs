@@ -3,7 +3,7 @@ import { initSmoothScroll } from './smooth-scroll.js';
 import { initMenu } from './menu.js';
 import { initPageTransitions } from './page-transition.js';
 import { 
-  initLoader, 
+  animateHeroEntrance, 
   initScrollReveals, 
   initMagneticButtons, 
   initHeroParallax, 
@@ -18,11 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initMenu();
   initCursor();
   initMagneticButtons();
-  initLoader();
 
   // Determine current page context
   const path = window.location.pathname;
-  const isHome = path === '/' || path.includes('index.html') || path.endsWith('global/');
+  const isHome = path === '/' || path.includes('index.html') || path.endsWith('global/') || path.includes('globalailabs') || !!document.getElementById('studio');
   const isWork = path.includes('work.html');
   const isTeam = path.includes('team.html');
   const isCareers = path.includes('careers.html');
@@ -48,6 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Register Service Worker for 24-hour image caching
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
+        .catch((err) => console.error('Service Worker registration failed:', err));
+    });
+  }
+
   // Common animations on all sub-pages
   initScrollReveals();
 });
@@ -60,6 +68,9 @@ function initHomePage() {
   
   // Initialize Studio Scroll Animations
   initStudioAnimations();
+
+  // Trigger Hero entrance immediately (loader removed)
+  animateHeroEntrance();
 
   // Clean up loops when leaving page
   window.addEventListener('beforeunload', () => {
