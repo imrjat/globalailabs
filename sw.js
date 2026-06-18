@@ -1,4 +1,4 @@
-const CACHE_NAME = 'global-ai-labs-media-cache-v1';
+const CACHE_NAME = 'global-ai-labs-media-cache-v2';
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 self.addEventListener('install', (event) => {
