@@ -2,11 +2,11 @@ import { initCursor } from './cursor.js';
 import { initSmoothScroll } from './smooth-scroll.js';
 import { initMenu } from './menu.js';
 import { initPageTransitions } from './page-transition.js';
-import { 
-  animateHeroEntrance, 
-  initScrollReveals, 
-  initMagneticButtons, 
-  initHeroParallax, 
+import {
+  animateHeroEntrance,
+  initScrollReveals,
+  initMagneticButtons,
+  initHeroParallax,
   initServicesCanvas,
   initStudioAnimations
 } from './animations.js';
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Register Service Worker for 24-hour image caching
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
-        .catch((err) => console.error('Service Worker registration failed:', err));
-    });
-  }
+  // if ('serviceWorker' in navigator) {
+  //   window.addEventListener('load', () => {
+  //     navigator.serviceWorker.register('./sw.js')
+  //       .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
+  //       .catch((err) => console.error('Service Worker registration failed:', err));
+  //   });
+  // }
 
   // Common animations on all sub-pages
   initScrollReveals();
@@ -65,7 +65,7 @@ function initHomePage() {
   // Parallax Hero and lines connection
   const cleanHeroParallax = initHeroParallax();
   const cleanServicesCanvas = initServicesCanvas();
-  
+
   // Initialize Studio Scroll Animations
   initStudioAnimations();
 
@@ -81,15 +81,15 @@ function initHomePage() {
   // 1. Capabilities Showcase Tab Selector
   const tabs = document.querySelectorAll('.showcase-tab-btn');
   const contents = document.querySelectorAll('.showcase-tab-content');
-  
+
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const targetId = tab.getAttribute('data-showcase');
-      
+
       // Update active tab button style
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      
+
       // Toggle visibility of panels
       contents.forEach(content => {
         if (content.id === `showcase-${targetId}`) {
@@ -116,7 +116,7 @@ function initHomePage() {
         monthlyBtn.classList.remove('active');
         yearlyBtn.classList.add('active');
         toggleBg.style.transform = 'translateX(100%)';
-        
+
         priceVals.forEach(val => {
           val.textContent = val.getAttribute('data-yearly');
         });
@@ -133,7 +133,7 @@ function initHomePage() {
         yearlyBtn.classList.remove('active');
         monthlyBtn.classList.add('active');
         toggleBg.style.transform = 'translateX(0)';
-        
+
         priceVals.forEach(val => {
           val.textContent = val.getAttribute('data-monthly');
         });
@@ -160,7 +160,7 @@ function initHomePage() {
     if (header) {
       header.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
-        
+
         // Collapse all items
         faqItems.forEach(i => {
           i.classList.remove('active');
@@ -185,7 +185,7 @@ function initHomePage() {
       audioState = !audioState;
       const icon = audioSyncBtn.querySelector('.audio-icon');
       const text = audioSyncBtn.nextElementSibling?.querySelector('span:first-child');
-      
+
       if (audioState) {
         icon.textContent = '🔊';
         icon.classList.add('animate-bounce');
@@ -218,7 +218,7 @@ function initWorkPage() {
       gridBtn.classList.remove('bg-transparent', 'text-ink');
       listBtn.classList.remove('bg-ink', 'text-ice');
       listBtn.classList.add('bg-transparent', 'text-ink');
-      
+
       workGrid.classList.remove('hidden');
       workList.classList.add('hidden');
     } else {
@@ -264,7 +264,7 @@ function setupWorkHoverPreviews() {
       // Update background gradient of hover element
       hoverContainer.style.background = gradient;
       hoverContainer.style.display = 'block';
-      
+
       if (window.gsap) {
         window.gsap.to(hoverContainer, {
           opacity: 1,
