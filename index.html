@@ -126,7 +126,7 @@
       50% { transform: scale(1.06); }
     }
 
-    /* Hotspot Label */
+    /* Hotspot Label (Hidden in Idle mode for clean minimalist layout, fades in on hover) */
     .hotspot-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -141,10 +141,15 @@
       border-radius: 9999px;
       white-space: nowrap;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
     }
 
     .globe-hotspot:hover .hotspot-label {
+      opacity: 1;
+      transform: translateY(0);
       border-color: currentColor;
       color: #ffffff;
       box-shadow: 0 0 15px currentColor;
@@ -153,6 +158,9 @@
     /* Holographic HUD Split Modules */
     #hud-modules-container {
       position: absolute;
+      top: 50%;
+      right: 5%;
+      transform: translateY(-50%);
       z-index: 40;
       pointer-events: none;
       opacity: 0;
@@ -162,6 +170,16 @@
       width: calc(100vw - 2rem);
       max-width: 440px;
       transition: opacity 0.3s ease;
+    }
+
+    @media (max-width: 767px) {
+      #hud-modules-container {
+        top: auto;
+        right: auto;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
 
     .hud-module {
@@ -276,12 +294,59 @@
       to { stroke-dashoffset: -1000; }
     }
 
-    /* HUD Lines Animation */
-    @keyframes hudPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.8; }
-    }
     .hud-pulse { animation: hudPulse 2s infinite ease-in-out; }
+
+    /* Hotspot Mini Hover Preview Tooltip */
+    .hotspot-preview-tooltip {
+      position: absolute;
+      top: 115%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(6, 10, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid currentColor;
+      border-radius: 12px;
+      padding: 8px 14px;
+      white-space: nowrap;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px currentColor;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 30;
+      text-align: center;
+    }
+
+    .globe-hotspot:hover .hotspot-preview-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Product Unique Keyframes */
+    @keyframes radarRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .radar-spin { transform-origin: 12px 12px; animation: radarRotate 2.5s infinite linear; }
+
+    @keyframes apertureRotate {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg); }
+    }
+    .aperture-spin { transform-origin: 12px 12px; animation: apertureRotate 4s infinite ease-in-out; }
+
+    @keyframes vaultPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 8px #f59e0b); }
+    }
+    .vault-pulse { transform-origin: 12px 12px; animation: vaultPulse 2s infinite ease-in-out; }
+
+    @keyframes playgroundSparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(180deg); filter: drop-shadow(0 0 10px #ff2e93); }
+    }
+    .playground-sparkle { transform-origin: 12px 12px; animation: playgroundSparkle 2.2s infinite ease-in-out; }
   </style>
 </head>
 <body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
@@ -304,7 +369,6 @@
     <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
     <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
   </div>
-
 
   <!-- Page Transition Screen Sweep Overlay -->
   <div class="transition-overlay">
@@ -403,12 +467,15 @@
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M12 2a10 10 0 0 0-10 10"/>
                 <path d="M12 22a10 10 0 0 0 10-10"/>
-                <path d="M2 12h3"/><path d="M19 12h3"/>
-                <path d="M12 2v3"/><path d="M12 19v3"/>
-                <path d="m4.93 4.93 2.12 2.12"/><path d="m16.95 16.95 2.12 2.12"/>
+                <line x1="12" y1="12" x2="12" y2="3" stroke="#00f0ff" stroke-width="2" class="radar-spin"/>
               </svg>
             </div>
             <div class="hotspot-label">MISSION CONTROL</div>
+            <div class="hotspot-preview-tooltip text-[#00f0ff]">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">MISSION CONTROL</div>
+              <div class="text-[8px] font-mono text-cyan-300">SaaS Workflow Platform</div>
+              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+            </div>
           </div>
         </div>
 
@@ -420,10 +487,15 @@
             <div class="hotspot-icon-box">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="6 3 20 12 6 21 6 3"/>
-                <circle cx="12" cy="12" r="9" stroke-dasharray="2 4"/>
+                <circle cx="12" cy="12" r="8" stroke-dasharray="3 3" class="aperture-spin"/>
               </svg>
             </div>
             <div class="hotspot-label">THE STUDIO</div>
+            <div class="hotspot-preview-tooltip text-[#a855f7]">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE STUDIO</div>
+              <div class="text-[8px] font-mono text-purple-300">AI Content Studio</div>
+              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+            </div>
           </div>
         </div>
 
@@ -433,13 +505,18 @@
             <div class="hotspot-ripple"></div>
             <div class="hotspot-ripple hotspot-ripple-delay"></div>
             <div class="hotspot-icon-box">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="vault-pulse">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 <rect x="9" y="11" width="6" height="5" rx="1"/>
                 <path d="M10 11V9a2 2 0 0 1 4 0v2"/>
               </svg>
             </div>
             <div class="hotspot-label">THE VAULT</div>
+            <div class="hotspot-preview-tooltip text-[#f59e0b]">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE VAULT</div>
+              <div class="text-[8px] font-mono text-amber-300">Proprietary IP Engine</div>
+              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+            </div>
           </div>
         </div>
 
@@ -449,35 +526,21 @@
             <div class="hotspot-ripple"></div>
             <div class="hotspot-ripple hotspot-ripple-delay"></div>
             <div class="hotspot-icon-box">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="playground-sparkle">
                 <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/>
                 <path d="m19 19 1.5 3.5L24 24l-1.5-3.5L24 19l-3.5-1.5L19 19z"/>
               </svg>
             </div>
             <div class="hotspot-label">THE PLAYGROUND</div>
+            <div class="hotspot-preview-tooltip text-[#ff2e93]">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND</div>
+              <div class="text-[8px] font-mono text-pink-300">Creator Platform</div>
+              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+            </div>
           </div>
-        </div>
-
       </div>
 
-      <!-- Minimal Futuristic Top Bar HUD -->
-      <div class="absolute top-6 left-6 md:top-8 md:left-10 z-30 flex items-center gap-3 pointer-events-auto">
-        <div class="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
-          <span class="w-2.5 h-2.5 rounded-full bg-[#00f0ff] animate-ping"></span>
-          <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white">GLOBAL AI OS // 2.06</span>
-        </div>
-      </div>
 
-      <!-- Minimal Futuristic HUD System Status (Bottom Left) -->
-      <div class="hidden lg:flex absolute bottom-8 left-10 z-30 flex-col gap-1.5 pointer-events-auto text-left">
-        <div class="text-[9px] font-mono text-muted uppercase tracking-widest flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda]"></span>
-          <span>INTERACTIVE NAVIGATION SYSTEM</span>
-        </div>
-        <div class="text-[10px] font-mono text-white/50">
-          NODES: <span class="text-[#00f0ff]">35,000</span> // HOTSPOTS: <span class="text-[#ff2e93]">ACTIVE</span>
-        </div>
-      </div>
 
       <!-- Bottom Center Animated Scroll Indicator (World-Class Magnetic Glass Pill) -->
       <div id="hero-scroll-indicator" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 bg-black/60 backdrop-blur-xl border border-white/15 px-6 py-2.5 rounded-full pointer-events-auto cursor-pointer group hover:border-[#ff2e93] hover:bg-[#ff2e93]/10 hover:shadow-[0_0_30px_rgba(255,46,147,0.3)] transition-all duration-300">
@@ -1801,7 +1864,7 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-    // --- PRODUCTS DATA CONFIG ---
+    // --- FIXED GEOGRAPHIC PRODUCTS DATA CONFIG ---
     const PRODUCTS = [
       {
         id: "mission-control",
@@ -1859,24 +1922,16 @@
 
     // --- GLOBE LAT/LON TO 3D MATH ---
     function latLongToVector3(lat, lon, radius) {
-      const phi = (90 - lat) * (Math.PI / 180);
-      const theta = (lon + 180) * (Math.PI / 180);
-      const x = -(radius * Math.sin(phi) * Math.cos(theta));
-      const z = radius * Math.sin(phi) * Math.sin(theta);
-      const y = radius * Math.cos(phi);
+      const phi = lat * (Math.PI / 180);
+      const theta = lon * (Math.PI / 180);
+      const x = radius * Math.cos(phi) * Math.sin(theta);
+      const y = radius * Math.sin(phi);
+      const z = radius * Math.cos(phi) * Math.cos(theta);
       return new THREE.Vector3(x, y, z);
     }
 
     // --- DOM ELEMENTS ---
     const container = document.getElementById('globe-canvas-container');
-    const detailPanel = document.getElementById('globe-detail-panel');
-    const panelCategoryBadge = document.getElementById('panel-category-badge');
-    const panelTitle = document.getElementById('panel-product-title');
-    const panelDesc = document.getElementById('panel-product-desc');
-    const panelFeatures = document.getElementById('panel-features-container');
-    const panelCta = document.getElementById('panel-cta-btn');
-    const panelGraphic = document.getElementById('panel-graphic-content');
-    const closeBtn = document.getElementById('panel-close-btn');
     const scrollDownBtn = document.getElementById('hero-scroll-indicator');
 
     // --- DYNAMIC OPTIMAL CAMERA DISTANCE (BEST UI/UX PROPORTIONS) ---
@@ -1892,13 +1947,55 @@
       return new THREE.Vector3(0, dist * 0.08, dist);
     }
 
+    // --- COMPOSITION ENGINE: 16 CURATED OPENING LAYOUTS (INNER SAFE ZONE: 70-75% GLOBE RADIUS) ---
+    // All coordinates sit comfortably inside the inner safe zone away from extreme outer rim / atmosphere
+    // Format for 4 products: [Mission Control, The Studio, The Vault, The Playground]
+    const CURATED_COMPOSITIONS = [
+      // 1. Classic Diamond Showcase
+      [ { lat: 28, lon: -32 }, { lat: 36, lon: 0 }, { lat: 22, lon: 32 }, { lat: -18, lon: 8 } ],
+      // 2. Balanced Quad Stagger
+      [ { lat: 24, lon: -36 }, { lat: 38, lon: -10 }, { lat: 26, lon: 28 }, { lat: -22, lon: 20 } ],
+      // 3. Crown & Base Framework
+      [ { lat: 32, lon: -28 }, { lat: 35, lon: 18 }, { lat: -12, lon: -22 }, { lat: -16, lon: 26 } ],
+      // 4. High-Tech Triangle & Anchor
+      [ { lat: 34, lon: -12 }, { lat: 18, lon: -35 }, { lat: 20, lon: 34 }, { lat: -25, lon: 0 } ],
+      // 5. Orbital Diagonal Flow
+      [ { lat: 30, lon: -34 }, { lat: 16, lon: -12 }, { lat: 28, lon: 24 }, { lat: -20, lon: 16 } ],
+      // 6. Golden Crest Alignment
+      [ { lat: 36, lon: -18 }, { lat: 28, lon: 30 }, { lat: -15, lon: -32 }, { lat: -10, lon: 12 } ],
+      // 7. Symmetric Keynote Frame
+      [ { lat: 25, lon: -30 }, { lat: 35, lon: 12 }, { lat: 10, lon: 35 }, { lat: -22, lon: -12 } ],
+      // 8. Central Nexus Ring
+      [ { lat: 22, lon: -26 }, { lat: 34, lon: -4 }, { lat: 18, lon: 30 }, { lat: -18, lon: -6 } ],
+      // 9. Radiant Corner Offset
+      [ { lat: 32, lon: -22 }, { lat: 20, lon: -36 }, { lat: 34, lon: 22 }, { lat: -16, lon: 32 } ],
+      // 10. Zenith & Horizon Arch
+      [ { lat: 38, lon: 6 }, { lat: 22, lon: -34 }, { lat: 15, lon: 32 }, { lat: -24, lon: -14 } ],
+      // 11. Kinetic Stepped Quadrant
+      [ { lat: 28, lon: -38 }, { lat: 32, lon: -8 }, { lat: 24, lon: 26 }, { lat: -22, lon: 22 } ],
+      // 12. Apex Triangle & Pod
+      [ { lat: 35, lon: -14 }, { lat: 30, lon: 16 }, { lat: 5, lon: -32 }, { lat: -20, lon: 10 } ],
+      // 13. Meridian Balanced Spread
+      [ { lat: 26, lon: -28 }, { lat: 36, lon: -2 }, { lat: 18, lon: 34 }, { lat: -24, lon: -8 } ],
+      // 14. Parallel Horizon Rows
+      [ { lat: 30, lon: -24 }, { lat: 32, lon: 24 }, { lat: -15, lon: -26 }, { lat: -18, lon: 26 } ],
+      // 15. Cyber Core Cross
+      [ { lat: 37, lon: 0 }, { lat: 12, lon: -34 }, { lat: 14, lon: 34 }, { lat: -22, lon: 0 } ],
+      // 16. Dynamic Equinox Wave
+      [ { lat: 32, lon: -30 }, { lat: 18, lon: -10 }, { lat: 28, lon: 28 }, { lat: -16, lon: 14 } ]
+    ];
+
+    let activeComposition = null;
+
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
-    let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup;
+    let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
-    let flameMode = true; // Enabled flameMode
+    let flameMode = true;
+    let inactivityTimer = null;
+    let isAutoDemoRunning = false;
     const globeRadius = 290;
 
     // --- INITIALIZATION ---
@@ -1907,13 +2004,15 @@
 
       clock = new THREE.Clock();
 
+      // Pick 1 of 16 curated compositions at random on every page load
+      activeComposition = CURATED_COMPOSITIONS[Math.floor(Math.random() * CURATED_COMPOSITIONS.length)];
+
       // 1. Scene
       scene = new THREE.Scene();
 
       // 2. Camera
       const defaultPos = getDefaultCameraPos();
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3500);
-      // Start further back for cinematic entrance flight
       camera.position.set(0, defaultPos.y * 1.5, defaultPos.z * 1.45);
 
       // 3. Renderer
@@ -1934,15 +2033,18 @@
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.55;
 
-      // 5. Parent Globe Group
+      // 5. Parent Globe Group (Clean starting alignment)
       globeGroup = new THREE.Group();
-      globeGroup.scale.set(0.82, 0.82, 0.82); // Initial scale for entrance reveal
+      globeGroup.scale.set(0.82, 0.82, 0.82);
+      globeGroup.rotation.y = 0.0;
+      globeGroup.rotation.x = -0.25;
       scene.add(globeGroup);
 
       // 6. Build 3D Components
       createMassiveParticleGlobe();
       createGlobeAtmosphere();
       createInternalCore();
+      createActiveDataOrbitPackets();
       createHotspotAnchors();
       createEnergyStreamSystem();
 
@@ -1964,7 +2066,10 @@
         y: defaultPos.y,
         z: defaultPos.z,
         duration: 1.8,
-        ease: "power3.out"
+        ease: "power3.out",
+        onComplete: () => {
+          runDiscoveryModeSequence();
+        }
       });
 
       gsap.to(globeGroup.scale, {
@@ -1975,9 +2080,10 @@
         ease: "power3.out"
       });
 
-      // 9. Event Listeners
+      // 9. Event Listeners & Inactivity Tracking
       window.addEventListener('resize', onResize);
       setupHotspotUIEvents();
+      setupInactivityTracker();
 
       // Mouse Parallax Effect
       window.addEventListener('mousemove', (e) => {
@@ -1989,6 +2095,540 @@
 
       // 10. Start Animation Loop
       animate();
+    }
+
+    // --- RESIZE HANDLER ---
+    function onResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      if (!isZoomed) {
+        const defaultPos = getDefaultCameraPos();
+        camera.position.copy(defaultPos);
+      }
+    }
+
+    // --- ACTIVE DATA ORBIT PACKETS ON EQUATOR ---
+    function createActiveDataOrbitPackets() {
+      const packetCount = 48;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(packetCount * 3);
+      const colors = new Float32Array(packetCount * 3);
+
+      const colorCyan = new THREE.Color('#00f0ff');
+      const colorPink = new THREE.Color('#ff2e93');
+
+      for (let i = 0; i < packetCount; i++) {
+        const angle = (i / packetCount) * Math.PI * 2;
+        const r = globeRadius + 12;
+        pos[i * 3] = Math.cos(angle) * r;
+        pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
+        pos[i * 3 + 2] = Math.sin(angle) * r;
+
+        const mixColor = i % 2 === 0 ? colorCyan : colorPink;
+        colors[i * 3] = mixColor.r;
+        colors[i * 3 + 1] = mixColor.g;
+        colors[i * 3 + 2] = mixColor.b;
+      }
+
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const mat = new THREE.PointsMaterial({
+        size: 4.5,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending
+      });
+
+      orbitPacketsMesh = new THREE.Points(geo, mat);
+      globeGroup.add(orbitPacketsMesh);
+    }
+
+    // --- DISCOVERY MODE ONBOARDING SEQUENCE (SEQUENTIAL SOFT PULSE) ---
+    function runDiscoveryModeSequence() {
+      // Sequentially pulse Mission Control -> Studio -> Vault -> Playground over 2 seconds
+      PRODUCTS.forEach((prod, i) => {
+        setTimeout(() => {
+          if (!isZoomed) {
+            triggerSoftPulse(i);
+          }
+        }, i * 500);
+      });
+    }
+
+    function triggerSoftPulse(idx) {
+      const elem = document.getElementById(`hotspot-${idx}`);
+      if (!elem || isZoomed) return;
+      const iconBox = elem.querySelector('.hotspot-icon-box');
+      const prod = PRODUCTS[idx];
+      if (iconBox && prod) {
+        gsap.fromTo(iconBox, 
+          { scale: 1, boxShadow: `0 0 25px ${prod.color}` },
+          { scale: 1.35, boxShadow: `0 0 45px ${prod.color}, inset 0 0 20px ${prod.color}`, duration: 0.5, yoyo: true, repeat: 1, ease: "power2.out" }
+        );
+      }
+    }
+
+    // --- INACTIVITY AUTO DEMO SHOWCASE ---
+    function setupInactivityTracker() {
+      const resetTimer = () => {
+        if (isAutoDemoRunning) {
+          isAutoDemoRunning = false;
+          resetCamera();
+        }
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(startAutoDemoShowcase, 10000);
+      };
+
+      window.addEventListener('mousemove', resetTimer);
+      window.addEventListener('touchstart', resetTimer);
+      window.addEventListener('keydown', resetTimer);
+      window.addEventListener('click', resetTimer);
+
+      inactivityTimer = setTimeout(startAutoDemoShowcase, 10000);
+    }
+
+    function startAutoDemoShowcase() {
+      if (isZoomed || isAutoDemoRunning) return;
+      isAutoDemoRunning = true;
+
+      let demoStep = 0;
+      const runStep = () => {
+        if (!isAutoDemoRunning) return;
+        selectHotspot(demoStep % PRODUCTS.length);
+        demoStep++;
+
+        setTimeout(() => {
+          if (!isAutoDemoRunning) return;
+          resetCamera();
+          setTimeout(() => {
+            if (isAutoDemoRunning) runStep();
+          }, 1500);
+        }, 3200);
+      };
+
+      runStep();
+    }
+
+    // --- 3D PROJECTED HOTSPOT POSITION SYNC & DEPTH PERCEPTION ---
+    function update2DProjectedHotspots() {
+      const tempVec = new THREE.Vector3();
+      const cameraDir = new THREE.Vector3();
+      camera.getWorldDirection(cameraDir);
+
+      PRODUCTS.forEach((prod, idx) => {
+        const anchor = hotspotAnchors[idx];
+        const elem = document.getElementById(`hotspot-${idx}`);
+        if (!anchor || !elem) return;
+
+        // 1. Get exact 3D world position of anchor glued to the globe surface
+        anchor.getWorldPosition(tempVec);
+
+        // 2. Vector from center of globe to 3D hotspot position
+        const normalVec = tempVec.clone().normalize();
+        const facingDot = normalVec.dot(cameraDir.clone().negate());
+
+        // 3. Project 3D world coordinate to 2D screen coordinates
+        const screenVector = tempVec.clone().project(camera);
+        const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
+        const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
+
+        // 4. Depth visibility and scaling
+        if (facingDot > -0.05) {
+          let targetOpacity = 1.0;
+          let targetScale = 1.0;
+
+          if (facingDot > 0.35) {
+            targetOpacity = 1.0;
+            targetScale = 1.0 + (facingDot - 0.35) * 0.18; // 1.0 to 1.11 scale
+          } else if (facingDot > 0.05) {
+            targetOpacity = 0.45 + ((facingDot - 0.05) / 0.3) * 0.55;
+            targetScale = 0.9 + ((facingDot - 0.05) / 0.3) * 0.1;
+          } else {
+            targetOpacity = 0.15 + ((facingDot + 0.05) / 0.1) * 0.3;
+            targetScale = 0.85;
+          }
+
+          if (isZoomed && activeProductIndex !== idx) {
+            targetOpacity *= 0.2; // Dim unselected hotspots when zoomed
+          }
+
+          elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${targetScale.toFixed(2)})`;
+          elem.style.opacity = Math.max(0, Math.min(1, targetOpacity)).toFixed(2);
+          elem.style.pointerEvents = 'auto';
+        } else {
+          // Behind globe: fade to 0 opacity completely and disable pointer events
+          elem.style.opacity = '0';
+          elem.style.pointerEvents = 'none';
+        }
+      });
+    }
+
+    // --- INTERACTIVE HOTSPOT CLICK & FLY-TO ANIMATION ---
+    function setupHotspotUIEvents() {
+      PRODUCTS.forEach((prod, idx) => {
+        const elem = document.getElementById(`hotspot-${idx}`);
+        if (elem) {
+          elem.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectHotspot(idx);
+          });
+
+          // Atmosphere reaction on hover
+          elem.addEventListener('mouseenter', () => {
+            if (atmosphereMesh) {
+              gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.4 });
+            }
+          });
+
+          elem.addEventListener('mouseleave', () => {
+            if (atmosphereMesh && !isZoomed) {
+              gsap.to(atmosphereMesh.material, { opacity: 0.08, duration: 0.4 });
+            }
+          });
+        }
+      });
+
+      // HUD Close Button
+      const hudCloseBtn = document.getElementById('hud-close-btn');
+      if (hudCloseBtn) {
+        hudCloseBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          resetCamera();
+        });
+      }
+
+      // Scroll Down Button
+      if (scrollDownBtn) {
+        scrollDownBtn.addEventListener('click', () => {
+          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        });
+      }
+
+      // Click Outside to Reset
+      window.addEventListener('click', (e) => {
+        const hudContainer = document.getElementById('hud-modules-container');
+        if (isZoomed && hudContainer && !hudContainer.contains(e.target) && !e.target.closest('.globe-hotspot')) {
+          resetCamera();
+        }
+      });
+
+      // Keyboard ESC key to Reset
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isZoomed) {
+          resetCamera();
+        }
+      });
+    }
+
+    function selectHotspot(index) {
+      const prod = PRODUCTS[index];
+      const anchor = hotspotAnchors[index];
+      if (!prod || !anchor) return;
+
+      activeProductIndex = index;
+      isZoomed = true;
+
+      // 1. AI Core Energy Propagation Burst
+      if (coreMesh) {
+        gsap.to(coreMesh.scale, { x: 1.6, y: 1.6, z: 1.6, duration: 0.4, yoyo: true, repeat: 1, ease: "power2.out" });
+      }
+
+      // 2. Atmosphere Reaction Brightens
+      if (atmosphereMesh) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.22, duration: 0.8 });
+      }
+
+      // 3. Globe auto-rotation continues slowly in background
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.18;
+
+      // 4. Get World position of target 3D hotspot
+      const targetVec = anchor.getWorldPosition(new THREE.Vector3());
+
+      // 5. Compute Camera Destination: ~5x zoom closer to hotspot
+      const camDestination = targetVec.clone().multiplyScalar(1.52);
+
+      // 6. Trigger Energy Particle Pulse
+      triggerEnergyPulse(targetVec, prod.color);
+
+      // 7. GSAP Camera Position Fly-To Animation (1200ms)
+      gsap.to(camera.position, {
+        x: camDestination.x,
+        y: camDestination.y + (window.innerWidth < 768 ? 0 : 15),
+        z: camDestination.z,
+        duration: 1.2,
+        ease: "power3.inOut"
+      });
+
+      // 8. GSAP Controls Target Interpolation
+      gsap.to(controls.target, {
+        x: targetVec.x * 0.65,
+        y: targetVec.y * 0.65,
+        z: targetVec.z * 0.65,
+        duration: 1.2,
+        ease: "power3.inOut",
+        onUpdate: () => controls.update()
+      });
+
+      // 9. Show Attached Staggered Holographic HUD Modules
+      showHolographicHUD(prod, targetVec);
+    }
+
+    function showHolographicHUD(prod, targetVec) {
+      const hudContainer = document.getElementById('hud-modules-container');
+      const hudTitle = document.getElementById('hud-title-text');
+      const hudCategory = document.getElementById('hud-category-badge');
+      const hudCoord = document.getElementById('hud-coord-text');
+      const hudDesc = document.getElementById('hud-desc-text');
+      const hudFeatures = document.getElementById('hud-features-list');
+      const hudCmdText = document.getElementById('hud-cmd-text');
+      const hudCmdBar = document.getElementById('hud-cmd-bar');
+      const hudHeaderMod = document.getElementById('hud-mod-header');
+      const hudNodeId = document.getElementById('hud-node-id');
+      const splineLine = document.getElementById('hud-spline-line');
+
+      if (!hudContainer) return;
+
+      // Update text & values
+      hudTitle.textContent = prod.name.toUpperCase();
+      hudCategory.textContent = prod.category;
+      hudCategory.style.color = prod.color;
+      hudCategory.style.borderColor = prod.color;
+
+      const formattedLat = Math.abs(prod.lat).toFixed(2) + (prod.lat >= 0 ? '° N' : '° S');
+      const formattedLon = Math.abs(prod.lon).toFixed(2) + (prod.lon >= 0 ? '° E' : '° W');
+      hudCoord.textContent = `${formattedLat} // ${formattedLon}`;
+      hudCoord.style.color = prod.color;
+
+      hudDesc.textContent = prod.description;
+      hudNodeId.textContent = `GLB-${prod.id.slice(0, 3).toUpperCase()}-942`;
+
+      // Status Labels Array
+      const statuses = ["READY", "ACTIVE", "CONNECTED"];
+
+      // Interactive Feature Matrix Tiles
+      hudFeatures.innerHTML = prod.features.map((f, i) => `
+        <div class="feature-tile group" style="border-color: rgba(255,255,255,0.1)">
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full animate-ping" style="background-color: ${prod.color}"></span>
+            <span class="text-xs font-mono font-bold text-white group-hover:text-white">${f}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[9px] font-mono text-white/40 hidden sm:inline">[||||||||||]</span>
+            <span class="text-[9px] font-mono font-extrabold px-2 py-0.5 rounded bg-white/10" style="color: ${prod.color}">${statuses[i % 3]}</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Command Bar CTA
+      hudCmdText.textContent = prod.cta.toUpperCase();
+      hudCmdBar.style.borderColor = prod.color;
+      hudCmdBar.style.color = "#ffffff";
+      hudCmdBar.href = prod.link;
+
+      // Header Module accent color
+      hudHeaderMod.style.borderColor = prod.color;
+      hudHeaderMod.style.color = prod.color;
+
+      // Spline line color
+      if (splineLine) {
+        splineLine.setAttribute('stroke', prod.color);
+        splineLine.style.opacity = '0.85';
+      }
+
+      // Position HUD Container (Desktop right side, Mobile bottom)
+      if (window.innerWidth < 768) {
+        hudContainer.style.left = '50%';
+        hudContainer.style.bottom = '1rem';
+        hudContainer.style.top = 'auto';
+        hudContainer.style.right = 'auto';
+        hudContainer.style.transform = 'translateX(-50%)';
+      } else {
+        hudContainer.style.right = '5%';
+        hudContainer.style.top = '50%';
+        hudContainer.style.bottom = 'auto';
+        hudContainer.style.left = 'auto';
+        hudContainer.style.transform = 'translateY(-50%)';
+      }
+
+      hudContainer.style.opacity = '1';
+      hudContainer.style.pointerEvents = 'none';
+
+      // GSAP Staggered Animation Sequence for HUD Modules
+      const modules = [
+        document.getElementById('hud-mod-header'),
+        document.getElementById('hud-mod-desc'),
+        document.getElementById('hud-mod-features'),
+        document.getElementById('hud-mod-telemetry'),
+        document.getElementById('hud-mod-cta')
+      ];
+
+      gsap.killTweensOf(modules);
+
+      // Initial Module state before staggered entry
+      modules.forEach(mod => {
+        if (mod) {
+          gsap.set(mod, { opacity: 0, x: 45, y: 0, scale: 0.95 });
+        }
+      });
+
+      // Staggered Entry Sequence (Title -> Desc -> Features -> Telemetry -> CTA)
+      gsap.to(modules, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.55,
+        stagger: 0.08,
+        ease: "power3.out"
+      });
+    }
+
+    function resetCamera() {
+      if (!isZoomed) return;
+      isZoomed = false;
+      activeProductIndex = null;
+
+      if (atmosphereMesh) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.08, duration: 0.6 });
+      }
+
+      const splineLine = document.getElementById('hud-spline-line');
+      if (splineLine) splineLine.style.opacity = '0';
+
+      const modules = [
+        document.getElementById('hud-mod-cta'),
+        document.getElementById('hud-mod-telemetry'),
+        document.getElementById('hud-mod-features'),
+        document.getElementById('hud-mod-desc'),
+        document.getElementById('hud-mod-header')
+      ];
+
+      // Reverse Staggered Exit Sequence
+      gsap.to(modules, {
+        opacity: 0,
+        x: 35,
+        scale: 0.95,
+        duration: 0.35,
+        stagger: 0.05,
+        ease: "power2.in",
+        onComplete: () => {
+          const hudContainer = document.getElementById('hud-modules-container');
+          if (hudContainer) hudContainer.style.opacity = '0';
+        }
+      });
+
+      const defaultPos = getDefaultCameraPos();
+
+      // Camera Fly-Back to Default View
+      gsap.to(camera.position, {
+        x: defaultPos.x,
+        y: defaultPos.y,
+        z: defaultPos.z,
+        duration: 1.2,
+        ease: "power3.inOut"
+      });
+
+      gsap.to(controls.target, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1.2,
+        ease: "power3.inOut",
+        onComplete: () => {
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = 0.55;
+        }
+      });
+    }
+
+    function updateConnectionSpline() {
+      const splineLine = document.getElementById('hud-spline-line');
+      if (!isZoomed || activeProductIndex === null || !splineLine) {
+        if (splineLine) splineLine.style.opacity = '0';
+        return;
+      }
+
+      const anchor = hotspotAnchors[activeProductIndex];
+      const hudContainer = document.getElementById('hud-modules-container');
+      if (!anchor || !hudContainer) return;
+
+      const targetVec = anchor.getWorldPosition(new THREE.Vector3());
+      const screenPos = targetVec.clone().project(camera);
+      const hx = (screenPos.x * 0.5 + 0.5) * window.innerWidth;
+      const hy = (-(screenPos.y * 0.5) + 0.5) * window.innerHeight;
+
+      const hudRect = hudContainer.getBoundingClientRect();
+      const px = window.innerWidth < 768 ? hudRect.left + hudRect.width / 2 : hudRect.left;
+      const py = window.innerWidth < 768 ? hudRect.top : hudRect.top + 45;
+
+      const cx = (hx + px) / 2;
+
+      splineLine.setAttribute('d', `M ${hx},${hy} Q ${cx},${hy} ${px},${py}`);
+      splineLine.style.opacity = '0.85';
+    }
+
+    // --- ANIMATION LOOP ---
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const t = clock ? clock.getElapsedTime() : 0;
+
+      // Slow Elegant Globe Rotation
+      if (globeGroup && controls.autoRotate) {
+        globeGroup.rotation.y += 0.0008;
+      }
+
+      // Rotate Active Data Orbit Packets
+      if (orbitPacketsMesh) {
+        orbitPacketsMesh.rotation.y += 0.008;
+      }
+
+      // Alive AI Core Breathing & Morphed Rotation
+      if (coreMesh) {
+        const breathingScale = 1.0 + Math.sin(t * 1.8) * 0.06;
+        coreMesh.scale.set(breathingScale, breathingScale, breathingScale);
+        coreMesh.rotation.y -= 0.003;
+        coreMesh.rotation.x += 0.0015;
+      }
+
+      // Flame Mode Particle Wave Pulse Animation
+      if (particleSphere && particleSphere.geometry.attributes.position) {
+        const pos = particleSphere.geometry.attributes.position;
+        const speed = flameMode ? 2.5 : 0.8;
+        const amplitude = flameMode ? 1.4 : 0.25;
+
+        for (let i = 0; i < pos.count; i++) {
+          let i3 = i * 3;
+          const dist = Math.sqrt(
+            pos.array[i3] ** 2 +
+            pos.array[i3 + 1] ** 2 +
+            pos.array[i3 + 2] ** 2
+          );
+          let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
+          pos.array[i3] *= 1 + pulse * 0.0007;
+          pos.array[i3 + 1] *= 1 + pulse * 0.0007;
+          pos.array[i3 + 2] *= 1 + pulse * 0.0007;
+        }
+        pos.needsUpdate = true;
+      }
+
+      // Rotate hotspot micro orbit particles
+      hotspotAnchors.forEach(anchor => {
+        if (anchor.children[1]) {
+          anchor.children[1].rotation.z += 0.02;
+        }
+      });
+
+      controls.update();
+      update2DProjectedHotspots();
+      updateConnectionSpline();
+      renderer.render(scene, camera);
     }
 
     // --- 35,000 PARTICLE GLOBE WITH EARTH LANDMASS DENSITY ---
@@ -2121,7 +2761,8 @@
     function createHotspotAnchors() {
       PRODUCTS.forEach((prod, idx) => {
         const anchorGroup = new THREE.Group();
-        const pos = latLongToVector3(prod.lat, prod.lon, globeRadius + 6);
+        const comp = (activeComposition && activeComposition[idx]) ? activeComposition[idx] : { lat: prod.lat, lon: prod.lon };
+        const pos = latLongToVector3(comp.lat, comp.lon, globeRadius + 6);
         anchorGroup.position.copy(pos);
 
         // 3D Ring Marker Mesh
@@ -2220,385 +2861,6 @@
           ease: "power2.out",
           onUpdate: () => { posAttr.needsUpdate = true; }
         });
-      }
-    }
-
-    // --- 2D PROJECTED HOTSPOT POSITION SYNC ---
-    function update2DProjectedHotspots() {
-      const tempVec = new THREE.Vector3();
-      const cameraDir = new THREE.Vector3();
-      camera.getWorldDirection(cameraDir);
-
-      PRODUCTS.forEach((prod, idx) => {
-        const anchor = hotspotAnchors[idx];
-        const elem = document.getElementById(`hotspot-${idx}`);
-        if (!anchor || !elem) return;
-
-        anchor.getWorldPosition(tempVec);
-
-        // Vector from camera to anchor point
-        const camToAnchor = tempVec.clone().sub(camera.position).normalize();
-        const dot = camToAnchor.dot(cameraDir);
-
-        // Project 3D vector to screen normalized device coordinates [-1, 1]
-        const screenVector = tempVec.clone().project(camera);
-
-        const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
-        const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
-
-        // Check if hotspot is on the visible front hemisphere of the globe
-        const isVisibleOnFront = dot > 0.15;
-
-        if (isVisibleOnFront) {
-          elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-          elem.style.opacity = isZoomed && activeProductIndex !== idx ? '0.25' : '1';
-          elem.style.pointerEvents = 'auto';
-        } else {
-          elem.style.opacity = '0';
-          elem.style.pointerEvents = 'none';
-        }
-      });
-    }
-
-    // --- INTERACTIVE HOTSPOT CLICK & FLY-TO ANIMATION ---
-    function setupHotspotUIEvents() {
-      PRODUCTS.forEach((prod, idx) => {
-        const elem = document.getElementById(`hotspot-${idx}`);
-        if (elem) {
-          elem.addEventListener('click', (e) => {
-            e.stopPropagation();
-            selectHotspot(idx);
-          });
-        }
-      });
-
-      // HUD Close Button
-      const hudCloseBtn = document.getElementById('hud-close-btn');
-      if (hudCloseBtn) {
-        hudCloseBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          resetCamera();
-        });
-      }
-
-      // Scroll Down Button
-      if (scrollDownBtn) {
-        scrollDownBtn.addEventListener('click', () => {
-          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        });
-      }
-
-      // Click Outside to Reset
-      window.addEventListener('click', (e) => {
-        const hudContainer = document.getElementById('hud-modules-container');
-        if (isZoomed && hudContainer && !hudContainer.contains(e.target) && !e.target.closest('.globe-hotspot')) {
-          resetCamera();
-        }
-      });
-
-      // Keyboard ESC key to Reset
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isZoomed) {
-          resetCamera();
-        }
-      });
-    }
-
-    function selectHotspot(index) {
-      const prod = PRODUCTS[index];
-      const anchor = hotspotAnchors[index];
-      if (!prod || !anchor) return;
-
-      activeProductIndex = index;
-      isZoomed = true;
-
-      // 1. Globe auto-rotation continues slowly in background so world stays alive
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.18;
-
-      // 2. Get World position of target 3D hotspot
-      const targetVec = anchor.getWorldPosition(new THREE.Vector3());
-
-      // 3. Compute Camera Destination: ~5x zoom closer to hotspot
-      const camDestination = targetVec.clone().multiplyScalar(1.52);
-
-      // 4. Trigger Energy Particle Pulse
-      triggerEnergyPulse(targetVec, prod.color);
-
-      // 5. GSAP Camera Position Fly-To Animation (1200ms)
-      gsap.to(camera.position, {
-        x: camDestination.x,
-        y: camDestination.y + (window.innerWidth < 768 ? 0 : 15),
-        z: camDestination.z,
-        duration: 1.2,
-        ease: "power3.inOut"
-      });
-
-      // 6. GSAP Controls Target Interpolation
-      gsap.to(controls.target, {
-        x: targetVec.x * 0.65,
-        y: targetVec.y * 0.65,
-        z: targetVec.z * 0.65,
-        duration: 1.2,
-        ease: "power3.inOut",
-        onUpdate: () => controls.update()
-      });
-
-      // 7. Show Attached Staggered Holographic HUD Modules
-      showHolographicHUD(prod, targetVec);
-    }
-
-    function showHolographicHUD(prod, targetVec) {
-      const hudContainer = document.getElementById('hud-modules-container');
-      const hudTitle = document.getElementById('hud-title-text');
-      const hudCategory = document.getElementById('hud-category-badge');
-      const hudCoord = document.getElementById('hud-coord-text');
-      const hudDesc = document.getElementById('hud-desc-text');
-      const hudFeatures = document.getElementById('hud-features-list');
-      const hudCmdText = document.getElementById('hud-cmd-text');
-      const hudCmdBar = document.getElementById('hud-cmd-bar');
-      const hudHeaderMod = document.getElementById('hud-mod-header');
-      const hudNodeId = document.getElementById('hud-node-id');
-      const splineLine = document.getElementById('hud-spline-line');
-
-      if (!hudContainer) return;
-
-      // Update text & values
-      hudTitle.textContent = prod.name.toUpperCase();
-      hudCategory.textContent = prod.category;
-      hudCategory.style.color = prod.color;
-      hudCategory.style.borderColor = prod.color;
-
-      const formattedLat = Math.abs(prod.lat).toFixed(2) + (prod.lat >= 0 ? '° N' : '° S');
-      const formattedLon = Math.abs(prod.lon).toFixed(2) + (prod.lon >= 0 ? '° E' : '° W');
-      hudCoord.textContent = `${formattedLat} // ${formattedLon}`;
-      hudCoord.style.color = prod.color;
-
-      hudDesc.textContent = prod.description;
-      hudNodeId.textContent = `GLB-${prod.id.slice(0, 3).toUpperCase()}-942`;
-
-      // Status Labels Array
-      const statuses = ["READY", "ACTIVE", "CONNECTED"];
-
-      // Interactive Feature Matrix Tiles
-      hudFeatures.innerHTML = prod.features.map((f, i) => `
-        <div class="feature-tile group" style="border-color: rgba(255,255,255,0.1)">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1.5 h-1.5 rounded-full animate-ping" style="background-color: ${prod.color}"></span>
-            <span class="text-xs font-mono font-bold text-white group-hover:text-white">${f}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-[9px] font-mono text-white/40 hidden sm:inline">[||||||||||]</span>
-            <span class="text-[9px] font-mono font-extrabold px-2 py-0.5 rounded bg-white/10" style="color: ${prod.color}">${statuses[i % 3]}</span>
-          </div>
-        </div>
-      `).join('');
-
-      // Command Bar CTA
-      hudCmdText.textContent = prod.cta.toUpperCase();
-      hudCmdBar.style.borderColor = prod.color;
-      hudCmdBar.style.color = "#ffffff";
-      hudCmdBar.href = prod.link;
-
-      // Header Module accent color
-      hudHeaderMod.style.borderColor = prod.color;
-      hudHeaderMod.style.color = prod.color;
-
-      // Spline line color
-      if (splineLine) {
-        splineLine.setAttribute('stroke', prod.color);
-        splineLine.style.opacity = '0.85';
-      }
-
-      // Position HUD Container (Desktop right side, Mobile bottom)
-      if (window.innerWidth < 768) {
-        hudContainer.style.left = '50%';
-        hudContainer.style.bottom = '1rem';
-        hudContainer.style.top = 'auto';
-        hudContainer.style.right = 'auto';
-        hudContainer.style.transform = 'translateX(-50%)';
-      } else {
-        hudContainer.style.right = '5%';
-        hudContainer.style.top = '50%';
-        hudContainer.style.bottom = 'auto';
-        hudContainer.style.left = 'auto';
-        hudContainer.style.transform = 'translateY(-50%)';
-      }
-
-      hudContainer.style.opacity = '1';
-      hudContainer.style.pointerEvents = 'none';
-
-      // GSAP Staggered Animation Sequence for HUD Modules
-      const modules = [
-        document.getElementById('hud-mod-header'),
-        document.getElementById('hud-mod-desc'),
-        document.getElementById('hud-mod-features'),
-        document.getElementById('hud-mod-telemetry'),
-        document.getElementById('hud-mod-cta')
-      ];
-
-      gsap.killTweensOf(modules);
-
-      // Initial Module state before staggered entry
-      modules.forEach(mod => {
-        if (mod) {
-          gsap.set(mod, { opacity: 0, x: 45, y: 0, scale: 0.95 });
-        }
-      });
-
-      // Staggered Entry Sequence (Title -> Desc -> Features -> Telemetry -> CTA)
-      gsap.to(modules, {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 0.55,
-        stagger: 0.08,
-        ease: "power3.out"
-      });
-    }
-
-    function resetCamera() {
-      if (!isZoomed) return;
-      isZoomed = false;
-      activeProductIndex = null;
-
-      const splineLine = document.getElementById('hud-spline-line');
-      if (splineLine) splineLine.style.opacity = '0';
-
-      const modules = [
-        document.getElementById('hud-mod-cta'),
-        document.getElementById('hud-mod-telemetry'),
-        document.getElementById('hud-mod-features'),
-        document.getElementById('hud-mod-desc'),
-        document.getElementById('hud-mod-header')
-      ];
-
-      // Reverse Staggered Exit Sequence
-      gsap.to(modules, {
-        opacity: 0,
-        x: 35,
-        scale: 0.95,
-        duration: 0.35,
-        stagger: 0.05,
-        ease: "power2.in",
-        onComplete: () => {
-          const hudContainer = document.getElementById('hud-modules-container');
-          if (hudContainer) hudContainer.style.opacity = '0';
-        }
-      });
-
-      const defaultPos = getDefaultCameraPos();
-
-      // Camera Fly-Back to Default View
-      gsap.to(camera.position, {
-        x: defaultPos.x,
-        y: defaultPos.y,
-        z: defaultPos.z,
-        duration: 1.2,
-        ease: "power3.inOut"
-      });
-
-      gsap.to(controls.target, {
-        x: 0,
-        y: 0,
-        z: 0,
-        duration: 1.2,
-        ease: "power3.inOut",
-        onComplete: () => {
-          controls.autoRotate = true;
-          controls.autoRotateSpeed = 0.55;
-        }
-      });
-    }
-
-    function updateConnectionSpline() {
-      const splineLine = document.getElementById('hud-spline-line');
-      if (!isZoomed || activeProductIndex === null || !splineLine) {
-        if (splineLine) splineLine.style.opacity = '0';
-        return;
-      }
-
-      const anchor = hotspotAnchors[activeProductIndex];
-      const hudContainer = document.getElementById('hud-modules-container');
-      if (!anchor || !hudContainer) return;
-
-      const targetVec = anchor.getWorldPosition(new THREE.Vector3());
-      const screenPos = targetVec.clone().project(camera);
-      const hx = (screenPos.x * 0.5 + 0.5) * window.innerWidth;
-      const hy = (-(screenPos.y * 0.5) + 0.5) * window.innerHeight;
-
-      const hudRect = hudContainer.getBoundingClientRect();
-      const px = window.innerWidth < 768 ? hudRect.left + hudRect.width / 2 : hudRect.left;
-      const py = window.innerWidth < 768 ? hudRect.top : hudRect.top + 45;
-
-      const cx = (hx + px) / 2;
-
-      splineLine.setAttribute('d', `M ${hx},${hy} Q ${cx},${hy} ${px},${py}`);
-      splineLine.style.opacity = '0.85';
-    }
-
-    // --- ANIMATION LOOP ---
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const t = clock ? clock.getElapsedTime() : 0;
-
-      // Slow Elegant Globe Rotation
-      if (globeGroup && controls.autoRotate) {
-        globeGroup.rotation.y += 0.0008;
-      }
-
-      // Flame Mode Particle Wave Pulse Animation
-      if (particleSphere && particleSphere.geometry.attributes.position) {
-        const pos = particleSphere.geometry.attributes.position;
-        const speed = flameMode ? 2.5 : 0.8;
-        const amplitude = flameMode ? 1.4 : 0.25;
-
-        for (let i = 0; i < pos.count; i++) {
-          let i3 = i * 3;
-          const dist = Math.sqrt(
-            pos.array[i3] ** 2 +
-            pos.array[i3 + 1] ** 2 +
-            pos.array[i3 + 2] ** 2
-          );
-          let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
-          pos.array[i3] *= 1 + pulse * 0.0007;
-          pos.array[i3 + 1] *= 1 + pulse * 0.0007;
-          pos.array[i3 + 2] *= 1 + pulse * 0.0007;
-        }
-        pos.needsUpdate = true;
-      }
-
-      // Rotate internal core opposite direction (accelerates in flame mode)
-      if (coreMesh) {
-        const coreSpeed = flameMode ? 0.005 : 0.002;
-        coreMesh.rotation.y -= coreSpeed;
-        coreMesh.rotation.x += coreSpeed * 0.5;
-      }
-
-      // Rotate hotspot micro orbit particles
-      hotspotAnchors.forEach(anchor => {
-        if (anchor.children[1]) {
-          anchor.children[1].rotation.z += flameMode ? 0.03 : 0.015;
-        }
-      });
-
-      controls.update();
-      update2DProjectedHotspots();
-      updateConnectionSpline();
-      renderer.render(scene, camera);
-    }
-
-    // --- RESIZE HANDLER ---
-    function onResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      if (!isZoomed) {
-        const defaultPos = getDefaultCameraPos();
-        camera.position.copy(defaultPos);
       }
     }
 
