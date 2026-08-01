@@ -377,30 +377,30 @@
       </div>
 
       <!-- Minimal Futuristic Top Bar HUD -->
-      <div class="absolute top-6 left-6 md:top-8 md:left-10 z-30 flex items-center gap-4 pointer-events-auto">
-        <div class="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+      <div class="absolute top-6 left-6 md:top-8 md:left-10 z-30 flex items-center gap-3 pointer-events-auto">
+        <div class="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
           <span class="w-2.5 h-2.5 rounded-full bg-[#00f0ff] animate-ping"></span>
           <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white">GLOBAL AI OS // 2.06</span>
         </div>
       </div>
 
-      <!-- Minimal Futuristic HUD Quick Nav / Status (Bottom Left) -->
-      <div class="hidden md:flex absolute bottom-8 left-10 z-30 flex-col gap-2 pointer-events-auto text-left">
+      <!-- Minimal Futuristic HUD System Status (Bottom Left) -->
+      <div class="hidden lg:flex absolute bottom-8 left-10 z-30 flex-col gap-1.5 pointer-events-auto text-left">
         <div class="text-[9px] font-mono text-muted uppercase tracking-widest flex items-center gap-2">
           <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda]"></span>
           <span>INTERACTIVE NAVIGATION SYSTEM</span>
         </div>
-        <p class="text-[11px] text-white/70 font-mono max-w-xs">
-          Click any hotspot or rotate the globe to explore ecosystem products.
-        </p>
+        <div class="text-[10px] font-mono text-white/50">
+          NODES: <span class="text-[#00f0ff]">35,000</span> // HOTSPOTS: <span class="text-[#ff2e93]">ACTIVE</span>
+        </div>
       </div>
 
-      <!-- Bottom Center Animated Scroll Indicator -->
-      <div id="hero-scroll-indicator" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-auto cursor-pointer group">
-        <span class="text-[9px] font-mono tracking-[0.25em] uppercase text-white/60 group-hover:text-white transition-colors">EXPLORE ECOSYSTEM</span>
-        <div class="w-5 h-8 rounded-full border border-white/30 group-hover:border-[#ff2e93] flex justify-center pt-1.5 transition-colors">
-          <span class="w-1 h-2 rounded-full bg-[#ff2e93] animate-bounce"></span>
-        </div>
+      <!-- Bottom Center Animated Scroll Indicator (World-Class Magnetic Glass Pill) -->
+      <div id="hero-scroll-indicator" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 bg-black/60 backdrop-blur-xl border border-white/15 px-6 py-2.5 rounded-full pointer-events-auto cursor-pointer group hover:border-[#ff2e93] hover:bg-[#ff2e93]/10 hover:shadow-[0_0_30px_rgba(255,46,147,0.3)] transition-all duration-300">
+        <span class="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-white transition-colors">EXPLORE ECOSYSTEM</span>
+        <svg class="w-3.5 h-3.5 text-[#ff2e93] animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
       </div>
 
       <!-- Glassmorphic Floating Detail Panel -->
@@ -1757,25 +1757,42 @@
     const closeBtn = document.getElementById('panel-close-btn');
     const scrollDownBtn = document.getElementById('hero-scroll-indicator');
 
+    // --- DYNAMIC OPTIMAL CAMERA DISTANCE (BEST UI/UX PROPORTIONS) ---
+    function getOptimalCameraDistance() {
+      const aspect = window.innerWidth / window.innerHeight;
+      if (aspect < 0.75) return 1180; // Mobile portrait
+      if (aspect < 1.1) return 1040;  // Tablet
+      return 950;                     // Desktop (Perfect ~70-75% viewport height)
+    }
+
+    function getDefaultCameraPos() {
+      const dist = getOptimalCameraDistance();
+      return new THREE.Vector3(0, dist * 0.08, dist);
+    }
+
     // --- THREE.JS STATE VARIABLES ---
-    let scene, camera, renderer, controls;
+    let scene, camera, renderer, controls, clock;
     let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup;
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
-    const defaultCamPos = new THREE.Vector3(0, 110, 720);
+    let flameMode = true; // Enabled flameMode
     const globeRadius = 290;
 
     // --- INITIALIZATION ---
     function initThreeEngine() {
       if (!container) return;
 
+      clock = new THREE.Clock();
+
       // 1. Scene
       scene = new THREE.Scene();
 
       // 2. Camera
+      const defaultPos = getDefaultCameraPos();
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3500);
-      camera.position.copy(defaultCamPos);
+      // Start further back for cinematic entrance flight
+      camera.position.set(0, defaultPos.y * 1.5, defaultPos.z * 1.45);
 
       // 3. Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
@@ -1790,13 +1807,14 @@
       controls.dampingFactor = 0.05;
       controls.rotateSpeed = 0.8;
       controls.enableZoom = true;
-      controls.minDistance = 240;
-      controls.maxDistance = 1100;
+      controls.minDistance = 300;
+      controls.maxDistance = 1400;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.55;
 
       // 5. Parent Globe Group
       globeGroup = new THREE.Group();
+      globeGroup.scale.set(0.82, 0.82, 0.82); // Initial scale for entrance reveal
       scene.add(globeGroup);
 
       // 6. Build 3D Components
@@ -1818,7 +1836,24 @@
       dirLight2.position.set(-500, -200, -500);
       scene.add(dirLight2);
 
-      // 8. Event Listeners
+      // 8. Cinematic Intro Camera Reveal
+      gsap.to(camera.position, {
+        x: defaultPos.x,
+        y: defaultPos.y,
+        z: defaultPos.z,
+        duration: 1.8,
+        ease: "power3.out"
+      });
+
+      gsap.to(globeGroup.scale, {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: 1.8,
+        ease: "power3.out"
+      });
+
+      // 9. Event Listeners
       window.addEventListener('resize', onResize);
       setupHotspotUIEvents();
 
@@ -1830,7 +1865,7 @@
         gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.5, ease: "power2.out" });
       });
 
-      // 9. Start Animation Loop
+      // 10. Start Animation Loop
       animate();
     }
 
@@ -2159,8 +2194,8 @@
       // 2. Get World position of target 3D hotspot
       const targetVec = anchor.getWorldPosition(new THREE.Vector3());
 
-      // 3. Compute Camera Destination: 5x zoom closer to hotspot
-      const camDestination = targetVec.clone().multiplyScalar(1.42);
+      // 3. Compute Camera Destination: ~5x zoom closer to hotspot
+      const camDestination = targetVec.clone().multiplyScalar(1.52);
 
       // 4. Trigger Energy Particle Pulse
       triggerEnergyPulse(targetVec, prod.color);
@@ -2250,11 +2285,13 @@
       detailPanel.style.pointerEvents = 'none';
       detailPanel.style.transform = 'translate(0, -50%) scale(0.95)';
 
+      const defaultPos = getDefaultCameraPos();
+
       // Camera Fly-Back to Default View
       gsap.to(camera.position, {
-        x: defaultCamPos.x,
-        y: defaultCamPos.y,
-        z: defaultCamPos.z,
+        x: defaultPos.x,
+        y: defaultPos.y,
+        z: defaultPos.z,
         duration: 1.2,
         ease: "power3.inOut"
       });
@@ -2275,21 +2312,45 @@
     function animate() {
       requestAnimationFrame(animate);
 
+      const t = clock ? clock.getElapsedTime() : 0;
+
       // Slow Elegant Globe Rotation
       if (globeGroup && controls.autoRotate) {
         globeGroup.rotation.y += 0.0008;
       }
 
-      // Rotate internal core opposite direction
+      // Flame Mode Particle Wave Pulse Animation
+      if (particleSphere && particleSphere.geometry.attributes.position) {
+        const pos = particleSphere.geometry.attributes.position;
+        const speed = flameMode ? 2.5 : 0.8;
+        const amplitude = flameMode ? 1.4 : 0.25;
+
+        for (let i = 0; i < pos.count; i++) {
+          let i3 = i * 3;
+          const dist = Math.sqrt(
+            pos.array[i3] ** 2 +
+            pos.array[i3 + 1] ** 2 +
+            pos.array[i3 + 2] ** 2
+          );
+          let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
+          pos.array[i3] *= 1 + pulse * 0.0007;
+          pos.array[i3 + 1] *= 1 + pulse * 0.0007;
+          pos.array[i3 + 2] *= 1 + pulse * 0.0007;
+        }
+        pos.needsUpdate = true;
+      }
+
+      // Rotate internal core opposite direction (accelerates in flame mode)
       if (coreMesh) {
-        coreMesh.rotation.y -= 0.002;
-        coreMesh.rotation.x += 0.001;
+        const coreSpeed = flameMode ? 0.005 : 0.002;
+        coreMesh.rotation.y -= coreSpeed;
+        coreMesh.rotation.x += coreSpeed * 0.5;
       }
 
       // Rotate hotspot micro orbit particles
       hotspotAnchors.forEach(anchor => {
         if (anchor.children[1]) {
-          anchor.children[1].rotation.z += 0.015;
+          anchor.children[1].rotation.z += flameMode ? 0.03 : 0.015;
         }
       });
 
@@ -2303,6 +2364,11 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+
+      if (!isZoomed) {
+        const defaultPos = getDefaultCameraPos();
+        camera.position.copy(defaultPos);
+      }
     }
 
     // --- BACKGROUND GRID & FOG CANVAS ANIMATIONS ---
