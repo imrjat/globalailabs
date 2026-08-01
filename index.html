@@ -22,7 +22,183 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Import Map for Three.js -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <!-- 3D Globe Ecosystem Styling -->
+  <style>
+    #hero-os-section {
+      background-color: #040404;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .vignette-overlay {
+      background: radial-gradient(circle at center, transparent 35%, rgba(4,4,4,0.7) 80%, #040404 100%);
+    }
+
+    .film-grain-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    /* Hotspot 2D Projected Elements */
+    .globe-hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      pointer-events: auto;
+      transition: opacity 0.4s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 25;
+    }
+
+    .hotspot-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Pulsating Ripple Rings */
+    .hotspot-ripple {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0.8;
+      animation: hotspotRipple 2.4s infinite cubic-bezier(0, 0.2, 0.8, 1);
+      pointer-events: none;
+    }
+
+    .hotspot-ripple-delay {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes hotspotRipple {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    /* Hotspot Icon Box */
+    .hotspot-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(8, 12, 18, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px currentColor;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: hotspotBreathing 3s infinite ease-in-out;
+    }
+
+    .globe-hotspot:hover .hotspot-icon-box {
+      transform: scale(1.18);
+      box-shadow: 0 0 40px currentColor, inset 0 0 15px currentColor;
+    }
+
+    @keyframes hotspotBreathing {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* Hotspot Label */
+    .hotspot-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: rgba(4, 6, 10, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .globe-hotspot:hover .hotspot-label {
+      border-color: currentColor;
+      color: #ffffff;
+      box-shadow: 0 0 15px currentColor;
+    }
+
+    /* Glassmorphic Detail Panel */
+    #globe-detail-panel {
+      background: rgba(8, 12, 18, 0.78);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.1);
+      border-radius: 20px;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #globe-detail-panel.panel-cyan {
+      border-color: rgba(0, 240, 255, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.2);
+    }
+    #globe-detail-panel.panel-purple {
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(168, 85, 247, 0.2);
+    }
+    #globe-detail-panel.panel-amber {
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(245, 158, 11, 0.2);
+    }
+    #globe-detail-panel.panel-pink {
+      border-color: rgba(255, 46, 147, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 46, 147, 0.2);
+    }
+
+    /* Product Feature Checkmark Badges */
+    .feature-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* HUD Lines Animation */
+    @keyframes hudPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    .hud-pulse { animation: hudPulse 2s infinite ease-in-out; }
+  </style>
 </head>
 <body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
 
@@ -116,145 +292,165 @@
     <div class="glow-blob glow-cyan w-[700px] h-[700px] top-[20%] -right-[20%] opacity-10"></div>
     <div class="glow-blob glow-mint w-[600px] h-[600px] bottom-[10%] left-[20%] opacity-5"></div>
 
-    <!-- 1. Hero Section -->
-    <section class="relative min-h-screen w-full flex flex-col justify-between px-5 pt-24 pb-12 md:px-8 lg:px-12 bg-[#06080c] overflow-hidden z-0 border-b border-white/5">
-      <div class="max-w-7xl mx-auto w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 my-8">
+    <!-- 1. Hero Section: Interactive 3D Cyber Globe AI OS -->
+    <section id="hero-os-section" class="relative w-full h-screen overflow-hidden bg-[#040404] select-none z-0">
+      
+      <!-- Background Canvas Layers -->
+      <canvas id="hero-grid-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-25 z-0"></canvas>
+      <canvas id="hero-fog-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-0"></canvas>
 
-        <!-- Left Side Dot Indicator (Desktop) -->
-        <div class="hidden lg:flex flex-col gap-3 absolute left-0 top-1/2 -translate-y-1/2 z-20">
-          <a href="#hero" class="w-2.5 h-2.5 rounded-full border border-white/40 bg-[#ff2e93] transition-all" aria-label="Hero Section"></a>
-          <a href="#features" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Features"></a>
-          <a href="#capabilities" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Showcase"></a>
-          <a href="#pricing" class="w-2.5 h-2.5 rounded-full border border-white/40 hover:bg-white/60 transition-all" aria-label="Pricing"></a>
-        </div>
+      <!-- Atmospheric Vignette & Film Grain -->
+      <div class="vignette-overlay absolute inset-0 pointer-events-none z-10"></div>
+      <div class="film-grain-overlay absolute inset-0 pointer-events-none z-10 opacity-30 mix-blend-overlay"></div>
 
-        <!-- Left Column: Copy & Details -->
-        <div class="lg:col-span-5 flex flex-col gap-6 lg:pl-10 text-left">
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-1 text-[9px] font-black tracking-[0.15em] uppercase text-[#ff2e93] bg-[#ff2e93]/10 rounded-full">
-              Cinematic AI Engine
-            </span>
-          </div>
+      <!-- WebGL 3D Globe Canvas Container -->
+      <div id="globe-canvas-container" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></div>
 
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-white font-outfit">
-AI POWERED CONTENT ECOSYSTEM          </h1>
-
-          <!-- Capabilities Highlights -->
-          <ul class="flex flex-col gap-4 my-2">
-            <li class="flex items-start gap-3 group">
-              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#ff2e93]/10 border border-[#ff2e93]/30 flex items-center justify-center text-[10px] text-[#ff2e93] font-bold font-mono">▲</span>
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider text-white">AI CONTENT CREATION</h3>
-                <p class="text-xs text-muted leading-relaxed mt-0.5">Generate production-ready content across films, TV, advertising, gaming, and digital media using advanced multimodal AI.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3 group">
-              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#9ff7ff]/10 border border-[#9ff7ff]/30 flex items-center justify-center text-[10px] text-[#9ff7ff] font-bold font-mono">▲</span>
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider text-white">CREATOR ECOSYSTEM</h3>
-                <p class="text-xs text-muted leading-relaxed mt-0.5">Equip creators with AI-powered tools for ideation, production, collaboration, and publishing from a single platform.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3 group">
-              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#b8ffda]/10 border border-[#b8ffda]/30 flex items-center justify-center text-[10px] text-[#b8ffda] font-bold font-mono">▲</span>
-              <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider text-white">DISCOVERY & COMMUNITY</h3>
-                <p class="text-xs text-muted leading-relaxed mt-0.5">Connect creators and audiences through intelligent content discovery, recommendations, and a thriving creative community.</p>
-              </div>
-            </li>
-          </ul>
-
-          <p class="text-sm text-[#8c969d] font-light leading-relaxed max-w-lg">
-            From creation to distribution, Global AI Labs brings together AI models, creator tools, discovery engines, and community into one intelligent ecosystem powering the future of media.
-          </p>
-
-          <div class="flex flex-row flex-wrap gap-4 mt-2">
-            <a href="./connect.html" class="magnetic px-7 py-3 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93]">
-              Reserve Your Spot
-            </a>
+      <!-- 2D Projected Hotspots Container -->
+      <div id="hotspots-container" class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-hidden">
+        
+        <!-- Hotspot 1: Mission Control -->
+        <div id="hotspot-0" class="globe-hotspot text-[#00f0ff]" data-index="0">
+          <div class="hotspot-inner">
+            <div class="hotspot-ripple"></div>
+            <div class="hotspot-ripple hotspot-ripple-delay"></div>
+            <div class="hotspot-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2a10 10 0 0 0-10 10"/>
+                <path d="M12 22a10 10 0 0 0 10-10"/>
+                <path d="M2 12h3"/><path d="M19 12h3"/>
+                <path d="M12 2v3"/><path d="M12 19v3"/>
+                <path d="m4.93 4.93 2.12 2.12"/><path d="m16.95 16.95 2.12 2.12"/>
+              </svg>
+            </div>
+            <div class="hotspot-label">MISSION CONTROL</div>
           </div>
         </div>
 
-        <!-- Right Column: Central Element & Widgets -->
-        <div class="lg:col-span-7 flex justify-center items-center relative h-[550px] md:h-[650px] w-full parallax-wrap">
-
-          <!-- SVG Connections Overlay (Drawn dynamically or styled via classes) -->
-          <svg class="absolute inset-0 w-full h-full pointer-events-none z-10 hidden md:block" id="hero-svg-connections">
-            <!-- Dynamic lines will be rendered here by JS targeting the centers of widgets -->
-            <line id="line-widget-1" x1="0" y1="0" x2="0" y2="0" stroke="rgba(255, 46, 147, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
-            <line id="line-widget-2" x1="0" y1="0" x2="0" y2="0" stroke="rgba(159, 247, 255, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
-            <line id="line-widget-3" x1="0" y1="0" x2="0" y2="0" stroke="rgba(184, 255, 218, 0.4)" stroke-width="1.5" stroke-dasharray="4 6" class="svg-connection-line" />
-          </svg>
-
-          <!-- Core Floating Organism Image -->
-          <div id="hero-main-visual" class="relative z-0 w-[280px] h-[280px] md:w-[460px] md:h-[460px] flex items-center justify-center floating-element">
-            <img src="assets/img/home-element.webp" alt="AI Core Element" class="w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(255,46,147,0.15)]">
-            <!-- Tiny pulsing light at center -->
-            <div class="absolute w-6 h-6 rounded-full bg-[#ff2e93]/50 blur-md animate-pulse"></div>
-          </div>
-
-          <!-- Glassmorphic Widget 1: Direct Reference (Top Right) -->
-          <div id="hero-widget-1" class="absolute top-[8%] right-[2%] md:right-[8%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-pink">
-            <div class="flex items-center gap-2 text-[#ff2e93] font-bold text-[10px] tracking-widest uppercase">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#ff2e93]"></span>
-              AI CREATION ENGINE
+        <!-- Hotspot 2: The Studio -->
+        <div id="hotspot-1" class="globe-hotspot text-[#a855f7]" data-index="1">
+          <div class="hotspot-inner">
+            <div class="hotspot-ripple"></div>
+            <div class="hotspot-ripple hotspot-ripple-delay"></div>
+            <div class="hotspot-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+                <circle cx="12" cy="12" r="9" stroke-dasharray="2 4"/>
+              </svg>
             </div>
-            <p class="text-[10px] text-muted leading-snug">Power multimodal generation across video, audio, images and text.</p>
+            <div class="hotspot-label">THE STUDIO</div>
           </div>
+        </div>
 
-          <!-- Glassmorphic Widget 2: Camera Tracking (Bottom Left) -->
-          <div id="hero-widget-2" class="absolute bottom-[15%] left-[2%] md:left-[8%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-cyan">
-            <div class="flex items-center gap-2 text-[#9ff7ff] font-bold text-[10px] tracking-widest uppercase">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#9ff7ff]"></span>
-              CREATOR TOOLS
+        <!-- Hotspot 3: The Vault -->
+        <div id="hotspot-2" class="globe-hotspot text-[#f59e0b]" data-index="2">
+          <div class="hotspot-inner">
+            <div class="hotspot-ripple"></div>
+            <div class="hotspot-ripple hotspot-ripple-delay"></div>
+            <div class="hotspot-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <rect x="9" y="11" width="6" height="5" rx="1"/>
+                <path d="M10 11V9a2 2 0 0 1 4 0v2"/>
+              </svg>
             </div>
-            <p class="text-[10px] text-muted leading-snug">Professional AI workspace for ideation, editing, collaboration and publishing.</p>
+            <div class="hotspot-label">THE VAULT</div>
           </div>
+        </div>
 
-          <!-- Glassmorphic Widget 3: Style Coherence (Bottom Right) -->
-          <div id="hero-widget-3" class="absolute bottom-[8%] right-[2%] md:right-[12%] premium-glass rounded-xl p-4 max-w-[200px] z-20 flex flex-col gap-1 text-left border-glow-mint">
-            <div class="flex items-center gap-2 text-[#b8ffda] font-bold text-[10px] tracking-widest uppercase">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda]"></span>
-              DISCOVERY NETWORK
+        <!-- Hotspot 4: The Playground -->
+        <div id="hotspot-3" class="globe-hotspot text-[#ff2e93]" data-index="3">
+          <div class="hotspot-inner">
+            <div class="hotspot-ripple"></div>
+            <div class="hotspot-ripple hotspot-ripple-delay"></div>
+            <div class="hotspot-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/>
+                <path d="m19 19 1.5 3.5L24 24l-1.5-3.5L24 19l-3.5-1.5L19 19z"/>
+              </svg>
             </div>
-            <p class="text-[10px] text-muted leading-snug">AI-powered recommendations connecting creators with global audiences.</p>
+            <div class="hotspot-label">THE PLAYGROUND</div>
           </div>
+        </div>
+
+      </div>
+
+      <!-- Minimal Futuristic Top Bar HUD -->
+      <div class="absolute top-6 left-6 md:top-8 md:left-10 z-30 flex items-center gap-4 pointer-events-auto">
+        <div class="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00f0ff] animate-ping"></span>
+          <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white">GLOBAL AI OS // 2.06</span>
         </div>
       </div>
 
-      <!-- Hero Bottom Bar -->
-      <div class="max-w-7xl mx-auto w-full border-t border-white/10 pt-6 mt-8 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-
-        <!-- Left: Audio Sync controller -->
-        <div class="flex items-center gap-3">
-          <button id="hero-audio-sync" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#ff2e93] hover:text-white transition-all text-white focus:outline-none" aria-label="Toggle Audio Beat Sync demo">
-            <span class="audio-icon text-xs">🔊</span>
-          </button>
-          <div class="text-left">
-            <span class="block text-[10px] font-bold uppercase tracking-wider text-white">Beat Sync Audio Enabled</span>
-            <span class="block text-[9px] text-[#8c969d]">Click to preview model rhythm alignment</span>
-          </div>
+      <!-- Minimal Futuristic HUD Quick Nav / Status (Bottom Left) -->
+      <div class="hidden md:flex absolute bottom-8 left-10 z-30 flex-col gap-2 pointer-events-auto text-left">
+        <div class="text-[9px] font-mono text-muted uppercase tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#b8ffda]"></span>
+          <span>INTERACTIVE NAVIGATION SYSTEM</span>
         </div>
+        <p class="text-[11px] text-white/70 font-mono max-w-xs">
+          Click any hotspot or rotate the globe to explore ecosystem products.
+        </p>
+      </div>
 
-        <!-- Center: Mini thumbnail & Engine status -->
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-8 rounded overflow-hidden bg-white/10 border border-white/20 hero-mini-thumb relative cursor-pointer">
-            <div class="absolute inset-0 bg-gradient-to-tr from-[#ff2e93]/40 to-transparent"></div>
-            <div class="w-full h-full bg-cover bg-center" style="background-image: url('assets/img/home-element.webp'); transform: scale(1.5);"></div>
-          </div>
-          <div class="text-left">
-            <span class="px-2 py-0.5 text-[8px] font-bold uppercase bg-[#b8ffda] text-[#0c1016] rounded-full">Active</span>
-            <h4 class="text-[10px] font-bold uppercase tracking-wider text-white mt-1">Render Pipeline v2.05</h4>
-          </div>
-        </div>
-
-        <!-- Right: Brief specs -->
-        <div class="text-center md:text-right max-w-xs">
-          <p class="text-[10px] text-muted leading-relaxed">
-            Multi-modal control translates music tracks, layout guidelines, and text prompts into 4K MP4 outputs without watermark delays.
-          </p>
+      <!-- Bottom Center Animated Scroll Indicator -->
+      <div id="hero-scroll-indicator" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-auto cursor-pointer group">
+        <span class="text-[9px] font-mono tracking-[0.25em] uppercase text-white/60 group-hover:text-white transition-colors">EXPLORE ECOSYSTEM</span>
+        <div class="w-5 h-8 rounded-full border border-white/30 group-hover:border-[#ff2e93] flex justify-center pt-1.5 transition-colors">
+          <span class="w-1 h-2 rounded-full bg-[#ff2e93] animate-bounce"></span>
         </div>
       </div>
+
+      <!-- Glassmorphic Floating Detail Panel -->
+      <div id="globe-detail-panel" class="absolute z-40 opacity-0 pointer-events-none transform scale-95 transition-all duration-500 max-w-md w-[calc(100vw-2rem)] md:w-[420px] p-6 text-left">
+        <!-- Close Button -->
+        <button id="panel-close-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all focus:outline-none" aria-label="Close Panel">
+          ✕
+        </button>
+
+        <!-- Category Badge -->
+        <div class="flex items-center gap-2 mb-2">
+          <span id="panel-category-badge" class="px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-wider rounded-full bg-white/10 text-cyan-400">
+            SaaS Workflow Platform
+          </span>
+        </div>
+
+        <!-- Product Name -->
+        <h2 id="panel-product-title" class="text-2xl md:text-3xl font-black uppercase text-white font-outfit tracking-tight mb-2">
+          Mission Control
+        </h2>
+
+        <!-- Product Description -->
+        <p id="panel-product-desc" class="text-xs text-muted leading-relaxed mb-4">
+          The workflow operating system for modern content teams. Manage projects, approvals, automation and delivery from one intelligent platform.
+        </p>
+
+        <!-- Dynamic Animated Feature Graphic / Visual Element -->
+        <div id="panel-visual-box" class="w-full h-24 rounded-xl bg-black/40 border border-white/10 mb-4 p-3 relative overflow-hidden flex items-center justify-center">
+          <div id="panel-graphic-content" class="w-full h-full flex items-center justify-center">
+            <!-- Animated HUD Graphics inserted dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="mb-6">
+          <div class="text-[9px] font-mono uppercase tracking-wider text-muted mb-2">Key Ecosystem Features</div>
+          <div id="panel-features-container" class="flex flex-wrap gap-2">
+            <span class="feature-chip"><span class="text-cyan-400 font-bold">✓</span> Project Management</span>
+            <span class="feature-chip"><span class="text-cyan-400 font-bold">✓</span> AI Automation</span>
+            <span class="feature-chip"><span class="text-cyan-400 font-bold">✓</span> Team Collaboration</span>
+          </div>
+        </div>
+
+        <!-- CTA Action Button -->
+        <a id="panel-cta-btn" href="./connect.html" class="w-full py-3 px-6 rounded-xl bg-[#00f0ff] text-[#040404] font-black text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-white transition-all shadow-lg hover:shadow-cyan-500/20">
+          <span>Explore Platform</span>
+          <span>→</span>
+        </a>
+      </div>
+
     </section>
 
     <!-- 2. Interactive AI Studio Experience -->
@@ -1478,6 +1674,716 @@ AI POWERED CONTENT ECOSYSTEM          </h1>
     gsap.registerPlugin(ScrollTrigger);
   </script>
 
-  <script type="module" src="./assets/js/main.js"></script>
+  <!-- 3D Cyber Globe AI OS Engine -->
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // --- PRODUCTS DATA CONFIG ---
+    const PRODUCTS = [
+      {
+        id: "mission-control",
+        name: "Mission Control",
+        category: "SaaS Workflow Platform",
+        color: "#00f0ff",
+        colorName: "cyan",
+        lat: 37.7749,
+        lon: -122.4194,
+        description: "The workflow operating system for modern content teams. Manage projects, approvals, automation and delivery from one intelligent platform.",
+        features: ["Project Management", "AI Automation", "Team Collaboration"],
+        cta: "Explore Platform",
+        link: "./connect.html"
+      },
+      {
+        id: "the-studio",
+        name: "The Studio",
+        category: "AI Content Studio",
+        color: "#a855f7",
+        colorName: "purple",
+        lat: 51.5074,
+        lon: -0.1278,
+        description: "Our done-for-you AI production house helping studios and brands create cinematic content at scale.",
+        features: ["AI Editing", "Production", "Post Production"],
+        cta: "View Studio",
+        link: "./connect.html"
+      },
+      {
+        id: "the-vault",
+        name: "The Vault",
+        category: "Proprietary IP Engine",
+        color: "#f59e0b",
+        colorName: "amber",
+        lat: 35.6762,
+        lon: 139.6503,
+        description: "Capture real people. Build AI-native intellectual property. License and syndicate globally.",
+        features: ["Digital Humans", "Licensing", "Ownership"],
+        cta: "Discover Vault",
+        link: "./connect.html"
+      },
+      {
+        id: "the-playground",
+        name: "The Playground",
+        category: "Creator Platform",
+        color: "#ff2e93",
+        colorName: "pink",
+        lat: -33.8688,
+        lon: 151.2093,
+        description: "Create. Publish. Build your audience. Earn from your content.",
+        features: ["Creator Tools", "Community", "Monetization"],
+        cta: "Join Playground",
+        link: "./connect.html"
+      }
+    ];
+
+    // --- GLOBE LAT/LON TO 3D MATH ---
+    function latLongToVector3(lat, lon, radius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return new THREE.Vector3(x, y, z);
+    }
+
+    // --- DOM ELEMENTS ---
+    const container = document.getElementById('globe-canvas-container');
+    const detailPanel = document.getElementById('globe-detail-panel');
+    const panelCategoryBadge = document.getElementById('panel-category-badge');
+    const panelTitle = document.getElementById('panel-product-title');
+    const panelDesc = document.getElementById('panel-product-desc');
+    const panelFeatures = document.getElementById('panel-features-container');
+    const panelCta = document.getElementById('panel-cta-btn');
+    const panelGraphic = document.getElementById('panel-graphic-content');
+    const closeBtn = document.getElementById('panel-close-btn');
+    const scrollDownBtn = document.getElementById('hero-scroll-indicator');
+
+    // --- THREE.JS STATE VARIABLES ---
+    let scene, camera, renderer, controls;
+    let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup;
+    let hotspotAnchors = [];
+    let activeProductIndex = null;
+    let isZoomed = false;
+    const defaultCamPos = new THREE.Vector3(0, 110, 720);
+    const globeRadius = 290;
+
+    // --- INITIALIZATION ---
+    function initThreeEngine() {
+      if (!container) return;
+
+      // 1. Scene
+      scene = new THREE.Scene();
+
+      // 2. Camera
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3500);
+      camera.position.copy(defaultCamPos);
+
+      // 3. Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      container.appendChild(renderer.domElement);
+
+      // 4. OrbitControls
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.rotateSpeed = 0.8;
+      controls.enableZoom = true;
+      controls.minDistance = 240;
+      controls.maxDistance = 1100;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.55;
+
+      // 5. Parent Globe Group
+      globeGroup = new THREE.Group();
+      scene.add(globeGroup);
+
+      // 6. Build 3D Components
+      createMassiveParticleGlobe();
+      createGlobeAtmosphere();
+      createInternalCore();
+      createHotspotAnchors();
+      createEnergyStreamSystem();
+
+      // 7. Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0x00f0ff, 2.5);
+      dirLight1.position.set(500, 300, 500);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0xff2e93, 2.0);
+      dirLight2.position.set(-500, -200, -500);
+      scene.add(dirLight2);
+
+      // 8. Event Listeners
+      window.addEventListener('resize', onResize);
+      setupHotspotUIEvents();
+
+      // Mouse Parallax Effect
+      window.addEventListener('mousemove', (e) => {
+        if (isZoomed) return;
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
+        gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.5, ease: "power2.out" });
+      });
+
+      // 9. Start Animation Loop
+      animate();
+    }
+
+    // --- 35,000 PARTICLE GLOBE WITH EARTH LANDMASS DENSITY ---
+    function createMassiveParticleGlobe() {
+      const particleCount = 35000;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      const sizes = new Float32Array(particleCount);
+
+      // Major Earth Geographic Landmass Lat/Lon Ranges for high density point clusters
+      const landmasses = [
+        { name: 'North America', minLat: 15, maxLat: 70, minLon: -160, maxLon: -50 },
+        { name: 'South America', minLat: -55, maxLat: 12, minLon: -80, maxLon: -35 },
+        { name: 'Europe', minLat: 35, maxLat: 70, minLon: -10, maxLon: 40 },
+        { name: 'Africa', minLat: -35, maxLat: 37, minLon: -18, maxLon: 50 },
+        { name: 'Asia', minLat: 5, maxLat: 75, minLon: 40, maxLon: 145 },
+        { name: 'Australia', minLat: -42, maxLat: -10, minLon: 110, maxLon: 155 }
+      ];
+
+      const cyanColor = new THREE.Color('#00f0ff');
+      const purpleColor = new THREE.Color('#a855f7');
+      const blueColor = new THREE.Color('#1d4ed8');
+      const iceColor = new THREE.Color('#ffffff');
+
+      let index = 0;
+      for (let i = 0; i < particleCount; i++) {
+        let lat, lon;
+        const isLand = i < 24000; // 24k points cluster on continents
+
+        if (isLand) {
+          const land = landmasses[Math.floor(Math.random() * landmasses.length)];
+          lat = land.minLat + Math.random() * (land.maxLat - land.minLat);
+          lon = land.minLon + Math.random() * (land.maxLon - land.minLon);
+        } else {
+          // 11k points distributed evenly across entire sphere for volumetric background
+          lat = (Math.random() - 0.5) * 180;
+          lon = (Math.random() - 0.5) * 360;
+        }
+
+        // Slight volumetric depth variance around radius 290
+        const radiusNoise = globeRadius + (Math.random() - 0.5) * (isLand ? 6 : 18);
+        const pos = latLongToVector3(lat, lon, radiusNoise);
+
+        positions[index] = pos.x;
+        positions[index + 1] = pos.y;
+        positions[index + 2] = pos.z;
+
+        // Color palette assignment
+        let pColor;
+        const randCol = Math.random();
+        if (randCol > 0.65) pColor = cyanColor;
+        else if (randCol > 0.35) pColor = purpleColor;
+        else if (randCol > 0.15) pColor = blueColor;
+        else pColor = iceColor;
+
+        colors[index] = pColor.r;
+        colors[index + 1] = pColor.g;
+        colors[index + 2] = pColor.b;
+
+        sizes[i] = isLand ? (Math.random() * 2.2 + 1.2) : (Math.random() * 1.5 + 0.8);
+
+        index += 3;
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 2.2,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      particleSphere = new THREE.Points(geometry, particleMaterial);
+      globeGroup.add(particleSphere);
+    }
+
+    // --- GLOBE ATMOSPHERE GLOW & CYBER RINGS ---
+    function createGlobeAtmosphere() {
+      // Outer Glowing Halo Sphere
+      const atmosphereGeo = new THREE.SphereGeometry(globeRadius + 18, 64, 64);
+      const atmosphereMat = new THREE.MeshBasicMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.08,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending
+      });
+      atmosphereMesh = new THREE.Mesh(atmosphereGeo, atmosphereMat);
+      globeGroup.add(atmosphereMesh);
+
+      // Equator and Latitude Ring Grids
+      const ringMat = new THREE.LineBasicMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.25,
+        blending: THREE.AdditiveBlending
+      });
+
+      const ringGeo1 = new THREE.BufferGeometry();
+      const ringPoints1 = [];
+      for (let i = 0; i <= 128; i++) {
+        const theta = (i / 128) * Math.PI * 2;
+        ringPoints1.push(new THREE.Vector3(Math.cos(theta) * (globeRadius + 4), 0, Math.sin(theta) * (globeRadius + 4)));
+      }
+      ringGeo1.setFromPoints(ringPoints1);
+      const ringMesh1 = new THREE.Line(ringGeo1, ringMat);
+      globeGroup.add(ringMesh1);
+    }
+
+    // --- INTERNAL PULSING CORE ---
+    function createInternalCore() {
+      const coreGeo = new THREE.IcosahedronGeometry(95, 2);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: 0x7000ff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending
+      });
+      coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      globeGroup.add(coreMesh);
+    }
+
+    // --- 4 HOTSPOT ANCHORS IN 3D SPACE ---
+    function createHotspotAnchors() {
+      PRODUCTS.forEach((prod, idx) => {
+        const anchorGroup = new THREE.Group();
+        const pos = latLongToVector3(prod.lat, prod.lon, globeRadius + 6);
+        anchorGroup.position.copy(pos);
+
+        // 3D Ring Marker Mesh
+        const ringGeo = new THREE.RingGeometry(4, 7, 32);
+        const ringMat = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(prod.color),
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.9,
+          blending: THREE.AdditiveBlending
+        });
+        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+        ringMesh.lookAt(pos.clone().multiplyScalar(2));
+        anchorGroup.add(ringMesh);
+
+        // Micro Orbit Particles around Hotspot Anchor
+        const orbitGeo = new THREE.BufferGeometry();
+        const orbitCount = 24;
+        const orbitPositions = new Float32Array(orbitCount * 3);
+        for (let i = 0; i < orbitCount; i++) {
+          const angle = (i / orbitCount) * Math.PI * 2;
+          const r = 12 + Math.random() * 4;
+          orbitPositions[i * 3] = Math.cos(angle) * r;
+          orbitPositions[i * 3 + 1] = Math.sin(angle) * r;
+          orbitPositions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+        }
+        orbitGeo.setAttribute('position', new THREE.BufferAttribute(orbitPositions, 3));
+        const orbitMat = new THREE.PointsMaterial({
+          color: new THREE.Color(prod.color),
+          size: 2.5,
+          transparent: true,
+          opacity: 0.8,
+          blending: THREE.AdditiveBlending
+        });
+        const orbitPoints = new THREE.Points(orbitGeo, orbitMat);
+        anchorGroup.add(orbitPoints);
+
+        globeGroup.add(anchorGroup);
+        hotspotAnchors.push(anchorGroup);
+      });
+    }
+
+    // --- CORE TO HOTSPOT ENERGY STREAM BURST ---
+    function createEnergyStreamSystem() {
+      energyStreamGroup = new THREE.Group();
+      scene.add(energyStreamGroup);
+    }
+
+    function triggerEnergyPulse(targetPos, colorHex) {
+      // Clear previous energy stream particles
+      while (energyStreamGroup.children.length > 0) {
+        energyStreamGroup.remove(energyStreamGroup.children[0]);
+      }
+
+      const streamCount = 120;
+      const streamGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(streamCount * 3);
+      const colors = new Float32Array(streamCount * 3);
+      const pulseColor = new THREE.Color(colorHex);
+
+      for (let i = 0; i < streamCount; i++) {
+        // Start near core (0,0,0)
+        positions[i * 3] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+
+        colors[i * 3] = pulseColor.r;
+        colors[i * 3 + 1] = pulseColor.g;
+        colors[i * 3 + 2] = pulseColor.b;
+      }
+
+      streamGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      streamGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const streamMat = new THREE.PointsMaterial({
+        size: 4.5,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.95,
+        blending: THREE.AdditiveBlending
+      });
+
+      const streamParticles = new THREE.Points(streamGeo, streamMat);
+      energyStreamGroup.add(streamParticles);
+
+      // Animate particles traveling from core to target position
+      const posAttr = streamGeo.attributes.position;
+      for (let i = 0; i < streamCount; i++) {
+        const delay = Math.random() * 0.4;
+        gsap.to(posAttr.array, {
+          [i * 3]: targetPos.x + (Math.random() - 0.5) * 15,
+          [i * 3 + 1]: targetPos.y + (Math.random() - 0.5) * 15,
+          [i * 3 + 2]: targetPos.z + (Math.random() - 0.5) * 15,
+          duration: 1.0,
+          delay: delay,
+          ease: "power2.out",
+          onUpdate: () => { posAttr.needsUpdate = true; }
+        });
+      }
+    }
+
+    // --- 2D PROJECTED HOTSPOT POSITION SYNC ---
+    function update2DProjectedHotspots() {
+      const tempVec = new THREE.Vector3();
+      const cameraDir = new THREE.Vector3();
+      camera.getWorldDirection(cameraDir);
+
+      PRODUCTS.forEach((prod, idx) => {
+        const anchor = hotspotAnchors[idx];
+        const elem = document.getElementById(`hotspot-${idx}`);
+        if (!anchor || !elem) return;
+
+        anchor.getWorldPosition(tempVec);
+
+        // Vector from camera to anchor point
+        const camToAnchor = tempVec.clone().sub(camera.position).normalize();
+        const dot = camToAnchor.dot(cameraDir);
+
+        // Project 3D vector to screen normalized device coordinates [-1, 1]
+        const screenVector = tempVec.clone().project(camera);
+
+        const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
+        const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
+
+        // Check if hotspot is on the visible front hemisphere of the globe
+        const isVisibleOnFront = dot > 0.15;
+
+        if (isVisibleOnFront) {
+          elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+          elem.style.opacity = isZoomed && activeProductIndex !== idx ? '0.25' : '1';
+          elem.style.pointerEvents = 'auto';
+        } else {
+          elem.style.opacity = '0';
+          elem.style.pointerEvents = 'none';
+        }
+      });
+    }
+
+    // --- INTERACTIVE HOTSPOT CLICK & FLY-TO ANIMATION ---
+    function setupHotspotUIEvents() {
+      PRODUCTS.forEach((prod, idx) => {
+        const elem = document.getElementById(`hotspot-${idx}`);
+        if (elem) {
+          elem.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectHotspot(idx);
+          });
+        }
+      });
+
+      // Panel Close Button
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          resetCamera();
+        });
+      }
+
+      // Scroll Down Button
+      if (scrollDownBtn) {
+        scrollDownBtn.addEventListener('click', () => {
+          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        });
+      }
+
+      // Click Outside to Reset
+      window.addEventListener('click', (e) => {
+        if (isZoomed && !detailPanel.contains(e.target) && !e.target.closest('.globe-hotspot')) {
+          resetCamera();
+        }
+      });
+
+      // Keyboard ESC key to Reset
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isZoomed) {
+          resetCamera();
+        }
+      });
+    }
+
+    function selectHotspot(index) {
+      const prod = PRODUCTS[index];
+      const anchor = hotspotAnchors[index];
+      if (!prod || !anchor) return;
+
+      activeProductIndex = index;
+      isZoomed = true;
+
+      // 1. Globe auto-rotation slows down
+      controls.autoRotate = false;
+
+      // 2. Get World position of target 3D hotspot
+      const targetVec = anchor.getWorldPosition(new THREE.Vector3());
+
+      // 3. Compute Camera Destination: 5x zoom closer to hotspot
+      const camDestination = targetVec.clone().multiplyScalar(1.42);
+
+      // 4. Trigger Energy Particle Pulse
+      triggerEnergyPulse(targetVec, prod.color);
+
+      // 5. GSAP Camera Position Fly-To Animation (1200ms)
+      gsap.to(camera.position, {
+        x: camDestination.x,
+        y: camDestination.y + (window.innerWidth < 768 ? 0 : 15),
+        z: camDestination.z,
+        duration: 1.2,
+        ease: "power3.inOut"
+      });
+
+      // 6. GSAP Controls Target Interpolation
+      gsap.to(controls.target, {
+        x: targetVec.x * 0.65,
+        y: targetVec.y * 0.65,
+        z: targetVec.z * 0.65,
+        duration: 1.2,
+        ease: "power3.inOut",
+        onUpdate: () => controls.update()
+      });
+
+      // 7. Show Attached Detail Panel
+      showDetailPanel(prod, targetVec);
+    }
+
+    function showDetailPanel(prod, targetVec) {
+      // Update Panel Content
+      panelCategoryBadge.textContent = prod.category;
+      panelCategoryBadge.style.color = prod.color;
+      panelCategoryBadge.style.borderColor = prod.color;
+
+      panelTitle.textContent = prod.name;
+      panelDesc.textContent = prod.description;
+
+      // Features Chips
+      panelFeatures.innerHTML = prod.features.map(f => `
+        <span class="feature-chip">
+          <span style="color: ${prod.color}; font-weight: bold;">✓</span> ${f}
+        </span>
+      `).join('');
+
+      // CTA Button
+      panelCta.textContent = prod.cta + " →";
+      panelCta.style.backgroundColor = prod.color;
+      panelCta.style.color = prod.color === "#00f0ff" || prod.color === "#f59e0b" ? "#040404" : "#ffffff";
+      panelCta.href = prod.link;
+
+      // Dynamic Graphic Element inside panel
+      panelGraphic.innerHTML = `
+        <div class="flex items-center gap-3 font-mono text-xs" style="color: ${prod.color}">
+          <span class="w-3 h-3 rounded-full animate-ping" style="background-color: ${prod.color}"></span>
+          <span>SYSTEM ACTIVE // ${prod.name.toUpperCase()} ENGINE</span>
+        </div>
+      `;
+
+      // Set Panel Color Accent Class
+      detailPanel.className = `absolute z-40 p-6 text-left transform transition-all duration-500 max-w-md w-[calc(100vw-2rem)] md:w-[420px] panel-${prod.colorName}`;
+
+      // Positioning Panel (Responsive Attached Position)
+      if (window.innerWidth < 768) {
+        // Mobile: Fixed Bottom Sheet
+        detailPanel.style.left = '50%';
+        detailPanel.style.bottom = '1rem';
+        detailPanel.style.top = 'auto';
+        detailPanel.style.transform = 'translate(-50%, 0) scale(1)';
+      } else {
+        // Desktop: Positioned to right or left of center hotspot
+        detailPanel.style.right = '6%';
+        detailPanel.style.top = '50%';
+        detailPanel.style.bottom = 'auto';
+        detailPanel.style.transform = 'translate(0, -50%) scale(1)';
+      }
+
+      detailPanel.style.opacity = '1';
+      detailPanel.style.pointerEvents = 'auto';
+    }
+
+    function resetCamera() {
+      if (!isZoomed) return;
+      isZoomed = false;
+      activeProductIndex = null;
+
+      // Hide Detail Panel
+      detailPanel.style.opacity = '0';
+      detailPanel.style.pointerEvents = 'none';
+      detailPanel.style.transform = 'translate(0, -50%) scale(0.95)';
+
+      // Camera Fly-Back to Default View
+      gsap.to(camera.position, {
+        x: defaultCamPos.x,
+        y: defaultCamPos.y,
+        z: defaultCamPos.z,
+        duration: 1.2,
+        ease: "power3.inOut"
+      });
+
+      gsap.to(controls.target, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1.2,
+        ease: "power3.inOut",
+        onComplete: () => {
+          controls.autoRotate = true;
+        }
+      });
+    }
+
+    // --- ANIMATION LOOP ---
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Slow Elegant Globe Rotation
+      if (globeGroup && controls.autoRotate) {
+        globeGroup.rotation.y += 0.0008;
+      }
+
+      // Rotate internal core opposite direction
+      if (coreMesh) {
+        coreMesh.rotation.y -= 0.002;
+        coreMesh.rotation.x += 0.001;
+      }
+
+      // Rotate hotspot micro orbit particles
+      hotspotAnchors.forEach(anchor => {
+        if (anchor.children[1]) {
+          anchor.children[1].rotation.z += 0.015;
+        }
+      });
+
+      controls.update();
+      update2DProjectedHotspots();
+      renderer.render(scene, camera);
+    }
+
+    // --- RESIZE HANDLER ---
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // --- BACKGROUND GRID & FOG CANVAS ANIMATIONS ---
+    function initBackgroundCanvases() {
+      const gridCanvas = document.getElementById('hero-grid-canvas');
+      const fogCanvas = document.getElementById('hero-fog-canvas');
+      if (!gridCanvas || !fogCanvas) return;
+
+      const gridCtx = gridCanvas.getContext('2d');
+      const fogCtx = fogCanvas.getContext('2d');
+
+      function resizeCanvases() {
+        gridCanvas.width = window.innerWidth;
+        gridCanvas.height = window.innerHeight;
+        fogCanvas.width = window.innerWidth;
+        fogCanvas.height = window.innerHeight;
+      }
+      resizeCanvases();
+      window.addEventListener('resize', resizeCanvases);
+
+      let gridOffset = 0;
+      let fogTime = 0;
+
+      function renderBackgrounds() {
+        requestAnimationFrame(renderBackgrounds);
+
+        // 1. Perspective Grid Line Animation
+        gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+        gridCtx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+        gridCtx.lineWidth = 1;
+
+        const step = 60;
+        gridOffset = (gridOffset + 0.3) % step;
+
+        for (let x = 0; x < gridCanvas.width; x += step) {
+          gridCtx.beginPath();
+          gridCtx.moveTo(x, 0);
+          gridCtx.lineTo(x, gridCanvas.height);
+          gridCtx.stroke();
+        }
+        for (let y = gridOffset; y < gridCanvas.height; y += step) {
+          gridCtx.beginPath();
+          gridCtx.moveTo(0, y);
+          gridCtx.lineTo(gridCanvas.width, y);
+          gridCtx.stroke();
+        }
+
+        // 2. Soft Moving Fog Ambient Circles
+        fogCtx.clearRect(0, 0, fogCanvas.width, fogCanvas.height);
+        fogTime += 0.005;
+
+        const fog1X = fogCanvas.width * 0.3 + Math.sin(fogTime) * 80;
+        const fog1Y = fogCanvas.height * 0.4 + Math.cos(fogTime * 0.7) * 60;
+        const grad1 = fogCtx.createRadialGradient(fog1X, fog1Y, 50, fog1X, fog1Y, 450);
+        grad1.addColorStop(0, 'rgba(0, 240, 255, 0.05)');
+        grad1.addColorStop(1, 'transparent');
+        fogCtx.fillStyle = grad1;
+        fogCtx.fillRect(0, 0, fogCanvas.width, fogCanvas.height);
+
+        const fog2X = fogCanvas.width * 0.7 + Math.cos(fogTime * 0.8) * 90;
+        const fog2Y = fogCanvas.height * 0.6 + Math.sin(fogTime * 0.9) * 70;
+        const grad2 = fogCtx.createRadialGradient(fog2X, fog2Y, 50, fog2X, fog2Y, 500);
+        grad2.addColorStop(0, 'rgba(168, 85, 247, 0.05)');
+        grad2.addColorStop(1, 'transparent');
+        fogCtx.fillStyle = grad2;
+        fogCtx.fillRect(0, 0, fogCanvas.width, fogCanvas.height);
+      }
+
+      renderBackgrounds();
+    }
+
+    // --- DOM READY INIT ---
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initBackgroundCanvases();
+        initThreeEngine();
+      });
+    } else {
+      initBackgroundCanvases();
+      initThreeEngine();
+    }
+  </script>
 </body>
 </html>
