@@ -452,11 +452,46 @@ html.lenis, html.lenis body {
   }
 }
 
-/* Default logo style: invert white text to black, keep pink 'ai' brand color pink using invert + hue-rotate */
+/* Default logo style */
 .header-logo {
-  filter: invert(1) hue-rotate(180deg);
+  filter: none !important;
   mix-blend-mode: normal;
   transition: filter 0.3s ease;
+}
+
+/* Solid Black Header Navbar & Overlay */
+#site-header, nav#menu-overlay {
+  background-color: #000000 !important;
+}
+
+#site-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#site-header .header-logo {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+#site-header .header-btn {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #f0f6f8 !important;
+}
+
+#site-header .header-btn:hover {
+  background-color: #f0f6f8 !important;
+  color: var(--color-ink) !important;
+  border-color: #f0f6f8 !important;
+}
+
+#site-header .header-menu-btn {
+  background-color: #f0f6f8 !important;
+  color: var(--color-ink) !important;
+}
+
+#site-header .header-menu-btn:hover {
+  background-color: #ff2e93 !important;
+  color: #ffffff !important;
 }
 
 /* When menu overlay is open, force fixed header logo and buttons to be visible on dark background */
