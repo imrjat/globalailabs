@@ -468,6 +468,12 @@ html.lenis, html.lenis body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Consistent Dark Footer Background across all pages (same as index.html) */
+footer {
+  background-color: #06080c !important;
+  border-top-color: rgba(255, 255, 255, 0.05) !important;
+}
+
 #site-header .header-logo {
   filter: none !important;
   mix-blend-mode: normal !important;

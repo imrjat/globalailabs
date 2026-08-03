@@ -22,102 +22,47 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-ice text-ink antialiased selection:bg-signal selection:text-ink">
+<body class="bg-[#06080c] text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
+
+  <!-- Dynamic Header & Menu Mount -->
+  <div id="site-header-container"></div>
 
   <!-- Noise Background -->
   <div class="noise-overlay"></div>
 
   <!-- Grid Overlay lines (Desktop only) -->
   <div class="grid-overlay hidden md:grid">
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
+    <div class="grid-line" style="border-color: rgba(255, 255, 255, 0.03);"></div>
   </div>
 
   <!-- Page Transition Screen Sweep Overlay -->
   <div class="transition-overlay" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); pointer-events: auto;">
-    <div class="transition-text">H2O</div>
+    <div class="transition-text font-outfit">H2O</div>
   </div>
 
-  <!-- Fixed Navigation Header -->
-  <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center bg-black">
-    <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-signal focus:ring-offset-2 flex items-center">
-      <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-5 md:h-6 w-auto header-logo">
-    </a>
-    <div class="flex items-center gap-4">
-      <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-ink text-ink text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ink hover:text-ice transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-btn">
-        get in touch
-      </a>
-      <button id="menu-trigger" aria-expanded="false" aria-controls="menu-overlay" class="magnetic px-6 py-2 bg-ink text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-signal hover:text-ink transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal header-menu-btn">
-        <span class="menu-text">menu</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Fullscreen Navigation Menu -->
-  <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-ink text-ice z-[998] flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);">
-    <div class="flex justify-between items-start w-full mt-12 md:mt-6">
-      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">navigation</div>
-      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">global ai labs</div>
-    </div>
-    
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
-      <div class="lg:col-span-8 flex flex-col gap-4">
-        <a href="./index.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
-          home
-        </a>
-        <a href="./team.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
-          founders
-        </a>
-        <a href="./connect.html" class="menu-main-link group block text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] uppercase hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal w-fit">
-          contact us
-        </a>
-      </div>
-      
-      <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
-        <div>
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3">capabilities</div>
-          <ul class="flex flex-col gap-2">
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">STRATEGY</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">PRODUCTION</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CONTENT</li>
-            <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-signal transition-colors">CREATORS</li>
-          </ul>
-        </div>
-        <div>
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2">say hello</div>
-          <a href="mailto:hello@globalailabs.ai" class="menu-secondary-item text-md md:text-lg hover:underline text-signal">hello@globalailabs.ai</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-between items-end w-full">
-      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">© 2026</div>
-      <div class="text-[11px] tracking-[0.08em] uppercase text-muted">mumbai, india</div>
-    </div>
-  </nav>
-
-  <main class="pt-32 pb-24 px-5 md:px-8 lg:px-12">
+  <main class="pt-32 pb-24 px-5 md:px-8 lg:px-12 relative z-10">
     <!-- Capabilities Hero -->
-    <section class="max-w-7xl mx-auto flex flex-col gap-8 border-b border-line-light pb-12 mb-16">
-      <span class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ CAPABILITY 03 / H2O ]</span>
+    <section class="max-w-7xl mx-auto flex flex-col gap-8 border-b border-white/10 pb-12 mb-16">
+      <span class="text-[11px] font-black tracking-[0.08em] uppercase text-[#00f0ff] font-mono">[ CAPABILITY 03 / H2O ]</span>
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
         <div class="lg:col-span-7">
-          <h1 class="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-[-0.05em] uppercase leading-[0.85] text-ink">
+          <h1 class="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-[-0.05em] uppercase leading-[0.85] text-white font-outfit">
             A fluid stream of<br>daily content.
           </h1>
         </div>
         <div class="lg:col-span-5">
-          <p class="text-lg md:text-xl text-muted font-light leading-relaxed">
+          <p class="text-lg md:text-xl text-white/60 font-light leading-relaxed">
             Continuous, fluid digital storytelling. We design daily social templates, write engaging copy, build interactive formats, and keep your feed fresh and alive 24/7.
           </p>
         </div>
@@ -126,105 +71,58 @@
 
     <!-- Capabilities Details -->
     <section class="max-w-5xl mx-auto mb-28 grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-black uppercase tracking-tight text-ink">Daily Social Templates</h2>
-        <p class="text-md text-muted font-light leading-relaxed">
+      <div class="flex flex-col gap-6 p-8 border border-white/10 rounded-[24px] bg-[#0c1016]/80 backdrop-blur-xl shadow-xl">
+        <h2 class="text-3xl font-black uppercase tracking-tight text-white font-outfit">Daily Social Templates</h2>
+        <p class="text-md text-white/60 font-light leading-relaxed">
           High-conversion social formats designed and packaged for quick delivery. We build custom template systems that keep your post design recognizable, clean, and engaging.
         </p>
       </div>
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-black uppercase tracking-tight text-ink">Digital Storytelling</h2>
-        <p class="text-md text-muted font-light leading-relaxed">
+      <div class="flex flex-col gap-6 p-8 border border-white/10 rounded-[24px] bg-[#0c1016]/80 backdrop-blur-xl shadow-xl">
+        <h2 class="text-3xl font-black uppercase tracking-tight text-white font-outfit">Digital Storytelling</h2>
+        <p class="text-md text-white/60 font-light leading-relaxed">
           Copywriting and storytelling optimized for digital attention spans. We write interactive stories, educational carousel slides, and community-building text formats.
         </p>
       </div>
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-black uppercase tracking-tight text-ink">Interactive Formats</h2>
-        <p class="text-md text-muted font-light leading-relaxed">
+      <div class="flex flex-col gap-6 p-8 border border-white/10 rounded-[24px] bg-[#0c1016]/80 backdrop-blur-xl shadow-xl">
+        <h2 class="text-3xl font-black uppercase tracking-tight text-white font-outfit">Interactive Formats</h2>
+        <p class="text-md text-white/60 font-light leading-relaxed">
           Quizzes, polls, custom web widgets, and augmented reality (AR) filters. We create interactive visual formats that turn passive viewers into active brand participants.
         </p>
       </div>
-      <div class="flex flex-col gap-6">
-        <h2 class="text-3xl font-black uppercase tracking-tight text-ink">Feed & Grid Management</h2>
-        <p class="text-md text-muted font-light leading-relaxed">
+      <div class="flex flex-col gap-6 p-8 border border-white/10 rounded-[24px] bg-[#0c1016]/80 backdrop-blur-xl shadow-xl">
+        <h2 class="text-3xl font-black uppercase tracking-tight text-white font-outfit">Feed & Grid Management</h2>
+        <p class="text-md text-white/60 font-light leading-relaxed">
           Curation and publication scheduling. We orchestrate the aesthetic rhythm of your social feeds, ensuring each piece of content complements the larger brand identity.
         </p>
       </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="max-w-4xl mx-auto py-20 text-center border-t border-line-light">
+    <section class="max-w-4xl mx-auto py-20 text-center border-t border-white/10">
       <div class="flex flex-col items-center gap-6">
-        <span class="text-[11px] font-black tracking-[0.08em] uppercase text-muted">[ GET IN TOUCH ]</span>
-        <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-none text-ink">
+        <span class="text-[11px] font-black tracking-[0.08em] uppercase text-[#00f0ff] font-mono">[ GET IN TOUCH ]</span>
+        <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[-0.04em] leading-none text-white font-outfit">
           Flow into your next format.
         </h2>
-        <p class="text-md text-muted max-w-lg leading-relaxed">
+        <p class="text-md text-white/60 max-w-lg leading-relaxed">
           Let's discuss how H2O can build a continuous, fresh content pipeline for your brand's digital channels.
         </p>
-        <a href="./connect.html" class="magnetic px-8 py-4 bg-ink text-ice hover:bg-signal hover:text-ink text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-signal mt-4">
+        <a href="./connect.html" class="magnetic px-8 py-4 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] mt-4 font-mono">
           start daily content
         </a>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-ink text-ice py-16 px-5 md:px-8 lg:px-12 relative z-10 border-t border-line-dark">
-    <div class="max-w-7xl mx-auto flex flex-col gap-16">
-      
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-        <div class="md:col-span-5 flex flex-col gap-4">
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted">agency</div>
-          <p class="text-md text-muted max-w-xs leading-relaxed">
-            An integrated creative agency with a digital-first approach.
-          </p>
-        </div>
-        <div class="md:col-span-3">
-          <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">pages</div>
-          <ul class="flex flex-col gap-2 text-sm font-bold">
-            <li><a href="./index.html" class="hover:text-signal transition-colors uppercase">Home</a></li>
-            <li><a href="./stir.html" class="hover:text-signal transition-colors uppercase">Stir</a></li>
-            <li><a href="./carbon.html" class="hover:text-signal transition-colors uppercase">Carbon</a></li>
-            <li><a href="./h2o.html" class="hover:text-signal transition-colors uppercase">H2O</a></li>
-            <li><a href="./team.html" class="hover:text-signal transition-colors uppercase">Team</a></li>
-            <li><a href="./careers.html" class="hover:text-signal transition-colors uppercase">Careers</a></li>
-            <li><a href="./connect.html" class="hover:text-signal transition-colors uppercase">Connect</a></li>
-          </ul>
-        </div>
-        <div class="md:col-span-4 flex flex-col gap-6">
-          <div>
-            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-4">business inquiries</div>
-            <a href="mailto:hello@globalailabs.ai" class="text-lg font-bold text-signal hover:underline">hello@globalailabs.ai</a>
-          </div>
-          <div>
-            <button id="go-up-btn" class="magnetic inline-flex items-center gap-2 px-6 py-2 border border-line-dark text-ice text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-ice hover:text-ink hover:border-ice transition-all duration-300">
-              go up ↑
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full border-t border-line-dark pt-12 overflow-hidden">
-        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="w-full opacity-10" style="max-height: 18vw; object-fit: contain; object-position: left;">
-      </div>
-
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-[0.08em] uppercase text-muted border-t border-line-dark pt-8">
-        <div>© 2026 Global AI Labs. All rights reserved.</div>
-        <div class="flex gap-4">
-          <a href="#" class="hover:text-ice transition-colors">Privacy Policy</a>
-          <span>/</span>
-          <a href="#" class="hover:text-ice transition-colors">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Dynamic Footer Mount -->
+  <div id="site-footer-container"></div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="./assets/js/components.js"></script>
   <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>
