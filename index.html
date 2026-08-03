@@ -1951,9 +1951,9 @@
     // --- DYNAMIC OPTIMAL CAMERA DISTANCE (BEST UI/UX PROPORTIONS) ---
     function getOptimalCameraDistance() {
       const aspect = window.innerWidth / window.innerHeight;
-      if (aspect < 0.75) return 1180; // Mobile portrait
-      if (aspect < 1.1) return 1040;  // Tablet
-      return 950;                     // Desktop (Perfect ~70-75% viewport height)
+      if (aspect < 0.75) return 1240; // Mobile portrait
+      if (aspect < 1.1) return 1100;  // Tablet
+      return 1000;                    // Desktop (Bold ~70% viewport height)
     }
 
     function getDefaultCameraPos() {
@@ -2041,7 +2041,7 @@
 
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
-    let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
+    let globeGroup, particleSphere, particleSphereBasePositions, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
@@ -2086,7 +2086,7 @@
       controls.rotateSpeed = 0.8;
       controls.enableZoom = false; // Disable wheel zoom trapping to allow natural page scrolling
       controls.minDistance = 300;
-      controls.maxDistance = 1400;
+      controls.maxDistance = 1800;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.55;
 
@@ -2096,7 +2096,7 @@
 
       // 5. Parent Globe Group (Restore saved rotation if coming back)
       globeGroup = new THREE.Group();
-      globeGroup.scale.set(0.82, 0.82, 0.82);
+      globeGroup.scale.set(0.78, 0.78, 0.78);
       globeGroup.rotation.y = (savedState && savedState.rotationY !== undefined) ? savedState.rotationY : 0.0;
       globeGroup.rotation.x = (savedState && savedState.rotationX !== undefined) ? savedState.rotationX : -0.25;
       scene.add(globeGroup);
@@ -2129,7 +2129,7 @@
         }
         controls.update();
 
-        gsap.to(globeGroup.scale, { x: 1, y: 1, z: 1, duration: 1.0, ease: "power3.out" });
+        gsap.to(globeGroup.scale, { x: 0.96, y: 0.96, z: 0.96, duration: 1.0, ease: "power3.out" });
 
         if (savedState.isZoomed && savedState.activeProductIndex !== null && savedState.activeProductIndex < PRODUCTS.length) {
           activeProductIndex = savedState.activeProductIndex;
@@ -2156,9 +2156,9 @@
         });
 
         gsap.to(globeGroup.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
+          x: 0.96,
+          y: 0.96,
+          z: 0.96,
           duration: 1.8,
           ease: "power3.out"
         });
@@ -2690,23 +2690,23 @@
         coreMesh.rotation.x += 0.0015;
       }
 
-      // Flame Mode Particle Wave Pulse Animation
-      if (particleSphere && particleSphere.geometry.attributes.position) {
+      // Flame Mode Particle Wave Pulse Animation (Calculated relative to immutable baseline)
+      if (particleSphere && particleSphereBasePositions && particleSphere.geometry.attributes.position) {
         const pos = particleSphere.geometry.attributes.position;
         const speed = flameMode ? 2.5 : 0.8;
-        const amplitude = flameMode ? 1.4 : 0.25;
+        const amplitude = flameMode ? 0.015 : 0.005;
 
         for (let i = 0; i < pos.count; i++) {
           let i3 = i * 3;
-          const dist = Math.sqrt(
-            pos.array[i3] ** 2 +
-            pos.array[i3 + 1] ** 2 +
-            pos.array[i3 + 2] ** 2
-          );
+          const baseX = particleSphereBasePositions[i3];
+          const baseY = particleSphereBasePositions[i3 + 1];
+          const baseZ = particleSphereBasePositions[i3 + 2];
+          const dist = Math.sqrt(baseX * baseX + baseY * baseY + baseZ * baseZ);
           let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
-          pos.array[i3] *= 1 + pulse * 0.0007;
-          pos.array[i3 + 1] *= 1 + pulse * 0.0007;
-          pos.array[i3 + 2] *= 1 + pulse * 0.0007;
+          const factor = 1 + pulse;
+          pos.array[i3]     = baseX * factor;
+          pos.array[i3 + 1] = baseY * factor;
+          pos.array[i3 + 2] = baseZ * factor;
         }
         pos.needsUpdate = true;
       }
@@ -2776,6 +2776,9 @@
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      // Store immutable baseline positions to prevent globe from shrinking over time
+      particleSphereBasePositions = new Float32Array(positions);
 
       const particleMaterial = new THREE.PointsMaterial({
         size: 2.2,
@@ -2947,17 +2950,33 @@
       // Animate particles traveling from core to target position
       const posAttr = streamGeo.attributes.position;
       for (let i = 0; i < streamCount; i++) {
-        const delay = Math.random() * 0.4;
+        const delay = Math.random() * 0.35;
         gsap.to(posAttr.array, {
-          [i * 3]: targetPos.x + (Math.random() - 0.5) * 15,
-          [i * 3 + 1]: targetPos.y + (Math.random() - 0.5) * 15,
-          [i * 3 + 2]: targetPos.z + (Math.random() - 0.5) * 15,
-          duration: 1.0,
+          [i * 3]: targetPos.x + (Math.random() - 0.5) * 18,
+          [i * 3 + 1]: targetPos.y + (Math.random() - 0.5) * 18,
+          [i * 3 + 2]: targetPos.z + (Math.random() - 0.5) * 18,
+          duration: 0.9,
           delay: delay,
           ease: "power2.out",
           onUpdate: () => { posAttr.needsUpdate = true; }
         });
       }
+
+      // Smooth Dissolve / Fade-Out Animation
+      gsap.to(streamMat, {
+        opacity: 0,
+        size: 0.5,
+        duration: 0.6,
+        delay: 0.85,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (streamParticles.parent) {
+            energyStreamGroup.remove(streamParticles);
+          }
+          streamGeo.dispose();
+          streamMat.dispose();
+        }
+      });
     }
 
     // --- BACKGROUND GRID & FOG CANVAS ANIMATIONS ---
