@@ -625,14 +625,6 @@
 
 
 
-      <!-- Bottom Center Animated Scroll Indicator (World-Class Magnetic Glass Pill) -->
-      <div id="hero-scroll-indicator" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 bg-black/60 backdrop-blur-xl border border-white/15 px-6 py-2.5 rounded-full pointer-events-auto cursor-pointer group hover:border-[#ff2e93] hover:bg-[#ff2e93]/10 hover:shadow-[0_0_30px_rgba(255,46,147,0.3)] transition-all duration-300">
-        <span class="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-white transition-colors">EXPLORE ECOSYSTEM</span>
-        <svg class="w-3.5 h-3.5 text-[#ff2e93] animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-        </svg>
-      </div>
-
       <!-- SVG HUD Connection Spline Line -->
       <svg id="hud-connection-svg" class="absolute inset-0 w-full h-full pointer-events-none z-35">
         <path id="hud-spline-line" d="M0,0 Q0,0 0,0" fill="none" stroke="#00f0ff" stroke-width="1.8" stroke-dasharray="4 4" style="opacity: 0; transition: opacity 0.4s ease;"/>
@@ -2915,14 +2907,30 @@
 
     // --- GLOBE ATMOSPHERE GLOW & CYBER RINGS ---
     function createGlobeAtmosphere() {
-      // Outer Glowing Halo Sphere
+      // Create Soft Pink Energy Field Radial Canvas Texture
+      const atmosphereCanvas = document.createElement('canvas');
+      atmosphereCanvas.width = 256;
+      atmosphereCanvas.height = 256;
+      const atmosphereCtx = atmosphereCanvas.getContext('2d');
+      const atmosphereGrad = atmosphereCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      atmosphereGrad.addColorStop(0.0, 'rgba(255, 0, 128, 1.0)');
+      atmosphereGrad.addColorStop(0.5, 'rgba(255, 0, 128, 0.6)');
+      atmosphereGrad.addColorStop(1.0, 'rgba(255, 0, 128, 0.2)');
+      atmosphereCtx.fillStyle = atmosphereGrad;
+      atmosphereCtx.fillRect(0, 0, 256, 256);
+
+      const atmosphereTexture = new THREE.CanvasTexture(atmosphereCanvas);
+
+      // Outer Glowing Halo Sphere (Brand Magenta/Pink Atmosphere)
       const atmosphereGeo = new THREE.SphereGeometry(globeRadius + 18, 64, 64);
       const atmosphereMat = new THREE.MeshBasicMaterial({
-        color: 0x00f0ff,
+        color: 0xff0080,
+        map: atmosphereTexture,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.10,
         side: THREE.BackSide,
-        blending: THREE.AdditiveBlending
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
       });
       atmosphereMesh = new THREE.Mesh(atmosphereGeo, atmosphereMat);
       globeGroup.add(atmosphereMesh);
