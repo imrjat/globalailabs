@@ -37,7 +37,7 @@
   <!-- 3D Globe Ecosystem Styling -->
   <style>
     #hero-os-section {
-      background-color: #040404;
+      background-color: #06080c;
       position: relative;
       width: 100vw;
       height: 100vh;
@@ -46,7 +46,7 @@
     }
 
     .vignette-overlay {
-      background: radial-gradient(circle at center, transparent 35%, rgba(4,4,4,0.7) 80%, #040404 100%);
+      background: radial-gradient(circle at center, transparent 35%, rgba(6,8,12,0.7) 80%, #06080c 100%);
     }
 
     .film-grain-overlay {
@@ -441,7 +441,7 @@
     <div class="glow-blob glow-mint w-[600px] h-[600px] bottom-[10%] left-[20%] opacity-5"></div>
 
     <!-- 1. Hero Section: Interactive 3D Cyber Globe AI OS -->
-    <section id="hero-os-section" class="relative w-full h-screen overflow-hidden bg-[#040404] select-none z-0">
+    <section id="hero-os-section" class="relative w-full h-screen overflow-hidden bg-[#06080c] select-none z-0">
       
       <!-- Background Canvas Layers -->
       <canvas id="hero-grid-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-25 z-0"></canvas>
@@ -616,14 +616,12 @@
             <div class="hotspot-label">THE PLAYGROUND HUB</div>
             <div class="hotspot-preview-tooltip text-[#ff2e93]">
               <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND HUB</div>
-              <div class="text-[8px] font-mono text-pink-300">Social AI Studio</div>
+          <div class="text-[8px] font-mono text-pink-300">Social AI Studio</div>
               <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
             </div>
           </div>
         </div>
       </div>
-
-
 
       <!-- SVG HUD Connection Spline Line -->
       <svg id="hud-connection-svg" class="absolute inset-0 w-full h-full pointer-events-none z-35">
@@ -2192,7 +2190,7 @@
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
       controls.rotateSpeed = 0.8;
-      controls.enableZoom = true;
+      controls.enableZoom = false; // Disable wheel zoom trapping to allow natural page scrolling
       controls.minDistance = 300;
       controls.maxDistance = 1400;
       controls.autoRotate = true;
@@ -2500,13 +2498,6 @@
         hudCloseBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           resetCamera();
-        });
-      }
-
-      // Scroll Down Button
-      if (scrollDownBtn) {
-        scrollDownBtn.addEventListener('click', () => {
-          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
         });
       }
 
