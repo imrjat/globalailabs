@@ -2033,6 +2033,11 @@
       return null;
     }
 
+    // --- TIMING CONFIGURATION CONSTANTS ---
+    const INACTIVITY_TIMEOUT_MS = 9000; // 9 seconds before auto-demo starts
+    const DEMO_HOTSPOT_HOLD_MS  = 3200;  // 3.2 seconds display time per hotspot
+    const DEMO_TRANSITION_MS    = 1500;  // 1.5 seconds pause between hotspots
+
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
     let globeGroup, particleSphere, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
@@ -2260,7 +2265,7 @@
           resetCamera();
         }
         clearTimeout(inactivityTimer);
-        inactivityTimer = setTimeout(startAutoDemoShowcase, 10000);
+        inactivityTimer = setTimeout(startAutoDemoShowcase, INACTIVITY_TIMEOUT_MS);
       };
 
       window.addEventListener('mousemove', resetTimer);
@@ -2268,7 +2273,7 @@
       window.addEventListener('keydown', resetTimer);
       window.addEventListener('click', resetTimer);
 
-      inactivityTimer = setTimeout(startAutoDemoShowcase, 10000);
+      inactivityTimer = setTimeout(startAutoDemoShowcase, INACTIVITY_TIMEOUT_MS);
     }
 
     function startAutoDemoShowcase() {
@@ -2286,8 +2291,8 @@
           resetCamera();
           setTimeout(() => {
             if (isAutoDemoRunning) runStep();
-          }, 1500);
-        }, 3200);
+          }, DEMO_TRANSITION_MS);
+        }, DEMO_HOTSPOT_HOLD_MS);
       };
 
       runStep();
