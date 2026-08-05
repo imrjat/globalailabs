@@ -2008,30 +2008,10 @@
     let activeCompositionIndex = 0;
     let activeComposition = null;
 
-    // --- GLOBE STATE PERSISTENCE (PERSISTS ROTATION & POSITION ON RETURN) ---
-    function saveGlobeState() {
-      if (!globeGroup) return;
-      const state = {
-        rotationY: globeGroup.rotation.y,
-        rotationX: globeGroup.rotation.x,
-        activeProductIndex: activeProductIndex,
-        isZoomed: isZoomed,
-        compositionIndex: activeCompositionIndex,
-        cameraPos: camera ? { x: camera.position.x, y: camera.position.y, z: camera.position.z } : null,
-        controlsTarget: controls ? { x: controls.target.x, y: controls.target.y, z: controls.target.z } : null
-      };
-      try {
-        sessionStorage.setItem('global_ai_globe_state', JSON.stringify(state));
-      } catch (e) {}
-    }
-
-    function getSavedGlobeState() {
-      try {
-        const raw = sessionStorage.getItem('global_ai_globe_state');
-        if (raw) return JSON.parse(raw);
-      } catch (e) {}
-      return null;
-    }
+    // --- CLEAR CACHED GLOBE STATE ON PAGE LOAD FOR FRESH INTRO UX ---
+    try {
+      sessionStorage.removeItem('global_ai_globe_state');
+    } catch (e) {}
 
     // --- TIMING & ANIMATION CONFIGURATION CONSTANTS ---
     const INACTIVITY_TIMEOUT_MS       = 10000; // 10 seconds before auto-demo starts
@@ -2042,6 +2022,10 @@
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
     let globeGroup, particleSphere, particleSphereBasePositions, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
+    let particleSphereStartPositions, particleSphereBaseColors;
+    let particleDelays, particleDurations, particleControlPoints, particleOrbitAxes, particleOrbitRevolutions;
+    let particleTwinklePhases, particleTwinkleSpeeds, particleAmbientPhases;
+    const ASSEMBLY_DURATION = 5.2; // 5.2s total 5-stage intelligent particle assembly
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
@@ -2056,12 +2040,7 @@
 
       clock = new THREE.Clock();
 
-      const savedState = getSavedGlobeState();
-      if (savedState && savedState.compositionIndex !== undefined && CURATED_COMPOSITIONS[savedState.compositionIndex]) {
-        activeCompositionIndex = savedState.compositionIndex;
-      } else {
-        activeCompositionIndex = Math.floor(Math.random() * CURATED_COMPOSITIONS.length);
-      }
+      activeCompositionIndex = Math.floor(Math.random() * CURATED_COMPOSITIONS.length);
       activeComposition = CURATED_COMPOSITIONS[activeCompositionIndex];
 
       // 1. Scene
@@ -2090,15 +2069,11 @@
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.55;
 
-      controls.addEventListener('change', () => {
-        saveGlobeState();
-      });
-
-      // 5. Parent Globe Group (Restore saved rotation if coming back)
+      // 5. Parent Globe Group
       globeGroup = new THREE.Group();
       globeGroup.scale.set(0.78, 0.78, 0.78);
-      globeGroup.rotation.y = (savedState && savedState.rotationY !== undefined) ? savedState.rotationY : 0.0;
-      globeGroup.rotation.x = (savedState && savedState.rotationX !== undefined) ? savedState.rotationX : -0.25;
+      globeGroup.rotation.y = 0.0;
+      globeGroup.rotation.x = -0.25;
       scene.add(globeGroup);
 
       // 6. Build 3D Components
@@ -2121,52 +2096,28 @@
       dirLight2.position.set(-500, -200, -500);
       scene.add(dirLight2);
 
-      // 8. Camera Reveal / Position Restoration
-      if (savedState && savedState.cameraPos) {
-        camera.position.set(savedState.cameraPos.x, savedState.cameraPos.y, savedState.cameraPos.z);
-        if (savedState.controlsTarget) {
-          controls.target.set(savedState.controlsTarget.x, savedState.controlsTarget.y, savedState.controlsTarget.z);
+      // 8. Camera Reveal Sequence
+      gsap.to(camera.position, {
+        x: defaultPos.x,
+        y: defaultPos.y,
+        z: defaultPos.z,
+        duration: 1.8,
+        ease: "power3.out",
+        onComplete: () => {
+          runDiscoveryModeSequence();
         }
-        controls.update();
+      });
 
-        gsap.to(globeGroup.scale, { x: 0.96, y: 0.96, z: 0.96, duration: 1.0, ease: "power3.out" });
-
-        if (savedState.isZoomed && savedState.activeProductIndex !== null && savedState.activeProductIndex < PRODUCTS.length) {
-          activeProductIndex = savedState.activeProductIndex;
-          isZoomed = true;
-          setTimeout(() => {
-            const prod = PRODUCTS[activeProductIndex];
-            const anchor = hotspotAnchors[activeProductIndex];
-            if (prod && anchor) {
-              const targetVec = anchor.getWorldPosition(new THREE.Vector3());
-              showHolographicHUD(prod, targetVec);
-            }
-          }, 300);
-        }
-      } else {
-        gsap.to(camera.position, {
-          x: defaultPos.x,
-          y: defaultPos.y,
-          z: defaultPos.z,
-          duration: 1.8,
-          ease: "power3.out",
-          onComplete: () => {
-            runDiscoveryModeSequence();
-          }
-        });
-
-        gsap.to(globeGroup.scale, {
-          x: 0.96,
-          y: 0.96,
-          z: 0.96,
-          duration: 1.8,
-          ease: "power3.out"
-        });
-      }
+      gsap.to(globeGroup.scale, {
+        x: 0.96,
+        y: 0.96,
+        z: 0.96,
+        duration: 1.8,
+        ease: "power3.out"
+      });
 
       // 9. Event Listeners & Inactivity Tracking
       window.addEventListener('resize', onResize);
-      window.addEventListener('beforeunload', saveGlobeState);
       setupHotspotUIEvents();
       setupInactivityTracker();
 
@@ -2342,6 +2293,13 @@
             targetOpacity *= 0.2; // Dim unselected hotspots when zoomed
           }
 
+          // Fade hotspots in smoothly as assembly completes
+          if (clock) {
+            const assemblyProgress = Math.min(1.0, clock.getElapsedTime() / ASSEMBLY_DURATION);
+            const assemblyFade = Math.max(0.0, Math.min(1.0, (assemblyProgress - 0.3) / 0.7));
+            targetOpacity *= assemblyFade;
+          }
+
           elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${targetScale.toFixed(2)})`;
           elem.style.opacity = Math.max(0, Math.min(1, targetOpacity)).toFixed(2);
           elem.style.pointerEvents = 'auto';
@@ -2418,7 +2376,6 @@
 
       activeProductIndex = index;
       isZoomed = true;
-      saveGlobeState();
 
       // 1. AI Core Energy Propagation Burst
       if (coreMesh) {
@@ -2461,7 +2418,6 @@
         ease: "power3.inOut",
         onUpdate: () => {
           controls.update();
-          saveGlobeState();
         }
       });
 
@@ -2583,7 +2539,6 @@
       if (!isZoomed) return;
       isZoomed = false;
       activeProductIndex = null;
-      saveGlobeState();
 
       if (atmosphereMesh) {
         gsap.to(atmosphereMesh.material, { opacity: 0.08, duration: 0.6 });
@@ -2622,8 +2577,7 @@
         y: defaultPos.y,
         z: defaultPos.z,
         duration: 1.2,
-        ease: "power3.inOut",
-        onUpdate: () => saveGlobeState()
+        ease: "power3.inOut"
       });
 
       gsap.to(controls.target, {
@@ -2635,7 +2589,6 @@
         onComplete: () => {
           controls.autoRotate = true;
           controls.autoRotateSpeed = 0.55;
-          saveGlobeState();
         }
       });
     }
@@ -2690,25 +2643,92 @@
         coreMesh.rotation.x += 0.0015;
       }
 
-      // Flame Mode Particle Wave Pulse Animation (Calculated relative to immutable baseline)
-      if (particleSphere && particleSphereBasePositions && particleSphere.geometry.attributes.position) {
+      // 5-Stage Intelligent Data Particle Assembly + Flame Mode Wave Pulse
+      if (particleSphere && particleSphereBasePositions && particleSphereStartPositions && particleSphere.geometry.attributes.position) {
         const pos = particleSphere.geometry.attributes.position;
+        const colAttr = particleSphere.geometry.attributes.color;
         const speed = flameMode ? 2.5 : 0.8;
         const amplitude = flameMode ? 0.015 : 0.005;
 
         for (let i = 0; i < pos.count; i++) {
           let i3 = i * 3;
-          const baseX = particleSphereBasePositions[i3];
-          const baseY = particleSphereBasePositions[i3 + 1];
-          const baseZ = particleSphereBasePositions[i3 + 2];
-          const dist = Math.sqrt(baseX * baseX + baseY * baseY + baseZ * baseZ);
+          let i6 = i * 6;
+
+          const targetX = particleSphereBasePositions[i3];
+          const targetY = particleSphereBasePositions[i3 + 1];
+          const targetZ = particleSphereBasePositions[i3 + 2];
+
+          const startX = particleSphereStartPositions[i3];
+          const startY = particleSphereStartPositions[i3 + 1];
+          const startZ = particleSphereStartPositions[i3 + 2];
+
+          const pDelay = particleDelays[i];
+          const pDuration = particleDurations[i];
+
+          let curX, curY, curZ, ease = 0;
+
+          if (t < pDelay) {
+            // Stage 1: Ambient Universe (Soft floating drift)
+            const ambPhase = particleAmbientPhases[i];
+            curX = startX + Math.sin(t * 0.8 + ambPhase) * 14;
+            curY = startY + Math.cos(t * 0.6 + ambPhase) * 14;
+            curZ = startZ + Math.sin(t * 1.1 + ambPhase) * 14;
+          } else {
+            // Stage 2 to 5: Awakening, Curved Intelligent Stream Flow, Orbiting & Completion
+            let particleT = Math.max(0, Math.min(1, (t - pDelay) / pDuration));
+
+            // Smootherstep Easing (butter smooth acceleration & deceleration)
+            ease = particleT * particleT * particleT * (particleT * (particleT * 6 - 15) + 10);
+
+            // Stage 3: Quadratic Bezier Intelligent Stream Path
+            const ctrlX = particleControlPoints[i3];
+            const ctrlY = particleControlPoints[i3 + 1];
+            const ctrlZ = particleControlPoints[i3 + 2];
+
+            const oneMinusE = 1 - ease;
+            const bX = oneMinusE * oneMinusE * startX + 2 * oneMinusE * ease * ctrlX + ease * ease * targetX;
+            const bY = oneMinusE * oneMinusE * startY + 2 * oneMinusE * ease * ctrlY + ease * ease * targetY;
+            const bZ = oneMinusE * oneMinusE * startZ + 2 * oneMinusE * ease * ctrlZ + ease * ease * targetZ;
+
+            // Stage 4: Orbit Formation (Spiraling orbit around globe 1-2 times, zero at target)
+            const orbitR = 140 * Math.sin(ease * Math.PI) * (1 - ease * 0.5);
+            const orbitAngle = ease * particleOrbitRevolutions[i] * Math.PI * 2;
+
+            const uX = particleOrbitAxes[i6],     uY = particleOrbitAxes[i6 + 1], uZ = particleOrbitAxes[i6 + 2];
+            const vX = particleOrbitAxes[i6 + 3], vY = particleOrbitAxes[i6 + 4], vZ = particleOrbitAxes[i6 + 5];
+
+            const orbX = (uX * Math.cos(orbitAngle) + vX * Math.sin(orbitAngle)) * orbitR;
+            const orbY = (uY * Math.cos(orbitAngle) + vY * Math.sin(orbitAngle)) * orbitR;
+            const orbZ = (uZ * Math.cos(orbitAngle) + vZ * Math.sin(orbitAngle)) * orbitR;
+
+            // Stage 5: Globe Completion
+            curX = bX + orbX;
+            curY = bY + orbY;
+            curZ = bZ + orbZ;
+          }
+
+          // Flame mode wave pulse once assembled or smoothly blending
+          const dist = Math.sqrt(targetX * targetX + targetY * targetY + targetZ * targetZ);
           let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
-          const factor = 1 + pulse;
-          pos.array[i3]     = baseX * factor;
-          pos.array[i3 + 1] = baseY * factor;
-          pos.array[i3 + 2] = baseZ * factor;
+          const factor = 1 + pulse * ease;
+
+          pos.array[i3]     = curX * factor;
+          pos.array[i3 + 1] = curY * factor;
+          pos.array[i3 + 2] = curZ * factor;
+
+          // Visual Principle: Subtle Twinkle & Brightness Pulsing
+          if (colAttr && particleSphereBaseColors) {
+            const twPhase = particleTwinklePhases[i];
+            const twSpeed = particleTwinkleSpeeds[i];
+            const twinkle = 0.85 + 0.3 * Math.sin(t * twSpeed + twPhase);
+
+            colAttr.array[i3]     = particleSphereBaseColors[i3] * twinkle;
+            colAttr.array[i3 + 1] = particleSphereBaseColors[i3 + 1] * twinkle;
+            colAttr.array[i3 + 2] = particleSphereBaseColors[i3 + 2] * twinkle;
+          }
         }
         pos.needsUpdate = true;
+        if (colAttr) colAttr.needsUpdate = true;
       }
 
       // Rotate hotspot micro orbit particles
@@ -2724,7 +2744,7 @@
       renderer.render(scene, camera);
     }
 
-    // --- 35,000 PARTICLE GLOBE WITH UNIFORM FIBONACCI SPHERE DISTRIBUTION ---
+    // --- 35,000 PARTICLE GLOBE WITH 5-STAGE INTELLIGENT DATA ASSEMBLY ---
     function createMassiveParticleGlobe() {
       const particleCount = 35000;
       const geometry = new THREE.BufferGeometry();
@@ -2732,17 +2752,73 @@
       const colors = new Float32Array(particleCount * 3);
       const sizes = new Float32Array(particleCount);
 
-      const cyanColor = new THREE.Color('#00f0ff');
+      const cyanColor   = new THREE.Color('#00f0ff');
       const purpleColor = new THREE.Color('#a855f7');
-      const blueColor = new THREE.Color('#1d4ed8');
-      const iceColor = new THREE.Color('#ffffff');
+      const blueColor   = new THREE.Color('#1d4ed8');
+      const iceColor    = new THREE.Color('#ffffff');
 
       const goldenRatio = (1 + Math.sqrt(5)) / 2;
       const goldenAngle = 2 * Math.PI * (1 - 1 / goldenRatio);
 
+      particleSphereBasePositions  = new Float32Array(particleCount * 3);
+      particleSphereStartPositions = new Float32Array(particleCount * 3);
+      particleSphereBaseColors     = new Float32Array(particleCount * 3);
+      particleDelays               = new Float32Array(particleCount);
+      particleDurations            = new Float32Array(particleCount);
+      particleControlPoints        = new Float32Array(particleCount * 3);
+      particleOrbitAxes            = new Float32Array(particleCount * 6);
+      particleOrbitRevolutions     = new Float32Array(particleCount);
+      particleTwinklePhases        = new Float32Array(particleCount);
+      particleTwinkleSpeeds        = new Float32Array(particleCount);
+      particleAmbientPhases        = new Float32Array(particleCount);
+
+      const aspect = window.innerWidth / window.innerHeight;
+      const defaultCam = getDefaultCameraPos();
+      const camDist = defaultCam.z;
+      const visibleHeight = 2 * Math.tan(THREE.MathUtils.degToRad(45 / 2)) * camDist;
+      const visibleWidth = visibleHeight * aspect;
+
+      const spreadX = visibleWidth * 0.88;
+      const spreadY = visibleHeight * 0.88;
+      const spreadZ = 750;
+
+      // 16 Intelligent Stream Clusters
+      const clusterCount = 16;
+      const clusterDelays = new Float32Array(clusterCount);
+      const clusterControlDirs = [];
+      const clusterOrbitAxes = [];
+
+      for (let c = 0; c < clusterCount; c++) {
+        // Wave propagation delay across screen (Stage 2: Awakening)
+        clusterDelays[c] = (c / clusterCount) * 1.6 + Math.random() * 0.2;
+
+        // Magnetic field flow control direction (Stage 3: Intelligent Flow)
+        const cDir = new THREE.Vector3(
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2
+        ).normalize();
+        clusterControlDirs.push(cDir);
+
+        // Orbital plane basis (Stage 4: Orbit Formation)
+        const planeNorm = new THREE.Vector3(
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2
+        ).normalize();
+
+        const uAxis = new THREE.Vector3().crossVectors(planeNorm, new THREE.Vector3(0, 1, 0));
+        if (uAxis.lengthSq() < 0.001) uAxis.set(1, 0, 0);
+        uAxis.normalize();
+        const vAxis = new THREE.Vector3().crossVectors(planeNorm, uAxis).normalize();
+
+        clusterOrbitAxes.push({ u: uAxis, v: vAxis });
+      }
+
       let index = 0;
+      let index6 = 0;
       for (let i = 0; i < particleCount; i++) {
-        // Equal-area Fibonacci Sphere distribution
+        // Equal-area Fibonacci Sphere distribution (Target positions)
         const y = 1 - (i / (particleCount - 1)) * 2;
         const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
         const theta = goldenAngle * i;
@@ -2750,12 +2826,63 @@
         const x = Math.cos(theta) * radiusAtY;
         const z = Math.sin(theta) * radiusAtY;
 
-        // Subtle uniform shell thickness variation around radius 290
         const radiusNoise = globeRadius + (Math.random() - 0.5) * 6;
 
-        positions[index]     = x * radiusNoise;
-        positions[index + 1] = y * radiusNoise;
-        positions[index + 2] = z * radiusNoise;
+        const targetX = x * radiusNoise;
+        const targetY = y * radiusNoise;
+        const targetZ = z * radiusNoise;
+
+        particleSphereBasePositions[index]     = targetX;
+        particleSphereBasePositions[index + 1] = targetY;
+        particleSphereBasePositions[index + 2] = targetZ;
+
+        // Random Viewport Start Positions across entire screen (Stage 1: Ambient Universe)
+        const startX = (Math.random() - 0.5) * 2 * spreadX;
+        const startY = (Math.random() - 0.5) * 2 * spreadY;
+        const startZ = (Math.random() - 0.5) * 2 * spreadZ;
+
+        particleSphereStartPositions[index]     = startX;
+        particleSphereStartPositions[index + 1] = startY;
+        particleSphereStartPositions[index + 2] = startZ;
+
+        // Frame 0 position = start position
+        positions[index]     = startX;
+        positions[index + 1] = startY;
+        positions[index + 2] = startZ;
+
+        // Cluster parameters
+        const clusterId = i % clusterCount;
+        const cDelay = clusterDelays[clusterId];
+        const pDelay = cDelay + Math.random() * 0.35;
+        particleDelays[i] = pDelay;
+        particleDurations[i] = 3.0 + Math.random() * 0.8;
+
+        // Magnetic Stream Control Point (Stage 3)
+        const cDir = clusterControlDirs[clusterId];
+        const midX = (startX + targetX) * 0.5;
+        const midY = (startY + targetY) * 0.5;
+        const midZ = (startZ + targetZ) * 0.5;
+        const curveMag = 180 + Math.random() * 220;
+
+        particleControlPoints[index]     = midX + cDir.x * curveMag;
+        particleControlPoints[index + 1] = midY + cDir.y * curveMag;
+        particleControlPoints[index + 2] = midZ + cDir.z * curveMag;
+
+        // Orbit axis basis (Stage 4)
+        const axes = clusterOrbitAxes[clusterId];
+        particleOrbitAxes[index6]     = axes.u.x;
+        particleOrbitAxes[index6 + 1] = axes.u.y;
+        particleOrbitAxes[index6 + 2] = axes.u.z;
+        particleOrbitAxes[index6 + 3] = axes.v.x;
+        particleOrbitAxes[index6 + 4] = axes.v.y;
+        particleOrbitAxes[index6 + 5] = axes.v.z;
+
+        particleOrbitRevolutions[i] = (Math.random() < 0.5 ? 1 : -1) * (1.0 + Math.random() * 1.2);
+
+        // Twinkle and ambient drift parameters
+        particleTwinklePhases[i] = Math.random() * Math.PI * 2;
+        particleTwinkleSpeeds[i] = 1.5 + Math.random() * 3.5;
+        particleAmbientPhases[i] = Math.random() * Math.PI * 2;
 
         // Color palette assignment
         let pColor;
@@ -2765,6 +2892,10 @@
         else if (randCol > 0.15) pColor = blueColor;
         else pColor = iceColor;
 
+        particleSphereBaseColors[index]     = pColor.r;
+        particleSphereBaseColors[index + 1] = pColor.g;
+        particleSphereBaseColors[index + 2] = pColor.b;
+
         colors[index]     = pColor.r;
         colors[index + 1] = pColor.g;
         colors[index + 2] = pColor.b;
@@ -2772,19 +2903,17 @@
         sizes[i] = Math.random() * 1.8 + 1.2;
 
         index += 3;
+        index6 += 6;
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-      // Store immutable baseline positions to prevent globe from shrinking over time
-      particleSphereBasePositions = new Float32Array(positions);
-
       const particleMaterial = new THREE.PointsMaterial({
         size: 2.2,
         vertexColors: true,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.88,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
