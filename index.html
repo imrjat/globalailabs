@@ -2042,6 +2042,8 @@
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
     let globeGroup, particleSphere, particleSphereBasePositions, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
+    let particleSphereStartPositions, particleDelays, particleSwirlAngles;
+    const ASSEMBLY_DURATION = 3.8; // 3.8 seconds particle assembly intro
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
@@ -2340,6 +2342,13 @@
 
           if (isZoomed && activeProductIndex !== idx) {
             targetOpacity *= 0.2; // Dim unselected hotspots when zoomed
+          }
+
+          // Fade hotspots in smoothly as assembly completes
+          if (clock) {
+            const assemblyProgress = Math.min(1.0, clock.getElapsedTime() / ASSEMBLY_DURATION);
+            const assemblyFade = Math.max(0.0, Math.min(1.0, (assemblyProgress - 0.25) / 0.75));
+            targetOpacity *= assemblyFade;
           }
 
           elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${targetScale.toFixed(2)})`;
@@ -2690,23 +2699,51 @@
         coreMesh.rotation.x += 0.0015;
       }
 
-      // Flame Mode Particle Wave Pulse Animation (Calculated relative to immutable baseline)
-      if (particleSphere && particleSphereBasePositions && particleSphere.geometry.attributes.position) {
+      // Particle Assembly Intro + Flame Mode Wave Pulse Animation
+      if (particleSphere && particleSphereBasePositions && particleSphereStartPositions && particleSphere.geometry.attributes.position) {
         const pos = particleSphere.geometry.attributes.position;
         const speed = flameMode ? 2.5 : 0.8;
         const amplitude = flameMode ? 0.015 : 0.005;
 
         for (let i = 0; i < pos.count; i++) {
           let i3 = i * 3;
-          const baseX = particleSphereBasePositions[i3];
-          const baseY = particleSphereBasePositions[i3 + 1];
-          const baseZ = particleSphereBasePositions[i3 + 2];
-          const dist = Math.sqrt(baseX * baseX + baseY * baseY + baseZ * baseZ);
+          const targetX = particleSphereBasePositions[i3];
+          const targetY = particleSphereBasePositions[i3 + 1];
+          const targetZ = particleSphereBasePositions[i3 + 2];
+
+          const startX = particleSphereStartPositions[i3];
+          const startY = particleSphereStartPositions[i3 + 1];
+          const startZ = particleSphereStartPositions[i3 + 2];
+
+          const delay = particleDelays[i];
+          const duration = ASSEMBLY_DURATION - delay;
+          let particleT = Math.max(0, Math.min(1, (t - delay) / duration));
+
+          // Smoothstep Easing
+          const ease = particleT * particleT * (3 - 2 * particleT);
+
+          // Interpolate from viewport random universe position toward globe vertex
+          let curX = startX + (targetX - startX) * ease;
+          let curY = startY + (targetY - startY) * ease;
+          let curZ = startZ + (targetZ - startZ) * ease;
+
+          // Organic swirl effect during assembly (reaches max displacement at mid-flight, zero at target)
+          if (ease < 1.0) {
+            const swirlAmount = Math.sin(ease * Math.PI);
+            const swirlAngle = particleSwirlAngles[i] + t * 0.6;
+            const curlRadius = 35 * swirlAmount;
+            curX += Math.cos(swirlAngle) * curlRadius;
+            curY += Math.sin(swirlAngle) * curlRadius;
+          }
+
+          // Existing flame mode wave pulse once assembled or blending near completion
+          const dist = Math.sqrt(targetX * targetX + targetY * targetY + targetZ * targetZ);
           let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
-          const factor = 1 + pulse;
-          pos.array[i3]     = baseX * factor;
-          pos.array[i3 + 1] = baseY * factor;
-          pos.array[i3 + 2] = baseZ * factor;
+          const factor = 1 + pulse * ease;
+
+          pos.array[i3]     = curX * factor;
+          pos.array[i3 + 1] = curY * factor;
+          pos.array[i3 + 2] = curZ * factor;
         }
         pos.needsUpdate = true;
       }
@@ -2740,9 +2777,24 @@
       const goldenRatio = (1 + Math.sqrt(5)) / 2;
       const goldenAngle = 2 * Math.PI * (1 - 1 / goldenRatio);
 
+      particleSphereBasePositions = new Float32Array(particleCount * 3);
+      particleSphereStartPositions = new Float32Array(particleCount * 3);
+      particleDelays = new Float32Array(particleCount);
+      particleSwirlAngles = new Float32Array(particleCount);
+
+      const aspect = window.innerWidth / window.innerHeight;
+      const defaultCam = getDefaultCameraPos();
+      const camDist = defaultCam.z;
+      const visibleHeight = 2 * Math.tan(THREE.MathUtils.degToRad(45 / 2)) * camDist;
+      const visibleWidth = visibleHeight * aspect;
+
+      const spreadX = visibleWidth * 0.85;
+      const spreadY = visibleHeight * 0.85;
+      const spreadZ = 700;
+
       let index = 0;
       for (let i = 0; i < particleCount; i++) {
-        // Equal-area Fibonacci Sphere distribution
+        // Equal-area Fibonacci Sphere distribution (Target positions)
         const y = 1 - (i / (particleCount - 1)) * 2;
         const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
         const theta = goldenAngle * i;
@@ -2753,9 +2805,31 @@
         // Subtle uniform shell thickness variation around radius 290
         const radiusNoise = globeRadius + (Math.random() - 0.5) * 6;
 
-        positions[index]     = x * radiusNoise;
-        positions[index + 1] = y * radiusNoise;
-        positions[index + 2] = z * radiusNoise;
+        const targetX = x * radiusNoise;
+        const targetY = y * radiusNoise;
+        const targetZ = z * radiusNoise;
+
+        particleSphereBasePositions[index]     = targetX;
+        particleSphereBasePositions[index + 1] = targetY;
+        particleSphereBasePositions[index + 2] = targetZ;
+
+        // Random Viewport Start Positions across entire screen
+        const startX = (Math.random() - 0.5) * 2 * spreadX;
+        const startY = (Math.random() - 0.5) * 2 * spreadY;
+        const startZ = (Math.random() - 0.5) * 2 * spreadZ;
+
+        particleSphereStartPositions[index]     = startX;
+        particleSphereStartPositions[index + 1] = startY;
+        particleSphereStartPositions[index + 2] = startZ;
+
+        // On frame 0, particle starts at random viewport position
+        positions[index]     = startX;
+        positions[index + 1] = startY;
+        positions[index + 2] = startZ;
+
+        // Staggered delay (0.0 to 0.9s) & organic swirl angles
+        particleDelays[i] = Math.random() * 0.9;
+        particleSwirlAngles[i] = Math.random() * Math.PI * 2;
 
         // Color palette assignment
         let pColor;
@@ -2776,9 +2850,6 @@
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      // Store immutable baseline positions to prevent globe from shrinking over time
-      particleSphereBasePositions = new Float32Array(positions);
 
       const particleMaterial = new THREE.PointsMaterial({
         size: 2.2,
