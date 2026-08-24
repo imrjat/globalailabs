@@ -347,6 +347,90 @@
       50% { transform: scale(1.2) rotate(180deg); filter: drop-shadow(0 0 10px #ff2e93); }
     }
     .playground-sparkle { transform-origin: 12px 12px; animation: playgroundSparkle 2.2s infinite ease-in-out; }
+
+    /* Bottom Hero Ecosystem Tagline Badge */
+    #hero-tagline-container {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 35;
+      pointer-events: none;
+      width: auto;
+      max-width: 92vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    @media (max-width: 768px) {
+      #hero-tagline-container {
+        bottom: 24px;
+      }
+    }
+
+    .hero-tagline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 24px;
+      background: rgba(6, 10, 16, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .hero-tagline-beacon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      flex-shrink: 0;
+      animation: beaconPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes beaconPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    .hero-tagline-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin: 0;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .hero-tagline-text {
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        white-space: normal;
+      }
+      .hero-tagline-badge {
+        padding: 8px 16px;
+        gap: 8px;
+      }
+    }
+
+    .hero-tagline-gradient {
+      background: linear-gradient(90deg, #00f0ff 0%, #d946ef 50%, #ff2e93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
   </style>
 </head>
 <body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
@@ -398,6 +482,16 @@
 
       <!-- WebGL 3D Globe Canvas Container -->
       <div id="globe-canvas-container" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></div>
+
+      <!-- Floating Hero Ecosystem Tagline (Below 3D Globe) -->
+      <div id="hero-tagline-container">
+        <div class="hero-tagline-badge">
+          <span class="hero-tagline-beacon"></span>
+          <h1 class="hero-tagline-text">
+            One-stop <span class="hero-tagline-gradient">AI powered</span> content ecosystem
+          </h1>
+        </div>
+      </div>
 
       <!-- 2D Projected Hotspots Container -->
       <div id="hotspots-container" class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-hidden">
@@ -2421,7 +2515,13 @@
         }
       });
 
-      // 9. Show Attached Staggered Holographic HUD Modules
+      // 9. Fade tagline on mobile during inspection
+      const taglineElem = document.getElementById('hero-tagline-container');
+      if (taglineElem && window.innerWidth < 768) {
+        gsap.to(taglineElem, { opacity: 0, duration: 0.3 });
+      }
+
+      // 10. Show Attached Staggered Holographic HUD Modules
       showHolographicHUD(prod, targetVec);
     }
 
@@ -2570,6 +2670,12 @@
       });
 
       const defaultPos = getDefaultCameraPos();
+
+      // Restore tagline visibility
+      const taglineElem = document.getElementById('hero-tagline-container');
+      if (taglineElem) {
+        gsap.to(taglineElem, { opacity: 1, duration: 0.4 });
+      }
 
       // Camera Fly-Back to Default View
       gsap.to(camera.position, {
