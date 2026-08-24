@@ -146,74 +146,19 @@ export const projectsData = [
 
 export const teamData = [
   {
-    name: "Vikram Mehta",
-    role: "Founder & CEO",
-    initials: "VM"
+    name: "Kartick Nishandar",
+    role: "Co-Founder & CEO",
+    initials: "KN"
   },
   {
-    name: "Elena Rostova",
-    role: "Founder & COO",
-    initials: "ER"
+    name: "Arjun Singgh Baran",
+    role: "Co-Founder & COO",
+    initials: "ASB"
   },
   {
-    name: "Arjun Sen",
-    role: "Chief Business Officer",
-    initials: "AS"
-  },
-  {
-    name: "Rhea Kapoor",
-    role: "Director, Brand Solutions",
-    initials: "RK"
-  },
-  {
-    name: "Marcus Aurelius",
-    role: "Production & Creative Lead",
-    initials: "MA"
-  },
-  {
-    name: "Siddharth Dev",
-    role: "Creative Director, Art",
-    initials: "SD"
-  },
-  {
-    name: "Tara Malhotra",
-    role: "Associate Creative Director, Copy",
-    initials: "TM"
-  },
-  {
-    name: "Zayn Malik",
-    role: "Motion Designer",
-    initials: "ZM"
-  },
-  {
-    name: "Nikhil Joshi",
-    role: "Video Editor",
-    initials: "NJ"
-  },
-  {
-    name: "Aisha Rahman",
-    role: "AI Generalist",
-    initials: "AR"
-  },
-  {
-    name: "Kabir Singh",
-    role: "Full Stack Developer",
-    initials: "KS"
-  },
-  {
-    name: "Divya Iyer",
-    role: "Account Manager",
-    initials: "DI"
-  },
-  {
-    name: "Pranav Shah",
-    role: "Brand Strategist",
-    initials: "PS"
-  },
-  {
-    name: "Sanya Gupta",
-    role: "Creator Partnerships Lead",
-    initials: "SG"
+    name: "Vikrant Nishandar",
+    role: "Co-founder & CPO",
+    initials: "VN"
   }
 ];
 
