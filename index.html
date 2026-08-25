@@ -99,31 +99,38 @@
       }
     }
 
-    /* Hotspot Icon Box */
+    /* Hotspot Icon Box with Reactive Hover Scale & Neon Bloom */
     .hotspot-icon-box {
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(8, 12, 18, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(4, 8, 16, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1.5px solid currentColor;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px currentColor;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: hotspotBreathing 3s infinite ease-in-out;
+      box-shadow: 0 0 20px currentColor;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.28s ease;
+      animation: hotspotBreathing 3.5s infinite ease-in-out;
+      cursor: pointer;
     }
 
     .globe-hotspot:hover .hotspot-icon-box {
-      transform: scale(1.18);
-      box-shadow: 0 0 40px currentColor, inset 0 0 15px currentColor;
+      transform: scale(1.24);
+      background: rgba(8, 14, 28, 0.95);
+      box-shadow: 0 0 30px currentColor, 0 0 60px currentColor, inset 0 0 15px currentColor;
+    }
+
+    .globe-hotspot:hover .hotspot-ripple {
+      animation-duration: 1.2s;
+      border-color: currentColor;
     }
 
     @keyframes hotspotBreathing {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
+      50% { transform: scale(1.05); }
     }
 
     /* Hotspot Label (Hidden in Idle mode for clean minimalist layout, fades in on hover) */
@@ -296,30 +303,44 @@
 
     .hud-pulse { animation: hudPulse 2s infinite ease-in-out; }
 
-    /* Hotspot Mini Hover Preview Tooltip */
+    /* Hotspot Reactive Glassmorphic Preview Card */
     .hotspot-preview-tooltip {
       position: absolute;
-      top: 115%;
+      bottom: calc(100% + 14px);
       left: 50%;
-      transform: translateX(-50%) scale(0.9);
+      transform: translateX(-50%) translateY(8px) scale(0.92);
       opacity: 0;
       pointer-events: none;
-      background: rgba(6, 10, 16, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid currentColor;
+      background: rgba(4, 8, 16, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 12px;
-      padding: 8px 14px;
-      white-space: nowrap;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px currentColor;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 30;
-      text-align: center;
+      padding: 10px 14px;
+      min-width: 180px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 240, 255, 0.18);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 50;
+      text-align: left;
+    }
+
+    .hotspot-preview-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(4, 8, 16, 0.94) transparent transparent transparent;
     }
 
     .globe-hotspot:hover .hotspot-preview-tooltip {
       opacity: 1;
-      transform: translateX(-50%) scale(1);
+      transform: translateX(-50%) translateY(0) scale(1);
+      pointer-events: auto;
+      border-color: currentColor;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 30px currentColor;
     }
 
     /* Product Unique Keyframes */
@@ -496,8 +517,7 @@
       <!-- 2D Projected Hotspots Container -->
       <div id="hotspots-container" class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-hidden">
         
-        <!-- Hotspot 1: Mission Control -->
-        <!-- Hotspot 1: The Mission Control -->
+        <!-- Hotspot 1: The Mission Control (San Francisco) -->
         <div id="hotspot-0" class="globe-hotspot text-[#00f0ff]" data-index="0">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -512,14 +532,19 @@
             </div>
             <div class="hotspot-label">THE MISSION CONTROL</div>
             <div class="hotspot-preview-tooltip text-[#00f0ff]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE MISSION CONTROL</div>
-              <div class="text-[8px] font-mono text-cyan-300">SaaS Workflow Platform</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#00f0ff] uppercase">SaaS Platform</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE MISSION CONTROL</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">37.77° N // 122.42° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 2: The Studio -->
+        <!-- Hotspot 2: The Studio (London) -->
         <div id="hotspot-1" class="globe-hotspot text-[#a855f7]" data-index="1">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -532,14 +557,19 @@
             </div>
             <div class="hotspot-label">THE STUDIO</div>
             <div class="hotspot-preview-tooltip text-[#a855f7]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE STUDIO</div>
-              <div class="text-[8px] font-mono text-purple-300">AI Content Studio</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#a855f7] uppercase">AI Content Studio</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-purple-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> ACTIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE STUDIO (LONDON)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">51.51° N // 0.13° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 3: The Vault -->
+        <!-- Hotspot 3: The Vault (Tokyo) -->
         <div id="hotspot-2" class="globe-hotspot text-[#f59e0b]" data-index="2">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -553,14 +583,19 @@
             </div>
             <div class="hotspot-label">THE VAULT</div>
             <div class="hotspot-preview-tooltip text-[#f59e0b]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE VAULT</div>
-              <div class="text-[8px] font-mono text-amber-300">Proprietary IP Engine</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#f59e0b] uppercase">IP Engine</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-amber-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> SECURED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE VAULT (TOKYO)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">35.68° N // 139.65° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 4: The Playground Hub -->
+        <!-- Hotspot 4: The Playground Hub (Sydney) -->
         <div id="hotspot-3" class="globe-hotspot text-[#ff2e93]" data-index="3">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -573,14 +608,19 @@
             </div>
             <div class="hotspot-label">THE PLAYGROUND HUB</div>
             <div class="hotspot-preview-tooltip text-[#ff2e93]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND HUB</div>
-              <div class="text-[8px] font-mono text-pink-300">Creator Platform</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#ff2e93] uppercase">Creator Hub</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-pink-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span> LIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE PLAYGROUND (SYDNEY)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">33.87° S // 151.21° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 5: The Mission Control -->
+        <!-- Hotspot 5: The Mission Control (New York) -->
         <div id="hotspot-4" class="globe-hotspot text-[#00f0ff]" data-index="4">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -594,14 +634,19 @@
             </div>
             <div class="hotspot-label">THE MISSION CONTROL</div>
             <div class="hotspot-preview-tooltip text-[#00f0ff]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE MISSION CONTROL</div>
-              <div class="text-[8px] font-mono text-cyan-300">Enterprise AI OS</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#00f0ff] uppercase">Enterprise AI OS</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-cyan-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> CONNECTED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">MISSION CONTROL (NEW YORK)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">40.71° N // 74.01° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 6: The Studio -->
+        <!-- Hotspot 6: The Studio (India - Mumbai/Bangalore) -->
         <div id="hotspot-5" class="globe-hotspot text-[#a855f7]" data-index="5">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -614,14 +659,19 @@
             </div>
             <div class="hotspot-label">THE STUDIO</div>
             <div class="hotspot-preview-tooltip text-[#a855f7]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE STUDIO</div>
-              <div class="text-[8px] font-mono text-purple-300">Generative Post-Production</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#a855f7] uppercase">VFX & Generative Media</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-purple-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> ACTIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE STUDIO (INDIA)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">19.08° N // 72.88° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 7: The Vault -->
+        <!-- Hotspot 7: The Vault (Singapore) -->
         <div id="hotspot-6" class="globe-hotspot text-[#f59e0b]" data-index="6">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -635,14 +685,19 @@
             </div>
             <div class="hotspot-label">THE VAULT</div>
             <div class="hotspot-preview-tooltip text-[#f59e0b]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE VAULT</div>
-              <div class="text-[8px] font-mono text-amber-300">Asset Rights Vault</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#f59e0b] uppercase">Rights & Quantum HSM</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-amber-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> SECURED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE VAULT (SINGAPORE)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">1.35° N // 103.82° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 8: The Playground Hub -->
+        <!-- Hotspot 8: The Playground Hub (Rio de Janeiro) -->
         <div id="hotspot-7" class="globe-hotspot text-[#ff2e93]" data-index="7">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -655,9 +710,14 @@
             </div>
             <div class="hotspot-label">THE PLAYGROUND HUB</div>
             <div class="hotspot-preview-tooltip text-[#ff2e93]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND HUB</div>
-              <div class="text-[8px] font-mono text-pink-300">Social AI Studio</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#ff2e93] uppercase">AI Sandbox Hub</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-pink-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span> LIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE PLAYGROUND (RIO)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">22.91° S // 43.17° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
@@ -2391,6 +2451,91 @@
       });
     }
 
+    // --- BEST UI/UX: REACTIVE MARKER HOVER SYSTEM ---
+    function highlightConnectedLaserArcs(hubIdx) {
+      if (hubIdx === null || hubIdx === undefined) return;
+      const targetProd = PRODUCTS[hubIdx];
+      if (!targetProd) return;
+
+      const tolerance = 2.0;
+
+      // 1. Connection lines brighten (connected surge to 0.98, unconnected dim to 0.12)
+      if (laserArcsGroup && laserArcsGroup.children) {
+        MAJOR_NETWORK_ROUTES.forEach((route, rIdx) => {
+          const arcLine = laserArcsGroup.children[rIdx];
+          if (!arcLine) return;
+
+          const isConnected = 
+            (Math.abs(route.from[0] - targetProd.lat) < tolerance && Math.abs(route.from[1] - targetProd.lon) < tolerance) ||
+            (Math.abs(route.to[0] - targetProd.lat) < tolerance && Math.abs(route.to[1] - targetProd.lon) < tolerance);
+
+          if (isConnected) {
+            gsap.to(arcLine.material, { opacity: 0.98, duration: 0.22, ease: "power2.out" });
+            if (networkPhotonCurves[rIdx]) {
+              networkPhotonCurves[rIdx].speed = 0.009; // Accelerate traveling photons
+            }
+          } else {
+            gsap.to(arcLine.material, { opacity: 0.12, duration: 0.22, ease: "power2.out" });
+          }
+        });
+      }
+
+      // 2. 3D Marker slightly scales up
+      const anchor = hotspotAnchors[hubIdx];
+      if (anchor) {
+        gsap.to(anchor.scale, { x: 1.35, y: 1.35, z: 1.35, duration: 0.25, ease: "power2.out" });
+      }
+
+      // 3. 3D Beacon Tower intensifies glow
+      if (beaconTowersGroup && beaconTowersGroup.children[hubIdx]) {
+        const towerGroup = beaconTowersGroup.children[hubIdx];
+        if (towerGroup.children[0] && towerGroup.children[0].material) {
+          gsap.to(towerGroup.children[0].material, { opacity: 1.0, duration: 0.2 });
+        }
+      }
+
+      // 4. Subtle atmospheric corona reaction
+      if (atmosphereMesh) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.28, duration: 0.3 });
+      }
+    }
+
+    function resetLaserArcsHighlight() {
+      // 1. Connection lines return to ambient brightness
+      if (laserArcsGroup && laserArcsGroup.children) {
+        MAJOR_NETWORK_ROUTES.forEach((route, rIdx) => {
+          const arcLine = laserArcsGroup.children[rIdx];
+          if (arcLine) {
+            gsap.to(arcLine.material, { opacity: 0.38, duration: 0.3, ease: "power2.out" });
+          }
+          if (networkPhotonCurves[rIdx]) {
+            networkPhotonCurves[rIdx].speed = 0.0035 + (rIdx % 3) * 0.001;
+          }
+        });
+      }
+
+      // 2. Reset all 3D anchor scales
+      hotspotAnchors.forEach((anchor) => {
+        if (anchor) {
+          gsap.to(anchor.scale, { x: 1.0, y: 1.0, z: 1.0, duration: 0.3, ease: "power2.out" });
+        }
+      });
+
+      // 3. Reset 3D Beacon Towers
+      if (beaconTowersGroup && beaconTowersGroup.children) {
+        beaconTowersGroup.children.forEach(towerGroup => {
+          if (towerGroup.children[0] && towerGroup.children[0].material) {
+            gsap.to(towerGroup.children[0].material, { opacity: 0.45, duration: 0.3 });
+          }
+        });
+      }
+
+      // 4. Reset atmosphere
+      if (atmosphereMesh && !isZoomed) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.3 });
+      }
+    }
+
     // --- INTERACTIVE HOTSPOT CLICK & QUICK-NAV DOCK EVENTS ---
     function setupHotspotUIEvents() {
       PRODUCTS.forEach((prod, idx) => {
@@ -2401,31 +2546,33 @@
             selectHotspot(idx);
           });
 
-          // Atmosphere reaction on hover
+          // Best UI/UX: Full reactive hover system
           elem.addEventListener('mouseenter', () => {
-            if (atmosphereMesh) {
-              gsap.to(atmosphereMesh.material, { opacity: 0.25, duration: 0.4 });
-            }
+            highlightConnectedLaserArcs(idx);
           });
 
           elem.addEventListener('mouseleave', () => {
-            if (atmosphereMesh && !isZoomed) {
-              gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.4 });
-            }
+            resetLaserArcsHighlight();
           });
         }
       });
 
-      // Quick-Jump Navigation Dock Buttons
+      // Quick-Jump Navigation Dock Buttons (Hover + Click)
       const hubButtons = document.querySelectorAll('.globe-hub-btn');
       hubButtons.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const hubIdx = parseInt(btn.getAttribute('data-hub'), 10);
-          if (!isNaN(hubIdx)) {
+        const hubIdx = parseInt(btn.getAttribute('data-hub'), 10);
+        if (!isNaN(hubIdx)) {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             selectHotspot(hubIdx);
-          }
-        });
+          });
+          btn.addEventListener('mouseenter', () => {
+            highlightConnectedLaserArcs(hubIdx);
+          });
+          btn.addEventListener('mouseleave', () => {
+            resetLaserArcsHighlight();
+          });
+        }
       });
 
       // HUD Command Bar CTA Click
