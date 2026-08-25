@@ -99,31 +99,38 @@
       }
     }
 
-    /* Hotspot Icon Box */
+    /* Hotspot Icon Box with Reactive Hover Scale & Neon Bloom */
     .hotspot-icon-box {
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(8, 12, 18, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(4, 8, 16, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1.5px solid currentColor;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px currentColor;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: hotspotBreathing 3s infinite ease-in-out;
+      box-shadow: 0 0 20px currentColor;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.28s ease;
+      animation: hotspotBreathing 3.5s infinite ease-in-out;
+      cursor: pointer;
     }
 
     .globe-hotspot:hover .hotspot-icon-box {
-      transform: scale(1.18);
-      box-shadow: 0 0 40px currentColor, inset 0 0 15px currentColor;
+      transform: scale(1.24);
+      background: rgba(8, 14, 28, 0.95);
+      box-shadow: 0 0 30px currentColor, 0 0 60px currentColor, inset 0 0 15px currentColor;
+    }
+
+    .globe-hotspot:hover .hotspot-ripple {
+      animation-duration: 1.2s;
+      border-color: currentColor;
     }
 
     @keyframes hotspotBreathing {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
+      50% { transform: scale(1.05); }
     }
 
     /* Hotspot Label (Hidden in Idle mode for clean minimalist layout, fades in on hover) */
@@ -296,30 +303,44 @@
 
     .hud-pulse { animation: hudPulse 2s infinite ease-in-out; }
 
-    /* Hotspot Mini Hover Preview Tooltip */
+    /* Hotspot Reactive Glassmorphic Preview Card */
     .hotspot-preview-tooltip {
       position: absolute;
-      top: 115%;
+      bottom: calc(100% + 14px);
       left: 50%;
-      transform: translateX(-50%) scale(0.9);
+      transform: translateX(-50%) translateY(8px) scale(0.92);
       opacity: 0;
       pointer-events: none;
-      background: rgba(6, 10, 16, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid currentColor;
+      background: rgba(4, 8, 16, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 12px;
-      padding: 8px 14px;
-      white-space: nowrap;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px currentColor;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 30;
-      text-align: center;
+      padding: 10px 14px;
+      min-width: 180px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 240, 255, 0.18);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 50;
+      text-align: left;
+    }
+
+    .hotspot-preview-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(4, 8, 16, 0.94) transparent transparent transparent;
     }
 
     .globe-hotspot:hover .hotspot-preview-tooltip {
       opacity: 1;
-      transform: translateX(-50%) scale(1);
+      transform: translateX(-50%) translateY(0) scale(1);
+      pointer-events: auto;
+      border-color: currentColor;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 30px currentColor;
     }
 
     /* Product Unique Keyframes */
@@ -431,6 +452,82 @@
       color: transparent;
       display: inline-block;
     }
+
+    /* Ambient Audio Floating Controller (Bottom-Left, Icon-Only) */
+    .ambient-audio-btn {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      z-index: 45;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 10, 18, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .ambient-audio-btn:hover {
+      background: rgba(10, 16, 28, 0.95);
+      border-color: rgba(0, 240, 255, 0.5);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .ambient-audio-btn.is-active {
+      border-color: #00f0ff;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    }
+
+    /* 4-Bar Equalizer Visualizer */
+    .audio-equalizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 16px;
+      width: 16px;
+    }
+
+    .eq-bar {
+      width: 2.5px;
+      background-color: rgba(255, 255, 255, 0.35);
+      border-radius: 2px;
+      height: 3px;
+      transition: height 0.25s ease, background-color 0.25s ease;
+    }
+
+    .ambient-audio-btn.is-active .eq-bar {
+      background-color: #00f0ff;
+      box-shadow: 0 0 8px #00f0ff;
+      animation: eqBarJump 1.2s infinite ease-in-out;
+    }
+
+    .ambient-audio-btn.is-active .eq-1 { animation-delay: 0.0s; }
+    .ambient-audio-btn.is-active .eq-2 { animation-delay: 0.35s; }
+    .ambient-audio-btn.is-active .eq-3 { animation-delay: 0.15s; }
+    .ambient-audio-btn.is-active .eq-4 { animation-delay: 0.5s; }
+
+    @keyframes eqBarJump {
+      0%, 100% { height: 3px; }
+      50% { height: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .ambient-audio-btn {
+        bottom: 24px;
+        left: 20px;
+        width: 38px;
+        height: 38px;
+      }
+    }
   </style>
 </head>
 <body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
@@ -483,6 +580,16 @@
       <!-- WebGL 3D Globe Canvas Container -->
       <div id="globe-canvas-container" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></div>
 
+      <!-- Floating Ambient Audio Controller (Bottom-Left, Icon-Only) -->
+      <button id="ambient-audio-toggle" class="ambient-audio-btn" aria-label="Toggle Ambient Audio" title="Ambient Cyber Audio (Click to Mute / Unmute)">
+        <div class="audio-equalizer">
+          <span class="eq-bar eq-1"></span>
+          <span class="eq-bar eq-2"></span>
+          <span class="eq-bar eq-3"></span>
+          <span class="eq-bar eq-4"></span>
+        </div>
+      </button>
+
       <!-- Floating Hero Ecosystem Tagline (Below 3D Globe) -->
       <div id="hero-tagline-container">
         <div class="hero-tagline-badge">
@@ -496,8 +603,7 @@
       <!-- 2D Projected Hotspots Container -->
       <div id="hotspots-container" class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-hidden">
         
-        <!-- Hotspot 1: Mission Control -->
-        <!-- Hotspot 1: The Mission Control -->
+        <!-- Hotspot 1: The Mission Control (San Francisco) -->
         <div id="hotspot-0" class="globe-hotspot text-[#00f0ff]" data-index="0">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -512,14 +618,19 @@
             </div>
             <div class="hotspot-label">THE MISSION CONTROL</div>
             <div class="hotspot-preview-tooltip text-[#00f0ff]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE MISSION CONTROL</div>
-              <div class="text-[8px] font-mono text-cyan-300">SaaS Workflow Platform</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#00f0ff] uppercase">SaaS Platform</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE MISSION CONTROL</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">37.77° N // 122.42° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 2: The Studio -->
+        <!-- Hotspot 2: The Studio (London) -->
         <div id="hotspot-1" class="globe-hotspot text-[#a855f7]" data-index="1">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -532,14 +643,19 @@
             </div>
             <div class="hotspot-label">THE STUDIO</div>
             <div class="hotspot-preview-tooltip text-[#a855f7]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE STUDIO</div>
-              <div class="text-[8px] font-mono text-purple-300">AI Content Studio</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#a855f7] uppercase">AI Content Studio</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-purple-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> ACTIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE STUDIO (LONDON)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">51.51° N // 0.13° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 3: The Vault -->
+        <!-- Hotspot 3: The Vault (Tokyo) -->
         <div id="hotspot-2" class="globe-hotspot text-[#f59e0b]" data-index="2">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -553,14 +669,19 @@
             </div>
             <div class="hotspot-label">THE VAULT</div>
             <div class="hotspot-preview-tooltip text-[#f59e0b]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE VAULT</div>
-              <div class="text-[8px] font-mono text-amber-300">Proprietary IP Engine</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#f59e0b] uppercase">IP Engine</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-amber-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> SECURED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE VAULT (TOKYO)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">35.68° N // 139.65° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 4: The Playground Hub -->
+        <!-- Hotspot 4: The Playground Hub (Sydney) -->
         <div id="hotspot-3" class="globe-hotspot text-[#ff2e93]" data-index="3">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -573,14 +694,19 @@
             </div>
             <div class="hotspot-label">THE PLAYGROUND HUB</div>
             <div class="hotspot-preview-tooltip text-[#ff2e93]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND HUB</div>
-              <div class="text-[8px] font-mono text-pink-300">Creator Platform</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#ff2e93] uppercase">Creator Hub</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-pink-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span> LIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE PLAYGROUND (SYDNEY)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">33.87° S // 151.21° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 5: The Mission Control -->
+        <!-- Hotspot 5: The Mission Control (New York) -->
         <div id="hotspot-4" class="globe-hotspot text-[#00f0ff]" data-index="4">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -594,14 +720,19 @@
             </div>
             <div class="hotspot-label">THE MISSION CONTROL</div>
             <div class="hotspot-preview-tooltip text-[#00f0ff]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE MISSION CONTROL</div>
-              <div class="text-[8px] font-mono text-cyan-300">Enterprise AI OS</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#00f0ff] uppercase">Enterprise AI OS</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-cyan-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> CONNECTED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">MISSION CONTROL (NEW YORK)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">40.71° N // 74.01° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 6: The Studio -->
+        <!-- Hotspot 6: The Studio (India - Mumbai/Bangalore) -->
         <div id="hotspot-5" class="globe-hotspot text-[#a855f7]" data-index="5">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -614,14 +745,19 @@
             </div>
             <div class="hotspot-label">THE STUDIO</div>
             <div class="hotspot-preview-tooltip text-[#a855f7]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE STUDIO</div>
-              <div class="text-[8px] font-mono text-purple-300">Generative Post-Production</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#a855f7] uppercase">VFX & Generative Media</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-purple-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> ACTIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE STUDIO (INDIA)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">19.08° N // 72.88° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 7: The Vault -->
+        <!-- Hotspot 7: The Vault (Singapore) -->
         <div id="hotspot-6" class="globe-hotspot text-[#f59e0b]" data-index="6">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -635,14 +771,19 @@
             </div>
             <div class="hotspot-label">THE VAULT</div>
             <div class="hotspot-preview-tooltip text-[#f59e0b]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE VAULT</div>
-              <div class="text-[8px] font-mono text-amber-300">Asset Rights Vault</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#f59e0b] uppercase">Rights & Quantum HSM</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-amber-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> SECURED
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE VAULT (SINGAPORE)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">1.35° N // 103.82° E • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
 
-        <!-- Hotspot 8: The Playground Hub -->
+        <!-- Hotspot 8: The Playground Hub (Rio de Janeiro) -->
         <div id="hotspot-7" class="globe-hotspot text-[#ff2e93]" data-index="7">
           <div class="hotspot-inner">
             <div class="hotspot-ripple"></div>
@@ -655,9 +796,14 @@
             </div>
             <div class="hotspot-label">THE PLAYGROUND HUB</div>
             <div class="hotspot-preview-tooltip text-[#ff2e93]">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-wider text-white">THE PLAYGROUND HUB</div>
-              <div class="text-[8px] font-mono text-pink-300">Social AI Studio</div>
-              <div class="text-[8px] font-mono text-white/50 mt-1">Click to Explore →</div>
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-[8px] font-mono font-bold tracking-widest text-[#ff2e93] uppercase">AI Sandbox Hub</span>
+                <span class="inline-flex items-center gap-1 text-[7px] font-mono text-pink-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span> LIVE
+                </span>
+              </div>
+              <div class="font-heading text-[12px] font-extrabold tracking-wide text-white uppercase">THE PLAYGROUND (RIO)</div>
+              <div class="text-[8px] font-mono text-white/60 mt-1">22.91° S // 43.17° W • Click to Inspect ↗</div>
             </div>
           </div>
         </div>
@@ -746,6 +892,30 @@
           </a>
         </div>
 
+      </div>
+
+      <!-- World-Class Global Hub Quick-Jump Navigation Dock -->
+      <div id="globe-quick-nav" class="absolute bottom-5 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 md:gap-2 p-1.5 rounded-full bg-[#080d1a]/85 backdrop-blur-2xl border border-white/10 shadow-[0_0_40px_rgba(0,240,255,0.15)] max-w-[95vw] overflow-x-auto no-scrollbar pointer-events-auto transition-all duration-500">
+        <div class="hidden md:flex items-center gap-2 pl-3 pr-2.5 py-1 text-[10px] font-mono tracking-widest text-white/50 uppercase border-r border-white/10">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping"></span>
+          <span>GLOBAL HUBS</span>
+        </div>
+        <button data-hub="0" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#00f0ff]/50 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff]"></span>
+          <span>MISSION CONTROL <span class="text-white/40 font-normal">SF</span></span>
+        </button>
+        <button data-hub="1" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#a855f7]/50 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-[#a855f7] shadow-[0_0_8px_#a855f7]"></span>
+          <span>THE STUDIO <span class="text-white/40 font-normal">LON</span></span>
+        </button>
+        <button data-hub="2" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#f59e0b]/50 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-[#f59e0b] shadow-[0_0_8px_#f59e0b]"></span>
+          <span>THE VAULT <span class="text-white/40 font-normal">TYO</span></span>
+        </button>
+        <button data-hub="3" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#ff2e93]/50 whitespace-nowrap">
+          <span class="w-2 h-2 rounded-full bg-[#ff2e93] shadow-[0_0_8px_#ff2e93]"></span>
+          <span>PLAYGROUND <span class="text-white/40 font-normal">SYD</span></span>
+        </button>
       </div>
 
     </section>
@@ -1918,6 +2088,11 @@
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { 
+      createCircleDotTexture,
+      WORLD_COASTLINES, 
+      MAJOR_NETWORK_ROUTES 
+    } from './assets/js/world-map-data.js';
 
     // --- FIXED GEOGRAPHIC PRODUCTS DATA CONFIG (8 ITEMS - 4 CORE TYPES REPEATED) ---
     const PRODUCTS = [
@@ -1992,11 +2167,11 @@
         category: "Generative Post-Production",
         color: "#a855f7",
         colorName: "purple",
-        lat: 48.8566,
-        lon: 2.3522,
-        description: "Next-gen VFX engine for neural inpainting, relighting, and high-speed multi-modal compositing.",
+        lat: 19.0760,
+        lon: 72.8777,
+        description: "AI Production Studio & Next-Gen VFX engine for neural inpainting, relighting, and high-speed compositing.",
         features: ["AI Editing", "Production", "Post Production"],
-        cta: "Explore Studio FX",
+        cta: "Explore Studio India",
         link: "./connect.html"
       },
       {
@@ -2005,8 +2180,8 @@
         category: "Asset Rights Vault",
         color: "#f59e0b",
         colorName: "amber",
-        lat: 22.3193,
-        lon: 114.1694,
+        lat: 1.3521,
+        lon: 103.8198,
         description: "Immutable digital rights protection and biometric consent verification for AI character assets.",
         features: ["Consent Lock", "Rights Registry", "IP Audit Trail"],
         cta: "Inspect Vault Safe",
@@ -2054,75 +2229,26 @@
       return new THREE.Vector3(0, dist * 0.08, dist);
     }
 
-    // --- COMPOSITION ENGINE: 8 CURATED OPENING LAYOUTS FOR 8 PRODUCTS (INNER SAFE ZONE) ---
-    const CURATED_COMPOSITIONS = [
-      // 1. Balanced Octagonal Ring
-      [
-        { lat: 28, lon: -135 }, { lat: -18, lon: -90 }, { lat: 32, lon: -45 }, { lat: -22, lon: 0 },
-        { lat: 24, lon: 45 }, { lat: -15, lon: 90 }, { lat: 35, lon: 135 }, { lat: -25, lon: 180 }
-      ],
-      // 2. Dual Horizon Stagger
-      [
-        { lat: 32, lon: -140 }, { lat: -22, lon: -95 }, { lat: 26, lon: -50 }, { lat: -18, lon: -5 },
-        { lat: 34, lon: 40 }, { lat: -25, lon: 85 }, { lat: 28, lon: 130 }, { lat: -20, lon: 175 }
-      ],
-      // 3. Equatorial Wave Constellation
-      [
-        { lat: 25, lon: -120 }, { lat: -28, lon: -75 }, { lat: 35, lon: -30 }, { lat: -12, lon: 15 },
-        { lat: 22, lon: 60 }, { lat: -32, lon: 105 }, { lat: 30, lon: 150 }, { lat: -16, lon: -165 }
-      ],
-      // 4. Staggered Spiral Matrix
-      [
-        { lat: 36, lon: -150 }, { lat: 18, lon: -105 }, { lat: -15, lon: -60 }, { lat: -30, lon: -15 },
-        { lat: 12, lon: 30 }, { lat: 34, lon: 75 }, { lat: -22, lon: 120 }, { lat: 26, lon: 165 }
-      ],
-      // 5. Orbital Diamond Lattice
-      [
-        { lat: 30, lon: -130 }, { lat: -20, lon: -85 }, { lat: 28, lon: -40 }, { lat: -24, lon: 5 },
-        { lat: 32, lon: 50 }, { lat: -16, lon: 95 }, { lat: 26, lon: 140 }, { lat: -22, lon: -170 }
-      ],
-      // 6. Double Meridian Spread
-      [
-        { lat: 22, lon: -145 }, { lat: -26, lon: -100 }, { lat: 34, lon: -55 }, { lat: -14, lon: -10 },
-        { lat: 28, lon: 35 }, { lat: -20, lon: 80 }, { lat: 32, lon: 125 }, { lat: -28, lon: 170 }
-      ],
-      // 7. Dynamic Crown & Base
-      [
-        { lat: 35, lon: -125 }, { lat: -15, lon: -80 }, { lat: 30, lon: -35 }, { lat: -25, lon: 10 },
-        { lat: 25, lon: 55 }, { lat: -30, lon: 100 }, { lat: 34, lon: 145 }, { lat: -18, lon: -160 }
-      ],
-      // 8. Equinox Balanced Crest
-      [
-        { lat: 24, lon: -138 }, { lat: -24, lon: -92 }, { lat: 32, lon: -46 }, { lat: -16, lon: 0 },
-        { lat: 30, lon: 46 }, { lat: -22, lon: 92 }, { lat: 26, lon: 138 }, { lat: -26, lon: 180 }
-      ]
-    ];
-
-    let activeCompositionIndex = 0;
-    let activeComposition = null;
-
     // --- CLEAR CACHED GLOBE STATE ON PAGE LOAD FOR FRESH INTRO UX ---
     try {
       sessionStorage.removeItem('global_ai_globe_state');
     } catch (e) {}
 
     // --- TIMING & ANIMATION CONFIGURATION CONSTANTS ---
-    const INACTIVITY_TIMEOUT_MS       = 10000; // 10 seconds before auto-demo starts
-    const DEMO_HOTSPOT_HOLD_MS        = 3200;  // 3.2 seconds display time per hotspot
-    const DEMO_TRANSITION_MS          = 1500;  // 1.5 seconds pause between hotspots
-    const ORBIT_PACKET_ROTATION_SPEED = 0.002; // Reduced from 0.008 for smoother, elegant rotation
+    const INACTIVITY_TIMEOUT_MS = 10000; // 10 seconds before auto-demo starts
+    const DEMO_HOTSPOT_HOLD_MS = 3200;  // 3.2 seconds display time per hotspot
+    const DEMO_TRANSITION_MS = 1500;  // 1.5 seconds pause between hotspots
+    const ORBIT_PACKET_ROTATION_SPEED = 0.0035; // Speed of equatorial data packets
 
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
-    let globeGroup, particleSphere, particleSphereBasePositions, coreMesh, atmosphereMesh, energyStreamGroup, orbitPacketsMesh;
-    let particleSphereStartPositions, particleSphereBaseColors;
-    let particleDelays, particleDurations, particleControlPoints, particleOrbitAxes, particleOrbitRevolutions;
-    let particleTwinklePhases, particleTwinkleSpeeds, particleAmbientPhases;
-    const ASSEMBLY_DURATION = 5.2; // 5.2s total 5-stage intelligent particle assembly
+    let globeGroup, coreSphereMesh, coastlineMesh, atmosphereMesh, atmosphereOuterMesh;
+    let beaconTowersGroup, laserArcsGroup, energyStreamGroup, orbitPacketsMesh;
+    let networkPhotonCurves = [], networkPhotonPoints = null;
+    let beaconRipples = [];
     let hotspotAnchors = [];
     let activeProductIndex = null;
     let isZoomed = false;
-    let flameMode = true;
     let inactivityTimer = null;
     let isAutoDemoRunning = false;
     const globeRadius = 290;
@@ -2132,9 +2258,6 @@
       if (!container) return;
 
       clock = new THREE.Clock();
-
-      activeCompositionIndex = Math.floor(Math.random() * CURATED_COMPOSITIONS.length);
-      activeComposition = CURATED_COMPOSITIONS[activeCompositionIndex];
 
       // 1. Scene
       scene = new THREE.Scene();
@@ -2149,45 +2272,52 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
       container.appendChild(renderer.domElement);
 
-      // 4. OrbitControls
+      // 4. OrbitControls with Natural Spherical Drag & Damped Inertia
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
-      controls.rotateSpeed = 0.8;
+      controls.rotateSpeed = 0.65;
       controls.enableZoom = false; // Disable wheel zoom trapping to allow natural page scrolling
       controls.minDistance = 300;
       controls.maxDistance = 1800;
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.55;
+      controls.autoRotateSpeed = 0.45;
 
-      // 5. Parent Globe Group
+      // 5. Parent Globe Group (Oriented with India front and center on load)
       globeGroup = new THREE.Group();
       globeGroup.scale.set(0.78, 0.78, 0.78);
-      globeGroup.rotation.y = 0.0;
-      globeGroup.rotation.x = -0.25;
+      globeGroup.rotation.y = -(78.0 * Math.PI / 180); // India Longitude: ~78°E facing directly front
+      globeGroup.rotation.x = -0.15; // Natural ergonomic tilt for viewing the Indian subcontinent
       scene.add(globeGroup);
 
-      // 6. Build 3D Components
-      createMassiveParticleGlobe();
+      // 6. Build Dark Vector Map Globe 3D Components (0 Dots, Pure Vector Lines)
+      createDarkBaseSphere();
+      createGlobeCoastlines();
+      createBeaconTowers();
+      createLaserNetworkArcs();
       createGlobeAtmosphere();
-      createInternalCore();
       createActiveDataOrbitPackets();
       createHotspotAnchors();
       createEnergyStreamSystem();
 
-      // 7. Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+      // 7. Lighting (Luminous Cyber 3-Point Setup)
+      const ambientLight = new THREE.AmbientLight(0x272b68, 2.2);
       scene.add(ambientLight);
 
-      const dirLight1 = new THREE.DirectionalLight(0x00f0ff, 2.5);
-      dirLight1.position.set(500, 300, 500);
+      const dirLight1 = new THREE.DirectionalLight(0x00f0ff, 3.6);
+      dirLight1.position.set(600, 400, 600);
       scene.add(dirLight1);
 
-      const dirLight2 = new THREE.DirectionalLight(0xff2e93, 2.0);
-      dirLight2.position.set(-500, -200, -500);
+      const dirLight2 = new THREE.DirectionalLight(0xff2e93, 2.8);
+      dirLight2.position.set(-600, -300, -600);
       scene.add(dirLight2);
+
+      const fillLight = new THREE.DirectionalLight(0x8b5cf6, 1.8);
+      fillLight.position.set(0, 800, 200);
+      scene.add(fillLight);
 
       // 8. Camera Reveal Sequence
       gsap.to(camera.position, {
@@ -2213,13 +2343,18 @@
       window.addEventListener('resize', onResize);
       setupHotspotUIEvents();
       setupInactivityTracker();
+      initAmbientAudioEngine();
 
-      // Mouse Parallax Effect
+      // Subtle Parallax (only when not interacting)
+      let isInteracting = false;
+      controls.addEventListener('start', () => { isInteracting = true; });
+      controls.addEventListener('end', () => { isInteracting = false; });
+
       window.addEventListener('mousemove', (e) => {
-        if (isZoomed) return;
-        const mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
-        const mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
-        gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.5, ease: "power2.out" });
+        if (isZoomed || isInteracting) return;
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+        gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.8, ease: "power2.out" });
       });
 
       // 10. Start Animation Loop
@@ -2366,31 +2501,30 @@
         const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
         const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
 
-        // 4. Depth visibility and scaling
-        if (facingDot > -0.05) {
+        // 4. Depth visibility and scaling (clean front-hemisphere occlusion)
+        if (facingDot > 0.02) {
           let targetOpacity = 1.0;
           let targetScale = 1.0;
 
           if (facingDot > 0.35) {
             targetOpacity = 1.0;
             targetScale = 1.0 + (facingDot - 0.35) * 0.18; // 1.0 to 1.11 scale
-          } else if (facingDot > 0.05) {
-            targetOpacity = 0.45 + ((facingDot - 0.05) / 0.3) * 0.55;
-            targetScale = 0.9 + ((facingDot - 0.05) / 0.3) * 0.1;
+          } else if (facingDot > 0.12) {
+            targetOpacity = 0.60 + ((facingDot - 0.12) / 0.23) * 0.40;
+            targetScale = 0.92 + ((facingDot - 0.12) / 0.23) * 0.08;
           } else {
-            targetOpacity = 0.15 + ((facingDot + 0.05) / 0.1) * 0.3;
+            targetOpacity = ((facingDot - 0.02) / 0.10) * 0.60;
             targetScale = 0.85;
           }
 
           if (isZoomed && activeProductIndex !== idx) {
-            targetOpacity *= 0.2; // Dim unselected hotspots when zoomed
+            targetOpacity *= 0.15; // Dim unselected hotspots when zoomed
           }
 
-          // Fade hotspots in smoothly as assembly completes
+          // Fade hotspots in smoothly on intro
           if (clock) {
-            const assemblyProgress = Math.min(1.0, clock.getElapsedTime() / ASSEMBLY_DURATION);
-            const assemblyFade = Math.max(0.0, Math.min(1.0, (assemblyProgress - 0.3) / 0.7));
-            targetOpacity *= assemblyFade;
+            const introProgress = Math.min(1.0, clock.getElapsedTime() / 1.5);
+            targetOpacity *= introProgress;
           }
 
           elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${targetScale.toFixed(2)})`;
@@ -2404,7 +2538,92 @@
       });
     }
 
-    // --- INTERACTIVE HOTSPOT CLICK & FLY-TO ANIMATION ---
+    // --- BEST UI/UX: REACTIVE MARKER HOVER SYSTEM ---
+    function highlightConnectedLaserArcs(hubIdx) {
+      if (hubIdx === null || hubIdx === undefined) return;
+      const targetProd = PRODUCTS[hubIdx];
+      if (!targetProd) return;
+
+      const tolerance = 2.0;
+
+      // 1. Connection lines brighten (connected surge to 0.98, unconnected dim to 0.12)
+      if (laserArcsGroup && laserArcsGroup.children) {
+        MAJOR_NETWORK_ROUTES.forEach((route, rIdx) => {
+          const arcLine = laserArcsGroup.children[rIdx];
+          if (!arcLine) return;
+
+          const isConnected = 
+            (Math.abs(route.from[0] - targetProd.lat) < tolerance && Math.abs(route.from[1] - targetProd.lon) < tolerance) ||
+            (Math.abs(route.to[0] - targetProd.lat) < tolerance && Math.abs(route.to[1] - targetProd.lon) < tolerance);
+
+          if (isConnected) {
+            gsap.to(arcLine.material, { opacity: 0.98, duration: 0.22, ease: "power2.out" });
+            if (networkPhotonCurves[rIdx]) {
+              networkPhotonCurves[rIdx].speed = 0.009; // Accelerate traveling photons
+            }
+          } else {
+            gsap.to(arcLine.material, { opacity: 0.12, duration: 0.22, ease: "power2.out" });
+          }
+        });
+      }
+
+      // 2. 3D Marker slightly scales up
+      const anchor = hotspotAnchors[hubIdx];
+      if (anchor) {
+        gsap.to(anchor.scale, { x: 1.35, y: 1.35, z: 1.35, duration: 0.25, ease: "power2.out" });
+      }
+
+      // 3. 3D Beacon Tower intensifies glow
+      if (beaconTowersGroup && beaconTowersGroup.children[hubIdx]) {
+        const towerGroup = beaconTowersGroup.children[hubIdx];
+        if (towerGroup.children[0] && towerGroup.children[0].material) {
+          gsap.to(towerGroup.children[0].material, { opacity: 1.0, duration: 0.2 });
+        }
+      }
+
+      // 4. Subtle atmospheric corona reaction
+      if (atmosphereMesh) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.28, duration: 0.3 });
+      }
+    }
+
+    function resetLaserArcsHighlight() {
+      // 1. Connection lines return to ambient brightness
+      if (laserArcsGroup && laserArcsGroup.children) {
+        MAJOR_NETWORK_ROUTES.forEach((route, rIdx) => {
+          const arcLine = laserArcsGroup.children[rIdx];
+          if (arcLine) {
+            gsap.to(arcLine.material, { opacity: 0.38, duration: 0.3, ease: "power2.out" });
+          }
+          if (networkPhotonCurves[rIdx]) {
+            networkPhotonCurves[rIdx].speed = 0.0035 + (rIdx % 3) * 0.001;
+          }
+        });
+      }
+
+      // 2. Reset all 3D anchor scales
+      hotspotAnchors.forEach((anchor) => {
+        if (anchor) {
+          gsap.to(anchor.scale, { x: 1.0, y: 1.0, z: 1.0, duration: 0.3, ease: "power2.out" });
+        }
+      });
+
+      // 3. Reset 3D Beacon Towers
+      if (beaconTowersGroup && beaconTowersGroup.children) {
+        beaconTowersGroup.children.forEach(towerGroup => {
+          if (towerGroup.children[0] && towerGroup.children[0].material) {
+            gsap.to(towerGroup.children[0].material, { opacity: 0.45, duration: 0.3 });
+          }
+        });
+      }
+
+      // 4. Reset atmosphere
+      if (atmosphereMesh && !isZoomed) {
+        gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.3 });
+      }
+    }
+
+    // --- INTERACTIVE HOTSPOT CLICK & QUICK-NAV DOCK EVENTS ---
     function setupHotspotUIEvents() {
       PRODUCTS.forEach((prod, idx) => {
         const elem = document.getElementById(`hotspot-${idx}`);
@@ -2414,17 +2633,31 @@
             selectHotspot(idx);
           });
 
-          // Atmosphere reaction on hover
+          // Best UI/UX: Full reactive hover system
           elem.addEventListener('mouseenter', () => {
-            if (atmosphereMesh) {
-              gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.4 });
-            }
+            highlightConnectedLaserArcs(idx);
           });
 
           elem.addEventListener('mouseleave', () => {
-            if (atmosphereMesh && !isZoomed) {
-              gsap.to(atmosphereMesh.material, { opacity: 0.08, duration: 0.4 });
-            }
+            resetLaserArcsHighlight();
+          });
+        }
+      });
+
+      // Quick-Jump Navigation Dock Buttons (Hover + Click)
+      const hubButtons = document.querySelectorAll('.globe-hub-btn');
+      hubButtons.forEach((btn) => {
+        const hubIdx = parseInt(btn.getAttribute('data-hub'), 10);
+        if (!isNaN(hubIdx)) {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectHotspot(hubIdx);
+          });
+          btn.addEventListener('mouseenter', () => {
+            highlightConnectedLaserArcs(hubIdx);
+          });
+          btn.addEventListener('mouseleave', () => {
+            resetLaserArcsHighlight();
           });
         }
       });
@@ -2449,7 +2682,7 @@
       // Click Outside to Reset
       window.addEventListener('click', (e) => {
         const hudContainer = document.getElementById('hud-modules-container');
-        if (isZoomed && hudContainer && !hudContainer.contains(e.target) && !e.target.closest('.globe-hotspot')) {
+        if (isZoomed && hudContainer && !hudContainer.contains(e.target) && !e.target.closest('.globe-hotspot') && !e.target.closest('#globe-quick-nav')) {
           resetCamera();
         }
       });
@@ -2462,6 +2695,137 @@
       });
     }
 
+    // --- OPTIMIZED AMBIENT AUDIO ENGINE (INTERACTION AUTO-PLAY + CACHED MUTE INTENT) ---
+    const AUDIO_SRC = 'assets/audio/background-audio.mpeg';
+    let bgAudio = null;
+    let isAudioPlaying = false;
+    const TARGET_VOLUME = 0.28;
+
+    function initAmbientAudioEngine() {
+      const audioBtn = document.getElementById('ambient-audio-toggle');
+      if (!audioBtn) return;
+
+      const INTERACTION_EVENTS = ['pointerdown', 'mousemove', 'click', 'touchstart', 'scroll', 'wheel', 'keydown'];
+
+      // Check if user has intentionally muted audio previously
+      const isUserIntentMuted = () => localStorage.getItem('global_ai_sound_user_intent') === 'muted';
+
+      function updateAudioUI(active) {
+        if (active) {
+          audioBtn.classList.add('is-active');
+          audioBtn.setAttribute('title', 'Ambient Sound: ON (Click to Mute)');
+        } else {
+          audioBtn.classList.remove('is-active');
+          audioBtn.setAttribute('title', 'Ambient Sound: MUTED (Click to Play)');
+        }
+      }
+
+      function ensureAudioInstance() {
+        if (!bgAudio) {
+          bgAudio = new Audio(AUDIO_SRC);
+          bgAudio.loop = true;
+          bgAudio.volume = 0.0;
+          bgAudio.preload = 'auto';
+        }
+        return bgAudio;
+      }
+
+      function playAudioWithFade() {
+        if (isUserIntentMuted()) return;
+
+        const audio = ensureAudioInstance();
+        audio.play().then(() => {
+          isAudioPlaying = true;
+          updateAudioUI(true);
+          gsap.to(audio, { volume: TARGET_VOLUME, duration: 1.4, ease: "power2.out" });
+          detachInteractionListeners();
+        }).catch(() => {
+          // Autoplay restricted until first user interaction gesture
+          attachInteractionListeners();
+        });
+      }
+
+      function pauseAudioWithFade(explicitUserMute = false) {
+        if (!bgAudio) return;
+        if (explicitUserMute) {
+          localStorage.setItem('global_ai_sound_user_intent', 'muted');
+          detachInteractionListeners();
+        }
+        gsap.to(bgAudio, {
+          volume: 0.0,
+          duration: 0.8,
+          ease: "power2.in",
+          onComplete: () => {
+            if (bgAudio) bgAudio.pause();
+            isAudioPlaying = false;
+            updateAudioUI(false);
+          }
+        });
+      }
+
+      // Handler for any user interaction on the website
+      const onUserInteraction = () => {
+        if (!isUserIntentMuted() && !isAudioPlaying) {
+          playAudioWithFade();
+        }
+      };
+
+      function attachInteractionListeners() {
+        if (isUserIntentMuted()) return;
+        INTERACTION_EVENTS.forEach(evt => {
+          window.addEventListener(evt, onUserInteraction, { once: true, passive: true });
+        });
+      }
+
+      function detachInteractionListeners() {
+        INTERACTION_EVENTS.forEach(evt => {
+          window.removeEventListener(evt, onUserInteraction);
+        });
+      }
+
+      // 1. Post-load asynchronous cache & preload
+      const loadAudioAsync = async () => {
+        try {
+          if ('caches' in window) {
+            const cache = await caches.open('global-ai-audio-v1');
+            const cachedRes = await cache.match(AUDIO_SRC);
+            if (!cachedRes) {
+              fetch(AUDIO_SRC).then((res) => {
+                if (res.ok) cache.put(AUDIO_SRC, res);
+              }).catch(() => {});
+            }
+          }
+        } catch (e) {}
+
+        ensureAudioInstance();
+
+        // If NOT intentionally muted by user, attempt playback & listen for any interaction
+        if (!isUserIntentMuted()) {
+          playAudioWithFade();
+          attachInteractionListeners();
+        } else {
+          updateAudioUI(false);
+        }
+      };
+
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(loadAudioAsync);
+      } else {
+        setTimeout(loadAudioAsync, 600);
+      }
+
+      // User explicit toggle button click
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isAudioPlaying) {
+          pauseAudioWithFade(true); // Explicit user mute
+        } else {
+          localStorage.setItem('global_ai_sound_user_intent', 'active');
+          playAudioWithFade();
+        }
+      });
+    }
+
     function selectHotspot(index) {
       const prod = PRODUCTS[index];
       const anchor = hotspotAnchors[index];
@@ -2470,30 +2834,41 @@
       activeProductIndex = index;
       isZoomed = true;
 
-      // 1. AI Core Energy Propagation Burst
-      if (coreMesh) {
-        gsap.to(coreMesh.scale, { x: 1.6, y: 1.6, z: 1.6, duration: 0.4, yoyo: true, repeat: 1, ease: "power2.out" });
+      // 1. Update Quick-Jump Dock active button styling
+      const hubButtons = document.querySelectorAll('.globe-hub-btn');
+      hubButtons.forEach((btn) => {
+        const hubIdx = parseInt(btn.getAttribute('data-hub'), 10);
+        if (hubIdx === (index % 4)) {
+          btn.classList.add('!bg-white/20', '!border-[#00f0ff]', '!text-white', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
+        } else {
+          btn.classList.remove('!bg-white/20', '!border-[#00f0ff]', '!text-white', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
+        }
+      });
+
+      // 2. Vector Coastlines Energy Glow Reaction
+      if (coastlineMesh && coastlineMesh.material) {
+        gsap.to(coastlineMesh.material, { opacity: 1.0, duration: 0.35, yoyo: true, repeat: 1, ease: "power2.out" });
       }
 
-      // 2. Atmosphere Reaction Brightens
+      // 3. Atmosphere Reaction Brightens
       if (atmosphereMesh) {
-        gsap.to(atmosphereMesh.material, { opacity: 0.22, duration: 0.8 });
+        gsap.to(atmosphereMesh.material, { opacity: 0.28, duration: 0.8 });
       }
 
-      // 3. Globe auto-rotation continues slowly in background
+      // 4. Globe auto-rotation continues slowly in background
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.18;
 
-      // 4. Get World position of target 3D hotspot
+      // 5. Get World position of target 3D hotspot
       const targetVec = anchor.getWorldPosition(new THREE.Vector3());
 
-      // 5. Compute Camera Destination: ~5x zoom closer to hotspot
+      // 6. Compute Camera Destination: ~5x zoom closer to hotspot
       const camDestination = targetVec.clone().multiplyScalar(1.52);
 
-      // 6. Trigger Energy Particle Pulse
+      // 7. Trigger Energy Particle Pulse
       triggerEnergyPulse(targetVec, prod.color);
 
-      // 7. GSAP Camera Position Fly-To Animation (1200ms)
+      // 8. GSAP Camera Position Fly-To Animation (1200ms)
       gsap.to(camera.position, {
         x: camDestination.x,
         y: camDestination.y + (window.innerWidth < 768 ? 0 : 15),
@@ -2502,7 +2877,7 @@
         ease: "power3.inOut"
       });
 
-      // 8. GSAP Controls Target Interpolation
+      // 9. GSAP Controls Target Interpolation
       gsap.to(controls.target, {
         x: targetVec.x * 0.65,
         y: targetVec.y * 0.65,
@@ -2514,13 +2889,13 @@
         }
       });
 
-      // 9. Fade tagline on mobile during inspection
+      // 10. Fade tagline on mobile during inspection
       const taglineElem = document.getElementById('hero-tagline-container');
       if (taglineElem && window.innerWidth < 768) {
         gsap.to(taglineElem, { opacity: 0, duration: 0.3 });
       }
 
-      // 10. Show Attached Staggered Holographic HUD Modules
+      // 11. Show Attached Staggered Holographic HUD Modules
       showHolographicHUD(prod, targetVec);
     }
 
@@ -2589,7 +2964,7 @@
       // Position HUD Container (Desktop right side, Mobile bottom)
       if (window.innerWidth < 768) {
         hudContainer.style.left = '50%';
-        hudContainer.style.bottom = '1rem';
+        hudContainer.style.bottom = '5.5rem';
         hudContainer.style.top = 'auto';
         hudContainer.style.right = 'auto';
         hudContainer.style.transform = 'translateX(-50%)';
@@ -2639,8 +3014,14 @@
       isZoomed = false;
       activeProductIndex = null;
 
+      // Reset Quick-Jump Dock highlights
+      const hubButtons = document.querySelectorAll('.globe-hub-btn');
+      hubButtons.forEach((btn) => {
+        btn.classList.remove('!bg-white/20', '!border-[#00f0ff]', '!text-white', 'shadow-[0_0_15px_rgba(0,240,255,0.4)]');
+      });
+
       if (atmosphereMesh) {
-        gsap.to(atmosphereMesh.material, { opacity: 0.08, duration: 0.6 });
+        gsap.to(atmosphereMesh.material, { opacity: 0.18, duration: 0.6 });
       }
 
       const splineLine = document.getElementById('hud-spline-line');
@@ -2740,100 +3121,32 @@
         orbitPacketsMesh.rotation.y += ORBIT_PACKET_ROTATION_SPEED;
       }
 
-      // Alive AI Core Breathing & Morphed Rotation
-      if (coreMesh) {
-        const breathingScale = 1.0 + Math.sin(t * 1.8) * 0.06;
-        coreMesh.scale.set(breathingScale, breathingScale, breathingScale);
-        coreMesh.rotation.y -= 0.003;
-        coreMesh.rotation.x += 0.0015;
+      // Real-Time Traveling Laser Photons
+      if (networkPhotonCurves.length > 0 && networkPhotonPoints && networkPhotonPoints.geometry.attributes.position) {
+        const posAttr = networkPhotonPoints.geometry.attributes.position;
+        let pIdx = 0;
+        networkPhotonCurves.forEach((item) => {
+          item.progresses.forEach((prog, idx) => {
+            let nextProg = (prog + item.speed) % 1.0;
+            item.progresses[idx] = nextProg;
+            const pt = item.curve.getPoint(nextProg);
+            posAttr.array[pIdx * 3]     = pt.x;
+            posAttr.array[pIdx * 3 + 1] = pt.y;
+            posAttr.array[pIdx * 3 + 2] = pt.z;
+            pIdx++;
+          });
+        });
+        posAttr.needsUpdate = true;
       }
 
-      // 5-Stage Intelligent Data Particle Assembly + Flame Mode Wave Pulse
-      if (particleSphere && particleSphereBasePositions && particleSphereStartPositions && particleSphere.geometry.attributes.position) {
-        const pos = particleSphere.geometry.attributes.position;
-        const colAttr = particleSphere.geometry.attributes.color;
-        const speed = flameMode ? 2.5 : 0.8;
-        const amplitude = flameMode ? 0.015 : 0.005;
-
-        for (let i = 0; i < pos.count; i++) {
-          let i3 = i * 3;
-          let i6 = i * 6;
-
-          const targetX = particleSphereBasePositions[i3];
-          const targetY = particleSphereBasePositions[i3 + 1];
-          const targetZ = particleSphereBasePositions[i3 + 2];
-
-          const startX = particleSphereStartPositions[i3];
-          const startY = particleSphereStartPositions[i3 + 1];
-          const startZ = particleSphereStartPositions[i3 + 2];
-
-          const pDelay = particleDelays[i];
-          const pDuration = particleDurations[i];
-
-          let curX, curY, curZ, ease = 0;
-
-          if (t < pDelay) {
-            // Stage 1: Ambient Universe (Soft floating drift)
-            const ambPhase = particleAmbientPhases[i];
-            curX = startX + Math.sin(t * 0.8 + ambPhase) * 14;
-            curY = startY + Math.cos(t * 0.6 + ambPhase) * 14;
-            curZ = startZ + Math.sin(t * 1.1 + ambPhase) * 14;
-          } else {
-            // Stage 2 to 5: Awakening, Curved Intelligent Stream Flow, Orbiting & Completion
-            let particleT = Math.max(0, Math.min(1, (t - pDelay) / pDuration));
-
-            // Smootherstep Easing (butter smooth acceleration & deceleration)
-            ease = particleT * particleT * particleT * (particleT * (particleT * 6 - 15) + 10);
-
-            // Stage 3: Quadratic Bezier Intelligent Stream Path
-            const ctrlX = particleControlPoints[i3];
-            const ctrlY = particleControlPoints[i3 + 1];
-            const ctrlZ = particleControlPoints[i3 + 2];
-
-            const oneMinusE = 1 - ease;
-            const bX = oneMinusE * oneMinusE * startX + 2 * oneMinusE * ease * ctrlX + ease * ease * targetX;
-            const bY = oneMinusE * oneMinusE * startY + 2 * oneMinusE * ease * ctrlY + ease * ease * targetY;
-            const bZ = oneMinusE * oneMinusE * startZ + 2 * oneMinusE * ease * ctrlZ + ease * ease * targetZ;
-
-            // Stage 4: Orbit Formation (Spiraling orbit around globe 1-2 times, zero at target)
-            const orbitR = 140 * Math.sin(ease * Math.PI) * (1 - ease * 0.5);
-            const orbitAngle = ease * particleOrbitRevolutions[i] * Math.PI * 2;
-
-            const uX = particleOrbitAxes[i6],     uY = particleOrbitAxes[i6 + 1], uZ = particleOrbitAxes[i6 + 2];
-            const vX = particleOrbitAxes[i6 + 3], vY = particleOrbitAxes[i6 + 4], vZ = particleOrbitAxes[i6 + 5];
-
-            const orbX = (uX * Math.cos(orbitAngle) + vX * Math.sin(orbitAngle)) * orbitR;
-            const orbY = (uY * Math.cos(orbitAngle) + vY * Math.sin(orbitAngle)) * orbitR;
-            const orbZ = (uZ * Math.cos(orbitAngle) + vZ * Math.sin(orbitAngle)) * orbitR;
-
-            // Stage 5: Globe Completion
-            curX = bX + orbX;
-            curY = bY + orbY;
-            curZ = bZ + orbZ;
-          }
-
-          // Flame mode wave pulse once assembled or smoothly blending
-          const dist = Math.sqrt(targetX * targetX + targetY * targetY + targetZ * targetZ);
-          let pulse = Math.sin(t * speed + dist * 0.02) * amplitude;
-          const factor = 1 + pulse * ease;
-
-          pos.array[i3]     = curX * factor;
-          pos.array[i3 + 1] = curY * factor;
-          pos.array[i3 + 2] = curZ * factor;
-
-          // Visual Principle: Subtle Twinkle & Brightness Pulsing
-          if (colAttr && particleSphereBaseColors) {
-            const twPhase = particleTwinklePhases[i];
-            const twSpeed = particleTwinkleSpeeds[i];
-            const twinkle = 0.85 + 0.3 * Math.sin(t * twSpeed + twPhase);
-
-            colAttr.array[i3]     = particleSphereBaseColors[i3] * twinkle;
-            colAttr.array[i3 + 1] = particleSphereBaseColors[i3 + 1] * twinkle;
-            colAttr.array[i3 + 2] = particleSphereBaseColors[i3 + 2] * twinkle;
-          }
-        }
-        pos.needsUpdate = true;
-        if (colAttr) colAttr.needsUpdate = true;
+      // Animate Surface Beacon Radar Ripples
+      if (beaconRipples.length > 0) {
+        beaconRipples.forEach((ripple) => {
+          ripple.progress = (ripple.progress + ripple.speed) % 1.0;
+          const currentScale = ripple.initialScale + ripple.progress * (ripple.maxScale - ripple.initialScale);
+          ripple.mesh.scale.set(currentScale, currentScale, currentScale);
+          ripple.mesh.material.opacity = (1.0 - ripple.progress) * 0.85;
+        });
       }
 
       // Rotate hotspot micro orbit particles
@@ -2849,253 +3162,281 @@
       renderer.render(scene, camera);
     }
 
-    // --- 35,000 PARTICLE GLOBE WITH 5-STAGE INTELLIGENT DATA ASSEMBLY ---
-    function createMassiveParticleGlobe() {
-      const particleCount = 35000;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-      const sizes = new Float32Array(particleCount);
+    // --- 1. DEEP DARK 3D BASE SPHERE WITH Z-BUFFER OCCLUSION ---
+    function createDarkBaseSphere() {
+      const coreGeo = new THREE.SphereGeometry(globeRadius, 64, 64);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: 0x030814,
+        depthWrite: true
+      });
+      coreSphereMesh = new THREE.Mesh(coreGeo, coreMat);
+      globeGroup.add(coreSphereMesh);
+    }
 
-      const cyanColor   = new THREE.Color('#00f0ff');
-      const purpleColor = new THREE.Color('#a855f7');
-      const blueColor   = new THREE.Color('#1d4ed8');
-      const iceColor    = new THREE.Color('#ffffff');
+    // --- 2. PERSISTENT GEOGRAPHIC VECTOR COUNTRY & CONTINENT OUTLINES ---
+    function createGlobeCoastlines() {
+      if (!WORLD_COASTLINES || !WORLD_COASTLINES.length) return;
 
-      const goldenRatio = (1 + Math.sqrt(5)) / 2;
-      const goldenAngle = 2 * Math.PI * (1 - 1 / goldenRatio);
+      const positions = [];
+      WORLD_COASTLINES.forEach(ring => {
+        if (!ring || ring.length < 2) return;
+        for (let i = 0; i < ring.length - 1; i++) {
+          const p1 = latLongToVector3(ring[i][1], ring[i][0], globeRadius + 1.2);
+          const p2 = latLongToVector3(ring[i + 1][1], ring[i + 1][0], globeRadius + 1.2);
+          positions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+        }
+      });
 
-      particleSphereBasePositions  = new Float32Array(particleCount * 3);
-      particleSphereStartPositions = new Float32Array(particleCount * 3);
-      particleSphereBaseColors     = new Float32Array(particleCount * 3);
-      particleDelays               = new Float32Array(particleCount);
-      particleDurations            = new Float32Array(particleCount);
-      particleControlPoints        = new Float32Array(particleCount * 3);
-      particleOrbitAxes            = new Float32Array(particleCount * 6);
-      particleOrbitRevolutions     = new Float32Array(particleCount);
-      particleTwinklePhases        = new Float32Array(particleCount);
-      particleTwinkleSpeeds        = new Float32Array(particleCount);
-      particleAmbientPhases        = new Float32Array(particleCount);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
 
-      const aspect = window.innerWidth / window.innerHeight;
-      const defaultCam = getDefaultCameraPos();
-      const camDist = defaultCam.z;
-      const visibleHeight = 2 * Math.tan(THREE.MathUtils.degToRad(45 / 2)) * camDist;
-      const visibleWidth = visibleHeight * aspect;
+      const mat = new THREE.LineBasicMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.90,
+        blending: THREE.AdditiveBlending,
+        depthTest: true
+      });
 
-      const spreadX = visibleWidth * 0.88;
-      const spreadY = visibleHeight * 0.88;
-      const spreadZ = 750;
+      coastlineMesh = new THREE.LineSegments(geo, mat);
+      globeGroup.add(coastlineMesh);
+    }
 
-      // 16 Intelligent Stream Clusters
-      const clusterCount = 16;
-      const clusterDelays = new Float32Array(clusterCount);
-      const clusterControlDirs = [];
-      const clusterOrbitAxes = [];
+    // --- 4. 3D GLOWING BEACON TOWERS & EXPANDING SURFACE RIPPLES ---
+    function createBeaconTowers() {
+      beaconTowersGroup = new THREE.Group();
+      beaconRipples = [];
 
-      for (let c = 0; c < clusterCount; c++) {
-        // Wave propagation delay across screen (Stage 2: Awakening)
-        clusterDelays[c] = (c / clusterCount) * 1.6 + Math.random() * 0.2;
+      PRODUCTS.forEach((prod) => {
+        const basePos = latLongToVector3(prod.lat, prod.lon, globeRadius + 0.5);
+        const topPos = latLongToVector3(prod.lat, prod.lon, globeRadius + 26);
 
-        // Magnetic field flow control direction (Stage 3: Intelligent Flow)
-        const cDir = new THREE.Vector3(
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2
-        ).normalize();
-        clusterControlDirs.push(cDir);
+        // Vertical Laser Light Pin Line
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([basePos, topPos]);
+        const lineMat = new THREE.LineBasicMaterial({
+          color: new THREE.Color(prod.color),
+          transparent: true,
+          opacity: 0.85,
+          blending: THREE.AdditiveBlending
+        });
+        const towerLine = new THREE.Line(lineGeo, lineMat);
+        beaconTowersGroup.add(towerLine);
 
-        // Orbital plane basis (Stage 4: Orbit Formation)
-        const planeNorm = new THREE.Vector3(
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2
-        ).normalize();
+        // Glowing Beacon Head Dot
+        const tipGeo = new THREE.BufferGeometry().setFromPoints([topPos]);
+        const circleTexture = new THREE.CanvasTexture(createCircleDotTexture());
+        const tipMat = new THREE.PointsMaterial({
+          color: new THREE.Color(prod.color),
+          size: 7.0,
+          map: circleTexture,
+          transparent: true,
+          opacity: 1.0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const tipPoint = new THREE.Points(tipGeo, tipMat);
+        beaconTowersGroup.add(tipPoint);
 
-        const uAxis = new THREE.Vector3().crossVectors(planeNorm, new THREE.Vector3(0, 1, 0));
-        if (uAxis.lengthSq() < 0.001) uAxis.set(1, 0, 0);
-        uAxis.normalize();
-        const vAxis = new THREE.Vector3().crossVectors(planeNorm, uAxis).normalize();
+        // Surface Animated Radar Rings (2 concentric ripples)
+        for (let r = 0; r < 2; r++) {
+          const ringGeo = new THREE.RingGeometry(2, 4, 32);
+          const ringMat = new THREE.MeshBasicMaterial({
+            color: new THREE.Color(prod.color),
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          });
+          const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+          ringMesh.position.copy(basePos);
+          ringMesh.lookAt(basePos.clone().multiplyScalar(2));
+          beaconTowersGroup.add(ringMesh);
 
-        clusterOrbitAxes.push({ u: uAxis, v: vAxis });
-      }
+          beaconRipples.push({
+            mesh: ringMesh,
+            progress: r * 0.5,
+            speed: 0.015,
+            initialScale: 1.0,
+            maxScale: 3.5
+          });
+        }
+      });
 
-      let index = 0;
-      let index6 = 0;
-      for (let i = 0; i < particleCount; i++) {
-        // Equal-area Fibonacci Sphere distribution (Target positions)
-        const y = 1 - (i / (particleCount - 1)) * 2;
-        const radiusAtY = Math.sqrt(Math.max(0, 1 - y * y));
-        const theta = goldenAngle * i;
+      globeGroup.add(beaconTowersGroup);
+    }
 
-        const x = Math.cos(theta) * radiusAtY;
-        const z = Math.sin(theta) * radiusAtY;
+    // --- 5. GREAT-CIRCLE LASER NETWORK ARCS & TRAVELING PHOTONS ---
+    function createLaserNetworkArcs() {
+      laserArcsGroup = new THREE.Group();
+      networkPhotonCurves = [];
 
-        const radiusNoise = globeRadius + (Math.random() - 0.5) * 6;
+      MAJOR_NETWORK_ROUTES.forEach((route, rIdx) => {
+        const p1 = latLongToVector3(route.from[0], route.from[1], globeRadius + 2.5);
+        const p2 = latLongToVector3(route.to[0], route.to[1], globeRadius + 2.5);
 
-        const targetX = x * radiusNoise;
-        const targetY = y * radiusNoise;
-        const targetZ = z * radiusNoise;
+        // Compute elevated mid-point for curved 3D parabolic laser arc
+        const midPoint = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
+        const distance = p1.distanceTo(p2);
+        const arcHeight = Math.min(80, Math.max(30, distance * 0.22));
+        midPoint.normalize().multiplyScalar(globeRadius + arcHeight);
 
-        particleSphereBasePositions[index]     = targetX;
-        particleSphereBasePositions[index + 1] = targetY;
-        particleSphereBasePositions[index + 2] = targetZ;
+        // Quadratic 3D Bezier Curve
+        const curve = new THREE.QuadraticBezierCurve3(p1, midPoint, p2);
+        networkPhotonCurves.push({
+          curve,
+          color: new THREE.Color(route.color),
+          progresses: [
+            (rIdx * 0.13) % 1.0,
+            (rIdx * 0.13 + 0.5) % 1.0
+          ],
+          speed: 0.0035 + (rIdx % 3) * 0.001
+        });
 
-        // Random Viewport Start Positions across entire screen (Stage 1: Ambient Universe)
-        const startX = (Math.random() - 0.5) * 2 * spreadX;
-        const startY = (Math.random() - 0.5) * 2 * spreadY;
-        const startZ = (Math.random() - 0.5) * 2 * spreadZ;
+        // 3D Laser Spline Line
+        const points = curve.getPoints(45);
+        const arcGeo = new THREE.BufferGeometry().setFromPoints(points);
+        const arcMat = new THREE.LineBasicMaterial({
+          color: new THREE.Color(route.color),
+          transparent: true,
+          opacity: 0.38,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const arcLine = new THREE.Line(arcGeo, arcMat);
+        laserArcsGroup.add(arcLine);
+      });
 
-        particleSphereStartPositions[index]     = startX;
-        particleSphereStartPositions[index + 1] = startY;
-        particleSphereStartPositions[index + 2] = startZ;
+      // Traveling Laser Photons
+      const totalPhotons = networkPhotonCurves.length * 2;
+      const photonGeo = new THREE.BufferGeometry();
+      const posArray = new Float32Array(totalPhotons * 3);
+      const colArray = new Float32Array(totalPhotons * 3);
 
-        // Frame 0 position = start position
-        positions[index]     = startX;
-        positions[index + 1] = startY;
-        positions[index + 2] = startZ;
+      let pIdx = 0;
+      networkPhotonCurves.forEach((item) => {
+        item.progresses.forEach((prog) => {
+          const pt = item.curve.getPoint(prog);
+          posArray[pIdx * 3]     = pt.x;
+          posArray[pIdx * 3 + 1] = pt.y;
+          posArray[pIdx * 3 + 2] = pt.z;
 
-        // Cluster parameters
-        const clusterId = i % clusterCount;
-        const cDelay = clusterDelays[clusterId];
-        const pDelay = cDelay + Math.random() * 0.35;
-        particleDelays[i] = pDelay;
-        particleDurations[i] = 3.0 + Math.random() * 0.8;
+          colArray[pIdx * 3]     = item.color.r;
+          colArray[pIdx * 3 + 1] = item.color.g;
+          colArray[pIdx * 3 + 2] = item.color.b;
+          pIdx++;
+        });
+      });
 
-        // Magnetic Stream Control Point (Stage 3)
-        const cDir = clusterControlDirs[clusterId];
-        const midX = (startX + targetX) * 0.5;
-        const midY = (startY + targetY) * 0.5;
-        const midZ = (startZ + targetZ) * 0.5;
-        const curveMag = 180 + Math.random() * 220;
+      photonGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+      photonGeo.setAttribute('color', new THREE.BufferAttribute(colArray, 3));
 
-        particleControlPoints[index]     = midX + cDir.x * curveMag;
-        particleControlPoints[index + 1] = midY + cDir.y * curveMag;
-        particleControlPoints[index + 2] = midZ + cDir.z * curveMag;
-
-        // Orbit axis basis (Stage 4)
-        const axes = clusterOrbitAxes[clusterId];
-        particleOrbitAxes[index6]     = axes.u.x;
-        particleOrbitAxes[index6 + 1] = axes.u.y;
-        particleOrbitAxes[index6 + 2] = axes.u.z;
-        particleOrbitAxes[index6 + 3] = axes.v.x;
-        particleOrbitAxes[index6 + 4] = axes.v.y;
-        particleOrbitAxes[index6 + 5] = axes.v.z;
-
-        particleOrbitRevolutions[i] = (Math.random() < 0.5 ? 1 : -1) * (1.0 + Math.random() * 1.2);
-
-        // Twinkle and ambient drift parameters
-        particleTwinklePhases[i] = Math.random() * Math.PI * 2;
-        particleTwinkleSpeeds[i] = 1.5 + Math.random() * 3.5;
-        particleAmbientPhases[i] = Math.random() * Math.PI * 2;
-
-        // Color palette assignment
-        let pColor;
-        const randCol = Math.random();
-        if (randCol > 0.65) pColor = cyanColor;
-        else if (randCol > 0.35) pColor = purpleColor;
-        else if (randCol > 0.15) pColor = blueColor;
-        else pColor = iceColor;
-
-        particleSphereBaseColors[index]     = pColor.r;
-        particleSphereBaseColors[index + 1] = pColor.g;
-        particleSphereBaseColors[index + 2] = pColor.b;
-
-        colors[index]     = pColor.r;
-        colors[index + 1] = pColor.g;
-        colors[index + 2] = pColor.b;
-
-        sizes[i] = Math.random() * 1.8 + 1.2;
-
-        index += 3;
-        index6 += 6;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const particleMaterial = new THREE.PointsMaterial({
-        size: 2.2,
+      const circleTexture = new THREE.CanvasTexture(createCircleDotTexture());
+      const photonMat = new THREE.PointsMaterial({
+        size: 5.5,
+        map: circleTexture,
         vertexColors: true,
         transparent: true,
-        opacity: 0.88,
+        opacity: 0.95,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
 
-      particleSphere = new THREE.Points(geometry, particleMaterial);
-      globeGroup.add(particleSphere);
+      networkPhotonPoints = new THREE.Points(photonGeo, photonMat);
+      laserArcsGroup.add(networkPhotonPoints);
+      globeGroup.add(laserArcsGroup);
     }
 
-    // --- GLOBE ATMOSPHERE GLOW & CYBER RINGS ---
+    // --- 6. DUAL ATMOSPHERE FRESNEL HALO & CYBER GRATICULE RINGS ---
     function createGlobeAtmosphere() {
-      // Create Soft Pink Energy Field Radial Canvas Texture
-      const atmosphereCanvas = document.createElement('canvas');
-      atmosphereCanvas.width = 256;
-      atmosphereCanvas.height = 256;
-      const atmosphereCtx = atmosphereCanvas.getContext('2d');
-      const atmosphereGrad = atmosphereCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
-      atmosphereGrad.addColorStop(0.0, 'rgba(255, 0, 128, 1.0)');
-      atmosphereGrad.addColorStop(0.5, 'rgba(255, 0, 128, 0.6)');
-      atmosphereGrad.addColorStop(1.0, 'rgba(255, 0, 128, 0.2)');
-      atmosphereCtx.fillStyle = atmosphereGrad;
-      atmosphereCtx.fillRect(0, 0, 256, 256);
+      // Inner Cyan Atmosphere Halo
+      const innerCanvas = document.createElement('canvas');
+      innerCanvas.width = 256;
+      innerCanvas.height = 256;
+      const innerCtx = innerCanvas.getContext('2d');
+      const innerGrad = innerCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      innerGrad.addColorStop(0.0, 'rgba(0, 240, 255, 1.0)');
+      innerGrad.addColorStop(0.45, 'rgba(0, 240, 255, 0.45)');
+      innerGrad.addColorStop(1.0, 'rgba(0, 240, 255, 0.0)');
+      innerCtx.fillStyle = innerGrad;
+      innerCtx.fillRect(0, 0, 256, 256);
 
-      const atmosphereTexture = new THREE.CanvasTexture(atmosphereCanvas);
+      const innerTexture = new THREE.CanvasTexture(innerCanvas);
+      const innerGeo = new THREE.SphereGeometry(globeRadius + 14, 64, 64);
+      const innerMat = new THREE.MeshBasicMaterial({
+        color: 0x00f0ff,
+        map: innerTexture,
+        transparent: true,
+        opacity: 0.18,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      atmosphereMesh = new THREE.Mesh(innerGeo, innerMat);
+      globeGroup.add(atmosphereMesh);
 
-      // Outer Glowing Halo Sphere (Brand Magenta/Pink Atmosphere)
-      const atmosphereGeo = new THREE.SphereGeometry(globeRadius + 18, 64, 64);
-      const atmosphereMat = new THREE.MeshBasicMaterial({
-        color: 0xff0080,
-        map: atmosphereTexture,
+      // Outer Purple Bloom Corona
+      const outerCanvas = document.createElement('canvas');
+      outerCanvas.width = 256;
+      outerCanvas.height = 256;
+      const outerCtx = outerCanvas.getContext('2d');
+      const outerGrad = outerCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      outerGrad.addColorStop(0.0, 'rgba(168, 85, 247, 0.9)');
+      outerGrad.addColorStop(0.5, 'rgba(168, 85, 247, 0.35)');
+      outerGrad.addColorStop(1.0, 'rgba(168, 85, 247, 0.0)');
+      outerCtx.fillStyle = outerGrad;
+      outerCtx.fillRect(0, 0, 256, 256);
+
+      const outerTexture = new THREE.CanvasTexture(outerCanvas);
+      const outerGeo = new THREE.SphereGeometry(globeRadius + 32, 64, 64);
+      const outerMat = new THREE.MeshBasicMaterial({
+        color: 0xa855f7,
+        map: outerTexture,
         transparent: true,
         opacity: 0.10,
         side: THREE.BackSide,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
-      atmosphereMesh = new THREE.Mesh(atmosphereGeo, atmosphereMat);
-      globeGroup.add(atmosphereMesh);
+      atmosphereOuterMesh = new THREE.Mesh(outerGeo, outerMat);
+      globeGroup.add(atmosphereOuterMesh);
 
-      // Equator and Latitude Ring Grids
-      const ringMat = new THREE.LineBasicMaterial({
-        color: 0x00f0ff,
-        transparent: true,
-        opacity: 0.25,
-        blending: THREE.AdditiveBlending
-      });
+      // Cyber Latitude Coordinate Rings
+      const createLatRing = (latDeg, colorHex, opacityVal, radiusVal) => {
+        const phi = latDeg * (Math.PI / 180);
+        const r = Math.cos(phi) * radiusVal;
+        const y = Math.sin(phi) * radiusVal;
+        const points = [];
+        for (let i = 0; i <= 128; i++) {
+          const theta = (i / 128) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(theta) * r, y, Math.sin(theta) * r));
+        }
+        const geo = new THREE.BufferGeometry().setFromPoints(points);
+        const mat = new THREE.LineBasicMaterial({
+          color: colorHex,
+          transparent: true,
+          opacity: opacityVal,
+          blending: THREE.AdditiveBlending
+        });
+        const line = new THREE.Line(geo, mat);
+        globeGroup.add(line);
+      };
 
-      const ringGeo1 = new THREE.BufferGeometry();
-      const ringPoints1 = [];
-      for (let i = 0; i <= 128; i++) {
-        const theta = (i / 128) * Math.PI * 2;
-        ringPoints1.push(new THREE.Vector3(Math.cos(theta) * (globeRadius + 4), 0, Math.sin(theta) * (globeRadius + 4)));
-      }
-      ringGeo1.setFromPoints(ringPoints1);
-      const ringMesh1 = new THREE.Line(ringGeo1, ringMat);
-      globeGroup.add(ringMesh1);
+      // Equator (0°)
+      createLatRing(0, 0x00f0ff, 0.32, globeRadius + 3.0);
+      // Tropic of Cancer (23.5° N) & Capricorn (23.5° S)
+      createLatRing(23.5, 0xff2e93, 0.16, globeRadius + 2.5);
+      createLatRing(-23.5, 0xff2e93, 0.16, globeRadius + 2.5);
+      // Polar Arctic & Antarctic (66.5° N/S)
+      createLatRing(66.5, 0x00f0ff, 0.12, globeRadius + 2.0);
+      createLatRing(-66.5, 0x00f0ff, 0.12, globeRadius + 2.0);
     }
 
-    // --- INTERNAL PULSING CORE ---
-    function createInternalCore() {
-      const coreGeo = new THREE.IcosahedronGeometry(95, 2);
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: 0x7000ff,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.35,
-        blending: THREE.AdditiveBlending
-      });
-      coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      globeGroup.add(coreMesh);
-    }
-
-    // --- 4 HOTSPOT ANCHORS IN 3D SPACE ---
+    // --- 7. 8 HOTSPOT ANCHORS ON REAL GEOGRAPHIC COORDINATES ---
     function createHotspotAnchors() {
       PRODUCTS.forEach((prod, idx) => {
         const anchorGroup = new THREE.Group();
-        const comp = (activeComposition && activeComposition[idx]) ? activeComposition[idx] : { lat: prod.lat, lon: prod.lon };
-        const pos = latLongToVector3(comp.lat, comp.lon, globeRadius + 6);
+        const pos = latLongToVector3(prod.lat, prod.lon, globeRadius + 6);
         anchorGroup.position.copy(pos);
 
         // 3D Ring Marker Mesh
