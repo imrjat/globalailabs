@@ -9,6 +9,7 @@ export const WORLD_COASTLINES = [[[-59.57, -80.04], [-59.87, -80.55], [-60.16, -
 
 /**
  * Creates an offscreen Canvas landmass sampler.
+ * Uses instant synchronous polygon rasterization of WORLD_COASTLINES so landmass detection is 100% immediate on frame 0.
  * @param {number} width
  * @param {number} height
  * @returns {{ isLand: (lat: number, lon: number) => boolean, canvas: HTMLCanvasElement, renderPromise: Promise<void> }}
@@ -19,13 +20,38 @@ export function createLandmassSampler(width = 1024, height = 512) {
   canvas.height = height;
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   
-  // Fill black (ocean)
+  // 1. Fill black (ocean background)
   ctx.fillStyle = '#000000';
   ctx.fillRect(0, 0, width, height);
 
-  let imageData = null;
+  // 2. Synchronously rasterize all 128 WORLD_COASTLINES polygon rings (0ms, 100% reliable)
+  if (WORLD_COASTLINES && WORLD_COASTLINES.length) {
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    WORLD_COASTLINES.forEach(ring => {
+      if (!ring || !ring.length) return;
+      const startX = ((ring[0][0] + 180) / 360) * width;
+      const startY = ((90 - ring[0][1]) / 180) * height;
+      ctx.moveTo(startX, startY);
+      for (let i = 1; i < ring.length; i++) {
+        const x = ((ring[i][0] + 180) / 360) * width;
+        const y = ((90 - ring[i][1]) / 180) * height;
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+    });
+    ctx.fill();
+  }
 
+  // 3. Extract synchronous imageData mask (immediate on frame 0)
+  let imageData = ctx.getImageData(0, 0, width, height).data;
+
+  // 4. Asynchronously layer high-res SVG path if available
   const renderPromise = new Promise((resolve) => {
+    if (!WORLD_LAND_SVG) {
+      resolve();
+      return;
+    }
     const img = new Image();
     const blob = new Blob([WORLD_LAND_SVG], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
@@ -52,14 +78,25 @@ export function createLandmassSampler(width = 1024, height = 512) {
       const px = Math.min(width - 1, Math.max(0, Math.floor(u * width)));
       const py = Math.min(height - 1, Math.max(0, Math.floor(v * height)));
       const idx = (py * width + px) * 4;
-      return imageData[idx] > 60;
+      return imageData[idx] > 50;
     },
     getCanvas: () => canvas
   };
 }
 
 
-export const MAJOR_NETWORK_ROUTES = [{"from": [37.7749, -122.4194], "to": [51.5074, -0.1278], "color": "#00f0ff"}, {"from": [51.5074, -0.1278], "to": [35.6762, 139.6503], "color": "#a855f7"}, {"from": [35.6762, 139.6503], "to": [-33.8688, 151.2093], "color": "#ff2e93"}, {"from": [37.7749, -122.4194], "to": [40.7128, -74.006], "color": "#00f0ff"}, {"from": [51.5074, -0.1278], "to": [48.8566, 2.3522], "color": "#00f0ff"}, {"from": [35.6762, 139.6503], "to": [22.3193, 114.1694], "color": "#a855f7"}, {"from": [40.7128, -74.006], "to": [-22.9068, -43.1729], "color": "#ff2e93"}, {"from": [-22.9068, -43.1729], "to": [51.5074, -0.1278], "color": "#00f0ff"}, {"from": [-33.8688, 151.2093], "to": [22.3193, 114.1694], "color": "#ff2e93"}, {"from": [37.7749, -122.4194], "to": [35.6762, 139.6503], "color": "#00f0ff"}];
+export const MAJOR_NETWORK_ROUTES = [
+  {"from": [37.7749, -122.4194], "to": [51.5074, -0.1278], "color": "#00f0ff"},
+  {"from": [51.5074, -0.1278], "to": [19.0760, 72.8777], "color": "#a855f7"},
+  {"from": [19.0760, 72.8777], "to": [35.6762, 139.6503], "color": "#a855f7"},
+  {"from": [35.6762, 139.6503], "to": [-33.8688, 151.2093], "color": "#ff2e93"},
+  {"from": [37.7749, -122.4194], "to": [40.7128, -74.006], "color": "#00f0ff"},
+  {"from": [19.0760, 72.8777], "to": [1.3521, 103.8198], "color": "#00f0ff"},
+  {"from": [40.7128, -74.006], "to": [-22.9068, -43.1729], "color": "#ff2e93"},
+  {"from": [-22.9068, -43.1729], "to": [51.5074, -0.1278], "color": "#00f0ff"},
+  {"from": [-33.8688, 151.2093], "to": [1.3521, 103.8198], "color": "#ff2e93"},
+  {"from": [37.7749, -122.4194], "to": [19.0760, 72.8777], "color": "#00f0ff"}
+];
 
 /**
  * Creates a luminescent 2048x1024 Earth canvas texture with glowing continents and oceans.
@@ -196,8 +233,8 @@ export function createCircleDotTexture() {
  */
 export function generatePixelGlobeData(landSampler, globeRadius = 290, latStepDeg = 1.6) {
   const latStepRad = (latStepDeg * Math.PI) / 180;
-  const minLat = -82;
-  const maxLat = 82;
+  const minLat = -85;
+  const maxLat = 85;
   const numRings = Math.floor((maxLat - minLat) / latStepDeg);
 
   const dots = [];
@@ -231,6 +268,7 @@ export function generatePixelGlobeData(landSampler, globeRadius = 290, latStepDe
   const totalPoints = dots.length;
   const positions = new Float32Array(totalPoints * 3);
   const colors = new Float32Array(totalPoints * 3);
+  const isLandArray = new Float32Array(totalPoints);
   const sizes = new Float32Array(totalPoints);
 
   // High-Tech Cyber Dot Matrix Palette
@@ -238,7 +276,7 @@ export function generatePixelGlobeData(landSampler, globeRadius = 290, latStepDe
   const landWhite = [0.95, 0.98, 1.0];   // #f0f9ff
   const landPink = [1.0, 0.18, 0.58];    // #ff2e93
   const landPurple = [0.66, 0.33, 0.97]; // #a855f7
-  const oceanNavy = [0.05, 0.13, 0.24];  // #0d213d
+  const oceanNavy = [0.08, 0.22, 0.40];  // #143866 (crisp, clearly defined spherical lattice)
 
   for (let i = 0; i < totalPoints; i++) {
     const d = dots[i];
@@ -249,7 +287,7 @@ export function generatePixelGlobeData(landSampler, globeRadius = 290, latStepDe
     positions[i3 + 2] = d.z;
 
     if (d.isLand) {
-      // Land Pixel: Vibrant sharp glowing dots
+      isLandArray[i] = 1.0;
       const rand = Math.random();
       let c = landCyan;
       if (rand > 0.82) c = landWhite;
@@ -259,15 +297,15 @@ export function generatePixelGlobeData(landSampler, globeRadius = 290, latStepDe
       colors[i3]     = c[0];
       colors[i3 + 1] = c[1];
       colors[i3 + 2] = c[2];
-      sizes[i] = 3.6;
+      sizes[i] = 1.40;
     } else {
-      // Ocean Grid Dot: Dark subtle cyber-navy
+      isLandArray[i] = 0.0;
       colors[i3]     = oceanNavy[0];
       colors[i3 + 1] = oceanNavy[1];
       colors[i3 + 2] = oceanNavy[2];
-      sizes[i] = 1.3;
+      sizes[i] = 0.85;
     }
   }
 
-  return { positions, colors, sizes, totalPoints, dots };
+  return { positions, colors, isLandArray, sizes, totalPoints, dots };
 }

@@ -1943,9 +1943,7 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { 
-      createLandmassSampler, 
       createCircleDotTexture,
-      generatePixelGlobeData,
       WORLD_COASTLINES, 
       MAJOR_NETWORK_ROUTES 
     } from './assets/js/world-map-data.js';
@@ -2023,11 +2021,11 @@
         category: "Generative Post-Production",
         color: "#a855f7",
         colorName: "purple",
-        lat: 48.8566,
-        lon: 2.3522,
-        description: "Next-gen VFX engine for neural inpainting, relighting, and high-speed multi-modal compositing.",
+        lat: 19.0760,
+        lon: 72.8777,
+        description: "AI Production Studio & Next-Gen VFX engine for neural inpainting, relighting, and high-speed compositing.",
         features: ["AI Editing", "Production", "Post Production"],
-        cta: "Explore Studio FX",
+        cta: "Explore Studio India",
         link: "./connect.html"
       },
       {
@@ -2036,8 +2034,8 @@
         category: "Asset Rights Vault",
         color: "#f59e0b",
         colorName: "amber",
-        lat: 22.3193,
-        lon: 114.1694,
+        lat: 1.3521,
+        lon: 103.8198,
         description: "Immutable digital rights protection and biometric consent verification for AI character assets.",
         features: ["Consent Lock", "Rights Registry", "IP Audit Trail"],
         cta: "Inspect Vault Safe",
@@ -2085,22 +2083,20 @@
       return new THREE.Vector3(0, dist * 0.08, dist);
     }
 
-    // --- GEOGRAPHIC CITY COORDINATES ARE ASSIGNED DIRECTLY FROM PRODUCTS DATA ---
-
     // --- CLEAR CACHED GLOBE STATE ON PAGE LOAD FOR FRESH INTRO UX ---
     try {
       sessionStorage.removeItem('global_ai_globe_state');
     } catch (e) {}
 
     // --- TIMING & ANIMATION CONFIGURATION CONSTANTS ---
-    const INACTIVITY_TIMEOUT_MS       = 10000; // 10 seconds before auto-demo starts
-    const DEMO_HOTSPOT_HOLD_MS        = 3200;  // 3.2 seconds display time per hotspot
-    const DEMO_TRANSITION_MS          = 1500;  // 1.5 seconds pause between hotspots
-    const ORBIT_PACKET_ROTATION_SPEED = 0.002; // Reduced from 0.008 for smoother, elegant rotation
+    const INACTIVITY_TIMEOUT_MS = 10000; // 10 seconds before auto-demo starts
+    const DEMO_HOTSPOT_HOLD_MS = 3200;  // 3.2 seconds display time per hotspot
+    const DEMO_TRANSITION_MS = 1500;  // 1.5 seconds pause between hotspots
+    const ORBIT_PACKET_ROTATION_SPEED = 0.0035; // Speed of equatorial data packets
 
     // --- THREE.JS STATE VARIABLES ---
     let scene, camera, renderer, controls, clock;
-    let globeGroup, pixelGlobeMesh, coreSphereMesh, coastlineMesh, atmosphereMesh, atmosphereOuterMesh;
+    let globeGroup, coreSphereMesh, coastlineMesh, atmosphereMesh, atmosphereOuterMesh;
     let beaconTowersGroup, laserArcsGroup, energyStreamGroup, orbitPacketsMesh;
     let networkPhotonCurves = [], networkPhotonPoints = null;
     let beaconRipples = [];
@@ -2109,20 +2105,13 @@
     let isZoomed = false;
     let inactivityTimer = null;
     let isAutoDemoRunning = false;
-    let landSampler = null;
     const globeRadius = 290;
 
     // --- INITIALIZATION ---
-    async function initThreeEngine() {
+    function initThreeEngine() {
       if (!container) return;
 
       clock = new THREE.Clock();
-
-      // Initialize Geographic Landmass Mask Sampler
-      landSampler = createLandmassSampler(1024, 512);
-      if (landSampler.renderPromise) {
-        await landSampler.renderPromise;
-      }
 
       // 1. Scene
       scene = new THREE.Scene();
@@ -2140,27 +2129,26 @@
       renderer.toneMappingExposure = 1.35;
       container.appendChild(renderer.domElement);
 
-      // 4. OrbitControls
+      // 4. OrbitControls with Natural Spherical Drag & Damped Inertia
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
-      controls.dampingFactor = 0.06;
-      controls.rotateSpeed = 0.85;
+      controls.dampingFactor = 0.05;
+      controls.rotateSpeed = 0.65;
       controls.enableZoom = false; // Disable wheel zoom trapping to allow natural page scrolling
       controls.minDistance = 300;
       controls.maxDistance = 1800;
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.55;
+      controls.autoRotateSpeed = 0.45;
 
-      // 5. Parent Globe Group
+      // 5. Parent Globe Group (Oriented with India front and center on load)
       globeGroup = new THREE.Group();
       globeGroup.scale.set(0.78, 0.78, 0.78);
-      globeGroup.rotation.y = 0.0;
-      globeGroup.rotation.x = -0.25;
+      globeGroup.rotation.y = -(78.0 * Math.PI / 180); // India Longitude: ~78°E facing directly front
+      globeGroup.rotation.x = -0.15; // Natural ergonomic tilt for viewing the Indian subcontinent
       scene.add(globeGroup);
 
-      // 6. Build Pixel Globe 3D Components
-      createTranslucentDarkCore();
-      createPixelDotMatrixGlobe();
+      // 6. Build Dark Vector Map Globe 3D Components (0 Dots, Pure Vector Lines)
+      createDarkBaseSphere();
       createGlobeCoastlines();
       createBeaconTowers();
       createLaserNetworkArcs();
@@ -2210,12 +2198,16 @@
       setupHotspotUIEvents();
       setupInactivityTracker();
 
-      // Mouse Parallax Effect
+      // Subtle Parallax (only when not interacting)
+      let isInteracting = false;
+      controls.addEventListener('start', () => { isInteracting = true; });
+      controls.addEventListener('end', () => { isInteracting = false; });
+
       window.addEventListener('mousemove', (e) => {
-        if (isZoomed) return;
-        const mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
-        const mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
-        gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.5, ease: "power2.out" });
+        if (isZoomed || isInteracting) return;
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+        gsap.to(globeGroup.position, { x: mouseX, y: -mouseY, duration: 1.8, ease: "power2.out" });
       });
 
       // 10. Start Animation Loop
@@ -2362,24 +2354,24 @@
         const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
         const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
 
-        // 4. Depth visibility and scaling
-        if (facingDot > -0.05) {
+        // 4. Depth visibility and scaling (clean front-hemisphere occlusion)
+        if (facingDot > 0.02) {
           let targetOpacity = 1.0;
           let targetScale = 1.0;
 
           if (facingDot > 0.35) {
             targetOpacity = 1.0;
             targetScale = 1.0 + (facingDot - 0.35) * 0.18; // 1.0 to 1.11 scale
-          } else if (facingDot > 0.05) {
-            targetOpacity = 0.45 + ((facingDot - 0.05) / 0.3) * 0.55;
-            targetScale = 0.9 + ((facingDot - 0.05) / 0.3) * 0.1;
+          } else if (facingDot > 0.12) {
+            targetOpacity = 0.60 + ((facingDot - 0.12) / 0.23) * 0.40;
+            targetScale = 0.92 + ((facingDot - 0.12) / 0.23) * 0.08;
           } else {
-            targetOpacity = 0.15 + ((facingDot + 0.05) / 0.1) * 0.3;
+            targetOpacity = ((facingDot - 0.02) / 0.10) * 0.60;
             targetScale = 0.85;
           }
 
           if (isZoomed && activeProductIndex !== idx) {
-            targetOpacity *= 0.2; // Dim unselected hotspots when zoomed
+            targetOpacity *= 0.15; // Dim unselected hotspots when zoomed
           }
 
           // Fade hotspots in smoothly on intro
@@ -2488,9 +2480,9 @@
         }
       });
 
-      // 2. Pixel Globe Pulse Reaction
-      if (pixelGlobeMesh) {
-        gsap.to(pixelGlobeMesh.material, { size: 4.5, duration: 0.35, yoyo: true, repeat: 1, ease: "power2.out" });
+      // 2. Vector Coastlines Energy Glow Reaction
+      if (coastlineMesh && coastlineMesh.material) {
+        gsap.to(coastlineMesh.material, { opacity: 1.0, duration: 0.35, yoyo: true, repeat: 1, ease: "power2.out" });
       }
 
       // 3. Atmosphere Reaction Brightens
@@ -2805,52 +2797,27 @@
       renderer.render(scene, camera);
     }
 
-    // --- 1. TRANSLUCENT DARK INNER CORE SPHERE ---
-    function createTranslucentDarkCore() {
-      const coreGeo = new THREE.SphereGeometry(globeRadius - 1.5, 64, 64);
+    // --- 1. DEEP DARK 3D BASE SPHERE WITH Z-BUFFER OCCLUSION ---
+    function createDarkBaseSphere() {
+      const coreGeo = new THREE.SphereGeometry(globeRadius, 64, 64);
       const coreMat = new THREE.MeshBasicMaterial({
-        color: 0x050c18,
-        transparent: true,
-        opacity: 0.90
+        color: 0x030814,
+        depthWrite: true
       });
       coreSphereMesh = new THREE.Mesh(coreGeo, coreMat);
       globeGroup.add(coreSphereMesh);
     }
 
-    // --- 2. EQUAL-AREA PIXEL DOT MATRIX GLOBE (STRIPE & GITHUB STYLE) ---
-    function createPixelDotMatrixGlobe() {
-      const { positions, colors, sizes, totalPoints } = generatePixelGlobeData(landSampler, globeRadius, 1.6);
-
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      // Circular anti-aliased dot texture
-      const circleTexture = new THREE.CanvasTexture(createCircleDotTexture());
-
-      const mat = new THREE.PointsMaterial({
-        size: 3.8,
-        map: circleTexture,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.96,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-
-      pixelGlobeMesh = new THREE.Points(geo, mat);
-      globeGroup.add(pixelGlobeMesh);
-    }
-
-    // --- 3. CRISP VECTOR COASTLINES ---
+    // --- 2. PERSISTENT GEOGRAPHIC VECTOR COUNTRY & CONTINENT OUTLINES ---
     function createGlobeCoastlines() {
       if (!WORLD_COASTLINES || !WORLD_COASTLINES.length) return;
 
       const positions = [];
       WORLD_COASTLINES.forEach(ring => {
+        if (!ring || ring.length < 2) return;
         for (let i = 0; i < ring.length - 1; i++) {
-          const p1 = latLongToVector3(ring[i][1], ring[i][0], globeRadius + 1.8);
-          const p2 = latLongToVector3(ring[i + 1][1], ring[i + 1][0], globeRadius + 1.8);
+          const p1 = latLongToVector3(ring[i][1], ring[i][0], globeRadius + 1.2);
+          const p2 = latLongToVector3(ring[i + 1][1], ring[i + 1][0], globeRadius + 1.2);
           positions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
         }
       });
@@ -2861,9 +2828,9 @@
       const mat = new THREE.LineBasicMaterial({
         color: 0x00f0ff,
         transparent: true,
-        opacity: 0.38,
+        opacity: 0.90,
         blending: THREE.AdditiveBlending,
-        depthWrite: false
+        depthTest: true
       });
 
       coastlineMesh = new THREE.LineSegments(geo, mat);
