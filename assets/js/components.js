@@ -7,8 +7,6 @@
   const currentPath = window.location.pathname.toLowerCase();
   const isHome = currentPath.endsWith('/') || currentPath.endsWith('/index.html');
   const isTeam = currentPath.endsWith('/team.html');
-  const isWork = currentPath.endsWith('/work.html');
-  const isCareers = currentPath.endsWith('/careers.html');
   const isConnect = currentPath.endsWith('/connect.html');
 
   const headerHTML = `
@@ -40,12 +38,7 @@
           <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isTeam ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
             founders
           </a>
-          <a href="./work.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isWork ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
-            work
-          </a>
-          <a href="./careers.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isCareers ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
-            careers
-          </a>
+       
           <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isConnect ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
             contact us
           </a>
@@ -96,8 +89,6 @@
             <ul class="flex flex-col gap-2 text-xs font-bold uppercase tracking-wider">
               <li><a href="./index.html" class="hover:text-[#ff2e93] transition-colors">Home</a></li>
               <li><a href="./team.html" class="hover:text-[#ff2e93] transition-colors">Founders</a></li>
-              <li><a href="./work.html" class="hover:text-[#ff2e93] transition-colors">Work</a></li>
-              <li><a href="./careers.html" class="hover:text-[#ff2e93] transition-colors">Careers</a></li>
               <li><a href="./connect.html" class="hover:text-[#ff2e93] transition-colors">Connect Workspace</a></li>
             </ul>
           </div>
