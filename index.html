@@ -424,16 +424,16 @@
     }
     .playground-sparkle { transform-origin: 12px 12px; animation: playgroundSparkle 2.2s infinite ease-in-out; }
 
-    /* Top Sub-Header Hero Ecosystem Tagline Badge */
+    /* Floating Hero Ecosystem Tagline (Below 3D Globe) */
     #hero-tagline-container {
       position: absolute;
-      top: 84px;
+      bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 30;
       pointer-events: none;
       width: auto;
-      max-width: 92vw;
+      max-width: calc(100vw - 120px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -443,7 +443,8 @@
 
     @media (max-width: 768px) {
       #hero-tagline-container {
-        top: 74px;
+        bottom: 24px;
+        max-width: calc(100vw - 80px);
       }
     }
 
@@ -645,15 +646,7 @@
         </div>
       </button>
 
-      <!-- Floating Hero Ecosystem Tagline (Below 3D Globe) -->
-      <div id="hero-tagline-container">
-        <div class="hero-tagline-badge">
-          <span class="hero-tagline-beacon"></span>
-          <h1 class="hero-tagline-text">
-            One-stop <span class="hero-tagline-gradient">AI powered</span> content ecosystem
-          </h1>
-        </div>
-      </div>
+   
 
       <!-- 2D Projected Hotspots Container -->
       <div id="hotspots-container">
@@ -929,29 +922,18 @@
 
       </div>
 
-      <!-- World-Class Global Hub Quick-Jump Navigation Dock -->
-      <div id="globe-quick-nav" class="absolute bottom-4 md:bottom-7 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 md:gap-2 p-1.5 rounded-full bg-[#080d1a]/85 backdrop-blur-2xl border border-white/10 shadow-[0_0_40px_rgba(0,240,255,0.15)] max-w-[96vw] overflow-x-auto no-scrollbar pointer-events-auto transition-all duration-500">
-        <div class="hidden md:flex items-center gap-2 pl-3 pr-2.5 py-1 text-[10px] font-mono tracking-widest text-white/50 uppercase border-r border-white/10">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping"></span>
-          <span>GLOBAL HUBS</span>
+   
+
+         <!-- Floating Hero Ecosystem Tagline (Below 3D Globe) -->
+      <div id="hero-tagline-container">
+        <div class="hero-tagline-badge">
+          <span class="hero-tagline-beacon"></span>
+          <h1 class="hero-tagline-text">
+            One-stop <span class="hero-tagline-gradient">AI powered</span> content ecosystem
+          </h1>
         </div>
-        <button data-hub="0" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[9px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#00f0ff]/50 whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-[#00f0ff] shadow-[0_0_8px_#00f0ff] flex-shrink-0"></span>
-          <span class="whitespace-nowrap"><span class="hidden sm:inline">MISSION CONTROL </span><span class="sm:hidden">CONTROL </span><span class="text-white/40 font-normal">SF</span></span>
-        </button>
-        <button data-hub="1" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[9px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#a855f7]/50 whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-[#a855f7] shadow-[0_0_8px_#a855f7] flex-shrink-0"></span>
-          <span class="whitespace-nowrap"><span class="hidden sm:inline">THE STUDIO </span><span class="sm:hidden">STUDIO </span><span class="text-white/40 font-normal">LON</span></span>
-        </button>
-        <button data-hub="2" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[9px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#f59e0b]/50 whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-[#f59e0b] shadow-[0_0_8px_#f59e0b] flex-shrink-0"></span>
-          <span class="whitespace-nowrap"><span class="hidden sm:inline">THE VAULT </span><span class="sm:hidden">VAULT </span><span class="text-white/40 font-normal">TYO</span></span>
-        </button>
-        <button data-hub="3" class="globe-hub-btn flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3.5 md:py-1.5 rounded-full text-[9px] md:text-xs font-mono font-bold tracking-wider text-white/75 hover:text-white bg-white/5 hover:bg-white/15 transition-all duration-300 border border-transparent hover:border-[#ff2e93]/50 whitespace-nowrap">
-          <span class="w-2 h-2 rounded-full bg-[#ff2e93] shadow-[0_0_8px_#ff2e93] flex-shrink-0"></span>
-          <span class="whitespace-nowrap"><span class="hidden sm:inline">PLAYGROUND </span><span class="sm:hidden">PLAY </span><span class="text-white/40 font-normal">SYD</span></span>
-        </button>
       </div>
+      
 
     </section>
 
