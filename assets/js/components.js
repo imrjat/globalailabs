@@ -12,7 +12,7 @@
   const headerHTML = `
     <header id="site-header" class="fixed top-0 left-0 w-full z-[1000] px-5 py-4 md:px-8 lg:px-12 flex justify-between items-center transition-all duration-300 bg-black border-b border-white/10">
       <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-[#ff2e93] focus:ring-offset-2 flex items-center">
-        <img src="./assets/img/globalailabs.png" alt="Global AI Labs" class="h-8 md:h-10 w-auto header-logo">
+        <img src="./assets/img/logo.png" alt="Global AI Labs" class="h-8 md:h-10 w-auto header-logo">
       </a>
       <div class="flex items-center gap-4">
         <a href="./connect.html" class="magnetic hidden md:inline-flex px-6 py-2 border border-[#ff2e93] bg-[#ff2e93]/10 text-white text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-[#ff2e93] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-btn">
@@ -24,7 +24,7 @@
       </div>
     </header>
 
-    <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-[#06080c] text-ice z-[998] flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);">
+    <nav id="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" class="fixed top-0 left-0 w-full h-screen bg-[#06080c] text-ice flex flex-col justify-between p-8 md:p-12 lg:p-16 pointer-events-none" style="clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); z-index: 99999;">
       <div class="flex justify-between items-start w-full mt-12 md:mt-6">
         <div class="text-[11px] tracking-[0.08em] uppercase text-muted font-mono">navigation</div>
         <div class="text-[11px] tracking-[0.08em] uppercase text-muted font-mono">global ai labs</div>
