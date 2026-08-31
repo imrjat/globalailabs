@@ -30,35 +30,17 @@
         <div class="text-[11px] tracking-[0.08em] uppercase text-muted font-mono">global ai labs</div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
-        <div class="lg:col-span-8 flex flex-col gap-4">
-          <a href="./index.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isHome ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
-            home
-          </a>
-          <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isTeam ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
-            founders
-          </a>
-       
-          <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isConnect ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
-            contact us
-          </a>
-        </div>
-
-        <div class="lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-line-dark lg:pl-12">
-          <div>
-            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3 font-mono">capabilities</div>
-            <ul class="flex flex-col gap-2">
-              <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">CINEMATIC AI VIDEO</li>
-              <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">MULTI-MODAL CONTROL</li>
-              <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">STYLE CONSISTENCY</li>
-              <li class="menu-secondary-item text-md md:text-lg font-bold hover:text-[#ff2e93] transition-colors">BEAT SYNC AUDIO</li>
-            </ul>
-          </div>
-          <div>
-            <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-2 font-mono">say hello</div>
-            <a href="mailto:hello@globalailabs.ai" class="menu-secondary-item text-md md:text-lg hover:underline text-[#ff2e93] font-bold">hello@globalailabs.ai</a>
-          </div>
-        </div>
+      <div class="flex flex-col gap-4 w-full">
+        <a href="./index.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isHome ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
+          home
+        </a>
+        <a href="./team.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isTeam ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
+          founders
+        </a>
+     
+        <a href="./connect.html" class="menu-main-link group block text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] uppercase transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff2e93] w-fit font-outfit ${isConnect ? 'text-[#ff2e93]' : 'hover:text-[#ff2e93]'}">
+          contact us
+        </a>
       </div>
 
       <div class="flex justify-between items-end w-full">

@@ -49,11 +49,13 @@ export function initMenu() {
 
       // Fade in secondary items
       const secondaryItems = menuOverlay.querySelectorAll('.menu-secondary-item');
-      tl.fromTo(secondaryItems, 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.05 },
-        '-=0.3'
-      );
+      if (secondaryItems.length > 0) {
+        tl.fromTo(secondaryItems, 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.05 },
+          '-=0.3'
+        );
+      }
     } else {
       menuOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
     }
