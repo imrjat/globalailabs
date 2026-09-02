@@ -35,17 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Footer "GO UP" smooth scroll behavior
-  const goUpBtn = document.getElementById('go-up-btn');
-  if (goUpBtn) {
-    goUpBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (window.lenisInstance) {
-        window.lenisInstance.scrollTo(0, { duration: 1.2 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    });
-  }
+  const attachGoUpListener = () => {
+    const goUpBtn = document.getElementById('go-up-btn');
+    if (goUpBtn && !goUpBtn.dataset.bound) {
+      goUpBtn.dataset.bound = 'true';
+      goUpBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.lenisInstance) {
+          window.lenisInstance.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+  };
+  attachGoUpListener();
+  window.addEventListener('components:mounted', attachGoUpListener);
 
   // Register Service Worker for 24-hour image caching
   // if ('serviceWorker' in navigator) {

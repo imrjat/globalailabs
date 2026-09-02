@@ -1,6 +1,6 @@
 export function initCursor() {
-  // Check for touch device or reduced motion
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  // Check for touch device, coarse pointer, mobile screen, or reduced motion
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(hover: none), (pointer: coarse)').matches || window.innerWidth < 1024;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (isTouchDevice || prefersReducedMotion) {

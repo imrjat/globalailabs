@@ -40,9 +40,14 @@
       background-color: #06080c;
       position: relative;
       width: 100vw;
+      width: 100%;
       height: 100vh;
+      height: 100dvh;
+      min-height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
       user-select: none;
+      touch-action: pan-y pinch-zoom;
     }
 
     .vignette-overlay {
@@ -70,6 +75,7 @@
       pointer-events: auto;
       transition: opacity 0.4s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 1001;
+      padding: 6px;
     }
 
     .globe-hotspot:hover {
@@ -128,6 +134,21 @@
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.28s ease;
       animation: hotspotBreathing 3.5s infinite ease-in-out;
       cursor: pointer;
+    }
+
+    @media (max-width: 767px) {
+      .hotspot-icon-box {
+        width: 38px;
+        height: 38px;
+      }
+      .hotspot-icon-box svg {
+        width: 18px;
+        height: 18px;
+      }
+      .hotspot-ripple {
+        width: 40px;
+        height: 40px;
+      }
     }
 
     .globe-hotspot:hover .hotspot-icon-box {
@@ -192,6 +213,7 @@
       width: calc(100vw - 1.5rem);
       max-width: 440px;
       max-height: calc(100vh - 90px);
+      max-height: calc(100dvh - 90px);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -206,16 +228,18 @@
       #hud-modules-container {
         top: auto;
         right: auto;
-        bottom: max(1rem, env(safe-area-inset-bottom));
+        bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
         left: 50%;
         transform: translateX(-50%);
         gap: 8px;
-        max-height: calc(100dvh - 80px);
+        width: calc(100vw - 1.25rem);
+        max-width: 420px;
+        max-height: calc(100dvh - 75px);
       }
     }
 
     .hud-module {
-      background: rgba(6, 10, 16, 0.88);
+      background: rgba(6, 10, 16, 0.92);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -509,38 +533,77 @@
       display: inline-block;
     }
 
-    /* Ambient Audio Floating Controller (Bottom-Left, Icon-Only) */
+    /* Compact Cyber Ambient Audio Controller (Bottom-Left) */
     .ambient-audio-btn {
       position: absolute;
-      bottom: 32px;
-      left: 32px;
-      z-index: 45;
+      bottom: 24px;
+      left: 24px;
+      z-index: 10005;
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(6, 10, 18, 0.85);
+      background: rgba(6, 10, 18, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
+      touch-action: manipulation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .ambient-audio-btn:hover {
-      background: rgba(10, 16, 28, 0.95);
+      background: rgba(10, 16, 28, 0.96);
       border-color: rgba(0, 240, 255, 0.5);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.3);
-      transform: scale(1.1);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.3);
+      transform: scale(1.08);
+    }
+
+    .ambient-audio-btn:active {
+      transform: scale(0.94);
+    }
+
+    .audio-btn-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Small status indicator dot on top-right of the circle */
+    .audio-beacon {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #ff2e93;
+      box-shadow: 0 0 6px #ff2e93;
+      transition: all 0.3s ease;
     }
 
     .ambient-audio-btn.is-active {
       border-color: #00f0ff;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .ambient-audio-btn.is-active .audio-beacon {
+      background-color: #00f0ff;
+      box-shadow: 0 0 8px #00f0ff;
+      animation: audioBeaconGlow 1.8s infinite ease-in-out;
+    }
+
+    @keyframes audioBeaconGlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.8); opacity: 0.5; }
     }
 
     /* 4-Bar Equalizer Visualizer */
@@ -550,6 +613,7 @@
       gap: 2.5px;
       height: 16px;
       width: 16px;
+      pointer-events: none;
     }
 
     .eq-bar {
@@ -558,6 +622,7 @@
       border-radius: 2px;
       height: 3px;
       transition: height 0.25s ease, background-color 0.25s ease;
+      pointer-events: none;
     }
 
     .ambient-audio-btn.is-active .eq-bar {
@@ -578,10 +643,10 @@
 
     @media (max-width: 768px) {
       .ambient-audio-btn {
-        bottom: 24px;
-        left: 20px;
-        width: 38px;
-        height: 38px;
+        bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+        left: max(1rem, env(safe-area-inset-left, 1rem));
+        width: 42px;
+        height: 42px;
       }
     }
   </style>
@@ -636,13 +701,16 @@
       <!-- WebGL 3D Globe Canvas Container -->
       <div id="globe-canvas-container" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></div>
 
-      <!-- Floating Ambient Audio Controller (Bottom-Left, Icon-Only) -->
-      <button id="ambient-audio-toggle" class="ambient-audio-btn" aria-label="Toggle Ambient Audio" title="Ambient Cyber Audio (Click to Mute / Unmute)">
-        <div class="audio-equalizer">
-          <span class="eq-bar eq-1"></span>
-          <span class="eq-bar eq-2"></span>
-          <span class="eq-bar eq-3"></span>
-          <span class="eq-bar eq-4"></span>
+      <!-- Compact Cyber Ambient Audio Controller (Bottom-Left, Icon-Only) -->
+      <button id="ambient-audio-toggle" type="button" class="ambient-audio-btn is-muted" aria-label="Toggle Ambient Audio" title="Ambient Sound: MUTED (Click to Play)">
+        <div class="audio-btn-content">
+          <span class="audio-beacon"></span>
+          <div class="audio-equalizer">
+            <span class="eq-bar eq-1"></span>
+            <span class="eq-bar eq-2"></span>
+            <span class="eq-bar eq-3"></span>
+            <span class="eq-bar eq-4"></span>
+          </div>
         </div>
       </button>
 
@@ -2100,6 +2168,7 @@
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>gsap.registerPlugin(ScrollTrigger);</script>
   <script src="./assets/js/components.js"></script>
+  <script type="module" src="./assets/js/main.js"></script>
 
   <!-- 3D Cyber Globe AI OS Engine -->
   <script type="module">
@@ -2242,8 +2311,8 @@
     // --- DYNAMIC OPTIMAL CAMERA DISTANCE (BEST UI/UX PROPORTIONS) ---
     function getOptimalCameraDistance() {
       const aspect = window.innerWidth / window.innerHeight;
-      if (aspect < 0.75) return 1240; // Mobile portrait
-      if (aspect < 1.1) return 1100;  // Tablet
+      if (aspect < 0.75) return 1320; // Mobile portrait (spacious, optimal framing)
+      if (aspect < 1.1) return 1140;  // Tablet
       return 1000;                    // Desktop (Bold ~70% viewport height)
     }
 
@@ -2658,6 +2727,31 @@
       PRODUCTS.forEach((prod, idx) => {
         const elem = document.getElementById(`hotspot-${idx}`);
         if (elem) {
+          let touchStartX = 0;
+          let touchStartY = 0;
+          let hasMoved = false;
+
+          elem.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            hasMoved = false;
+          }, { passive: true });
+
+          elem.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            if (Math.abs(touch.clientX - touchStartX) > 8 || Math.abs(touch.clientY - touchStartY) > 8) {
+              hasMoved = true;
+            }
+          }, { passive: true });
+
+          elem.addEventListener('touchend', (e) => {
+            if (!hasMoved) {
+              e.stopPropagation();
+              selectHotspot(idx);
+            }
+          });
+
           elem.addEventListener('click', (e) => {
             e.stopPropagation();
             selectHotspot(idx);
@@ -2743,10 +2837,14 @@
       function updateAudioUI(active) {
         if (active) {
           audioBtn.classList.add('is-active');
+          audioBtn.classList.remove('is-muted');
           audioBtn.setAttribute('title', 'Ambient Sound: ON (Click to Mute)');
+          audioBtn.setAttribute('aria-label', 'Ambient Sound: ON (Click to Mute)');
         } else {
           audioBtn.classList.remove('is-active');
+          audioBtn.classList.add('is-muted');
           audioBtn.setAttribute('title', 'Ambient Sound: MUTED (Click to Play)');
+          audioBtn.setAttribute('aria-label', 'Ambient Sound: MUTED (Click to Play)');
         }
       }
 
@@ -2844,16 +2942,22 @@
         setTimeout(loadAudioAsync, 600);
       }
 
-      // User explicit toggle button click
-      audioBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+      // User explicit toggle button click & touch
+      const handleAudioToggle = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         if (isAudioPlaying) {
           pauseAudioWithFade(true); // Explicit user mute
         } else {
           localStorage.setItem('global_ai_sound_user_intent', 'active');
           playAudioWithFade();
         }
-      });
+      };
+
+      audioBtn.addEventListener('click', handleAudioToggle);
+      audioBtn.addEventListener('touchend', handleAudioToggle);
     }
 
     function selectHotspot(index) {
@@ -2895,7 +2999,7 @@
 
       // 6. Compute Camera Destination: responsive zoom closer to hotspot
       const isMobile = window.innerWidth < 768;
-      const camMultiplier = isMobile ? 1.68 : 1.52;
+      const camMultiplier = isMobile ? 1.76 : 1.52;
       const camDestination = targetVec.clone().multiplyScalar(camMultiplier);
 
       // 7. Trigger Energy Particle Pulse
@@ -2904,7 +3008,7 @@
       // 8. GSAP Camera Position Fly-To Animation (1200ms)
       gsap.to(camera.position, {
         x: camDestination.x,
-        y: camDestination.y + (isMobile ? -18 : 15),
+        y: camDestination.y + (isMobile ? -28 : 15),
         z: camDestination.z,
         duration: 1.2,
         ease: "power3.inOut"
@@ -2912,9 +3016,9 @@
 
       // 9. GSAP Controls Target Interpolation
       gsap.to(controls.target, {
-        x: targetVec.x * (isMobile ? 0.45 : 0.65),
-        y: targetVec.y * (isMobile ? 0.45 : 0.65) - (isMobile ? 22 : 0),
-        z: targetVec.z * (isMobile ? 0.45 : 0.65),
+        x: targetVec.x * (isMobile ? 0.35 : 0.65),
+        y: targetVec.y * (isMobile ? 0.35 : 0.65) - (isMobile ? 36 : 0),
+        z: targetVec.z * (isMobile ? 0.35 : 0.65),
         duration: 1.2,
         ease: "power3.inOut",
         onUpdate: () => {

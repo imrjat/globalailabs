@@ -90,6 +90,9 @@ export function initPageTransitions() {
     else if (href.includes('team.html')) pageName = 'TEAM';
     else if (href.includes('careers.html')) pageName = 'CAREERS';
     else if (href.includes('connect.html')) pageName = 'CONNECT';
+    else if (href.includes('carbon.html')) pageName = 'CARBON';
+    else if (href.includes('h2o.html')) pageName = 'H2O';
+    else if (href.includes('stir.html')) pageName = 'STIR';
     else if (href.includes('index.html') || href === '/' || href === './') pageName = 'HOME';
 
     if (transitionText) {
