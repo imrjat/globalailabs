@@ -448,27 +448,43 @@
     }
     .playground-sparkle { transform-origin: 12px 12px; animation: playgroundSparkle 2.2s infinite ease-in-out; }
 
-    /* Floating Hero Ecosystem Tagline (Below 3D Globe) */
+    /* Hero Copy Panel (Right of 3D Globe on desktop, bottom-centered on smaller screens) */
     #hero-tagline-container {
       position: absolute;
-      bottom: 32px;
       left: 50%;
+      bottom: max(84px, calc(env(safe-area-inset-bottom, 0px) + 84px));
       transform: translateX(-50%);
       z-index: 30;
       pointer-events: none;
-      width: auto;
-      max-width: calc(100vw - 120px);
+      width: calc(100vw - 32px);
+      max-width: 560px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
-    @media (max-width: 768px) {
+    /* Desktop / landscape: copy sits to the right of the offset globe */
+    @media (min-width: 768px) and (min-aspect-ratio: 6/5) {
       #hero-tagline-container {
-        bottom: 24px;
-        max-width: calc(100vw - 80px);
+        left: auto;
+        bottom: auto;
+        top: 50%;
+        right: clamp(32px, 6vw, 120px);
+        transform: translateY(-50%);
+        width: clamp(380px, 34vw, 600px);
+        max-width: none;
+        align-items: flex-start;
+        text-align: left;
+      }
+      /* Soft scrim to keep copy legible over grid & fog canvases */
+      #hero-tagline-container::before {
+        content: "";
+        position: absolute;
+        inset: -30% -40% -30% -25%;
+        z-index: -1;
+        background: radial-gradient(ellipse at 55% 50%, rgba(6, 8, 12, 0.72) 0%, rgba(6, 8, 12, 0.35) 45%, rgba(6, 8, 12, 0) 72%);
+        pointer-events: none;
       }
     }
 
@@ -476,7 +492,7 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 24px;
+      padding: 10px 22px;
       background: rgba(6, 10, 16, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -502,9 +518,9 @@
 
     .hero-tagline-text {
       font-family: 'Outfit', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 900;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #ffffff;
       margin: 0;
@@ -512,25 +528,94 @@
       white-space: nowrap;
     }
 
-    @media (max-width: 640px) {
-      .hero-tagline-text {
-        font-size: 11px;
-        letter-spacing: 0.02em;
-        white-space: normal;
-      }
-      .hero-tagline-badge {
-        padding: 8px 16px;
-        gap: 8px;
-      }
-    }
-
-    .hero-tagline-gradient {
+    .hero-tagline-gradient,
+    .hero-headline-accent {
       background: linear-gradient(90deg, #00f0ff 0%, #d946ef 50%, #ff2e93 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       color: transparent;
       display: inline-block;
+    }
+
+    .hero-headline {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: clamp(26px, 6.5vw, 36px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin: 18px 0 0;
+      text-wrap: balance;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-headline-accent {
+      padding-bottom: 0.08em; /* avoid clipping descenders on gradient text */
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 3.6vw, 16px);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.66);
+      margin: 12px 0 0;
+      max-width: 44ch;
+      text-wrap: pretty;
+    }
+
+    @media (min-width: 768px) and (min-aspect-ratio: 6/5) {
+      .hero-headline {
+        font-size: clamp(28px, min(3.6vw, 6.5vh), 60px);
+        margin-top: 22px;
+      }
+      .hero-sub {
+        font-size: clamp(15px, 1.1vw, 18px);
+        margin-top: 18px;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1279px) and (min-aspect-ratio: 6/5) {
+      .hero-tagline-text {
+        font-size: 11.5px;
+        letter-spacing: 0.04em;
+      }
+      .hero-tagline-badge {
+        padding: 9px 16px;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-tagline-text {
+        font-size: 10.5px;
+        letter-spacing: 0.04em;
+      }
+      .hero-tagline-badge {
+        padding: 8px 14px;
+        gap: 8px;
+      }
+      .hero-headline {
+        margin-top: 14px;
+      }
+      .hero-sub {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-tagline-text {
+        white-space: normal;
+        line-height: 1.3;
+      }
+    }
+
+    /* Entrance: hidden until GSAP reveals (JS fallback keeps it visible if GSAP fails) */
+    .hero-copy-anim { opacity: 0; transform: translateY(20px); }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-copy-anim { opacity: 1; transform: none; }
     }
 
     /* Compact Cyber Ambient Audio Controller (Bottom-Left) */
@@ -992,14 +1077,21 @@
 
    
 
-         <!-- Floating Hero Ecosystem Tagline (Below 3D Globe) -->
+      <!-- Hero Copy Panel (Right of 3D Globe) -->
       <div id="hero-tagline-container">
-        <div class="hero-tagline-badge">
-          <span class="hero-tagline-beacon"></span>
-          <h1 class="hero-tagline-text">
+        <div class="hero-tagline-badge hero-copy-anim">
+          <span class="hero-tagline-beacon" aria-hidden="true"></span>
+          <span class="hero-tagline-text">
             One-stop <span class="hero-tagline-gradient">AI powered</span> content ecosystem
-          </h1>
+          </span>
         </div>
+        <h1 class="hero-headline hero-copy-anim">
+          Every stage of content production.<br>
+          <span class="hero-headline-accent">One platform.</span>
+        </h1>
+        <p class="hero-sub hero-copy-anim">
+          Script to delivery, with every approval logged and every likeness consented.
+        </p>
       </div>
       
 
@@ -2313,12 +2405,60 @@
       const aspect = window.innerWidth / window.innerHeight;
       if (aspect < 0.75) return 1320; // Mobile portrait (spacious, optimal framing)
       if (aspect < 1.1) return 1140;  // Tablet
+      // Split hero on narrower landscape screens: pull back so globe + copy panel both fit
+      if (heroSplitQuery.matches && aspect < 1.75) return 1000 * (1.75 / aspect);
       return 1000;                    // Desktop (Bold ~70% viewport height)
     }
 
     function getDefaultCameraPos() {
       const dist = getOptimalCameraDistance();
       return new THREE.Vector3(0, dist * 0.08, dist);
+    }
+
+    // --- HERO SPLIT LAYOUT: SHIFT GLOBE FRAME TO MAKE ROOM FOR COPY PANEL ---
+    // Uses camera view offset so hotspot projection & raycasting stay aligned.
+    // Keep this query in sync with the #hero-tagline-container CSS media query.
+    const heroSplitQuery = window.matchMedia('(min-width: 768px) and (min-aspect-ratio: 6/5)');
+    const heroViewShift = { x: 0, y: 0 };
+
+    function getHeroViewShiftTarget() {
+      if (isZoomed) return { x: 0, y: 0 };
+      // Desktop: globe moves left. Portrait/mobile: globe lifts up above bottom copy.
+      if (!heroSplitQuery.matches) return { x: 0, y: 0.08 };
+      return { x: window.innerWidth / window.innerHeight < 1.6 ? 0.18 : 0.16, y: 0 };
+    }
+
+    function applyHeroViewShift() {
+      if (!camera) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (heroViewShift.x === 0 && heroViewShift.y === 0) {
+        camera.clearViewOffset();
+      } else {
+        camera.setViewOffset(w, h, w * heroViewShift.x, h * heroViewShift.y, w, h);
+      }
+    }
+
+    function updateHeroViewShift(duration = 0) {
+      const target = getHeroViewShiftTarget();
+      gsap.killTweensOf(heroViewShift);
+      if (duration === 0) {
+        heroViewShift.x = target.x;
+        heroViewShift.y = target.y;
+        applyHeroViewShift();
+        return;
+      }
+      gsap.to(heroViewShift, { x: target.x, y: target.y, duration, ease: "power3.inOut", onUpdate: applyHeroViewShift });
+    }
+
+    function revealHeroCopy() {
+      const items = document.querySelectorAll('.hero-copy-anim');
+      if (!items.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
+      gsap.to(items, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.6 });
     }
 
     // --- CLEAR CACHED GLOBE STATE ON PAGE LOAD FOR FRESH INTRO UX ---
@@ -2358,6 +2498,7 @@
       const defaultPos = getDefaultCameraPos();
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3500);
       camera.position.set(0, defaultPos.y * 1.5, defaultPos.z * 1.45);
+      updateHeroViewShift(0);
 
       // 3. Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
@@ -2431,6 +2572,8 @@
         ease: "power3.out"
       });
 
+      revealHeroCopy();
+
       // 9. Event Listeners & Inactivity Tracking
       window.addEventListener('resize', onResize);
       setupHotspotUIEvents();
@@ -2457,6 +2600,7 @@
     function onResize() {
       if (!camera || !renderer) return;
       camera.aspect = window.innerWidth / window.innerHeight;
+      updateHeroViewShift(0);
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -2967,6 +3111,7 @@
 
       activeProductIndex = index;
       isZoomed = true;
+      updateHeroViewShift(1.2);
 
       // 1. Update Quick-Jump Dock active button styling
       const hubButtons = document.querySelectorAll('.globe-hub-btn');
@@ -3155,6 +3300,7 @@
       if (!isZoomed) return;
       isZoomed = false;
       activeProductIndex = null;
+      updateHeroViewShift(1.2);
 
       // Reset Quick-Jump Dock highlights
       const hubButtons = document.querySelectorAll('.globe-hub-btn');
