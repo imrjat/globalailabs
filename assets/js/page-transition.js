@@ -1,157 +1,52 @@
+// Page transitions are handled natively by CSS cross-document View Transitions
+// (see `@view-transition` in src/input.css). This module only makes navigation
+// feel instant by prefetching internal pages before the user clicks.
 export function initPageTransitions() {
-  const transitionOverlay = document.querySelector('.transition-overlay');
-  const transitionText = document.querySelector('.transition-text');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const supportsSpeculationRules =
+    HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules');
 
-  const path = window.location.pathname;
-  const isHome = path === '/' || path.includes('index.html') || path.endsWith('global/') || path.includes('globalailabs') || !!document.getElementById('studio');
-
-  // 1. Page Entrance Animation on Load
-  if (transitionOverlay) {
-    if (isHome) {
-      // For index page, ensure overlay is hidden instantly with no animation
-      transitionOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
-      transitionOverlay.style.pointerEvents = 'none';
-      if (transitionText) {
-        transitionText.style.opacity = '0';
-      }
-    } else if (prefersReducedMotion) {
-      if (window.gsap) {
-        window.gsap.fromTo(transitionOverlay, 
-          { opacity: 1, clipPath: 'none' }, 
-          { opacity: 0, duration: 0.35, onComplete: () => {
-            transitionOverlay.style.display = 'none';
-          }}
-        );
-      } else {
-        transitionOverlay.style.opacity = '0';
-        setTimeout(() => transitionOverlay.style.display = 'none', 350);
-      }
-    } else {
-      if (window.gsap) {
-        // Explicitly set text to visible at start of entrance animation
-        if (transitionText) {
-          window.gsap.set(transitionText, { opacity: 1, y: 0 });
-        }
-
-        const tl = window.gsap.timeline({
-          onComplete: () => {
-            transitionOverlay.style.pointerEvents = 'none';
-          }
-        });
-
-        tl.to(transitionOverlay, {
-          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-          duration: 0.85,
-          ease: 'power4.inOut'
-        });
-
-        if (transitionText) {
-          tl.to(transitionText, {
-            opacity: 0,
-            y: -40,
-            duration: 0.45,
-            ease: 'power3.in'
-          }, 0);
-        }
-      } else {
-        transitionOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
-        if (transitionText) {
-          transitionText.style.opacity = '0';
-        }
-      }
-    }
+  if (supportsSpeculationRules) {
+    // Chromium: prerender same-site pages on hover / pointerdown (moderate eagerness)
+    const rules = document.createElement('script');
+    rules.type = 'speculationrules';
+    rules.textContent = JSON.stringify({
+      prerender: [{
+        where: {
+          and: [
+            { href_matches: '/*' },
+            { not: { href_matches: '*.pdf' } },
+            { not: { selector_matches: '[target=_blank], [download], [rel~=nofollow]' } }
+          ]
+        },
+        eagerness: 'moderate'
+      }]
+    });
+    document.head.appendChild(rules);
+    return;
   }
 
-  // 2. Intercept Internal Link Clicks
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (!link) return;
+  // Fallback (Safari / Firefox): prefetch on hover or touch start
+  const prefetched = new Set();
+  const prefetch = (e) => {
+    const link = e.target.closest && e.target.closest('a[href]');
+    if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
 
-    const href = link.getAttribute('href');
-    if (!href) return;
-
-    // Filter out anchors, external, mailto, tel, blank targets
-    const isExternal = href.startsWith('http') && !href.includes(window.location.hostname);
-    const isAnchor = href.startsWith('#');
-    const isMailTo = href.startsWith('mailto:');
-    const isTel = href.startsWith('tel:');
-    const isBlank = link.getAttribute('target') === '_blank';
-
-    if (isExternal || isAnchor || isMailTo || isTel || isBlank) {
-      return; // Allow native navigation
+    let url;
+    try {
+      url = new URL(link.href, window.location.href);
+    } catch {
+      return;
     }
+    if (url.origin !== window.location.origin || url.hash && url.pathname === window.location.pathname) return;
+    if (prefetched.has(url.href)) return;
+    prefetched.add(url.href);
 
-    e.preventDefault();
+    const hint = document.createElement('link');
+    hint.rel = 'prefetch';
+    hint.href = url.href;
+    document.head.appendChild(hint);
+  };
 
-    // Deduce Page Name for Overlay Title
-    let pageName = 'GLOBAL';
-    if (href.includes('work.html')) pageName = 'WORK';
-    else if (href.includes('team.html')) pageName = 'TEAM';
-    else if (href.includes('careers.html')) pageName = 'CAREERS';
-    else if (href.includes('connect.html')) pageName = 'CONNECT';
-    else if (href.includes('carbon.html')) pageName = 'CARBON';
-    else if (href.includes('h2o.html')) pageName = 'H2O';
-    else if (href.includes('stir.html')) pageName = 'STIR';
-    else if (href.includes('index.html') || href === '/' || href === './') pageName = 'HOME';
-
-    if (transitionText) {
-      transitionText.textContent = pageName;
-    }
-
-    if (transitionOverlay) {
-      transitionOverlay.style.pointerEvents = 'auto';
-
-      if (prefersReducedMotion) {
-        if (window.gsap) {
-          window.gsap.fromTo(transitionOverlay, 
-            { opacity: 0, clipPath: 'none', display: 'flex' },
-            { opacity: 1, duration: 0.35, onComplete: () => {
-              window.location.href = href;
-            }}
-          );
-        } else {
-          transitionOverlay.style.display = 'flex';
-          transitionOverlay.style.opacity = '1';
-          setTimeout(() => {
-            window.location.href = href;
-          }, 350);
-        }
-      } else {
-        if (window.gsap) {
-          // Reset clip-path to bottom edge
-          window.gsap.set(transitionOverlay, {
-            clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)'
-          });
-
-          const tl = window.gsap.timeline({
-            onComplete: () => {
-              window.location.href = href;
-            }
-          });
-
-          // Sweep up to cover screen
-          tl.to(transitionOverlay, {
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-            duration: 0.75,
-            ease: 'power4.inOut'
-          });
-
-          // Slide text in
-          tl.fromTo(transitionText, 
-            { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
-            '-=0.4'
-          );
-        } else {
-          transitionOverlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
-          setTimeout(() => {
-            window.location.href = href;
-          }, 750);
-        }
-      }
-    } else {
-      window.location.href = href;
-    }
-  });
+  document.addEventListener('mouseover', prefetch, { passive: true });
+  document.addEventListener('touchstart', prefetch, { passive: true });
 }

@@ -261,7 +261,9 @@
         window.dispatchEvent(new CustomEvent('components:mounted'));
     }
 
-    if (document.readyState === 'loading') {
+    // Mount right away when the mount points are already parsed (script sits at end of <body>),
+    // so the header is in the very first painted frame and page transitions don't flicker.
+    if (document.readyState === 'loading' && !document.getElementById('site-header-container')) {
         document.addEventListener('DOMContentLoaded', initDynamicComponents);
     } else {
         initDynamicComponents();
