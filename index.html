@@ -70,12 +70,38 @@
 
     .globe-hotspot {
       position: absolute;
+      top: 0;
+      left: 0;
       transform: translate(-50%, -50%);
       cursor: pointer;
       pointer-events: auto;
-      transition: opacity 0.4s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      /* transform is driven per-frame by JS; a CSS transform transition would make markers lag behind the globe */
+      transition: opacity 0.4s ease;
+      will-change: transform, opacity;
       z-index: 1001;
       padding: 6px;
+    }
+
+    /* Lite tier (touch / small screens): drop GPU-heavy effects layered over the live WebGL canvas */
+    .globe-lite .hotspot-icon-box,
+    .globe-lite .hero-tagline-badge,
+    .globe-lite .ambient-audio-btn,
+    .globe-lite .hud-module,
+    .globe-lite .hud-command-bar {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .globe-lite .hotspot-icon-box { background: rgba(4, 8, 16, 0.94); animation: none; }
+    .globe-lite .hero-tagline-badge { background: rgba(6, 10, 16, 0.94); }
+    .globe-lite .ambient-audio-btn { background: rgba(6, 10, 18, 0.95); }
+    .globe-lite #hero-os-section .film-grain-overlay,
+    .globe-lite .glow-blob { display: none; }
+    .globe-lite .hotspot-ripple-delay { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hotspot-ripple,
+      .hotspot-icon-box,
+      .hero-tagline-beacon { animation: none !important; }
     }
 
     .globe-hotspot:hover {
@@ -2415,6 +2441,63 @@
       return new THREE.Vector3(0, dist * 0.08, dist);
     }
 
+    // --- DEVICE TIER: lighter rendering & touch-friendly controls on phones/tablets ---
+    const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches;
+    const IS_LITE = IS_TOUCH || window.innerWidth < 768;
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const CAN_HOVER = window.matchMedia('(hover: hover)').matches;
+    document.documentElement.classList.toggle('globe-lite', IS_LITE);
+
+    // --- PAUSE RENDER LOOPS WHEN HERO IS OFF-SCREEN OR TAB IS HIDDEN ---
+    let heroInView = true;
+    let heroActive = true;
+    function refreshHeroActive() {
+      const wasActive = heroActive;
+      heroActive = heroInView && !document.hidden;
+      if (heroActive && !wasActive && clock) clock.getDelta(); // drop paused time so motion doesn't jump
+    }
+    document.addEventListener('visibilitychange', refreshHeroActive);
+    const heroSectionEl = document.getElementById('hero-os-section');
+    if (heroSectionEl && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        heroInView = entry.isIntersecting;
+        refreshHeroActive();
+      }).observe(heroSectionEl);
+    }
+
+    // Touch devices fire resize repeatedly while the address bar slides; settle before re-allocating buffers
+    function onViewportResize(fn) {
+      if (!IS_TOUCH) {
+        window.addEventListener('resize', fn);
+        return;
+      }
+      let timer = null;
+      let lastW = window.innerWidth;
+      let lastH = window.innerHeight;
+      window.addEventListener('resize', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          if (window.innerWidth === lastW && window.innerHeight === lastH) return;
+          lastW = window.innerWidth;
+          lastH = window.innerHeight;
+          fn();
+        }, 180);
+      });
+    }
+
+    // Touch: lock tilt so one-finger drag only spins the globe and vertical swipes scroll the page
+    function setTouchTiltLock(locked) {
+      if (!IS_TOUCH || !controls) return;
+      if (locked) {
+        const polar = controls.getPolarAngle();
+        controls.minPolarAngle = polar;
+        controls.maxPolarAngle = polar;
+      } else {
+        controls.minPolarAngle = 0;
+        controls.maxPolarAngle = Math.PI;
+      }
+    }
+
     // --- HERO SPLIT LAYOUT: SHIFT GLOBE FRAME TO MAKE ROOM FOR COPY PANEL ---
     // Uses camera view offset so hotspot projection & raycasting stay aligned.
     // Keep this query in sync with the #hero-tagline-container CSS media query.
@@ -2501,9 +2584,9 @@
       updateHeroViewShift(0);
 
       // 3. Renderer
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({ antialias: !IS_LITE, alpha: true, powerPreference: "high-performance" });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_LITE ? 1.5 : 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.35;
       container.appendChild(renderer.domElement);
@@ -2516,8 +2599,16 @@
       controls.enableZoom = false; // Disable wheel zoom trapping to allow natural page scrolling
       controls.minDistance = 300;
       controls.maxDistance = 1800;
-      controls.autoRotate = true;
+      controls.autoRotate = !REDUCED_MOTION;
       controls.autoRotateSpeed = 0.45;
+
+      if (IS_TOUCH) {
+        // Vertical swipe scrolls the page; horizontal drag reaches OrbitControls
+        renderer.domElement.style.touchAction = 'pan-y';
+        controls.enablePan = false;
+        controls.rotateSpeed = 0.5;
+        controls.dampingFactor = 0.08;
+      }
 
       // 5. Parent Globe Group (Oriented with India front and center on load)
       globeGroup = new THREE.Group();
@@ -2560,6 +2651,7 @@
         duration: 1.8,
         ease: "power3.out",
         onComplete: () => {
+          setTouchTiltLock(true);
           runDiscoveryModeSequence();
         }
       });
@@ -2575,7 +2667,7 @@
       revealHeroCopy();
 
       // 9. Event Listeners & Inactivity Tracking
-      window.addEventListener('resize', onResize);
+      onViewportResize(onResize);
       setupHotspotUIEvents();
       setupInactivityTracker();
       initAmbientAudioEngine();
@@ -2585,7 +2677,7 @@
       controls.addEventListener('start', () => { isInteracting = true; });
       controls.addEventListener('end', () => { isInteracting = false; });
 
-      window.addEventListener('mousemove', (e) => {
+      if (CAN_HOVER && !REDUCED_MOTION) window.addEventListener('mousemove', (e) => {
         if (isZoomed || isInteracting) return;
         const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
         const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -2715,30 +2807,45 @@
     }
 
     // --- 3D PROJECTED HOTSPOT POSITION SYNC & DEPTH PERCEPTION ---
+    // Cached per-frame state (avoids DOM lookups, allocations & redundant style writes)
+    const _hsWorld = new THREE.Vector3();
+    const _hsNormal = new THREE.Vector3();
+    const _hsScreen = new THREE.Vector3();
+    const _hsViewDir = new THREE.Vector3();
+    let _hsElems = null;
+    const _hsLast = [];
+
     function update2DProjectedHotspots() {
-      const tempVec = new THREE.Vector3();
-      const cameraDir = new THREE.Vector3();
-      camera.getWorldDirection(cameraDir);
+      if (!_hsElems) {
+        _hsElems = PRODUCTS.map((_, idx) => document.getElementById(`hotspot-${idx}`));
+      }
+      camera.getWorldDirection(_hsViewDir).negate();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const introProgress = clock ? Math.min(1.0, clock.getElapsedTime() / 1.5) : 1.0;
 
       PRODUCTS.forEach((prod, idx) => {
         const anchor = hotspotAnchors[idx];
-        const elem = document.getElementById(`hotspot-${idx}`);
+        const elem = _hsElems[idx];
         if (!anchor || !elem) return;
+        const last = _hsLast[idx] || (_hsLast[idx] = { transform: '', opacity: '', pointer: '', flip: null });
 
-        // 1. Get exact 3D world position of anchor glued to the globe surface
-        anchor.getWorldPosition(tempVec);
+        // 1. Exact 3D world position of anchor glued to the globe surface
+        anchor.getWorldPosition(_hsWorld);
 
-        // 2. Vector from center of globe to 3D hotspot position
-        const normalVec = tempVec.clone().normalize();
-        const facingDot = normalVec.dot(cameraDir.clone().negate());
+        // 2. How much the hotspot faces the camera
+        const facingDot = _hsNormal.copy(_hsWorld).normalize().dot(_hsViewDir);
 
-        // 3. Project 3D world coordinate to 2D screen coordinates
-        const screenVector = tempVec.clone().project(camera);
-        const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
-        const y = (-(screenVector.y * 0.5) + 0.5) * window.innerHeight;
+        let opacity = '0';
+        let pointer = 'none';
 
-        // 4. Depth visibility and scaling (clean front-hemisphere occlusion)
+        // 3. Depth visibility and scaling (clean front-hemisphere occlusion)
         if (facingDot > 0.02) {
+          // Project 3D world coordinate to 2D screen coordinates
+          _hsScreen.copy(_hsWorld).project(camera);
+          const x = (_hsScreen.x * 0.5 + 0.5) * vw;
+          const y = (-(_hsScreen.y * 0.5) + 0.5) * vh;
+
           let targetOpacity = 1.0;
           let targetScale = 1.0;
 
@@ -2758,25 +2865,32 @@
           }
 
           // Fade hotspots in smoothly on intro
-          if (clock) {
-            const introProgress = Math.min(1.0, clock.getElapsedTime() / 1.5);
-            targetOpacity *= introProgress;
-          }
+          targetOpacity *= introProgress;
 
           // Auto-flip tooltip below marker when marker is near the top edge
-          if (y < 140) {
-            elem.classList.add('tooltip-flip-bottom');
-          } else {
-            elem.classList.remove('tooltip-flip-bottom');
+          const flip = y < 140;
+          if (flip !== last.flip) {
+            elem.classList.toggle('tooltip-flip-bottom', flip);
+            last.flip = flip;
           }
 
-          elem.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${targetScale.toFixed(2)})`;
-          elem.style.opacity = Math.max(0, Math.min(1, targetOpacity)).toFixed(2);
-          elem.style.pointerEvents = 'auto';
-        } else {
-          // Behind globe: fade to 0 opacity completely and disable pointer events
-          elem.style.opacity = '0';
-          elem.style.pointerEvents = 'none';
+          const transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${targetScale.toFixed(2)})`;
+          if (transform !== last.transform) {
+            elem.style.transform = transform;
+            last.transform = transform;
+          }
+          opacity = Math.max(0, Math.min(1, targetOpacity)).toFixed(2);
+          pointer = 'auto';
+        }
+
+        // Behind globe: fade to 0 opacity completely and disable pointer events
+        if (opacity !== last.opacity) {
+          elem.style.opacity = opacity;
+          last.opacity = opacity;
+        }
+        if (pointer !== last.pointer) {
+          elem.style.pointerEvents = pointer;
+          last.pointer = pointer;
         }
       });
     }
@@ -3135,8 +3249,9 @@
       }
 
       // 4. Globe auto-rotation continues slowly in background
-      controls.autoRotate = true;
+      controls.autoRotate = !REDUCED_MOTION;
       controls.autoRotateSpeed = 0.18;
+      setTouchTiltLock(false);
 
       // 5. Get World position of target 3D hotspot
       // 5. Get World position of target 3D hotspot
@@ -3366,8 +3481,9 @@
         duration: 1.2,
         ease: "power3.inOut",
         onComplete: () => {
-          controls.autoRotate = true;
+          controls.autoRotate = !REDUCED_MOTION;
           controls.autoRotateSpeed = 0.55;
+          setTouchTiltLock(true);
         }
       });
     }
@@ -3401,26 +3517,29 @@
     // --- ANIMATION LOOP ---
     function animate() {
       requestAnimationFrame(animate);
+      if (!heroActive) return;
 
-      const t = clock ? clock.getElapsedTime() : 0;
+      // Frame-rate independent motion: dt = 1.0 at 60fps (stable on 60/90/120Hz & under frame drops)
+      const deltaSec = clock ? Math.min(clock.getDelta(), 0.05) : 1 / 60;
+      const dt = deltaSec * 60;
 
       // Slow Elegant Globe Rotation
       if (globeGroup && controls.autoRotate) {
-        globeGroup.rotation.y += 0.0008;
+        globeGroup.rotation.y += 0.0008 * dt;
       }
 
       // Rotate Active Data Orbit Packets
-      if (orbitPacketsMesh) {
-        orbitPacketsMesh.rotation.y += ORBIT_PACKET_ROTATION_SPEED;
+      if (orbitPacketsMesh && !REDUCED_MOTION) {
+        orbitPacketsMesh.rotation.y += ORBIT_PACKET_ROTATION_SPEED * dt;
       }
 
       // Real-Time Traveling Laser Photons
-      if (networkPhotonCurves.length > 0 && networkPhotonPoints && networkPhotonPoints.geometry.attributes.position) {
+      if (!REDUCED_MOTION && networkPhotonCurves.length > 0 && networkPhotonPoints && networkPhotonPoints.geometry.attributes.position) {
         const posAttr = networkPhotonPoints.geometry.attributes.position;
         let pIdx = 0;
         networkPhotonCurves.forEach((item) => {
           item.progresses.forEach((prog, idx) => {
-            let nextProg = (prog + item.speed) % 1.0;
+            let nextProg = (prog + item.speed * dt) % 1.0;
             item.progresses[idx] = nextProg;
             const pt = item.curve.getPoint(nextProg);
             posAttr.array[pIdx * 3]     = pt.x;
@@ -3433,9 +3552,9 @@
       }
 
       // Animate Surface Beacon Radar Ripples
-      if (beaconRipples.length > 0) {
+      if (!REDUCED_MOTION && beaconRipples.length > 0) {
         beaconRipples.forEach((ripple) => {
-          ripple.progress = (ripple.progress + ripple.speed) % 1.0;
+          ripple.progress = (ripple.progress + ripple.speed * dt) % 1.0;
           const currentScale = ripple.initialScale + ripple.progress * (ripple.maxScale - ripple.initialScale);
           ripple.mesh.scale.set(currentScale, currentScale, currentScale);
           ripple.mesh.material.opacity = (1.0 - ripple.progress) * 0.85;
@@ -3445,11 +3564,11 @@
       // Rotate hotspot micro orbit particles
       hotspotAnchors.forEach(anchor => {
         if (anchor.children[1]) {
-          anchor.children[1].rotation.z += 0.02;
+          anchor.children[1].rotation.z += 0.02 * dt;
         }
       });
 
-      controls.update();
+      controls.update(deltaSec);
       update2DProjectedHotspots();
       updateConnectionSpline();
       renderer.render(scene, camera);
@@ -3457,7 +3576,7 @@
 
     // --- 1. DEEP DARK 3D BASE SPHERE WITH Z-BUFFER OCCLUSION ---
     function createDarkBaseSphere() {
-      const coreGeo = new THREE.SphereGeometry(globeRadius, 64, 64);
+      const coreGeo = new THREE.SphereGeometry(globeRadius, IS_LITE ? 40 : 64, IS_LITE ? 40 : 64);
       const coreMat = new THREE.MeshBasicMaterial({
         color: 0x030814,
         depthWrite: true
@@ -3655,7 +3774,7 @@
       innerCtx.fillRect(0, 0, 256, 256);
 
       const innerTexture = new THREE.CanvasTexture(innerCanvas);
-      const innerGeo = new THREE.SphereGeometry(globeRadius + 14, 64, 64);
+      const innerGeo = new THREE.SphereGeometry(globeRadius + 14, IS_LITE ? 40 : 64, IS_LITE ? 40 : 64);
       const innerMat = new THREE.MeshBasicMaterial({
         color: 0x00f0ff,
         map: innerTexture,
@@ -3681,7 +3800,7 @@
       outerCtx.fillRect(0, 0, 256, 256);
 
       const outerTexture = new THREE.CanvasTexture(outerCanvas);
-      const outerGeo = new THREE.SphereGeometry(globeRadius + 32, 64, 64);
+      const outerGeo = new THREE.SphereGeometry(globeRadius + 32, IS_LITE ? 40 : 64, IS_LITE ? 40 : 64);
       const outerMat = new THREE.MeshBasicMaterial({
         color: 0xa855f7,
         map: outerTexture,
@@ -3856,45 +3975,31 @@
       const gridCtx = gridCanvas.getContext('2d');
       const fogCtx = fogCanvas.getContext('2d');
 
-      function resizeCanvases() {
-        gridCanvas.width = window.innerWidth;
-        gridCanvas.height = window.innerHeight;
-        fogCanvas.width = window.innerWidth;
-        fogCanvas.height = window.innerHeight;
-      }
-      resizeCanvases();
-      window.addEventListener('resize', resizeCanvases);
-
+      // Phones/tablets & reduced motion: draw once (static). Desktop: animate, paused when hero is hidden.
+      const animateBackgrounds = !IS_LITE && !REDUCED_MOTION;
       let gridOffset = 0;
       let fogTime = 0;
 
-      function renderBackgrounds() {
-        requestAnimationFrame(renderBackgrounds);
-
-        // 1. Perspective Grid Line Animation
+      function drawBackgrounds() {
+        // 1. Perspective Grid Lines (single batched path)
         gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
         gridCtx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
         gridCtx.lineWidth = 1;
 
         const step = 60;
-        gridOffset = (gridOffset + 0.3) % step;
-
+        gridCtx.beginPath();
         for (let x = 0; x < gridCanvas.width; x += step) {
-          gridCtx.beginPath();
           gridCtx.moveTo(x, 0);
           gridCtx.lineTo(x, gridCanvas.height);
-          gridCtx.stroke();
         }
         for (let y = gridOffset; y < gridCanvas.height; y += step) {
-          gridCtx.beginPath();
           gridCtx.moveTo(0, y);
           gridCtx.lineTo(gridCanvas.width, y);
-          gridCtx.stroke();
         }
+        gridCtx.stroke();
 
-        // 2. Soft Moving Fog Ambient Circles
+        // 2. Soft Ambient Fog Circles
         fogCtx.clearRect(0, 0, fogCanvas.width, fogCanvas.height);
-        fogTime += 0.005;
 
         const fog1X = fogCanvas.width * 0.3 + Math.sin(fogTime) * 80;
         const fog1Y = fogCanvas.height * 0.4 + Math.cos(fogTime * 0.7) * 60;
@@ -3913,7 +4018,30 @@
         fogCtx.fillRect(0, 0, fogCanvas.width, fogCanvas.height);
       }
 
-      renderBackgrounds();
+      function resizeCanvases() {
+        gridCanvas.width = window.innerWidth;
+        gridCanvas.height = window.innerHeight;
+        fogCanvas.width = window.innerWidth;
+        fogCanvas.height = window.innerHeight;
+        drawBackgrounds();
+      }
+      resizeCanvases();
+      onViewportResize(resizeCanvases);
+
+      if (!animateBackgrounds) return;
+
+      let lastTime = performance.now();
+      function renderBackgrounds(now) {
+        requestAnimationFrame(renderBackgrounds);
+        const dt = Math.min((now - lastTime) / 1000, 0.05) * 60;
+        lastTime = now;
+        if (!heroActive) return;
+
+        gridOffset = (gridOffset + 0.3 * dt) % 60;
+        fogTime += 0.005 * dt;
+        drawBackgrounds();
+      }
+      requestAnimationFrame(renderBackgrounds);
     }
 
     // --- DOM READY INIT ---
