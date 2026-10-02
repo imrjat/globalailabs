@@ -12,9 +12,10 @@
   <meta property="og:description" content="Create cinematic AI videos with precise multi-modal control. Keep character and scene consistency across shots.">
 
   <!-- Image Preloads -->
-  <link rel="preload" href="./assets/img/globalailabs.png" as="image">
-  <link rel="preload" href="assets/img/home-element.webp" as="image">
-  <link rel="preload" href="./assets/img/globalailabs.png" as="image">
+  <link rel="preload" href="./assets/img/logo.webp" as="image" type="image/webp">
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="modulepreload" href="https://unpkg.com/three@0.161.0/build/three.module.js" crossorigin>
+  <link rel="modulepreload" href="https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js" crossorigin>
 
   <!-- Tailwind & Custom Styles -->
   <link rel="stylesheet" href="./assets/css/styles.css">
@@ -81,6 +82,13 @@
       z-index: 1001;
       padding: 6px;
     }
+
+    .globe-hotspot:focus { outline: none; }
+    .globe-hotspot:focus-visible .hotspot-icon-box {
+      outline: 2px solid #ffffff;
+      outline-offset: 4px;
+    }
+    .globe-hotspot:focus-visible .hotspot-label { opacity: 1; }
 
     /* Lite tier (touch / small screens): drop GPU-heavy effects layered over the live WebGL canvas */
     .globe-lite .hotspot-icon-box,
@@ -761,6 +769,16 @@
       }
     }
   </style>
+  <!-- Icons & Social Preview -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/img/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/img/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#06080c">
+  <meta property="og:image" content="./assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Global AI Labs">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="bg-dark-premium text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
 
@@ -2886,6 +2904,9 @@
         }
         if (pointer !== last.pointer) {
           elem.style.pointerEvents = pointer;
+          // Hidden (behind globe) hotspots leave the tab order
+          elem.tabIndex = pointer === 'auto' ? 0 : -1;
+          elem.setAttribute('aria-hidden', pointer === 'auto' ? 'false' : 'true');
           last.pointer = pointer;
         }
       });
@@ -2981,6 +3002,21 @@
       PRODUCTS.forEach((prod, idx) => {
         const elem = document.getElementById(`hotspot-${idx}`);
         if (elem) {
+          // Accessible button semantics (keyboard + screen readers)
+          const readableName = prod.name.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+          elem.setAttribute('role', 'button');
+          elem.setAttribute('aria-label', `Open ${readableName}`);
+          elem.tabIndex = 0;
+          elem.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              selectHotspot(idx);
+            }
+          });
+          elem.addEventListener('focus', () => highlightConnectedLaserArcs(idx));
+          elem.addEventListener('blur', () => resetLaserArcsHighlight());
+
           let touchStartX = 0;
           let touchStartY = 0;
           let hasMoved = false;
@@ -3002,6 +3038,7 @@
           elem.addEventListener('touchend', (e) => {
             if (!hasMoved) {
               e.stopPropagation();
+              e.preventDefault(); // suppress the follow-up synthetic click (avoids double select)
               selectHotspot(idx);
             }
           });

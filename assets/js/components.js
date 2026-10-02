@@ -12,7 +12,10 @@
     const headerHTML = `
     <header id="site-header" class="fixed top-0 left-0 w-full z-[100002] px-4 sm:px-6 md:px-8 lg:px-12 py-3 sm:py-4 flex justify-between items-center transition-all duration-300 bg-black/95 backdrop-blur-md border-b border-white/10">
       <a href="./index.html" class="focus:outline-none focus:ring-2 focus:ring-[#ff2e93] focus:ring-offset-2 flex items-center group py-1 flex-shrink-0" aria-label="Global AI Labs Home">
-        <img src="./assets/img/logo.png" alt="Global AI Labs" class="h-7 sm:h-8 md:h-10 w-auto header-logo transition-transform duration-300 group-hover:scale-105 object-contain">
+        <picture>
+          <source srcset="./assets/img/logo.webp" type="image/webp">
+          <img src="./assets/img/logo.png" alt="Global AI Labs" width="559" height="100" decoding="async" fetchpriority="high" class="block h-7 sm:h-8 md:h-10 w-auto header-logo transition-transform duration-300 group-hover:scale-105 object-contain">
+        </picture>
       </a>
       <div class="flex items-center gap-2.5 sm:gap-3 md:gap-4 flex-shrink-0">
         <a href="./connect.html" class="magnetic hidden md:inline-flex px-4 sm:px-6 py-2 border border-[#ff2e93] bg-[#ff2e93]/10 text-white text-[10px] sm:text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-[#ff2e93] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] header-connect-btn header-btn items-center justify-center">
@@ -112,9 +115,9 @@
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] sm:text-[11px] tracking-[0.08em] uppercase text-muted border-t border-white/5 pt-6 sm:pt-8 text-center sm:text-left">
           <div>© 2026 Global AI Labs. All rights reserved.</div>
           <div class="flex gap-4">
-            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="./privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
             <span>/</span>
-            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            <a href="./terms.html" class="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@
         content="Get in touch with Global AI Labs. Start a creative project, campaign, or digital branding project.">
 
     <!-- Image Preloads -->
-    <link rel="preload" href="./assets/img/globalailabs.png" as="image">
+    <link rel="preload" href="./assets/img/logo.webp" as="image" type="image/webp">
 
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/styles.css">
@@ -23,7 +23,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Icons & Social Preview -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/img/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/img/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#06080c">
+  <meta property="og:image" content="./assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Global AI Labs">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="bg-[#06080c] text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
@@ -153,24 +163,30 @@
             </div>
 
             <!-- Contact Form (Right Column) -->
-            <form
-                class="lg:col-span-8 flex flex-col gap-6 sm:gap-8 border border-white/10 rounded-[24px] p-5 sm:p-8 md:p-10 bg-[#0c1016]/80 backdrop-blur-xl relative shadow-2xl"
-                action="#" method="POST"
-                onsubmit="event.preventDefault(); alert('Thanks — your access request is in. We will be in touch shortly.');">
+            <!-- FORMSPREE endpoint: https://formspree.io/f/mzezlbag (change data-endpoint + action to switch forms) -->
+            <form id="access-form" novalidate
+                data-endpoint="https://formspree.io/f/mzezlbag"
+                class="order-first lg:order-none lg:col-span-8 flex flex-col gap-6 sm:gap-8 border border-white/10 rounded-[24px] p-5 sm:p-8 md:p-10 bg-[#0c1016]/80 backdrop-blur-xl relative shadow-2xl"
+                action="https://formspree.io/f/mzezlbag" method="POST">
+                <!-- Spam honeypot (hidden from people) -->
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                     <div class="flex flex-col gap-2">
                         <label for="form-name"
                             class="text-[10px] font-bold tracking-[0.08em] uppercase text-white/60 font-mono">NAME *</label>
                         <input type="text" id="form-name" name="name" required autocomplete="name"
-                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/20"
+                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/40"
                             placeholder="your name">
+                        <p id="form-name-error" class="field-error hidden text-[11px] text-[#ff6b9d]" role="alert"></p>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="form-company"
                             class="text-[10px] font-bold tracking-[0.08em] uppercase text-white/60 font-mono">COMPANY *</label>
                         <input type="text" id="form-company" name="company" required autocomplete="organization"
-                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/20"
+                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/40"
                             placeholder="company name">
+                        <p id="form-company-error" class="field-error hidden text-[11px] text-[#ff6b9d]" role="alert"></p>
                     </div>
                 </div>
 
@@ -179,15 +195,16 @@
                         <label for="form-email"
                             class="text-[10px] font-bold tracking-[0.08em] uppercase text-white/60 font-mono">EMAIL *</label>
                         <input type="email" id="form-email" name="email" required autocomplete="email"
-                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/20"
+                            class="bg-transparent border-b border-white/20 py-2.5 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors placeholder:text-white/40"
                             placeholder="name@company.com">
+                        <p id="form-email-error" class="field-error hidden text-[11px] text-[#ff6b9d]" role="alert"></p>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="form-role"
                             class="text-[10px] font-bold tracking-[0.08em] uppercase text-white/60 font-mono">I AM A… *</label>
                         <div class="relative">
                             <select id="form-role" name="role" required
-                                class="appearance-none w-full bg-[#0c1016] border-b border-white/20 py-2.5 pr-8 text-white text-base sm:text-sm focus:outline-none focus:border-[#ff2e93] transition-colors uppercase font-bold cursor-pointer invalid:text-white/30 invalid:font-normal">
+                                class="appearance-none w-full bg-[#0c1016] border-b border-white/20 py-2.5 pr-8 text-white text-base sm:text-sm focus:outline-none focus:border-[#ff2e93] transition-colors uppercase font-bold cursor-pointer invalid:text-white/40 invalid:font-normal">
                                 <option value="" disabled selected hidden>Select one</option>
                                 <option value="studio-ott">Studio / OTT</option>
                                 <option value="agency">Agency</option>
@@ -197,6 +214,7 @@
                             </select>
                             <svg class="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/60" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 7.5l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <p id="form-role-error" class="field-error hidden text-[11px] text-[#ff6b9d]" role="alert"></p>
                     </div>
                 </div>
 
@@ -204,14 +222,25 @@
                     <label for="form-message"
                         class="text-[10px] font-bold tracking-[0.08em] uppercase text-white/60 font-mono">WHAT ARE YOU WORKING ON? <span class="text-white/30">(OPTIONAL)</span></label>
                     <textarea id="form-message" name="message" rows="4"
-                        class="bg-transparent border border-white/20 rounded-[12px] p-3.5 sm:p-4 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors resize-none placeholder:text-white/20"
+                        class="bg-transparent border border-white/20 rounded-[12px] p-3.5 sm:p-4 text-white text-base sm:text-md focus:outline-none focus:border-[#ff2e93] transition-colors resize-none placeholder:text-white/40"
                         placeholder="a series, a campaign, a slate — tell us what you want to make"></textarea>
                 </div>
 
-                <button type="submit"
-                    class="magnetic w-full py-4 sm:py-5 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] active:scale-[0.99] text-xs sm:text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] mt-2 sm:mt-4 cursor-pointer shadow-lg shadow-[#ff2e93]/20">
-                    Request access
+                <p id="form-status" class="hidden text-sm rounded-[12px] border px-4 py-3" role="status" aria-live="polite"></p>
+
+                <button type="submit" id="form-submit"
+                    class="magnetic w-full disabled:opacity-60 disabled:cursor-wait py-4 sm:py-5 bg-[#ff2e93] text-white hover:bg-white hover:text-[#0c1016] active:scale-[0.99] text-xs sm:text-[11px] font-black tracking-[0.08em] uppercase rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#ff2e93] mt-2 sm:mt-4 cursor-pointer shadow-lg shadow-[#ff2e93]/20">
+                    <span class="submit-label">Request access</span>
                 </button>
+
+                <!-- Success state (replaces fields after a successful submit) -->
+                <div id="form-success" class="hidden flex-col items-start gap-4 py-6" tabindex="-1">
+                    <span class="w-12 h-12 rounded-full bg-[#ff2e93]/15 border border-[#ff2e93]/40 flex items-center justify-center text-[#ff2e93]" aria-hidden="true">
+                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4.5 10.5l3.5 3.5 7.5-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-[-0.02em] text-white font-outfit">You're on the list.</h2>
+                    <p class="text-white/70 leading-relaxed max-w-md">Thanks — your access request is in. We'll reply within two business days at the email you shared.</p>
+                </div>
             </form>
         </section>
     </main>
@@ -225,6 +254,7 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
     <script>gsap.registerPlugin(ScrollTrigger);</script>
     <script src="./assets/js/components.js"></script>
+    <script src="./assets/js/access-form.js" defer></script>
     <script type="module" src="./assets/js/main.js"></script>
 </body>
 
