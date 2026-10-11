@@ -911,3 +911,53 @@ body.menu-open #site-header .header-menu-btn:hover {
   }
 }
 
+
+/* Team cards: cursor spotlight + gentle 3D tilt (driven by initTeamCards in animations.js) */
+.team-tilt {
+  --mx: 50%;
+  --my: 30%;
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.3s;
+  will-change: transform;
+}
+
+.team-photo {
+  filter: grayscale(0.3) contrast(1.03);
+  transition: filter 0.6s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.team-glow {
+  background: radial-gradient(420px circle at var(--mx) var(--my), var(--accent), transparent 60%);
+  opacity: 0;
+  mix-blend-mode: soft-light;
+  transition: opacity 0.4s ease;
+}
+
+.group:hover .team-photo,
+.group:focus-within .team-photo {
+  filter: grayscale(0) contrast(1.03);
+  transform: scale(1.05);
+}
+
+.group:hover .team-glow {
+  opacity: 0.9;
+}
+
+.group:hover .team-tilt {
+  box-shadow: 0 30px 60px -20px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Touch devices have no hover: show photos in full colour, skip the spotlight */
+@media (hover: none), (pointer: coarse) {
+  .team-photo { filter: none; }
+  .team-glow { display: none; }
+  .team-tilt { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-tilt, .team-photo, .team-glow { transition: none; }
+  .team-tilt { transform: none !important; }
+  .group:hover .team-photo { transform: none; }
+}

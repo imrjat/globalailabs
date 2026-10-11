@@ -469,3 +469,37 @@ export function initStudioAnimations() {
   });
 }
 
+
+// 9. Team cards: cursor spotlight and gentle 3D tilt (mouse pointers only)
+export function initTeamCards() {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reduceMotion) return;
+
+  const MAX_TILT = 5; // degrees
+
+  document.querySelectorAll('.team-tilt').forEach(card => {
+    let frame = null;
+
+    card.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const { clientX, clientY } = e;
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const px = (clientX - r.left) / r.width;
+        const py = (clientY - r.top) / r.height;
+        card.style.setProperty('--mx', `${px * 100}%`);
+        card.style.setProperty('--my', `${py * 100}%`);
+        card.style.setProperty('--ry', `${(px - 0.5) * 2 * MAX_TILT}deg`);
+        card.style.setProperty('--rx', `${(0.5 - py) * 2 * MAX_TILT}deg`);
+      });
+    });
+
+    card.addEventListener('pointerleave', () => {
+      if (frame) cancelAnimationFrame(frame);
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
+  });
+}

@@ -8,7 +8,8 @@ import {
   initMagneticButtons,
   initHeroParallax,
   initServicesCanvas,
-  initStudioAnimations
+  initStudioAnimations,
+  initTeamCards
 } from './animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initHomePage();
   } else if (isWork) {
     initWorkPage();
+  } else if (isTeam) {
+    initTeamCards();
   }
 
   // Footer "GO UP" smooth scroll behavior
