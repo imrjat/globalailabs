@@ -115,7 +115,7 @@
         }
 
         if (!isConfigured) {
-            setStatus('error', "This form isn't connected yet. Please email hello@globalailabs.ai and we'll get you set up.");
+            setStatus('error', "This form isn't connected yet. Please email support@globalailabs.ai and we'll get you set up.");
             return;
         }
 

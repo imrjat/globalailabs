@@ -197,7 +197,7 @@ html.lenis, html.lenis body {
   transform: translateY(100%);
 }
 
-/* Page Transitions — native cross-document View Transitions.
+/* Page Transitions: native cross-document View Transitions.
    The old page stays on screen until the new one is ready, then they crossfade on the GPU.
    Browsers without support simply navigate instantly. */
 @view-transition {

@@ -50,7 +50,7 @@
 
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 w-full border-t border-white/10 pt-4 text-[10px] sm:text-[11px] tracking-[0.08em] uppercase text-muted font-mono">
         <div>© 2026 GLOBAL AI LABS</div>
-        <div><a href="mailto:hello@globalailabs.ai" class="text-white/70 hover:text-[#ff2e93] transition-colors">hello@globalailabs.ai</a></div>
+        <div><a href="mailto:support@globalailabs.ai" class="text-white/70 hover:text-[#ff2e93] transition-colors">support@globalailabs.ai</a></div>
         <div>MUMBAI, INDIA</div>
       </div>
     </nav>
@@ -65,7 +65,7 @@
           <div class="md:col-span-5 flex flex-col gap-4 text-left">
             <div class="text-[11px] tracking-[0.08em] uppercase text-muted font-mono">agency</div>
             <p class="text-sm text-white/70 max-w-sm leading-relaxed">
-              We are building the operations layer for AI-era content—production workflow, post-production, and consent-verified IP, in one place.
+              We are building the operations layer for AI-era content: production workflow, post-production, and consent-verified IP, in one place.
             </p>
             <div class="flex flex-wrap items-center gap-3 mt-2">
               <a href="./connect.html" class="magnetic group inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#ff2e93] text-white text-[10px] sm:text-[11px] font-black tracking-[0.08em] uppercase rounded-full shadow-lg shadow-[#ff2e93]/20 hover:bg-white hover:text-[#0c1016] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2e93] focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080c]">
@@ -96,7 +96,7 @@
           <div class="md:col-span-4 flex flex-col gap-6 text-left">
             <div>
               <div class="text-[11px] tracking-[0.08em] uppercase text-muted mb-3 font-mono">support inquiries</div>
-              <a href="mailto:hello@globalailabs.ai" class="text-base sm:text-lg font-bold text-[#ff2e93] hover:underline block break-all">hello@globalailabs.ai</a>
+              <a href="mailto:support@globalailabs.ai" class="text-base sm:text-lg font-bold text-[#ff2e93] hover:underline block break-all">support@globalailabs.ai</a>
             </div>
             <div>
               <button id="go-up-btn" aria-label="Scroll to top of page" class="magnetic inline-flex items-center gap-2 px-6 py-2.5 border border-white/15 text-white text-[10px] sm:text-[11px] font-bold tracking-[0.08em] uppercase rounded-full hover:bg-white hover:text-[#0c1016] transition-all duration-300 cursor-pointer">

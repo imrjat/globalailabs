@@ -147,7 +147,7 @@ export const projectsData = [
 export const teamData = [
     {
         name: "Kartick Nishandar",
-        role: "Co-Founder & CEO",
+        role: "Founder & CEO",
         initials: "KN"
     },
     {
@@ -166,7 +166,7 @@ export const careersData = [
     {
         id: "role-1",
         title: "Junior Copywriter",
-        description: "For a writer with 1–2 years of digital agency experience, strong ideation skills, and a portfolio that shows campaign thinking, social copy, scripts, reels, and branded content ideas."
+        description: "For a writer with 1 to 2 years of digital agency experience, strong ideation skills, and a portfolio that shows campaign thinking, social copy, scripts, reels, and branded content ideas."
     },
     {
         id: "role-2",
