@@ -93,7 +93,12 @@
 
     function showSuccess() {
         Array.from(form.children).forEach((child) => {
-            if (child !== successEl) child.classList.add('hidden');
+            // Inline display:none because `.magnetic { display: inline-block }` (unlayered CSS)
+            // outranks Tailwind's `.hidden` and would leave the submit button on screen.
+            if (child !== successEl) {
+                child.classList.add('hidden');
+                child.style.display = 'none';
+            }
         });
         if (successEl) {
             successEl.classList.remove('hidden');

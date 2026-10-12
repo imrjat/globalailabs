@@ -241,6 +241,9 @@
       z-index: 45;
       pointer-events: none;
       opacity: 0;
+      /* Hidden HUD must not intercept clicks: its CTA, tiles and close button set pointer-events:auto
+         and would otherwise swallow taps meant for the hero buttons beneath it. */
+      visibility: hidden;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -3164,14 +3167,6 @@
         }
       });
 
-      // HUD Command Bar CTA Click
-      const hudCmdBar = document.getElementById('hud-cmd-bar');
-      if (hudCmdBar) {
-        hudCmdBar.addEventListener('click', () => {
-          saveGlobeState();
-        });
-      }
-
       // HUD Close Button
       const hudCloseBtn = document.getElementById('hud-close-btn');
       if (hudCloseBtn) {
@@ -3500,6 +3495,7 @@
         hudContainer.style.transform = 'translateY(-50%)';
       }
 
+      hudContainer.style.visibility = 'visible';
       hudContainer.style.opacity = '1';
       hudContainer.style.pointerEvents = 'auto';
 
@@ -3572,6 +3568,7 @@
           if (hudContainer) {
             hudContainer.style.opacity = '0';
             hudContainer.style.pointerEvents = 'none';
+            hudContainer.style.visibility = 'hidden';
           }
         }
       });
