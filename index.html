@@ -11,11 +11,21 @@
   <meta property="og:title" content="Global AI Labs | Cinematic AI Video Generator">
   <meta property="og:description" content="Create cinematic AI videos with precise multi-modal control. Keep character and scene consistency across shots.">
 
+  <!-- Import Map for Three.js: must come before any module/modulepreload, or browsers ignore it -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/js/vendor/three/three.module.js",
+        "three/addons/": "./assets/js/vendor/three/"
+      }
+    }
+  </script>
+
   <!-- Image Preloads -->
   <link rel="preload" href="./assets/img/logo.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
-  <link rel="modulepreload" href="https://unpkg.com/three@0.161.0/build/three.module.js" crossorigin>
-  <link rel="modulepreload" href="https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js" crossorigin>
+  <link rel="modulepreload" href="./assets/js/vendor/three/three.module.js">
+  <link rel="modulepreload" href="./assets/js/vendor/three/controls/OrbitControls.js">
 
   <!-- Tailwind & Custom Styles -->
   <link rel="stylesheet" href="./assets/css/styles.css">
@@ -24,16 +34,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Import Map for Three.js -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
-      }
-    }
-  </script>
 
   <!-- 3D Globe Ecosystem Styling -->
   <style>
