@@ -2143,7 +2143,14 @@
       }
 
       // Handler for any user interaction on the website
-      const onUserInteraction = () => {
+      const onUserInteraction = (e) => {
+        // A click on a link is about to leave the page: don't start a big audio download that would
+        // compete with the next page's own requests. The listeners stay attached (they are `once`
+        // per event type), so sound starts on the next non-link interaction.
+        if (e && e.target && e.target.closest && e.target.closest('a[href]')) {
+          attachInteractionListeners();
+          return;
+        }
         if (!isUserIntentMuted() && !isAudioPlaying) {
           playAudioWithFade();
         }
@@ -2191,6 +2198,16 @@
 
       audioBtn.addEventListener('click', handleAudioToggle);
       audioBtn.addEventListener('touchend', handleAudioToggle);
+
+      // Leaving the page: stop any audio download still in flight so it can't slow the next page
+      window.addEventListener('pagehide', () => {
+        if (!bgAudio) return;
+        try {
+          bgAudio.pause();
+          bgAudio.removeAttribute('src');
+          bgAudio.load();
+        } catch (_) { /* nothing to clean up */ }
+      });
     }
 
     function selectHotspot(index) {
