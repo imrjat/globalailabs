@@ -91,7 +91,11 @@
         if (submitLabel) submitLabel.textContent = loading ? 'Sending…' : 'Request access';
     }
 
+    // Children we hid on success (the honeypot, status line and success panel start out hidden already)
+    let hiddenOnSuccess = [];
+
     function showSuccess() {
+        hiddenOnSuccess = Array.from(form.children).filter((child) => child !== successEl && !child.classList.contains('hidden'));
         Array.from(form.children).forEach((child) => {
             // Inline display:none because `.magnetic { display: inline-block }` (unlayered CSS)
             // outranks Tailwind's `.hidden` and would leave the submit button on screen.
@@ -107,6 +111,25 @@
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
+
+    // "Send another request": bring the form back and hide the success panel
+    function showFormAgain() {
+        hiddenOnSuccess.forEach((child) => {
+            child.classList.remove('hidden');
+            child.style.display = '';
+        });
+        hiddenOnSuccess = [];
+        if (successEl) {
+            successEl.classList.add('hidden');
+            successEl.classList.remove('flex');
+        }
+        setStatus(null);
+        fields.forEach(clearFieldError);
+        if (fields[0]) fields[0].input.focus();
+    }
+
+    const againBtn = document.getElementById('form-again');
+    if (againBtn) againBtn.addEventListener('click', showFormAgain);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

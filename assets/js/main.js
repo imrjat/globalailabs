@@ -55,14 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
   attachGoUpListener();
   window.addEventListener('components:mounted', attachGoUpListener);
 
-  // Register Service Worker for 24-hour image caching
-  // if ('serviceWorker' in navigator) {
-  //   window.addEventListener('load', () => {
-  //     navigator.serviceWorker.register('./sw.js')
-  //       .then((reg) => console.log('Service Worker registered successfully:', reg.scope))
-  //       .catch((err) => console.error('Service Worker registration failed:', err));
-  //   });
-  // }
+  // Clean up the retired image-caching service worker (see sw.js) on devices that still have it
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => registrations.forEach((registration) => registration.unregister()))
+      .catch(() => {});
+    if (window.caches) {
+      caches.keys()
+        .then((keys) => keys.filter((key) => key.startsWith('global-ai-labs-media-cache') || key.startsWith('global-ai-audio')).forEach((key) => caches.delete(key)))
+        .catch(() => {});
+    }
+  }
 
   // Common animations on all sub-pages
   initScrollReveals();

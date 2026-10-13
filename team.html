@@ -29,11 +29,16 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/img/icons/icon-192.png">
   <link rel="apple-touch-icon" href="./assets/img/icons/apple-touch-icon.png">
   <meta name="theme-color" content="#06080c">
-  <meta property="og:image" content="./assets/img/og-image.jpg">
+  <meta property="og:image" content="https://globalailabs.ai/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Global AI Labs">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://globalailabs.ai/team.html">
+  <meta name="twitter:title" content="Team | Global AI Labs">
+  <meta name="twitter:description" content="Meet the team of creators, writers, designers, and creative developers behind the scenes at Global AI Labs.">
+  <meta name="twitter:image" content="https://globalailabs.ai/assets/img/og-image.jpg">
+  <link rel="canonical" href="https://globalailabs.ai/team.html">
 </head>
 
 <body class="bg-[#06080c] text-[#f0f6f8] antialiased selection:bg-[#ff2e93] selection:text-white dark-mode-override">
@@ -96,9 +101,12 @@
                 <article class="stagger-card group" style="--accent:#ff2e93">
                     <div
                         class="team-tilt relative aspect-[4/5] overflow-hidden rounded-[24px] border border-white/10 bg-[#10151d] shadow-xl group-hover:border-[#ff2e93]">
-                        <img src="./assets/img/team/KartickNishandar.jpeg" alt="Portrait of Kartick Nishandar, Founder & CEO"
-                            width="888" height="892" loading="lazy" decoding="async"
+                        <picture>
+                            <source srcset="./assets/img/team/KartickNishandar.webp" type="image/webp">
+                            <img src="./assets/img/team/KartickNishandar.jpeg" alt="Portrait of Kartick Nishandar, Founder & CEO"
+                            width="720" height="723" loading="lazy" decoding="async"
                             class="team-photo absolute inset-0 w-full h-full object-cover object-[50%_20%]">
+                        </picture>
                         <div class="team-glow absolute inset-0 pointer-events-none"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#06080c] via-[#06080c]/30 via-40% to-transparent pointer-events-none"></div>
                         <span
@@ -117,9 +125,12 @@
                 <article class="stagger-card group" style="--accent:#00f0ff">
                     <div
                         class="team-tilt relative aspect-[4/5] overflow-hidden rounded-[24px] border border-white/10 bg-[#10151d] shadow-xl group-hover:border-[#00f0ff]">
-                        <img src="./assets/img/team/ArjunSingghBaran.jpeg" alt="Portrait of Arjun Singgh Baran, Co-Founder & COO"
-                            width="970" height="972" loading="lazy" decoding="async"
+                        <picture>
+                            <source srcset="./assets/img/team/ArjunSingghBaran.webp" type="image/webp">
+                            <img src="./assets/img/team/ArjunSingghBaran.jpeg" alt="Portrait of Arjun Singgh Baran, Co-Founder & COO"
+                            width="720" height="721" loading="lazy" decoding="async"
                             class="team-photo absolute inset-0 w-full h-full object-cover object-[45%_25%]">
+                        </picture>
                         <div class="team-glow absolute inset-0 pointer-events-none"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#06080c] via-[#06080c]/30 via-40% to-transparent pointer-events-none"></div>
                         <span
@@ -138,9 +149,12 @@
                 <article class="stagger-card group sm:col-span-2 lg:col-span-1 sm:w-[calc(50%-0.75rem)] md:w-[calc(50%-1rem)] lg:w-full max-w-md sm:max-w-none mx-auto w-full" style="--accent:#ff2e93">
                     <div
                         class="team-tilt relative aspect-[4/5] overflow-hidden rounded-[24px] border border-white/10 bg-[#10151d] shadow-xl group-hover:border-[#ff2e93]">
-                        <img src="./assets/img/team/VikrantNishandar.jpeg" alt="Portrait of Vikrant Nishandar, Co-Founder & Investing Partner"
-                            width="1000" height="992" loading="lazy" decoding="async"
+                        <picture>
+                            <source srcset="./assets/img/team/VikrantNishandar.webp" type="image/webp">
+                            <img src="./assets/img/team/VikrantNishandar.jpeg" alt="Portrait of Vikrant Nishandar, Co-Founder & Investing Partner"
+                            width="720" height="714" loading="lazy" decoding="async"
                             class="team-photo absolute inset-0 w-full h-full object-cover object-[50%_20%]">
+                        </picture>
                         <div class="team-glow absolute inset-0 pointer-events-none"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#06080c] via-[#06080c]/30 via-40% to-transparent pointer-events-none"></div>
                         <span
@@ -192,10 +206,10 @@
     <div id="site-footer-container"></div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script>gsap.registerPlugin(ScrollTrigger);</script>
+    <script src="./assets/js/vendor/gsap/gsap.min.js" defer></script>
+    <script src="./assets/js/vendor/gsap/ScrollTrigger.min.js" defer></script>
+    <script src="./assets/js/vendor/lenis/lenis.min.js" defer></script>
+    <script src="./assets/js/vendor/gsap-init.js" defer></script>
     <script src="./assets/js/components.js"></script>
     <script type="module" src="./assets/js/main.js"></script>
 </body>
