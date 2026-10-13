@@ -50,6 +50,17 @@
       touch-action: pan-y pinch-zoom;
     }
 
+    /* Touch devices: use the small viewport height so the hero (and the globe inside it) does not
+       resize every time the mobile browser's address bar slides in or out while scrolling. */
+    @media (hover: none), (pointer: coarse) {
+      #hero-os-section {
+        height: 100vh;
+        height: 100svh;
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+    }
+
     .vignette-overlay {
       background: radial-gradient(circle at center, transparent 35%, rgba(6,8,12,0.7) 80%, #06080c 100%);
     }
@@ -1410,7 +1421,8 @@
 
     // --- DYNAMIC OPTIMAL CAMERA DISTANCE (BEST UI/UX PROPORTIONS) ---
     function getOptimalCameraDistance() {
-      const aspect = window.innerWidth / window.innerHeight;
+      const vp = getViewport();
+      const aspect = vp.w / vp.h;
       if (aspect < 0.75) return 1320; // Mobile portrait (spacious, optimal framing)
       if (aspect < 1.1) return 1140;  // Tablet
       // Split hero on narrower landscape screens: pull back so globe + copy panel both fit
@@ -1425,6 +1437,26 @@
 
     // --- DEVICE TIER: lighter rendering & touch-friendly controls on phones/tablets ---
     const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches;
+
+    // Mobile browsers change window.innerHeight while the address bar slides in/out during scroll.
+    // Keep the globe framing on a stable size and only re-measure on a real change (width or rotation).
+    // The hero uses 100svh on touch devices, so its own height is the truest "toolbar visible" height.
+    function measureViewportHeight() {
+      const hero = document.getElementById('hero-os-section');
+      const heroH = hero ? hero.clientHeight : 0;
+      return heroH > 0 ? Math.min(window.innerHeight, heroH) : window.innerHeight;
+    }
+    const stableViewport = { w: window.innerWidth, h: measureViewportHeight(), landscape: window.innerWidth > window.innerHeight };
+    function getViewport() {
+      if (!IS_TOUCH) return { w: window.innerWidth, h: window.innerHeight };
+      const landscape = window.innerWidth > window.innerHeight;
+      if (Math.abs(window.innerWidth - stableViewport.w) > 1 || landscape !== stableViewport.landscape) {
+        stableViewport.w = window.innerWidth;
+        stableViewport.h = measureViewportHeight();
+        stableViewport.landscape = landscape;
+      }
+      return stableViewport;
+    }
     const IS_LITE = IS_TOUCH || window.innerWidth < 768;
     const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const CAN_HOVER = window.matchMedia('(hover: hover)').matches;
@@ -1454,14 +1486,14 @@
         return;
       }
       let timer = null;
-      let lastW = window.innerWidth;
-      let lastH = window.innerHeight;
+      let { w: lastW, h: lastH } = getViewport();
       window.addEventListener('resize', () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-          if (window.innerWidth === lastW && window.innerHeight === lastH) return;
-          lastW = window.innerWidth;
-          lastH = window.innerHeight;
+          const vp = getViewport();
+          if (vp.w === lastW && vp.h === lastH) return; // address-bar height change only: leave the globe alone
+          lastW = vp.w;
+          lastH = vp.h;
           fn();
         }, 180);
       });
@@ -1490,13 +1522,13 @@
       if (isZoomed) return { x: 0, y: 0 };
       // Desktop: globe moves left. Portrait/mobile: globe lifts up above bottom copy.
       if (!heroSplitQuery.matches) return { x: 0, y: 0.08 };
-      return { x: window.innerWidth / window.innerHeight < 1.6 ? 0.18 : 0.16, y: 0 };
+      const vp = getViewport();
+      return { x: vp.w / vp.h < 1.6 ? 0.18 : 0.16, y: 0 };
     }
 
     function applyHeroViewShift() {
       if (!camera) return;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const { w, h } = getViewport();
       if (heroViewShift.x === 0 && heroViewShift.y === 0) {
         camera.clearViewOffset();
       } else {
@@ -1561,13 +1593,13 @@
 
       // 2. Camera
       const defaultPos = getDefaultCameraPos();
-      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3500);
+      camera = new THREE.PerspectiveCamera(45, getViewport().w / getViewport().h, 1, 3500);
       camera.position.set(0, defaultPos.y * 1.5, defaultPos.z * 1.45);
       updateHeroViewShift(0);
 
       // 3. Renderer
       renderer = new THREE.WebGLRenderer({ antialias: !IS_LITE, alpha: true, powerPreference: "high-performance" });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(getViewport().w, getViewport().h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_LITE ? 1.5 : 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.35;
@@ -1673,10 +1705,11 @@
     // --- RESIZE HANDLER ---
     function onResize() {
       if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const vp = getViewport();
+      camera.aspect = vp.w / vp.h;
       updateHeroViewShift(0);
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(vp.w, vp.h);
 
       if (!isZoomed) {
         const defaultPos = getDefaultCameraPos();
@@ -1802,8 +1835,7 @@
         _hsElems = PRODUCTS.map((_, idx) => document.getElementById(`hotspot-${idx}`));
       }
       camera.getWorldDirection(_hsViewDir).negate();
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const { w: vw, h: vh } = getViewport();
       const introProgress = clock ? Math.min(1.0, clock.getElapsedTime() / 1.5) : 1.0;
 
       PRODUCTS.forEach((prod, idx) => {
@@ -2497,8 +2529,9 @@
 
       const targetVec = anchor.getWorldPosition(new THREE.Vector3());
       const screenPos = targetVec.clone().project(camera);
-      const hx = (screenPos.x * 0.5 + 0.5) * window.innerWidth;
-      const hy = (-(screenPos.y * 0.5) + 0.5) * window.innerHeight;
+      const vpHud = getViewport();
+      const hx = (screenPos.x * 0.5 + 0.5) * vpHud.w;
+      const hy = (-(screenPos.y * 0.5) + 0.5) * vpHud.h;
 
       const hudRect = hudContainer.getBoundingClientRect();
       const px = window.innerWidth < 768 ? hudRect.left + hudRect.width / 2 : hudRect.left;
@@ -3015,10 +3048,11 @@
       }
 
       function resizeCanvases() {
-        gridCanvas.width = window.innerWidth;
-        gridCanvas.height = window.innerHeight;
-        fogCanvas.width = window.innerWidth;
-        fogCanvas.height = window.innerHeight;
+        const vp = getViewport();
+        gridCanvas.width = vp.w;
+        gridCanvas.height = vp.h;
+        fogCanvas.width = vp.w;
+        fogCanvas.height = vp.h;
         drawBackgrounds();
       }
       resizeCanvases();
